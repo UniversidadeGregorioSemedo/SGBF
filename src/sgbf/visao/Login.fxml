@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbiblioteca.visao.LoginController">
+   <children>
+      <AnchorPane prefHeight="140.0" prefWidth="600.0" style="-fx-background-color: #00aced;">
+         <children>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/open-book%20(3).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/reading.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="96.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/creative.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="80.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/book.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="495.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/book.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="472.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/creative.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/reading.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/open-book%20(3).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="135.0" layoutY="21.0" prefHeight="31.0" prefWidth="335.0" text="Sistema de Gestão de Bibliotecas" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="131.0" layoutY="54.0" prefHeight="286.0" prefWidth="343.0" style="-fx-background-color: white; -fx-background-radius: 15px;">
+         <children>
+            <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="125.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/User1.png" />
+               </image>
+            </ImageView>
+            <TextField layoutX="37.0" layoutY="131.0" prefHeight="30.0" prefWidth="276.0" promptText="Usuário">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </TextField>
+            <PasswordField layoutX="37.0" layoutY="186.0" prefHeight="30.0" prefWidth="276.0" promptText="Senha ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </PasswordField>
+            <Button layoutX="37.0" layoutY="236.0" mnemonicParsing="false" style="-fx-background-color: #00aced;" text="Entrar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="202.0" layoutY="236.0" text="Esqueci minha senha" textFill="#00aced">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <right>
+            <VBox prefHeight="522.0" prefWidth="188.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="204.0" text="Adicionar acervo" textAlignment="RIGHT">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/open-book%20(3).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="88.0" prefWidth="188.0" text="Adicionar usuário">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/reading.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="88.0" prefWidth="189.0" text="Pesquisar acervo">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/search%20book%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="89.0" prefWidth="188.0" text="Pesquisar usuário">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/search%20user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="91.0" prefWidth="189.0" text="Listar todos acervos">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/student-standing-with-books-stack.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="98.0" prefWidth="193.0" text="Listar tos usuários">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/team.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </right>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="Informação do acervo">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="502.0" prefWidth="558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="186.0" prefWidth="558.0">
+                                       <children>
+                                          <TextField prefHeight="25.0" prefWidth="118.0" promptText="Id acervo">
+                                             <HBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <VBox alignment="CENTER" prefHeight="186.0" prefWidth="410.0">
+                                             <HBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                             </HBox.margin>
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do acervo" textAlignment="CENTER" wrappingWidth="370.166015625">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <Text layoutX="10.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" textAlignment="CENTER" wrappingWidth="370.166015625">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="186.0" prefWidth="558.0">
+                                       <children>
+                                          <TextField prefHeight="25.0" prefWidth="145.0" promptText="Id usuario / utente">
+                                             <HBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <VBox alignment="CENTER" prefHeight="186.0" prefWidth="410.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario / Utente" textAlignment="CENTER" wrappingWidth="370.166015625">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <Text layoutX="10.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contacto" textAlignment="CENTER" wrappingWidth="370.166015625">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" text="Procurar" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Renovação/Submissão">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane layoutX="121.0" layoutY="62.0" prefHeight="502.0" prefWidth="558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
