@@ -22,7 +22,7 @@ public class SGBF extends Application {
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
-        btn.setText("Say 'Hello World  - Djavam Amaro'");
+        btn.setText("Say 'Hello World  - Djavam king'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
