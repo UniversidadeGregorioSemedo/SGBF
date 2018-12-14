@@ -10,7 +10,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
@@ -104,21 +103,24 @@
                            <children>
                               <VBox prefHeight="502.0" prefWidth="558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="186.0" prefWidth="558.0">
+                                    <HBox alignment="CENTER" prefHeight="186.0" prefWidth="558.0" style="-fx-background-color: white; -fx-border-style: solid; -fx-border-width: 5px; -fx-border-color: #00aced; -fx-border-radius: 5px; -fx-border-insets: 5;">
                                        <children>
                                           <TextField prefHeight="25.0" prefWidth="118.0" promptText="Id acervo">
                                              <HBox.margin>
                                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="High Tower Text" size="15.0" />
+                                             </font>
                                           </TextField>
-                                          <VBox alignment="CENTER" prefHeight="186.0" prefWidth="410.0">
+                                          <VBox alignment="CENTER" prefHeight="186.0" prefWidth="410.0" style="-fx-border-color: #00aced; -fx-border-width: 3px; -fx-border-insets: 2; -fx-border-style: solid; -fx-background-color: white; -fx-border-radius: 5px;">
                                              <HBox.margin>
                                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                              </HBox.margin>
                                              <children>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do acervo" textAlignment="CENTER" wrappingWidth="370.166015625">
                                                    <font>
-                                                      <Font size="13.0" />
+                                                      <Font name="High Tower Text" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
@@ -126,7 +128,7 @@
                                                 </Text>
                                                 <Text layoutX="10.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" textAlignment="CENTER" wrappingWidth="370.166015625">
                                                    <font>
-                                                      <Font size="13.0" />
+                                                      <Font name="High Tower Text" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
@@ -136,18 +138,21 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="186.0" prefWidth="558.0">
+                                    <HBox alignment="CENTER" prefHeight="186.0" prefWidth="558.0" style="-fx-background-color: white; -fx-border-insets: 5; -fx-border-style: solid; -fx-border-radius: 5px; -fx-border-width: 5px; -fx-border-color: #00aced;">
                                        <children>
-                                          <TextField prefHeight="25.0" prefWidth="145.0" promptText="Id usuario / utente">
+                                          <TextField prefHeight="28.0" prefWidth="216.0" promptText="Id utente">
                                              <HBox.margin>
                                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="High Tower Text" size="15.0" />
+                                             </font>
                                           </TextField>
-                                          <VBox alignment="CENTER" prefHeight="186.0" prefWidth="410.0">
+                                          <VBox alignment="CENTER" prefHeight="126.0" prefWidth="346.0" style="-fx-background-color: white; -fx-border-color: #00aced; -fx-border-insets: 2; -fx-border-radius: 5px; -fx-border-style: solid; -fx-border-width: 3;">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario / Utente" textAlignment="CENTER" wrappingWidth="370.166015625">
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome utente" textAlignment="CENTER" wrappingWidth="370.166015625">
                                                    <font>
-                                                      <Font size="13.0" />
+                                                      <Font name="High Tower Text" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
@@ -155,7 +160,7 @@
                                                 </Text>
                                                 <Text layoutX="10.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contacto" textAlignment="CENTER" wrappingWidth="370.166015625">
                                                    <font>
-                                                      <Font size="13.0" />
+                                                      <Font name="High Tower Text" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
@@ -183,7 +188,43 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <BorderPane layoutX="121.0" layoutY="62.0" prefHeight="502.0" prefWidth="558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <BorderPane layoutX="121.0" layoutY="62.0" prefHeight="502.0" prefWidth="558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <top>
+                                    <TextField prefHeight="25.0" prefWidth="436.0" promptText="Digite o Id do acervo" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets left="150.0" right="150.0" top="20.0" />
+                                       </BorderPane.margin>
+                                       <font>
+                                          <Font name="High Tower Text" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </top>
+                                 <center>
+                                    <ListView prefHeight="432.0" prefWidth="558.0" BorderPane.alignment="CENTER">
+                                       <padding>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                       </padding>
+                                       <BorderPane.margin>
+                                          <Insets top="10.0" />
+                                       </BorderPane.margin>
+                                    </ListView>
+                                 </center>
+                                 <bottom>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Button mnemonicParsing="false" text="Renovar">
+                                             <font>
+                                                <Font name="High Tower Text" size="15.0" />
+                                             </font>
+                                          </Button>
+                                          <Button mnemonicParsing="false" text="Submissão">
+                                             <font>
+                                                <Font name="High Tower Text" size="15.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </bottom></BorderPane>
                            </children>
                         </AnchorPane>
                   </content>
