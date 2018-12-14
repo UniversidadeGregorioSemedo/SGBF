@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.visao.Tela_PrincipalController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
@@ -37,7 +37,7 @@
          <right>
             <VBox prefHeight="522.0" prefWidth="188.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="204.0" text="Adicionar acervo" textAlignment="RIGHT">
+                  <Button mnemonicParsing="false" onAction="#Carregar_acervos" prefHeight="99.0" prefWidth="204.0" text="Adicionar acervo" textAlignment="RIGHT">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
