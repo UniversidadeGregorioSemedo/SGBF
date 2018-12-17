@@ -22,7 +22,7 @@ public abstract class ConCRUD {
     
     public abstract boolean registar(Object objecto_registar, String operacao);
     public abstract boolean alterar(Object objecto_alterar, String operacao);
-    public abstract boolean remover(Object objecto_registar, String operacao);
+    public abstract boolean remover(Object objecto_remover, String operacao);
     public abstract List<Object> listarTodos(String operacao);
     public abstract List<Object> pesquisar(Object objecto_pesquisar, String operacao);
     
