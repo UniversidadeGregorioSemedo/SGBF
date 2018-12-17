@@ -6,6 +6,8 @@
 package sgbf.modelo;
 
 import sgbf.util.UtilControloDaData;
+import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -41,10 +43,10 @@ public final class ModAcervoDigital extends ModAcervo {
 
     public void setEndereco_acervo(String endereco_acervo, String operacao) {
         if(endereco_acervo == null){
-            this.endereco_acervo = endereco_acervo;
+            throw new UtilControloExcessao("Erro ao inserir Imagem", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }else{
             if(endereco_acervo.isEmpty()){
-                
+                throw new UtilControloExcessao("Erro ao inserir Imagem", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
             }else{
                 this.endereco_acervo = endereco_acervo;
             }

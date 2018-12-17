@@ -5,10 +5,54 @@
  */
 package sgbf.modelo;
 
+import sgbf.util.UtilControloDaData;
+
 /**
  *
  * @author Look
  */
-public class ModFuncionario {
+public class ModFuncionario extends ModUtente  {
+    private String cargo;
+    private Integer codigo_funcionario;
+    private ModUsuario usuarioMod;
+
+    public ModFuncionario() {
+        this.idUtente = 0;
+        this.primeiro_nome = null;
+        this.segundo_nome = null;
+        this.genero = null;
+        this.tipo_identificacao = null;
+        this.numero = null;
+        this.endereco = null;
+        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
+        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.cargo = null;
+        this.codigo_funcionario = 0;
+        this.usuarioMod = new ModUsuario();
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public Integer getCodigo_funcionario() {
+        return codigo_funcionario;
+    }
+
+    public void setCodigo_funcionario(Integer codigo_funcionario) {
+        this.codigo_funcionario = codigo_funcionario;
+    }
+
+    public ModUsuario getUsuarioMod() {
+        return usuarioMod;
+    }
+
+    public void setUsuarioMod(ModUsuario usuarioMod) {
+        this.usuarioMod = usuarioMod;
+    }
     
 }

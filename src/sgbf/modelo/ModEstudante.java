@@ -5,10 +5,37 @@
  */
 package sgbf.modelo;
 
+import sgbf.util.UtilControloDaData;
+
 /**
  *
  * @author Look
  */
-public final class ModEstudante {
+public final class ModEstudante extends ModUtente {
+    
+    private ModUsuario usuarioMod;
+
+    public ModEstudante() {
+        this.idUtente = 0;
+        this.primeiro_nome = null;
+        this.segundo_nome = null;
+        this.genero = null;
+        this.tipo_identificacao = null;
+        this.numero = null;
+        this.endereco = null;
+        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
+        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.usuarioMod = new ModUsuario();
+    }
+
+    public ModUsuario getUsuarioMod() {
+        return usuarioMod;
+    }
+
+    public void setUsuarioMod(ModUsuario usuarioMod) {
+        this.usuarioMod = usuarioMod;
+    }
+    
+    
     
 }
