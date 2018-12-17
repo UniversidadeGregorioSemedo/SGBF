@@ -6,6 +6,7 @@
 package sgbf.modelo;
 
 
+import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilEmail;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -32,6 +33,8 @@ public class ModEditora {
         this.email = null;
         this.fax = null;
         this.endereco = null;
+        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
+        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
     }
 
     public Integer getiEditora() {
@@ -113,7 +116,7 @@ public class ModEditora {
     
     public void equals(ModEditora editoraMod, String operacao){
         if(this.nome.equalsIgnoreCase(editoraMod.nome)){
-            throw new UtilControloExcessao("Já existe uma Editora com este Nome !", operacao, nome);
+            throw new UtilControloExcessao("Já existe uma Editora com este Nome !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }
     }
     
