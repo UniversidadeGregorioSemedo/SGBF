@@ -7,6 +7,7 @@ package sgbf.modelo;
 
 
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilEmail;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
@@ -70,7 +71,12 @@ public class ModEditora {
     }
 
     public void setEmail(String email, String operacao) {
-        this.email = email;
+        UtilEmail emailUtil = new UtilEmail();
+        if(emailUtil.emailValido(email)){
+            this.email = email;
+        }else{
+            throw new UtilControloExcessao("Erro ao "+operacao+"\nErro: "+email+" é um email inválido !", operacao, nome);
+        }
     }
 
     public String getFax() {
