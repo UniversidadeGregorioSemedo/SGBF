@@ -5,6 +5,7 @@
  */
 package sgbf.modelo;
 
+import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilEmail;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -28,8 +29,8 @@ public class ModAutor {
         this.segundo_nome = null;
         this.contacto = null;
         this.email = null;
-        this.data_registo = null;
-        this.data_modificacao = null;
+        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
+        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
     }
 
     public Integer getIdAutor() {
@@ -46,10 +47,10 @@ public class ModAutor {
 
     public void setPrimeiro_nome(String primeiro_nome, String operacao) {
         if(primeiro_nome == null){
-            throw new UtilControloExcessao("Introduza o nome do Autor !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao("Primeiro nome do Autor não definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }else{
             if(primeiro_nome.isEmpty()){
-                throw new UtilControloExcessao("Introduza o nome do Autor !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao("Primeiro nome do Autor não definido  !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
             }else{
                 this.primeiro_nome = primeiro_nome;
             }
@@ -61,7 +62,15 @@ public class ModAutor {
     }
 
     public void setSegundo_nome(String segundo_nome, String operacao) {
-        this.segundo_nome = segundo_nome;
+        if(segundo_nome == null){
+            throw new UtilControloExcessao("Segundo nome do Autor não definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+        }else{
+            if(segundo_nome.isEmpty()){
+                throw new UtilControloExcessao("Segundo nome do Autor não definido  !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            }else{
+                this.segundo_nome = segundo_nome;
+            }
+        }
     }
 
     public String getContacto() {
