@@ -75,7 +75,7 @@ public class ModEditora {
         if(emailUtil.emailValido(email)){
             this.email = email;
         }else{
-            throw new UtilControloExcessao("Erro ao "+operacao+"\nErro: "+email+" é um email inválido !", operacao, nome);
+            throw new UtilControloExcessao("Erro ao "+operacao+"\nErro: "+email+" é um email inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }
     }
 
