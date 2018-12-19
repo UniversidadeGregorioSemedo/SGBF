@@ -20,8 +20,7 @@ public class ModEstante {
     private Byte linha;
     private Byte coluna;
     private ModArea areaMod;
-    private String data_registo;
-    private String data_modificacao;
+    private UtilControloDaData utilControloDaData;
     
     public ModEstante(){
         this.idEstante = 0;
@@ -30,8 +29,7 @@ public class ModEstante {
         this.linha = 0;
         this.coluna = 0;
         this.areaMod = new ModArea();
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public Integer getIdEstante() {
@@ -102,20 +100,8 @@ public class ModEstante {
         return areaMod;
     }
 
-    public String getData_registo() {
-        return data_registo;
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
-
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
-    }
-    
+ 
 }

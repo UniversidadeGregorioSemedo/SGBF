@@ -23,8 +23,7 @@ public class ModEditora {
     private String email;
     private String fax;
     private String endereco;
-    private String data_registo;
-    private String data_modificacao;
+    private UtilControloDaData utilControloDaData;
     
     public ModEditora(){
         this.iEditora = 0;
@@ -33,8 +32,7 @@ public class ModEditora {
         this.email = null;
         this.fax = null;
         this.endereco = null;
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public Integer getiEditora() {
@@ -98,25 +96,15 @@ public class ModEditora {
         this.endereco = endereco;
     }
 
-    public String getData_registo() {
-        return data_registo;
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
 
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
-    }
-    
     public void equals(ModEditora editoraMod, String operacao){
-        if(this.nome.equalsIgnoreCase(editoraMod.nome)){
-            throw new UtilControloExcessao("Já existe uma Editora com este Nome !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+        if(this.iEditora != editoraMod.iEditora){
+            if(this.nome.equalsIgnoreCase(editoraMod.nome)){
+                throw new UtilControloExcessao("Já existe uma Editora com este Nome !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            }
         }
     }
     

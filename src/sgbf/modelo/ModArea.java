@@ -17,14 +17,12 @@ public class ModArea {
     
     private Integer idArea;
     private String sector;
-    private String data_registo;
-    private String data_modificacao;
+    private UtilControloDaData utilControloDaData;
     
     public ModArea(){
         this.idArea = 0;
         this.sector = null;
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public Integer getIdArea() {
@@ -51,26 +49,19 @@ public class ModArea {
         }
     }
 
-    
-    public String getData_registo() {
-        return data_registo;
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
 
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
+    public void setUtilControloDaData(UtilControloDaData utilControloDaData) {
+        this.utilControloDaData = utilControloDaData;
     }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
-    }
-    
-      public void equals(ModArea areaMod, String operacao){
-        if(this.sector.equalsIgnoreCase(areaMod.sector)){
-            throw new UtilControloExcessao("Já existe Sector com esta designação !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+ 
+    public void equals(ModArea areaMod, String operacao){
+        if(this.idArea != areaMod.idArea){
+            if(this.sector.equalsIgnoreCase(areaMod.sector)){
+                throw new UtilControloExcessao("Já existe Sector com esta designação !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            }
         }
     }
     
