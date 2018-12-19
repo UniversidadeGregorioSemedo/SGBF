@@ -6,12 +6,11 @@
 package sgbf.dao;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -32,17 +31,17 @@ public class DaoCominhoDaBaseDadosTest {
 
     @Test
     public void testBaseDeDados() {
-        DaoCominhoDaBaseDados dadosBaseDaCaminhoDao = new DaoCominhoDaBaseDados();
+        final String operacao = "Conectando ao servidor de BD...";
+        DaoCominhoDaBaseDados conectarA = new DaoCominhoDaBaseDados();
         try {
-            if(dadosBaseDaCaminhoDao.baseDeDados("Iniciar").isValid(0)){
-                System.out.println("Deu certo !");
+            if(conectarA.baseDeDados(operacao).isValid(0)){
+                throw new UtilControloExcessao("Conexão com o servidor establecido com sucesso !", operacao, UtilIconesDaJOPtionPane.Confirmacao.nomeDaImagem());
             }else{
-                System.out.println("Não deu certo ");
+                throw new UtilControloExcessao("Erro ao se conectar a base de dados !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
             }
         } catch (SQLException ex) {
-            System.out.println("Ao se conectar com a Base de dados !\nErro: "+ex.getMessage());
+            throw new UtilControloExcessao("Erro: "+ex.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }
-                
     }
 
     @Test
