@@ -1,6 +1,7 @@
 
 package sgbf.util;
 
+import java.sql.Timestamp;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -10,13 +11,35 @@ import org.joda.time.LocalDate;
 
 public class UtilControloDaData {
     
+    private Timestamp data_registo;
+    private Timestamp data_modificacao;
+    
+    public UtilControloDaData(){
+        this.data_registo = null;
+        this.data_modificacao = null;
+    }
+
+    public String getData_registo() {
+        return String.valueOf(data_registo);
+    }
+
+    public void setData_registo(Timestamp data_registo, String operacao) {
+        this.data_registo = data_registo;
+    }
+
+    public String getData_modificacao() {
+        return String.valueOf(data_modificacao);
+    }
+
+    public void setData_modificacao(Timestamp data_modificacao, String operacao) {
+        this.data_modificacao = data_modificacao;
+    }
     
     public static LocalDate dataActual(){
         LocalDate dataActual = new LocalDate();
         return dataActual;
     }
   
-    
     public  Integer anoDaDataIntroduzida(DateTime data_introduzida, String operacao){
         if(UtilControloDaData.dataFoiIntroduzida(data_introduzida)){
             return data_introduzida.getYear();
@@ -53,7 +76,6 @@ public class UtilControloDaData {
         }
     }
 
-    
     private static boolean dataFoiIntroduzida(DateTime data_introduzida){
         return (data_introduzida != null);
     }
