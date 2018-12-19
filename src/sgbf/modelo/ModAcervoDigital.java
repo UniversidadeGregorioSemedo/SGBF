@@ -33,8 +33,7 @@ public final class ModAcervoDigital extends ModAcervo {
         this.sinopse = null;
         this.estoqueMod = new ModEstoque();
         this.categoriaMod = new ModCategoria();
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
     
     public String getEndereco_acervo() {

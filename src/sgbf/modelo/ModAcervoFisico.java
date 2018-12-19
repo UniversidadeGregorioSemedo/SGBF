@@ -31,8 +31,7 @@ public final class ModAcervoFisico extends ModAcervo{
         this.isbn = null;
         this.estoqueMod = new ModEstoque();
         this.categoriaMod = new ModCategoria();
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public String getCodigo_barra() {

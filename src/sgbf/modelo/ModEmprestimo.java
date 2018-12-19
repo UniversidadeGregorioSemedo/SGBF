@@ -5,8 +5,6 @@
  */
 package sgbf.modelo;
 
-import sgbf.util.UtilControloDaData;
-
 /**
  *
  * @author Look
@@ -28,7 +26,7 @@ public class ModEmprestimo {
         this.estado = null;
         this.multa = 0.0;
         this.dias_atrazo = 0;
-        this.data_emprestimo = String.valueOf(UtilControloDaData.dataActual());
+        this.data_emprestimo = null;
         this.data_vencimento = null;
     }
 

@@ -21,19 +21,21 @@ public class ConAcervo extends ConCRUD {
     
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
-        ModEstante estanteMod = (ModEstante)objecto_registar;
+        //ModEstante estanteMod = (ModEstante)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.Estante (designacao, descricacao, linha, coluna, Area_idArea)"
-                        + " VALUES (?, ?, ?, ?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.query = "INSERT INTO tcc.acervos (titulo, subtittulo, tipo_acervo, formato, edicao, volume,"
+                        + " numero_paginas, codigo_barra, isbn, idioma, ano_lancamento, sinopse, endereco_acervo,"
+                        + " categoria_idcategoria, Editora_idEditora, Estoque_idEstoque)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            /*super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, estanteMod.getDesignacao());
             super.preparedStatement.setString(2, estanteMod.getDescricao());
             super.preparedStatement.setByte(3, estanteMod.getLinha());
             super.preparedStatement.setByte(4, estanteMod.getColuna());
-            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
+            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());*/
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -41,19 +43,21 @@ public class ConAcervo extends ConCRUD {
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
-        ModEstante estanteMod = (ModEstante)objecto_alterar;
+        //ModEstante estanteMod = (ModEstante)objecto_alterar;
         try{
-            super.query = "UPDATE tcc.Estante set designacao=?, descricacao=?, linha=?, coluna=?, Area_idArea=? where idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.query = "UPDATE tcc.acervos set titulo=?, subtittulo=?, tipo_acervo=?, formato=?, edicao=?, volume=?,"
+                        + " numero_paginas=?, codigo_barra=?, isbn=?, idioma=?, ano_lancamento=?, sinopse=?, endereco_acervo=?,"
+                        + " categoria_idcategoria=?, Editora_idEditora=?, Estoque_idEstoque=? where idAcervos=?";
+            /*super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, estanteMod.getDesignacao());
             super.preparedStatement.setString(2, estanteMod.getDescricao());
             super.preparedStatement.setByte(3, estanteMod.getLinha());
             super.preparedStatement.setByte(4, estanteMod.getColuna());
             super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
-            super.preparedStatement.setInt(6, estanteMod.getIdEstante());
+            super.preparedStatement.setInt(6, estanteMod.getIdEstante());*/
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -61,14 +65,14 @@ public class ConAcervo extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-       ModEstante estanteMod = (ModEstante)objecto_remover;
+        //ModEstante estanteMod = (ModEstante)objecto_remover;
         try{
-            super.query = "delete from tcc.Estante where idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,estanteMod.getIdEstante());
+            super.query = "delete from tcc.acervos where idAcervos=?";
+            /* super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1,estanteMod.getIdEstante());*/
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+           throw new UtilControloExcessao("Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -78,7 +82,7 @@ public class ConAcervo extends ConCRUD {
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
         try{
-            super.query = "select * from tcc.Estante designacao by nome, data_modificacao asc";
+            super.query = "select * from tcc.acervos order by titulo, data_modificacao asc";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
@@ -86,7 +90,7 @@ public class ConAcervo extends ConCRUD {
             }
             return todosRegistos;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Acervo(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -97,8 +101,8 @@ public class ConAcervo extends ConCRUD {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         ModEstante estanteMod = (ModEstante)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.Estante where idEstante=? or "
-                        + "designacao like '%"+estanteMod.getDesignacao()+"%'";
+            super.query = "select * from tcc.acervos where idAcervos=? or "
+                        + "titulo like '%"+estanteMod.getDesignacao()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, estanteMod.getIdEstante());
             super.setResultset  = super.preparedStatement.executeQuery();
@@ -107,7 +111,7 @@ public class ConAcervo extends ConCRUD {
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Acervo(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -115,14 +119,14 @@ public class ConAcervo extends ConCRUD {
     
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
         ModEstante estanteMod = new ModEstante();
-        estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
+        /*estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
         estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
         estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
         estanteMod.setLinha(setResultset.getByte("linha"), operacao);
         estanteMod.setColuna(setResultset.getByte("coluna"), operacao);
         estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
         estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);*/
         return estanteMod;
     }
 

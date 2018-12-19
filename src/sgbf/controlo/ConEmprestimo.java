@@ -19,18 +19,18 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  */
 public class ConEmprestimo extends ConCRUD{
     
-        @Override
+    @Override
     public boolean registar(Object objecto_registar, String operacao) {
         ModEstante estanteMod = (ModEstante)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.Estante (designacao, descricacao, linha, coluna, Area_idArea)"
+            super.query = "INSERT INTO tcc.Estante (v, descricacao, linha, coluna, Area_idArea)"
                         + " VALUES (?, ?, ?, ?, ?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, estanteMod.getDesignacao());
+            /*super.preparedStatement.setString(1, estanteMod.getDesignacao());
             super.preparedStatement.setString(2, estanteMod.getDescricao());
             super.preparedStatement.setByte(3, estanteMod.getLinha());
             super.preparedStatement.setByte(4, estanteMod.getColuna());
-            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
+            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());*/
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());

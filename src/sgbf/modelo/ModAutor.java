@@ -20,8 +20,7 @@ public class ModAutor {
     private String segundo_nome;
     private String contacto;
     private String email;
-    private String data_registo;
-    private String data_modificacao;
+    private UtilControloDaData utilControloDaData;
     
     public ModAutor(){
         this.idAutor = 0;
@@ -29,8 +28,7 @@ public class ModAutor {
         this.segundo_nome = null;
         this.contacto = null;
         this.email = null;
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public Integer getIdAutor() {
@@ -94,21 +92,8 @@ public class ModAutor {
         }
     }
 
-    public String getData_registo() {
-        return data_registo;
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
 
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
-    }
-    
-    
 }

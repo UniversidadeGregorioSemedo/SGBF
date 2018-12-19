@@ -16,14 +16,12 @@ import sgbf.util.UtilIconesDaJOPtionPane;
 public class ModCategoria {
     private Integer idCategoria;
     private String designacao;
-    private String data_registo;
-    private String data_modificacao;
+    private UtilControloDaData utilControloDaData;
     
     public ModCategoria(){
         this.idCategoria = 0;
         this.designacao = null;
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public Integer getIdCategoria() {
@@ -50,22 +48,10 @@ public class ModCategoria {
         }
     }
 
-    public String getData_registo() {
-        return data_registo;
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
 
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String opercao) {
-        this.data_modificacao = data_modificacao;
-    }
-    
     public void equals(ModCategoria categoriaMod, String operacao){
         if(this.designacao.equalsIgnoreCase(categoriaMod.designacao)){
             throw new UtilControloExcessao("Já existe uma Categoria com este Nome !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
