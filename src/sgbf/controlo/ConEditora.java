@@ -5,7 +5,9 @@
  */
 package sgbf.controlo;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModEditora;
 import sgbf.util.UtilControloExcessao;
@@ -19,21 +21,19 @@ public class ConEditora extends ConCRUD{
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
+        ModEditora editoraMod = (ModEditora)objecto_registar;
         try{
-            ModEditora editoraMod = (ModEditora)objecto_registar;
             if(this.jaExisteEssaEditora(editoraMod, operacao)){
-                throw new UtilControloExcessao("Erro ao verificar dados da Editora !", operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+                throw new UtilControloExcessao("Erro ao verificar dados da Editora !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
             }else{
-                super.query = "INSERT INTO tcc.Editora (nome, contacto, email, fax, endereco, data_registo, data_modificacao)"
-                            + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+                super.query = "INSERT INTO tcc.Editora (nome, contacto, email, fax, endereco)"
+                            + " VALUES (?, ?, ?, ?, ?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setString(1, editoraMod.getNome());
                 super.preparedStatement.setString(2, editoraMod.getContacto());
                 super.preparedStatement.setString(3, editoraMod.getEmail());
                 super.preparedStatement.setString(4, editoraMod.getFax());
                 super.preparedStatement.setString(5, editoraMod.getEndereco());
-                super.preparedStatement.setString(6, editoraMod.getData_registo());
-                super.preparedStatement.setString(7, editoraMod.getData_modificacao());
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
@@ -41,27 +41,98 @@ public class ConEditora extends ConCRUD{
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
-     
     }
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ModEditora editoraMod = (ModEditora)objecto_alterar;
+        try{
+            if(this.jaExisteEssaEditora(editoraMod, operacao)){
+                throw new UtilControloExcessao("Erro ao verificar dados da Editora !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }else{
+                super.query = "UPDATE tcc.Editora set nome=?, contacto=?, email=?, fax=?, endereco=?"
+                            + " VALUES (?, ?, ?, ?, ?) where idEditora=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, editoraMod.getNome());
+                super.preparedStatement.setString(2, editoraMod.getContacto());
+                super.preparedStatement.setString(3, editoraMod.getEmail());
+                super.preparedStatement.setString(4, editoraMod.getFax());
+                super.preparedStatement.setString(5, editoraMod.getEndereco());
+                super.preparedStatement.setInt(6, editoraMod.getiEditora());
+                return !super.preparedStatement.execute();
+            }
+        }catch(SQLException erro){
+            throw new UtilControloExcessao("Erro ao "+operacao+" Editora !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+        }finally{
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+        }
     }
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       ModEditora editoraMod = (ModEditora)objecto_remover;
+        try{
+            super.query = "delete from tcc.Editora where idEditora=?";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1,editoraMod.getiEditora());
+            return !super.preparedStatement.execute();
+        }catch(SQLException erro){
+           throw new UtilControloExcessao("Erro ao "+operacao+" Editora !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+        }finally{
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+        }
     }
 
     @Override
     public List<Object> listarTodos(String operacao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Object> todosRegistos = new ArrayList<>();
+        try{
+            super.query = "select * from tcc.editora order by nome asc";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.setResultset = super.preparedStatement.executeQuery();
+            while(super.setResultset.next()){
+                todosRegistos.add(this.pegarRegistos(super.setResultset,operacao));
+            }
+            return todosRegistos;
+        }catch(SQLException erro){
+            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+        }finally{
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+        }
     }
 
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        ModEditora editoraMod = (ModEditora) objecto_pesquisar;
+        try{
+            super.query = "select * from tcc.Editora where idEditora=? or "
+                        + "nome like '%"+editoraMod.getNome()+"%'";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, editoraMod.getiEditora());
+            super.setResultset  = super.preparedStatement.executeQuery();
+            while(super.setResultset.next()){
+                todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
+            }
+            return todosRegistosEncontrados;
+        }catch(SQLException erro){
+            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+        }finally{
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+        }
+    }
+    
+    private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
+        ModEditora editoraMod = new ModEditora();
+        editoraMod.setiEditora(setResultset.getInt("idEditora"), operacao);
+        editoraMod.setNome(setResultset.getString("nome"), operacao);
+        editoraMod.setContacto(setResultset.getString("contacto"), operacao);
+        editoraMod.setEmail(setResultset.getString("email"), operacao);
+        editoraMod.setFax(setResultset.getString("fax"), operacao);
+        editoraMod.setEndereco(setResultset.getString("endereco"), operacao);
+        editoraMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
+        editoraMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        return editoraMod;
     }
     
     private boolean jaExisteEssaEditora(ModEditora editoraMod, String operacao){
