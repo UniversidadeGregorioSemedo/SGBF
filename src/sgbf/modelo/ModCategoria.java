@@ -15,13 +15,13 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  */
 public class ModCategoria {
     private Integer idCategoria;
-    private String nome;
+    private String designacao;
     private String data_registo;
     private String data_modificacao;
     
     public ModCategoria(){
         this.idCategoria = 0;
-        this.nome = null;
+        this.designacao = null;
         this.data_registo = String.valueOf(UtilControloDaData.dataActual());
         this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
     }
@@ -34,18 +34,18 @@ public class ModCategoria {
         this.idCategoria = idCategoria;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDesignacao() {
+        return designacao;
     }
 
-    public void setNome(String nome, String operacao) {
-        if(nome == null){
+    public void setDesignacao(String designacao, String operacao) {
+        if(designacao == null){
             throw new UtilControloExcessao("Categoria não definida !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }else{
-            if(nome.isEmpty()){
+            if(designacao.isEmpty()){
                 throw new UtilControloExcessao("Categoria não definida !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
             }else{
-                this.nome = nome;
+                this.designacao = designacao;
             }
         }
     }
@@ -67,7 +67,7 @@ public class ModCategoria {
     }
     
     public void equals(ModCategoria categoriaMod, String operacao){
-        if(this.nome.equalsIgnoreCase(categoriaMod.nome)){
+        if(this.designacao.equalsIgnoreCase(categoriaMod.designacao)){
             throw new UtilControloExcessao("Já existe uma Categoria com este Nome !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }
     }

@@ -32,7 +32,7 @@ public final class ModEstudante extends ModUtente {
         return usuarioMod;
     }
 
-    public void setUsuarioMod(ModUsuario usuarioMod) {
+    public void setUsuarioMod(ModUsuario usuarioMod, String operacao) {
         this.usuarioMod = usuarioMod;
     }
     

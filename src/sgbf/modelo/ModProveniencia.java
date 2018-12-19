@@ -29,7 +29,7 @@ public class ModProveniencia {
         return idProveniencia;
     }
 
-    public void setIdProveniencia(Integer idProveniencia) {
+    public void setIdProveniencia(Integer idProveniencia, String operacao) {
         this.idProveniencia = idProveniencia;
     }
 
@@ -37,7 +37,7 @@ public class ModProveniencia {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(String tipo, String operacao) {
         this.tipo = tipo;
     }
 
@@ -45,7 +45,7 @@ public class ModProveniencia {
         return data_registo;
     }
 
-    public void setData_registo(String data_registo) {
+    public void setData_registo(String data_registo, String operacao) {
         this.data_registo = data_registo;
     }
 
@@ -53,7 +53,7 @@ public class ModProveniencia {
         return data_modificacao;
     }
 
-    public void setData_modificacao(String data_modificacao) {
+    public void setData_modificacao(String data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
     

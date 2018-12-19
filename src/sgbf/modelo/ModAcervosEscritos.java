@@ -17,7 +17,7 @@ public class ModAcervosEscritos {
         return acervoMod;
     }
 
-    public void setAcervoMod(ModAcervo acervoMod) {
+    public void setAcervoMod(ModAcervo acervoMod, String operacao) {
         this.acervoMod = acervoMod;
     }
 
@@ -25,7 +25,7 @@ public class ModAcervosEscritos {
         return autorMod;
     }
 
-    public void setAutorMod(ModAutor autorMod) {
+    public void setAutorMod(ModAutor autorMod, String operacao) {
         this.autorMod = autorMod;
     }
     

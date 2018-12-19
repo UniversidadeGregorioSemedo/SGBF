@@ -33,7 +33,7 @@ public abstract class  ModAcervo {
         return idAcervo;
     }
 
-    public void setIdAcervo(Integer idAcervo) {
+    public void setIdAcervo(Integer idAcervo, String operacao) {
         this.idAcervo = idAcervo;
     }
 

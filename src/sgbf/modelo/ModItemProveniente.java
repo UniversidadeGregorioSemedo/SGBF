@@ -14,11 +14,11 @@ import sgbf.util.UtilControloDaData;
 public class ModItemProveniente {
     
     
-    private Short quantidade_entrada;
-    private Double custo_unitario;
-    private Double total;
     private ModEstoque estoqueMod;
     private ModProveniencia provenienciaMod;
+    private Short quantidade_entrada;
+    private Double custo_unitario;
+    private Double subtotaltotal;
     private String data_registo;
     private String data_modificacao;
   
@@ -26,7 +26,7 @@ public class ModItemProveniente {
     public ModItemProveniente() {
         this.quantidade_entrada = 0;
         this.custo_unitario = 0.0;
-        this.total = 0.0;
+        this.subtotaltotal = 0.0;
         this.data_registo = String.valueOf(UtilControloDaData.dataActual());
         this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
        
@@ -37,7 +37,7 @@ public class ModItemProveniente {
         return quantidade_entrada;
     }
 
-    public void setQuantidade_entrada(Short quantidade_entrada) {
+    public void setQuantidade_entrada(Short quantidade_entrada, String operacao) {
         this.quantidade_entrada = quantidade_entrada;
     }
 
@@ -45,23 +45,23 @@ public class ModItemProveniente {
         return custo_unitario;
     }
 
-    public void setCusto_unitario(Double custo_unitario) {
+    public void setCusto_unitario(Double custo_unitario, String operacao) {
         this.custo_unitario = custo_unitario;
     }
 
-    public Double getTotal() {
-        return total;
+    public Double getSubTotal() {
+        return subtotaltotal;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setSubTotal(Double subtotaltotal, String operacao) {
+        this.subtotaltotal = subtotaltotal;
     }
 
     public ModEstoque getEstoqueMod() {
         return estoqueMod;
     }
 
-    public void setEstoqueMod(ModEstoque estoqueMod) {
+    public void setEstoqueMod(ModEstoque estoqueMod, String operacao) {
         this.estoqueMod = estoqueMod;
     }
 
@@ -69,7 +69,7 @@ public class ModItemProveniente {
         return provenienciaMod;
     }
 
-    public void setProvenienciaMod(ModProveniencia provenienciaMod) {
+    public void setProvenienciaMod(ModProveniencia provenienciaMod, String operacao) {
         this.provenienciaMod = provenienciaMod;
     }
 
@@ -77,7 +77,7 @@ public class ModItemProveniente {
         return data_registo;
     }
 
-    public void setData_registo(String data_registo) {
+    public void setData_registo(String data_registo, String operacao) {
         this.data_registo = data_registo;
     }
 
@@ -85,7 +85,7 @@ public class ModItemProveniente {
         return data_modificacao;
     }
 
-    public void setData_modificacao(String data_modificacao) {
+    public void setData_modificacao(String data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
 

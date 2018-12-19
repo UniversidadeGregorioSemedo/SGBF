@@ -28,7 +28,7 @@ public class ModItemSolicitado {
         return fisicoAcervoMod;
     }
 
-    public void setFisicoAcervoMod(ModAcervoFisico fisicoAcervoMod) {
+    public void setFisicoAcervoMod(ModAcervoFisico fisicoAcervoMod, String operacao) {
         this.fisicoAcervoMod = fisicoAcervoMod;
     }
 
@@ -36,7 +36,7 @@ public class ModItemSolicitado {
         return reservaMod;
     }
 
-    public void setReservaMod(ModReserva reservaMod) {
+    public void setReservaMod(ModReserva reservaMod, String operacao) {
         this.reservaMod = reservaMod;
     }
 

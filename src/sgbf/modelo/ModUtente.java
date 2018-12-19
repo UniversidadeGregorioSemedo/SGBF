@@ -22,13 +22,11 @@ public abstract class ModUtente {
     protected String data_modificacao;
 
  
-    
-    
     public Integer getIdUtente() {
         return idUtente;
     }
 
-    public void setIdUtente(Integer idUtente) {
+    public void setIdUtente(Integer idUtente, String operacao) {
         this.idUtente = idUtente;
     }
 
@@ -36,7 +34,7 @@ public abstract class ModUtente {
         return primeiro_nome;
     }
 
-    public void setPrimeiro_nome(String primeiro_nome) {
+    public void setPrimeiro_nome(String primeiro_nome, String operacao) {
         this.primeiro_nome = primeiro_nome;
     }
 
@@ -44,7 +42,7 @@ public abstract class ModUtente {
         return segundo_nome;
     }
 
-    public void setSegundo_nome(String segundo_nome) {
+    public void setSegundo_nome(String segundo_nome, String operacao) {
         this.segundo_nome = segundo_nome;
     }
 
@@ -52,7 +50,7 @@ public abstract class ModUtente {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(String genero, String operacao) {
         this.genero = genero;
     }
 
@@ -60,7 +58,7 @@ public abstract class ModUtente {
         return tipo_identificacao;
     }
 
-    public void setTipo_identificacao(String tipo_identificacao) {
+    public void setTipo_identificacao(String tipo_identificacao, String operacao) {
         this.tipo_identificacao = tipo_identificacao;
     }
 
@@ -68,7 +66,7 @@ public abstract class ModUtente {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(String numero, String operacao) {
         this.numero = numero;
     }
 
@@ -76,7 +74,7 @@ public abstract class ModUtente {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(String endereco, String operacao) {
         this.endereco = endereco;
     }
 
@@ -84,7 +82,7 @@ public abstract class ModUtente {
         return data_registo;
     }
 
-    public void setData_registo(String data_registo) {
+    public void setData_registo(String data_registo, String operacao) {
         this.data_registo = data_registo;
     }
 
@@ -92,7 +90,7 @@ public abstract class ModUtente {
         return data_modificacao;
     }
 
-    public void setData_modificacao(String data_modificacao) {
+    public void setData_modificacao(String data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
     

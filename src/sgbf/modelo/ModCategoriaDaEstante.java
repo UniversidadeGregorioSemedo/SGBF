@@ -18,7 +18,7 @@ public class ModCategoriaDaEstante {
         return categoriaMod;
     }
 
-    public void setCategoriaMod(ModCategoria categoriaMod) {
+    public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
         this.categoriaMod = categoriaMod;
     }
 
@@ -26,7 +26,7 @@ public class ModCategoriaDaEstante {
         return estanteMod;
     }
 
-    public void setEstanteMod(ModEstante estanteMod) {
+    public void setEstanteMod(ModEstante estanteMod, String operacao) {
         this.estanteMod = estanteMod;
     }
     

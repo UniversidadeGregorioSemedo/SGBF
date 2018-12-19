@@ -35,7 +35,7 @@ public class ModEstoque {
         return idEstoque;
     }
 
-    public void setIdEstoque(Integer idEstoque) {
+    public void setIdEstoque(Integer idEstoque, String operacao) {
         this.idEstoque = idEstoque;
     }
 
@@ -43,7 +43,7 @@ public class ModEstoque {
         return quantidade_total;
     }
 
-    public void setQuantidade_total(Short quantidade_total) {
+    public void setQuantidade_total(Short quantidade_total, String operacao) {
         this.quantidade_total = quantidade_total;
     }
 
@@ -51,7 +51,7 @@ public class ModEstoque {
         return quantidade_em_falta;
     }
 
-    public void setQuantidade_em_falta(Short quantidade_em_falta) {
+    public void setQuantidade_em_falta(Short quantidade_em_falta, String operacao) {
         this.quantidade_em_falta = quantidade_em_falta;
     }
 
@@ -59,7 +59,7 @@ public class ModEstoque {
         return quantidade_acervos_emprestados;
     }
 
-    public void setQuantidade_acervos_emprestados(Short quantidade_acervos_emprestados) {
+    public void setQuantidade_acervos_emprestados(Short quantidade_acervos_emprestados, String operacao) {
         this.quantidade_acervos_emprestados = quantidade_acervos_emprestados;
     }
 
@@ -67,7 +67,7 @@ public class ModEstoque {
         return quantidade_acervos_resercados;
     }
 
-    public void setQuantidade_acervos_resercados(Short quantidade_acervos_resercados) {
+    public void setQuantidade_acervos_resercados(Short quantidade_acervos_resercados, String operacao) {
         this.quantidade_acervos_resercados = quantidade_acervos_resercados;
     }
 
@@ -75,7 +75,7 @@ public class ModEstoque {
         return data_registo;
     }
 
-    public void setData_registo(String data_registo) {
+    public void setData_registo(String data_registo, String operacao) {
         this.data_registo = data_registo;
     }
 
@@ -83,7 +83,7 @@ public class ModEstoque {
         return data_modificacao;
     }
 
-    public void setData_modificacao(String data_modificacao) {
+    public void setData_modificacao(String data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
     

@@ -31,7 +31,7 @@ public class ModArea {
         return idArea;
     }
 
-    public void setIdArea(Integer idArea) {
+    public void setIdArea(Integer idArea, String operacao) {
         this.idArea = idArea;
     }
 

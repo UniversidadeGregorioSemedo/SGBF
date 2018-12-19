@@ -21,7 +21,7 @@ public class ModUsuario {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome, String operacao) {
         this.nome = nome;
     }
 
@@ -29,7 +29,7 @@ public class ModUsuario {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(String senha, String operacao) {
         this.senha = senha;
     }
 
@@ -37,7 +37,7 @@ public class ModUsuario {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(String estado, String operacao) {
         this.estado = estado;
     }
 
@@ -45,7 +45,7 @@ public class ModUsuario {
         return data_registo;
     }
 
-    public void setData_registo(String data_registo) {
+    public void setData_registo(String data_registo, String operacao) {
         this.data_registo = data_registo;
     }
 
@@ -53,7 +53,7 @@ public class ModUsuario {
         return data_modificacao;
     }
 
-    public void setData_modificacao(String data_modificacao) {
+    public void setData_modificacao(String data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
 

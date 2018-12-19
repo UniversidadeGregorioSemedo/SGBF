@@ -33,7 +33,7 @@ public class ModDevolucao {
         return idDevolucao;
     }
 
-    public void setIdDevolucao(Integer idDevolucao) {
+    public void setIdDevolucao(Integer idDevolucao, String operacao) {
         this.idDevolucao = idDevolucao;
     }
 
@@ -41,7 +41,7 @@ public class ModDevolucao {
         return tipo_devolucao;
     }
 
-    public void setTipo_devolucao(String tipo_devolucao) {
+    public void setTipo_devolucao(String tipo_devolucao, String operacao) {
         this.tipo_devolucao = tipo_devolucao;
     }
 
@@ -49,7 +49,7 @@ public class ModDevolucao {
         return quantidade_devolvida;
     }
 
-    public void setQuantidade_devolvida(Integer quantidade_devolvida) {
+    public void setQuantidade_devolvida(Integer quantidade_devolvida, String operacao) {
         this.quantidade_devolvida = quantidade_devolvida;
     }
 
@@ -57,7 +57,7 @@ public class ModDevolucao {
         return data_devolucao;
     }
 
-    public void setData_devolucao(String data_devolucao) {
+    public void setData_devolucao(String data_devolucao, String operacao) {
         this.data_devolucao = data_devolucao;
     }
 
@@ -65,7 +65,7 @@ public class ModDevolucao {
         return funcionarioMod;
     }
 
-    public void setFuncionarioMod(ModFuncionario funcionarioMod) {
+    public void setFuncionarioMod(ModFuncionario funcionarioMod, String operacao) {
         this.funcionarioMod = funcionarioMod;
     }
 
@@ -73,7 +73,7 @@ public class ModDevolucao {
         return solicitadoItemMod;
     }
 
-    public void setSolicitadoItemMod(ModItemSolicitado solicitadoItemMod) {
+    public void setSolicitadoItemMod(ModItemSolicitado solicitadoItemMod, String operacao) {
         this.solicitadoItemMod = solicitadoItemMod;
     }
     

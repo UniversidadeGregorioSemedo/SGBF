@@ -35,7 +35,7 @@ public class ModFuncionario extends ModUtente  {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(String cargo, String operacao) {
         this.cargo = cargo;
     }
 
@@ -43,7 +43,7 @@ public class ModFuncionario extends ModUtente  {
         return codigo_funcionario;
     }
 
-    public void setCodigo_funcionario(Integer codigo_funcionario) {
+    public void setCodigo_funcionario(Integer codigo_funcionario, String operacao) {
         this.codigo_funcionario = codigo_funcionario;
     }
 
@@ -51,7 +51,7 @@ public class ModFuncionario extends ModUtente  {
         return usuarioMod;
     }
 
-    public void setUsuarioMod(ModUsuario usuarioMod) {
+    public void setUsuarioMod(ModUsuario usuarioMod, String operacao) {
         this.usuarioMod = usuarioMod;
     }
     

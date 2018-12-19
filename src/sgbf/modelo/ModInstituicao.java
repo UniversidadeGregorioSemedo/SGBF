@@ -13,7 +13,7 @@ public class ModInstituicao {
     
     private Integer idInstituicao;
     private String nome;
-    private ModEndereco enderecoMod;
+    private String enderecoMod;
     private String data_registo;
     private String data_modificacao;
 
@@ -21,7 +21,7 @@ public class ModInstituicao {
         return idInstituicao;
     }
 
-    public void setIdInstituicao(Integer idInstituicao) {
+    public void setIdInstituicao(Integer idInstituicao, String operacao) {
         this.idInstituicao = idInstituicao;
     }
 
@@ -29,23 +29,25 @@ public class ModInstituicao {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome, String operacao) {
         this.nome = nome;
     }
 
-    public ModEndereco getEnderecoMod() {
+    public String getEnderecoMod() {
         return enderecoMod;
     }
 
-    public void setEnderecoMod(ModEndereco enderecoMod) {
+    public void setEnderecoMod(String enderecoMod, String operacao) {
         this.enderecoMod = enderecoMod;
     }
+
+    
 
     public String getData_registo() {
         return data_registo;
     }
 
-    public void setData_registo(String data_registo) {
+    public void setData_registo(String data_registo, String operacao) {
         this.data_registo = data_registo;
     }
 
@@ -53,10 +55,8 @@ public class ModInstituicao {
         return data_modificacao;
     }
 
-    public void setData_modificacao(String data_modificacao) {
+    public void setData_modificacao(String data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
-    
-    
     
 }

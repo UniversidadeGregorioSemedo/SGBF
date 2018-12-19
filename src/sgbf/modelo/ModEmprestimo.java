@@ -36,7 +36,7 @@ public class ModEmprestimo {
         return idEmprestimo;
     }
 
-    public void setIdEmprestimo(Integer idEmprestimo) {
+    public void setIdEmprestimo(Integer idEmprestimo, String operacao) {
         this.idEmprestimo = idEmprestimo;
     }
 
@@ -44,7 +44,7 @@ public class ModEmprestimo {
         return reservaMod;
     }
 
-    public void setReservaMod(ModReserva reservaMod) {
+    public void setReservaMod(ModReserva reservaMod, String operacao) {
         this.reservaMod = reservaMod;
     }
 
@@ -52,7 +52,7 @@ public class ModEmprestimo {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(String estado, String operacao) {
         this.estado = estado;
     }
 
@@ -60,7 +60,7 @@ public class ModEmprestimo {
         return multa;
     }
 
-    public void setMulta(Double multa) {
+    public void setMulta(Double multa, String operacao) {
         this.multa = multa;
     }
 
@@ -68,7 +68,7 @@ public class ModEmprestimo {
         return dias_atrazo;
     }
 
-    public void setDias_atrazo(Integer dias_atrazo) {
+    public void setDias_atrazo(Integer dias_atrazo, String operacao) {
         this.dias_atrazo = dias_atrazo;
     }
 
@@ -76,7 +76,7 @@ public class ModEmprestimo {
         return data_emprestimo;
     }
 
-    public void setData_emprestimo(String data_emprestimo) {
+    public void setData_emprestimo(String data_emprestimo, String operacao) {
         this.data_emprestimo = data_emprestimo;
     }
 
@@ -84,7 +84,7 @@ public class ModEmprestimo {
         return data_vencimento;
     }
 
-    public void setData_vencimento(String data_vencimento) {
+    public void setData_vencimento(String data_vencimento, String operacao) {
         this.data_vencimento = data_vencimento;
     }
 
@@ -92,7 +92,7 @@ public class ModEmprestimo {
         return utenteMod;
     }
 
-    public void setUtenteMod(ModUtente utenteMod) {
+    public void setUtenteMod(ModUtente utenteMod, String operacao) {
         this.utenteMod = utenteMod;
     }
     

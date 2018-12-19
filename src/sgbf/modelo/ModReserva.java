@@ -35,7 +35,7 @@ public class ModReserva {
         return idReserva;
     }
 
-    public void setIdReserva(Integer idReserva) {
+    public void setIdReserva(Integer idReserva, String operacao) {
         this.idReserva = idReserva;
     }
 
@@ -43,7 +43,7 @@ public class ModReserva {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(String estado, String operacao) {
         this.estado = estado;
     }
 
@@ -51,7 +51,7 @@ public class ModReserva {
         return dias_remanescente;
     }
 
-    public void setDias_remanescente(Byte dias_remanescente) {
+    public void setDias_remanescente(Byte dias_remanescente, String operacao) {
         this.dias_remanescente = dias_remanescente;
     }
 
@@ -59,7 +59,7 @@ public class ModReserva {
         return utenteMod;
     }
 
-    public void setUtenteMod(ModUtente utenteMod) {
+    public void setUtenteMod(ModUtente utenteMod, String operacao) {
         this.utenteMod = utenteMod;
     }
 
@@ -67,7 +67,7 @@ public class ModReserva {
         return funcionarioMod;
     }
 
-    public void setFuncionarioMod(ModFuncionario funcionarioMod) {
+    public void setFuncionarioMod(ModFuncionario funcionarioMod, String operacao) {
         this.funcionarioMod = funcionarioMod;
     }
 
@@ -75,7 +75,7 @@ public class ModReserva {
         return data_registo;
     }
 
-    public void setData_registo(String data_registo) {
+    public void setData_registo(String data_registo, String operacao) {
         this.data_registo = data_registo;
     }
 
@@ -83,7 +83,7 @@ public class ModReserva {
         return data_modificacao;
     }
 
-    public void setData_modificacao(String data_modificacao) {
+    public void setData_modificacao(String data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
     
