@@ -25,5 +25,5 @@ public abstract class ConCRUD {
     public abstract boolean remover(Object objecto_remover, String operacao);
     public abstract List<Object> listarTodos(String operacao);
     public abstract List<Object> pesquisar(Object objecto_pesquisar, String operacao);
-    
+   
 }
