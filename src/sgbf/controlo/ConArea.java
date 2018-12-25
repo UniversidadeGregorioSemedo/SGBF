@@ -62,17 +62,21 @@ public class ConArea extends ConCRUD{
     public boolean remover(Object objecto_remover, String operacao) {
         ModArea areaMod = (ModArea)objecto_remover;
         try{
-            super.query = "delete from tcc.area where idArea=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,areaMod.getIdArea());
-            return !super.preparedStatement.execute();
+            if(this.temDadosRelacionados(areaMod, operacao)){
+                super.query = "delete from tcc.area where idArea=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1,areaMod.getIdArea());
+                return !super.preparedStatement.execute();
+            }else{
+                throw new UtilControloExcessao("Esta operação não pode ser executada\n A Área seleccionada possui Registos !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Área(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
-
+    
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
@@ -112,15 +116,6 @@ public class ConArea extends ConCRUD{
         }
     }
     
-    private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
-        ModArea areaMod = new ModArea();
-        areaMod.setIdArea(setResultset.getInt("idArea"), operacao);
-        areaMod.setSector(setResultset.getString("sector"), operacao);
-        areaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        areaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
-        return areaMod;
-    }
-    
     private boolean jaExisteEssaArea(ModArea areaMod, String operacao){
         for(Object todosRegistos: this.listarTodos(operacao)){
             ModArea areaRegistada = (ModArea)todosRegistos;
@@ -129,4 +124,19 @@ public class ConArea extends ConCRUD{
         return false;
     }
     
+    private boolean temDadosRelacionados(ModArea areaMod, String operacao) throws SQLException{
+        super.query = "select *from estante where Area_idArea=?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement.setInt(1, areaMod.getIdArea());
+        return super.setResultset.next();
+    }
+    
+    private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
+        ModArea areaMod = new ModArea();
+        areaMod.setIdArea(setResultset.getInt("idArea"), operacao);
+        areaMod.setSector(setResultset.getString("sector"), operacao);
+        areaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
+        areaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        return areaMod;
+    }
 }
