@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModEstante;
+import sgbf.modelo.ModProveniencia;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -19,21 +20,16 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  */
 public class ConProveniencia extends ConCRUD {
     
-        @Override
+    @Override
     public boolean registar(Object objecto_registar, String operacao) {
-        ModEstante estanteMod = (ModEstante)objecto_registar;
+        ModProveniencia provenienciaMod = (ModProveniencia)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.Estante (designacao, descricacao, linha, coluna, Area_idArea)"
-                        + " VALUES (?, ?, ?, ?, ?)";
+            super.query = "INSERT INTO tcc.proveniencia (tipo) VALUES (?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, estanteMod.getDesignacao());
-            super.preparedStatement.setString(2, estanteMod.getDescricao());
-            super.preparedStatement.setByte(3, estanteMod.getLinha());
-            super.preparedStatement.setByte(4, estanteMod.getColuna());
-            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
+            super.preparedStatement.setString(1, provenienciaMod.getTipo());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Proveniencia !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -41,19 +37,15 @@ public class ConProveniencia extends ConCRUD {
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
-        ModEstante estanteMod = (ModEstante)objecto_alterar;
+        ModProveniencia provenienciaMod = (ModProveniencia)objecto_alterar;
         try{
-            super.query = "UPDATE tcc.Estante set designacao=?, descricacao=?, linha=?, coluna=?, Area_idArea=? where idEstante=?";
+            super.query = "update tcc.proveniencia set tipo=? where idProveniencia=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, estanteMod.getDesignacao());
-            super.preparedStatement.setString(2, estanteMod.getDescricao());
-            super.preparedStatement.setByte(3, estanteMod.getLinha());
-            super.preparedStatement.setByte(4, estanteMod.getColuna());
-            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
-            super.preparedStatement.setInt(6, estanteMod.getIdEstante());
+            super.preparedStatement.setString(1, provenienciaMod.getTipo());
+            super.preparedStatement.setInt(2, provenienciaMod.getIdProveniencia());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Proveniencia !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -61,19 +53,23 @@ public class ConProveniencia extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-       ModEstante estanteMod = (ModEstante)objecto_remover;
+        ModProveniencia provenienciaMod = (ModProveniencia)objecto_remover;
         try{
-            super.query = "delete from tcc.Estante where idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,estanteMod.getIdEstante());
-            return !super.preparedStatement.execute();
+            if(this.temDadosRelacionados(provenienciaMod, operacao)){
+               throw new UtilControloExcessao("Esta operação não pode ser executada !\nErro: A proveniencia seleccionada tem dados registados !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }else{
+                super.query = "delete from tcc.proveniencia where idProveniencia=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1,provenienciaMod.getIdProveniencia());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
-
+    
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
@@ -125,6 +121,12 @@ public class ConProveniencia extends ConCRUD {
         estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return estanteMod;
     }
-
     
+    private boolean temDadosRelacionados(ModProveniencia provenienciaMod, String operacao) throws SQLException{
+        super.query = "select *from itensProvenientes where Proveniencia_idProveniencia=?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement.setInt(1, provenienciaMod.getIdProveniencia());
+        return super.setResultset.next();
+    }
+
 }

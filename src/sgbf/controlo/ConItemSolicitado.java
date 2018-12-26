@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModEstante;
+import sgbf.modelo.ModItemSolicitado;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -21,19 +22,17 @@ public class ConItemSolicitado extends ConCRUD {
     
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
-        ModEstante estanteMod = (ModEstante)objecto_registar;
+        ModItemSolicitado itemSolicitadoMod = (ModItemSolicitado)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.Estante (designacao, descricacao, linha, coluna, Area_idArea)"
-                        + " VALUES (?, ?, ?, ?, ?)";
+            super.query = "INSERT INTO tcc.itenssolicitados (Acervos_idAcervos, Reserva_idReserva, quantidade)"
+                        + " VALUES (?, ?, ?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, estanteMod.getDesignacao());
-            super.preparedStatement.setString(2, estanteMod.getDescricao());
-            super.preparedStatement.setByte(3, estanteMod.getLinha());
-            super.preparedStatement.setByte(4, estanteMod.getColuna());
-            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
+            super.preparedStatement.setInt(1, itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
+            super.preparedStatement.setInt(2, itemSolicitadoMod.getReservaMod().getIdReserva());
+            super.preparedStatement.setByte(3, itemSolicitadoMod.getQuantidade_revervada());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Reserva !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -41,19 +40,16 @@ public class ConItemSolicitado extends ConCRUD {
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
-        ModEstante estanteMod = (ModEstante)objecto_alterar;
+        ModItemSolicitado itemSolicitadoMod = (ModItemSolicitado)objecto_alterar;
         try{
-            super.query = "UPDATE tcc.Estante set designacao=?, descricacao=?, linha=?, coluna=?, Area_idArea=? where idEstante=?";
+            super.query = "update tcc.itenssolicitados set quantidade=? where Acervos_idAcervos=? and Reserva_idReserva=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, estanteMod.getDesignacao());
-            super.preparedStatement.setString(2, estanteMod.getDescricao());
-            super.preparedStatement.setByte(3, estanteMod.getLinha());
-            super.preparedStatement.setByte(4, estanteMod.getColuna());
-            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
-            super.preparedStatement.setInt(6, estanteMod.getIdEstante());
+            super.preparedStatement.setByte(1, itemSolicitadoMod.getQuantidade_revervada());
+            super.preparedStatement.setInt(2, itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
+            super.preparedStatement.setInt(3, itemSolicitadoMod.getReservaMod().getIdReserva());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Reserva !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -61,23 +57,29 @@ public class ConItemSolicitado extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-       ModEstante estanteMod = (ModEstante)objecto_remover;
+        ModItemSolicitado itemSolicitadoMod = (ModItemSolicitado)objecto_remover;
         try{
-            super.query = "delete from tcc.Estante where idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,estanteMod.getIdEstante());
-            return !super.preparedStatement.execute();
+            if(this.temDadosRelacionados(itemSolicitadoMod, operacao)){
+               throw new UtilControloExcessao("Esta operacão não pode ser executada\nErro: Tem devolução ! ", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }else{
+                super.query = "delete from tcc.itenssolicitados where Acervos_idAcervos=? and Reserva_idReserva=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1,itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
+                super.preparedStatement.setInt(2,itemSolicitadoMod.getReservaMod().getIdReserva());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+           throw new UtilControloExcessao("Erro ao "+operacao+" Reserva !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
+    
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
-        try{
+        /*try{
             super.query = "select * from tcc.Estante designacao by nome, data_modificacao asc";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
@@ -89,13 +91,15 @@ public class ConItemSolicitado extends ConCRUD {
             throw new UtilControloExcessao("Erro ao "+operacao+" Estante(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }
+        }*/
+        return todosRegistos;
     }
 
+    
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        ModEstante estanteMod = (ModEstante)objecto_pesquisar;
+        /*ModEstante estanteMod = (ModEstante)objecto_pesquisar;
         try{
             super.query = "select * from tcc.Estante where idEstante=? or "
                         + "designacao like '%"+estanteMod.getDesignacao()+"%'";
@@ -110,12 +114,13 @@ public class ConItemSolicitado extends ConCRUD {
             throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }
+        }*/
+        return todosRegistosEncontrados;
     }
     
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
         ModEstante estanteMod = new ModEstante();
-        estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
+        /*estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
         estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
         estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
         estanteMod.setLinha(setResultset.getByte("linha"), operacao);
@@ -123,7 +128,16 @@ public class ConItemSolicitado extends ConCRUD {
         estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
         estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        */
         return estanteMod;
+    }
+    
+    private boolean temDadosRelacionados( ModItemSolicitado itemSolicitadoMod, String operacao) throws SQLException{
+        super.query = "select *from devolucao where ItensSolicitados_Acervos_idAcervos=? and ItensSolicitados_Reserva_idReserva=?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement.setInt(1,itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
+        super.preparedStatement.setInt(2,itemSolicitadoMod.getReservaMod().getIdReserva());
+        return super.setResultset.next();
     }
 
     

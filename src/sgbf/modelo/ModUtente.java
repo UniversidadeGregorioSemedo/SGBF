@@ -17,7 +17,13 @@ public abstract class ModUtente {
     protected String genero;
     protected String tipo_identificacao;
     protected String numero;
+    protected String contacto;
+    protected String email;
     protected String endereco;
+    protected String endereco_imagem;
+    protected String categoria;
+    protected String usuario;
+    protected String senha;
     protected String data_registo;
     protected String data_modificacao;
 
@@ -66,6 +72,23 @@ public abstract class ModUtente {
         return numero;
     }
 
+    public String getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(String contacto) {
+        this.contacto = contacto;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+
     public void setNumero(String numero, String operacao) {
         this.numero = numero;
     }
@@ -78,6 +101,39 @@ public abstract class ModUtente {
         this.endereco = endereco;
     }
 
+    public String getEndereco_imagem() {
+        return endereco_imagem;
+    }
+
+    public void setEndereco_imagem(String endereco_imagem) {
+        this.endereco_imagem = endereco_imagem;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
     public String getData_registo() {
         return data_registo;
     }

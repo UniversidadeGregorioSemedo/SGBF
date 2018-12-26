@@ -10,29 +10,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModEstante;
-import sgbf.modelo.ModItemProveniente;
+import sgbf.modelo.ModFuncionario;
+import sgbf.modelo.ModProveniencia;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
- * @author Look
+ * @author Dell
  */
-public class ContItemProveniente extends ConCRUD {
-        @Override
+public class ConFuncionario extends ConCRUD {
+   @Override
     public boolean registar(Object objecto_registar, String operacao) {
-        ModItemProveniente itemProvenienteMod = (ModItemProveniente)objecto_registar;
+        ModFuncionario funcionarioMod = (ModFuncionario)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.itensprovenientes (Estoque_idEstoque, Proveniencia_idProveniencia, quantidade_entrada, subtotal)"
-                        + " VALUES (?, ?, ?, ?);";
+            super.query = "INSERT INTO tcc.funcionario (cargo, cod_funcionario, Utente_idUtente)"
+                        + " VALUES (?, ?, ?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, itemProvenienteMod.getEstoqueMod().getIdEstoque());
-            super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
-            super.preparedStatement.setInt(3, itemProvenienteMod.getQuantidade_entrada());
-            super.preparedStatement.setDouble(4, itemProvenienteMod.getSubTotal());
+            super.preparedStatement.setString(1, funcionarioMod.getCargo());
+            super.preparedStatement.setInt(2, funcionarioMod.getCodigo_funcionario());
+            super.preparedStatement.setInt(3, funcionarioMod.getIdUtente());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estoque !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Funcionários !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -40,17 +40,16 @@ public class ContItemProveniente extends ConCRUD {
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
-        ModItemProveniente itemProvenienteMod = (ModItemProveniente)objecto_alterar;
+        ModFuncionario funcionarioMod = (ModFuncionario)objecto_alterar;
         try{
-            super.query = "update tcc.itensprovenientes set quantidade_entrada=?, subtotal=? where Estoque_idEstoque=? and Proveniencia_idProveniencia=?";
+            super.query = "update tcc.funcionario set cargo=?, cod_funcionario=? where Utente_idUtente=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, itemProvenienteMod.getQuantidade_entrada());
-            super.preparedStatement.setDouble(2, itemProvenienteMod.getSubTotal());
-            super.preparedStatement.setInt(3, itemProvenienteMod.getEstoqueMod().getIdEstoque());
-            super.preparedStatement.setInt(4, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
+            super.preparedStatement.setString(1, funcionarioMod.getCargo());
+            super.preparedStatement.setInt(2, funcionarioMod.getCodigo_funcionario());
+            super.preparedStatement.setInt(3, funcionarioMod.getIdUtente());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estoque !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Funcionários !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -58,20 +57,23 @@ public class ContItemProveniente extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-        ModItemProveniente itemProvenienteMod = (ModItemProveniente)objecto_remover;
+        ModFuncionario funcionarioMod = (ModFuncionario)objecto_remover;
         try{
-            super.query = "delete from tcc.itensprovenientes where Estoque_idEstoque=? and Proveniencia_idProveniencia=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,itemProvenienteMod.getEstoqueMod().getIdEstoque());
-            super.preparedStatement.setInt(2,itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
-            return !super.preparedStatement.execute();
+            if(this.temDadosRelacionados(funcionarioMod, operacao)){
+               throw new UtilControloExcessao("Esta operação não pode ser executada !\nErro: Ofuncionario seleccionado tem resgisto seleccionada tem dados registados !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }else{
+                super.query = "delete from tcc.funcionario where idFuncionario=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1,funcionarioMod.getCodigo_funcionario());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+"!\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+           throw new UtilControloExcessao("Erro ao "+operacao+" Funcionario !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
-
+    
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
@@ -115,7 +117,7 @@ public class ContItemProveniente extends ConCRUD {
     
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
         ModEstante estanteMod = new ModEstante();
-        estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
+        /*estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
         estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
         estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
         estanteMod.setLinha(setResultset.getByte("linha"), operacao);
@@ -123,8 +125,29 @@ public class ContItemProveniente extends ConCRUD {
         estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
         estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        */
         return estanteMod;
     }
-
+    
+    private boolean temDadosRelacionados(ModFuncionario funcionarioMod, String operacao) throws SQLException{
+        super.query = "select *from reserva where Funcionario_idFuncionario=?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement.setInt(1, funcionarioMod.getCodigo_funcionario());
+        if(super.setResultset.next()){
+            return super.setResultset.next();
+        }else{
+            super.query = "select *from devolucao where Funcionario_idFuncionario=?";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+            super.preparedStatement.setInt(1, funcionarioMod.getCodigo_funcionario());
+            if(super.setResultset.next()){
+                return super.setResultset.next();
+            }else{
+                super.query = "select *from emprestimo where Funcionario_idFuncionario=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+                super.preparedStatement.setInt(1, funcionarioMod.getCodigo_funcionario());
+                return super.setResultset.next();
+            }
+        }
+    } 
     
 }

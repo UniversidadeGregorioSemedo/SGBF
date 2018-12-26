@@ -63,12 +63,12 @@ public class ConArea extends ConCRUD{
         ModArea areaMod = (ModArea)objecto_remover;
         try{
             if(this.temDadosRelacionados(areaMod, operacao)){
+                throw new UtilControloExcessao("Esta operação não pode ser executada\n A Área seleccionada possui Registos !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }else{
                 super.query = "delete from tcc.area where idArea=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setInt(1,areaMod.getIdArea());
                 return !super.preparedStatement.execute();
-            }else{
-                throw new UtilControloExcessao("Esta operação não pode ser executada\n A Área seleccionada possui Registos !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
             }
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Área(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());

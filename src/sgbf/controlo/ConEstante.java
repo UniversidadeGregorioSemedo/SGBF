@@ -63,17 +63,21 @@ public class ConEstante extends ConCRUD{
     public boolean remover(Object objecto_remover, String operacao) {
        ModEstante estanteMod = (ModEstante)objecto_remover;
         try{
-            super.query = "delete from tcc.Estante where idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,estanteMod.getIdEstante());
-            return !super.preparedStatement.execute();
+            if(this.temDadosRelacionados(estanteMod, operacao)){
+                throw new UtilControloExcessao("Esta operação não pode ser executada\n A Estante seleccionada possui registo !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }else{
+                super.query = "delete from tcc.Estante where idEstante=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1,estanteMod.getIdEstante());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
-
+    
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
@@ -126,5 +130,11 @@ public class ConEstante extends ConCRUD{
         return estanteMod;
     }
     
+    private boolean temDadosRelacionados(ModEstante estanteMod, String operacao) throws SQLException{
+        super.query = "select *from categoriasdaestante where Estante_idEstante=?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+        return super.setResultset.next();
+    }
     
 }

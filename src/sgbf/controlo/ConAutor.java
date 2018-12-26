@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModAutor;
-import sgbf.modelo.ModCategoria;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -62,10 +61,14 @@ public class ConAutor extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModAutor autorMod = (ModAutor)objecto_remover;
         try{
-            super.query = "delete from tcc.Autor where idAutor=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,autorMod.getIdAutor());
-            return !super.preparedStatement.execute();
+            if(this.temDadosRelacionados(autorMod, operacao)){
+               throw new UtilControloExcessao("Esta operação não pode ser executada\nO autor seleccionado possui dados relacionados ", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }else{
+                super.query = "delete from tcc.Autor where idAutor=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1,autorMod.getIdAutor());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Autor !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
@@ -123,6 +126,12 @@ public class ConAutor extends ConCRUD {
         autorMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return autorMod;
     }
-
     
+    private boolean temDadosRelacionados(ModAutor autorMod, String operacao) throws SQLException{
+        super.query = "select *from acervosescritos where Autor_idAutor=?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement.setInt(1, autorMod.getIdAutor());
+        return super.setResultset.next();
+    }
+
 }

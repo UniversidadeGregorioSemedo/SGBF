@@ -52,12 +52,16 @@ public class ConCategoria extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-       ModCategoria categoriaMod = (ModCategoria)objecto_remover;
+        ModCategoria categoriaMod = (ModCategoria)objecto_remover;
         try{
-            super.query = "delete from tcc.categoria where idcategoria=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,categoriaMod.getIdCategoria());
-            return !super.preparedStatement.execute();
+            if(this.temDadosRelacionados(categoriaMod, operacao)){
+               throw new UtilControloExcessao("Esta operação não pode ser executada\nA Categoria seleccionada tem registo !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            }else{
+                super.query = "delete from tcc.categoria where idcategoria=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1,categoriaMod.getIdCategoria());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
@@ -112,6 +116,11 @@ public class ConCategoria extends ConCRUD {
         categoriaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return categoriaMod;
     }
+    private boolean temDadosRelacionados(ModCategoria categoriModMod, String operacao) throws SQLException{
+        super.query = "select *from categoriasdaestante where categoria_idcategoria=?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement.setInt(1, categoriModMod.getIdCategoria());
+        return super.setResultset.next();
+    }
 
-    
 }

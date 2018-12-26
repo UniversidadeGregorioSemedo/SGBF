@@ -18,7 +18,7 @@ public class ModEmprestimo {
     private Integer dias_atrazo;
     private String data_emprestimo;
     private String data_vencimento;
-    private ModUtente utenteMod;
+    private ModFuncionario funcionarioMod;
 
     public ModEmprestimo() {
         this.idEmprestimo = 0;
@@ -26,6 +26,7 @@ public class ModEmprestimo {
         this.estado = null;
         this.multa = 0.0;
         this.dias_atrazo = 0;
+        this.funcionarioMod = new ModFuncionario();
         this.data_emprestimo = null;
         this.data_vencimento = null;
     }
@@ -86,13 +87,15 @@ public class ModEmprestimo {
         this.data_vencimento = data_vencimento;
     }
 
-    public ModUtente getUtenteMod() {
-        return utenteMod;
+    public ModFuncionario getFuncionarioMod() {
+        return funcionarioMod;
     }
 
-    public void setUtenteMod(ModUtente utenteMod, String operacao) {
-        this.utenteMod = utenteMod;
+    public void setFuncionarioMod(ModFuncionario funcionarioMod) {
+        this.funcionarioMod = funcionarioMod;
     }
+
+    
     
     
     
