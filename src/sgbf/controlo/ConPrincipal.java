@@ -31,7 +31,6 @@ public class ConPrincipal extends Application {
         try {
             Parent root = FXMLLoader.load(this.getClass().getResource("/sgbf/visao/VisLogin.fxml"));
             Scene scene = new Scene(root);
-
             primaryStage.setScene(scene);
             primaryStage.setTitle("Sistema de Gestão de Biblioteca");
             primaryStage.setResizable(false);
