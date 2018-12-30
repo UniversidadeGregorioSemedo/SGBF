@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModFuncionario;
-import sgbf.modelo.ModProveniencia;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
