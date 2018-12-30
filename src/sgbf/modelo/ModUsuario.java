@@ -5,6 +5,10 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
+import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilIconesDaJOPtionPane;
+
 /**
  *
  * @author Look
@@ -22,7 +26,15 @@ public class ModUsuario {
     }
 
     public void setNome(String nome, String operacao) {
-        this.nome = nome;
+        if(nome == null){
+            throw new UtilControloExcessao(operacao, "Introduza o nome do usário !", Alert.AlertType.WARNING);
+        }else{
+            if(nome.isEmpty()){
+                throw new UtilControloExcessao(operacao, "Introduza o nome do usário !", Alert.AlertType.WARNING);
+            }else{
+                this.nome = nome;
+            }
+        }
     }
 
     public String getSenha() {
@@ -30,7 +42,15 @@ public class ModUsuario {
     }
 
     public void setSenha(String senha, String operacao) {
-        this.senha = senha;
+        if(senha == null){
+            throw new UtilControloExcessao(operacao, "Introduza a senha !", Alert.AlertType.WARNING);
+        }else{
+            if(senha.isEmpty()){
+                throw new UtilControloExcessao(operacao, "Introduza a senha !", Alert.AlertType.WARNING);
+            }else{
+                this.senha = senha;
+            }
+        }
     }
 
     public String getEstado() {

@@ -5,6 +5,7 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -127,10 +128,10 @@ public abstract class ModUtente {
 
     public void setUsuario(String usuario, String operacao) {
         if(usuario == null){
-            throw new UtilControloExcessao("Introduza o nome do Usuário !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Introduza o nome do usuário !", Alert.AlertType.WARNING);
         }else{
             if(usuario.isEmpty()){
-                throw new UtilControloExcessao("Introduza o nome do Usuário !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Introduza o nome do usuário !", Alert.AlertType.WARNING);
             }else{
                 this.usuario = usuario;
             }
@@ -143,10 +144,10 @@ public abstract class ModUtente {
 
     public void setSenha(String senha, String operacao) {
         if(senha == null){
-            throw new UtilControloExcessao("Introduza a senha !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Introduza a senha !", Alert.AlertType.WARNING);
         }else{
             if(senha.isEmpty()){
-                throw new UtilControloExcessao("Introduza a senha !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Introduza a senha !", Alert.AlertType.WARNING);
             }else{
                 this.senha = senha;
             }
@@ -168,7 +169,5 @@ public abstract class ModUtente {
     public void setData_modificacao(String data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
-    
-    
     
 }
