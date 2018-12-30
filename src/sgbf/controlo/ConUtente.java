@@ -19,8 +19,8 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  * @author Look
  */
 public class ConUtente extends ConCRUD {
-
-        @Override
+    
+    @Override
     public boolean registar(Object objecto_registar, String operacao) {
         ModUtente utenteMod = (ModUtente)objecto_registar;
         try{
