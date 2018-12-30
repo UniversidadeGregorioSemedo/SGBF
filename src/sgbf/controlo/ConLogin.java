@@ -55,7 +55,7 @@ public class ConLogin implements Initializable {
     public void clicarBotoes(MouseEvent accao){
         if(accao.getSource() == loginEntrar){
            final String operacao = "Iniciar sessão";
-            this.abrirTelaPrincipal(operacao,accao);
+           this.abrirTelaPrincipal(operacao,accao);
         }else{
             if(accao.getSource() == loginCancelar){
                 System.exit(0);
@@ -80,9 +80,9 @@ public class ConLogin implements Initializable {
             }else{
                 loginMensagem.setText("Usuário ou senha incorreta");
             }
-       }catch(IOException erro){
+        }catch(IOException erro){
            
-       }
+        }
     }
     
     private boolean autenticar(String operacao){
@@ -90,8 +90,8 @@ public class ConLogin implements Initializable {
         ModFuncionario funcionaMod = new ModFuncionario();
         ConUsuario usuarioCon = new ConUsuario();
         
-        funcionaMod.setUsuario(this.loginNomeUsuario.getText());
-        funcionaMod.setSenha(this.loginSenha.getText());
+        funcionaMod.setUsuario(this.loginNomeUsuario.getText(),operacao);
+        funcionaMod.setSenha(this.loginSenha.getText(),operacao);
         return usuarioCon.autenticar(funcionaMod, operacao); 
     }
     
