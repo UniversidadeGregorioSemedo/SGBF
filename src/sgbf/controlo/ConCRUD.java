@@ -15,7 +15,7 @@ import sgbf.dao.DaoCominhoDaBaseDados;
  * @author Look
  */
 public abstract class ConCRUD {
-    protected DaoCominhoDaBaseDados caminhoDaBaseDados = null;
+    final protected DaoCominhoDaBaseDados caminhoDaBaseDados = new DaoCominhoDaBaseDados();
     protected PreparedStatement preparedStatement = null;
     protected ResultSet setResultset = null;
     protected String query = null;
