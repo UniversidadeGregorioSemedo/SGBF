@@ -5,6 +5,9 @@
  */
 package sgbf.modelo;
 
+import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilIconesDaJOPtionPane;
+
 /**
  *
  * @author Look
@@ -122,16 +125,32 @@ public abstract class ModUtente {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsuario(String usuario, String operacao) {
+        if(usuario == null){
+            throw new UtilControloExcessao("Introduza o nome do Usuário !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+        }else{
+            if(usuario.isEmpty()){
+                throw new UtilControloExcessao("Introduza o nome do Usuário !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            }else{
+                this.usuario = usuario;
+            }
+        }
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha(String senha, String operacao) {
+        if(senha == null){
+            throw new UtilControloExcessao("Introduza a senha !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+        }else{
+            if(senha.isEmpty()){
+                throw new UtilControloExcessao("Introduza a senha !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            }else{
+                this.senha = senha;
+            }
+        }
     }
     
     public String getData_registo() {
