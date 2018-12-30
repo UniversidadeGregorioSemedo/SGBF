@@ -37,12 +37,12 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <JFXButton layoutX="300.0" layoutY="250.0" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #2ECCFA;" text="Entrar" />
-      <JFXButton layoutX="455.0" layoutY="250.0" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #2ECCFA;" text="Cancelar" />
-      <Hyperlink layoutX="308.0" layoutY="285.0" text="Esqueceu a senha ?" />
-      <Hyperlink layoutX="469.0" layoutY="285.0" text="Contacte-nos" />
-      <JFXTextField labelFloat="true" layoutX="350.0" layoutY="119.0" prefHeight="25.0" prefWidth="196.0" promptText="Nome Usuário" styleClass="glyph-icon" stylesheets="@../util/sgbf.visao.login.css" />
-      <JFXPasswordField labelFloat="true" layoutX="349.0" layoutY="172.0" prefHeight="25.0" prefWidth="196.0" promptText="Senha" styleClass="glyph-icon" stylesheets="@../util/sgbf.visao.login.css" />
+      <JFXButton fx:id="loginEntrar" layoutX="300.0" layoutY="250.0" onMouseClicked="#clicarBotoes" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #2ECCFA;" text="Entrar" />
+      <JFXButton fx:id="loginCancelar" layoutX="455.0" layoutY="250.0" onMouseClicked="#clicarBotoes" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #2ECCFA;" text="Cancelar" />
+      <Hyperlink fx:id="loginEsqueceuSenha" layoutX="308.0" layoutY="285.0" text="Esqueceu a senha ?" />
+      <Hyperlink fx:id="loginContacte" layoutX="469.0" layoutY="285.0" text="Contacte-nos" />
+      <JFXTextField fx:id="loginNomeUsuario" labelFloat="true" layoutX="350.0" layoutY="119.0" prefHeight="25.0" prefWidth="196.0" promptText="Nome do Usuário" styleClass="glyph-icon" stylesheets="@../util/UtilLogin.css" />
+      <JFXPasswordField fx:id="loginSenha" labelFloat="true" layoutX="349.0" layoutY="172.0" prefHeight="25.0" prefWidth="196.0" promptText="Senha" styleClass="glyph-icon" stylesheets="@../util/UtilLogin.css" />
       <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="308.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icones/User%20Account_52px.png" />
@@ -53,5 +53,10 @@
             <Image url="@../icones/Key%202_50px.png" />
          </image>
       </ImageView>
+      <Label fx:id="loginMensagem" layoutX="349.0" layoutY="218.0" prefHeight="17.0" prefWidth="196.0" textFill="#eb1d1d">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
