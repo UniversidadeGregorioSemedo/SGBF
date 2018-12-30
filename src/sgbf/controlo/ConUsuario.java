@@ -6,9 +6,9 @@
 package sgbf.controlo;
 
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModUtente;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 
 /**
@@ -25,14 +25,14 @@ public class ConUsuario {
     
     public boolean autenticar(ModUtente utenteMod, String operacao){
         try{
-            this.utenteCon.query = "select * from usuario where usuario=? and senha=?";
+            this.utenteCon.query = "select * from utente where usuario=? and senha=?";
             this.utenteCon.preparedStatement = this.utenteCon.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(utenteCon.query);
             this.utenteCon.preparedStatement.setString(1, utenteMod.getUsuario());
             this.utenteCon.preparedStatement.setString(2, utenteMod.getSenha());
             this.utenteCon.setResultset = utenteCon.preparedStatement.executeQuery();
             return utenteCon.setResultset.next();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao iniciar sessão\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao iniciar sessão\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
     

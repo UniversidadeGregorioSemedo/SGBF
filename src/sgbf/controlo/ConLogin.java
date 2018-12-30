@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sgbf.controlo;
 
 import com.jfoenix.controls.JFXButton;
@@ -17,11 +13,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sgbf.modelo.ModFuncionario;
+import sgbf.util.UtilControloExcessao;
 
 /**
  * FXML Controller class
@@ -39,7 +37,6 @@ public class ConLogin implements Initializable {
     @FXML
     private Label loginMensagem;
             
-
     @FXML
     private JFXButton loginEntrar;
 
@@ -81,7 +78,7 @@ public class ConLogin implements Initializable {
                 loginMensagem.setText("Usuário ou senha incorreta");
             }
         }catch(IOException erro){
-           
+            throw new UtilControloExcessao(operacao, "Erro so iniciar o sistema !\nErro: "+erro, Alert.AlertType.ERROR);
         }
     }
     
