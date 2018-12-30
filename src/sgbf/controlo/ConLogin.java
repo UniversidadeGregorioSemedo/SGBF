@@ -75,7 +75,7 @@ public class ConLogin implements Initializable {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Sistema de Gestão de Biblioteca");
-                stage.setResizable(false);
+                stage.setResizable(true);
                 stage.show();
             }else{
                 loginMensagem.setText("Usuário ou senha incorreta");
