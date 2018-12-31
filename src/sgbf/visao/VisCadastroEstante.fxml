@@ -9,12 +9,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.VisCadastroEstanteController">
+<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroEstanteController">
     <stylesheets>
         <URL value="@/sgbf/util/viscadastroestante.css" />
     </stylesheets>
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="372.0" prefWidth="573.0" style="-fx-border-style: solid; -fx-border-width: 2px;">
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="272.0" prefWidth="573.0" style="-fx-border-style: solid; -fx-border-width: 2px;">
          <children>
             <Text layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Cadastro de Estante" textAlignment="JUSTIFY" wrappingWidth="573.0">
                <font>
@@ -31,8 +31,8 @@
             <TextField layoutX="320.0" layoutY="71.0" prefHeight="25.0" prefWidth="113.0" />
             <TextField layoutX="320.0" layoutY="118.0" prefHeight="25.0" prefWidth="113.0" />
             <ComboBox layoutX="87.0" layoutY="174.0" prefWidth="150.0" />
-            <JFXButton layoutX="507.0" layoutY="322.0" text="Cancelar" />
-            <JFXButton layoutX="433.0" layoutY="322.0" text="Cadastrar" />
+            <JFXButton layoutX="497.0" layoutY="231.0" text="Cancelar" />
+            <JFXButton layoutX="423.0" layoutY="231.0" text="Cadastrar" />
          </children>
       </Pane>
    </children>
