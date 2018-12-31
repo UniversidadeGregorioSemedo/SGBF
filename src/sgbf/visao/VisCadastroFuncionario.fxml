@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="216.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.VisCadastroFuncionarioController">
+    <stylesheets>
+        <URL value="@/sgbf/util/viscadastrofuncionario.css" />
+    </stylesheets>
+   <children>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="192.0" prefWidth="573.0" style="-fx-border-style: solid; -fx-border-width: 2px;">
+         <children>
+            <Text layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Cadastro de Funcionario" textAlignment="JUSTIFY" wrappingWidth="573.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Label layoutX="14.0" layoutY="75.0" prefHeight="17.0" prefWidth="36.0" text="Cargo" />
+            <Label layoutX="235.0" layoutY="75.0" text="Codigo de funcionario" />
+            <Label layoutX="14.0" layoutY="121.0" text="Id utente" />
+            <TextField layoutX="369.0" layoutY="71.0" />
+            <JFXButton layoutX="497.0" layoutY="154.0" text="Cancelar" />
+            <JFXButton layoutX="423.0" layoutY="154.0" text="Cadastrar" />
+            <ComboBox layoutX="63.0" layoutY="71.0" prefWidth="150.0" />
+            <ComboBox layoutX="75.0" layoutY="118.0" prefHeight="25.0" prefWidth="66.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
