@@ -10,7 +10,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.ConTelaPrincipal">
    <children>
-      <MenuBar>
+      <MenuBar fx:id="menuBar">
         <menus>
           <Menu mnemonicParsing="false" text="Arquivo">
             <items>
@@ -23,7 +23,8 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Sair do sistema">
+                  <MenuItem fx:id="menuItemTerminarSessao" mnemonicParsing="false" onAction="#accaoDoMenuItem" text="Terminar Sessão" />
+                  <MenuItem fx:id="menuItemSairDoSistema" mnemonicParsing="false" onAction="#accaoDoMenuItem" text="Sair do sistema">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
