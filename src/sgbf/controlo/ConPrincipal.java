@@ -10,9 +10,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -22,7 +22,10 @@ public class ConPrincipal extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+        final String operacao = "Iniciar Sessão";
         try {
+           this.fecharPeloBotaoWindow(operacao, primaryStage);
+            
             Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
@@ -30,7 +33,7 @@ public class ConPrincipal extends Application {
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException erro) {
-            throw new UtilControloExcessao("Erro ao inciar o sistema !\nErro: "+erro.getMessage(), "Iniciar Sessão", UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao inciar o sistema !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -41,4 +44,18 @@ public class ConPrincipal extends Application {
         launch(args);
     }
     
+    private void fecharPeloBotaoWindow(String operacao, Stage propridadeDaJanela){
+        propridadeDaJanela.setOnCloseRequest((evento) -> {
+            evento.consume();
+            ConPrincipal.sairdoSistema(operacao, propridadeDaJanela);
+        });
+    }
+    
+    public static void sairdoSistema(String operacao, Stage propriedadeDaJanela){
+        UtilControloExcessao confirmar = new UtilControloExcessao();
+        final String mensagem = "Tem a certeza que pretende fechar o programa ?";
+        if(confirmar.temCerteza(operacao, mensagem)){
+           propriedadeDaJanela.close();
+        }
+    }
 }
