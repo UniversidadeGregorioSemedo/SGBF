@@ -50,30 +50,31 @@ public class ConLogin implements Initializable {
     private Hyperlink loginContacte;
 
     public void clicarBotoes(MouseEvent accao){
+        Node node = (Node)accao.getSource();
+        Stage propreidadeDaJanela =  (Stage) node.getScene().getWindow();
+        final String operacao = "Iniciar sessão";
+       
         if(accao.getSource() == loginEntrar){
-           final String operacao = "Iniciar sessão";
-           this.abrirTelaPrincipal(operacao,accao);
+           this.abrirTelaPrincipal(operacao,accao,propreidadeDaJanela);
         }else{
             if(accao.getSource() == loginCancelar){
-                System.exit(0);
+                ConPrincipal.sairdoSistema(operacao, propreidadeDaJanela);
             }
         }
     }
     
-    private void abrirTelaPrincipal(String operacao,MouseEvent accao){
+    private void abrirTelaPrincipal(String operacao,MouseEvent accao, Stage propreidadeDaJanela){
         try{
             if(this.autenticar(operacao)){
-                Node node = (Node)accao.getSource();
-                Stage stage =  (Stage) node.getScene().getWindow();
-                stage.setMaximized(true);
-                stage.close();
+                propreidadeDaJanela.close();
 
                 Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisTelaPrincipal.fxml"));
                 Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Sistema de Gestão de Biblioteca");
-                stage.setResizable(true);
-                stage.show();
+                propreidadeDaJanela.setScene(scene);
+                propreidadeDaJanela.setTitle("Sistema de Gestão de Biblioteca");
+                propreidadeDaJanela.setMaximized(true);
+                propreidadeDaJanela.setResizable(true);
+                propreidadeDaJanela.show();
             }else{
                 loginMensagem.setText("Usuário ou senha incorreta");
             }
@@ -81,6 +82,7 @@ public class ConLogin implements Initializable {
             throw new UtilControloExcessao(operacao, "Erro so iniciar o sistema !\nErro: "+erro, Alert.AlertType.ERROR);
         }
     }
+    
     
     private boolean autenticar(String operacao){
         
