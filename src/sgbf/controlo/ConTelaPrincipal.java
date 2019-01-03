@@ -86,43 +86,34 @@ public class ConTelaPrincipal implements Initializable {
     }    
     
     public void accaoDoMenuItem(ActionEvent accao){
-        
-       if(accao.getSource() == menuItemTerminarSessao){
-           menuItemTerminarSessao.setOnAction(e ->terminarSessao(menuItemTerminarSessao.getText(),accao));
-       }else{
+       Stage propriedadeDaJanela = (Stage) menuBar.getScene().getWindow();
+       
+        if(accao.getSource() == menuItemTerminarSessao){
+           menuItemTerminarSessao.setOnAction(e ->terminarSessao(menuItemTerminarSessao.getText(),propriedadeDaJanela));
+        }else{
             if(accao.getSource() == menuItemSairDoSistema){
-                menuItemSairDoSistema.setOnAction(e ->sairdoSistema(menuItemSairDoSistema.getText()));
+                menuItemSairDoSistema.setOnAction(e ->ConPrincipal.sairdoSistema(menuItemSairDoSistema.getText(), propriedadeDaJanela));
             }
-       }
-        
+        }
     }
     
-    private void terminarSessao(String operacao, ActionEvent accao){
+    private void terminarSessao(String operacao, Stage propriedadeDaJanela){
         final String mensagem = "Tem a certeza que pretende terminar sessão ?";
         if(confirmar.temCerteza(operacao, mensagem)){
             try {
-                Stage stage = (Stage) menuBar.getScene().getWindow();
-                stage.close();
+                propriedadeDaJanela.close();
 
                 Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
                 Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Sistema de Gestão de Biblioteca");
-                stage.setResizable(false);
-                stage.setMaximized(false);
-                stage.show();
+                propriedadeDaJanela.setScene(scene);
+                propriedadeDaJanela.setTitle("Sistema de Gestão de Biblioteca");
+                propriedadeDaJanela.setResizable(false);
+                propriedadeDaJanela.setMaximized(false);
+                propriedadeDaJanela.show();
             } catch (IOException ex) {
                 throw new UtilControloExcessao(operacao, "Erro "+operacao+"\nErro: "+ex.getMessage(), Alert.AlertType.ERROR);
             }
         }
     }
-    
-    private void sairdoSistema(String operacao){
-        final String mensagem = "Tem a certeza que pretende fechar o programa ?";
-        if(confirmar.temCerteza(operacao, mensagem)){
-            System.exit(0);
-        }
-    }
-    
-    
+ 
 }
