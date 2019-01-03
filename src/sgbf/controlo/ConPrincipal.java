@@ -22,7 +22,7 @@ public class ConPrincipal extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        final String operacao = "Iniciar Sessão";
+        final String operacao = "Fechar o programa";
         try {
            this.fecharPeloBotaoWindow(operacao, primaryStage);
             
