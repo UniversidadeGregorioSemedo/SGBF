@@ -121,4 +121,39 @@ public class ConTelaPrincipal implements Initializable {
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroUtente.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
+    @FXML
+    public void BotaoMenuItemFuncionario() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroFuncionario.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    
+    @FXML
+    public void BotaoMenuItemEstante() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroEstante.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    
+    @FXML
+    public void BotaoMenuItemEditora() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroEditora.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    
+    @FXML
+    public void BotaoMenuItemCategoria() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroCategoria.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    
+    @FXML
+    public void BotaoMenuItemArea() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroArea.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    
+    @FXML
+    public void BotaoMenuItemAcervo() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroAcervo.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
 }
