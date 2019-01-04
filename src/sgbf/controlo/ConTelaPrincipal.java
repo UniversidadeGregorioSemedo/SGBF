@@ -115,5 +115,10 @@ public class ConTelaPrincipal implements Initializable {
             }
         }
     }
- 
+    
+    @FXML
+    public void BotaoMenuItemUtente() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroUtente.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
 }
