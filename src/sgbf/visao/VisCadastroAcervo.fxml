@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
@@ -10,123 +11,110 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="678.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroAcervoController">
-    <stylesheets>
-        <URL value="@/sgbf/util/viscadastroacervo.css" />
-    </stylesheets>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="701.0" prefWidth="1266.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane layoutY="-3.0" orientation="VERTICAL" prefHeight="406.0" prefWidth="678.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="413.0" prefWidth="676.0">
+      <SplitPane dividerPositions="0.46924177396280403" orientation="VERTICAL" prefHeight="701.0" prefWidth="1266.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="1199.0">
                <children>
-                  <ComboBox layoutX="545.0" layoutY="157.0" prefHeight="25.0" prefWidth="97.0" />
-                  <Label layoutX="460.0" layoutY="160.0" text="Formato">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <ComboBox layoutX="578.0" layoutY="117.0" prefHeight="25.0" prefWidth="64.0" />
-                  <TextField layoutX="577.0" layoutY="71.0" prefHeight="25.0" prefWidth="66.0" />
-                  <Label layoutX="495.0" layoutY="120.0" text="Estoque">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <ComboBox layoutX="351.0" layoutY="118.0" prefHeight="25.0" prefWidth="123.0" />
-                  <TextField layoutX="351.0" layoutY="157.0" prefHeight="25.0" prefWidth="64.0" />
+                  <Pane layoutX="14.0" layoutY="8.0" prefHeight="309.0" prefWidth="1046.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Pesquisar acervo">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="60.0" text="Nome">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="232.0" layoutY="58.0" prefHeight="25.0" prefWidth="551.0" />
+                        <TableView layoutX="14.0" layoutY="98.0" prefHeight="200.0" prefWidth="988.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Id" />
+                              <TableColumn prefWidth="226.0" text="Titulo" />
+                              <TableColumn prefWidth="225.0" text="Autor" />
+                              <TableColumn prefWidth="75.0" text="Edição" />
+                              <TableColumn prefWidth="75.0" text="Ano" />
+                              <TableColumn prefWidth="75.0" text="Quantidade" />
+                              <TableColumn prefWidth="153.0" text="Idioma" />
+                              <TableColumn prefWidth="83.0" text="ISBN" />
+                           </columns>
+                        </TableView>
+                        <JFXButton layoutX="798.0" layoutY="54.0" prefHeight="20.0" prefWidth="25.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
-        </items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="761.0">
+               <children>
+                  <Pane layoutX="13.0" layoutY="9.0" prefHeight="340.0" prefWidth="1048.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="815.0" layoutY="63.0" text="Nº Paginas" />
+                        <TextField layoutX="893.0" layoutY="61.0" prefHeight="25.0" prefWidth="66.0" />
+                        <TextField layoutX="530.0" layoutY="123.0" prefHeight="25.0" prefWidth="66.0" />
+                        <Label layoutX="479.0" layoutY="127.0" text="Ano " />
+                        <TextField layoutX="688.0" layoutY="123.0" prefHeight="25.0" prefWidth="104.0" />
+                        <Label layoutX="630.0" layoutY="126.0" text="Idioma" />
+                        <ComboBox layoutX="441.0" layoutY="182.0" prefHeight="25.0" prefWidth="149.0" />
+                        <Label layoutX="368.0" layoutY="186.0" text="Editora" />
+                        <ComboBox layoutX="688.0" layoutY="182.0" prefHeight="25.0" prefWidth="115.0" />
+                        <Label layoutX="620.0" layoutY="186.0" text="Autor" />
+                        <TextArea layoutX="563.0" layoutY="227.0" prefHeight="96.0" prefWidth="326.0" />
+                        <Label layoutX="504.0" layoutY="231.0" text="Sinopse" />
+                        <TextField layoutX="311.0" layoutY="227.0" prefHeight="25.0" prefWidth="170.0" />
+                        <Label layoutX="204.0" layoutY="231.0" text="Endereço acervo" />
+                        <Label layoutX="155.0" layoutY="65.0" text="Titulo" />
+                        <TextField layoutX="204.0" layoutY="58.0" prefHeight="25.0" prefWidth="181.0" />
+                        <Label layoutX="414.0" layoutY="64.0" text="Subtitulo" />
+                        <TextField layoutX="479.0" layoutY="60.0" />
+                        <Label layoutX="653.0" layoutY="62.0" text="Edição" />
+                        <TextField layoutX="711.0" layoutY="59.0" prefHeight="25.0" prefWidth="66.0" />
+                        <TextField layoutX="879.0" layoutY="182.0" prefHeight="25.0" prefWidth="66.0" />
+                        <Label layoutX="818.0" layoutY="185.0" text="Volume" />
+                        <TextField layoutX="262.0" layoutY="182.0" prefHeight="25.0" prefWidth="87.0" />
+                        <Label layoutX="220.0" layoutY="186.0" text="ISBN" />
+                        <Label layoutX="8.0" layoutY="185.0" text="Cod-Barra" />
+                        <ComboBox layoutX="896.0" layoutY="123.0" prefHeight="25.0" prefWidth="137.0" />
+                        <Label layoutX="818.0" layoutY="127.0" text="Categoria" />
+                        <ComboBox layoutX="83.0" layoutY="227.0" prefHeight="25.0" prefWidth="87.0" />
+                        <Label layoutX="23.0" layoutY="231.0" text="Estoque" />
+                     </children>
+                  </Pane>
+                  <ComboBox layoutX="344.0" layoutY="132.0" prefHeight="25.0" prefWidth="121.0" />
+                  <ComboBox layoutX="114.0" layoutY="132.0" prefWidth="150.0" />
+                  <TextField layoutX="98.0" layoutY="188.0" prefHeight="25.0" prefWidth="104.0" />
+                  <TextField layoutX="65.0" layoutY="72.0" prefHeight="25.0" prefWidth="66.0" />
+                  <Label layoutX="285.0" layoutY="136.0" text="Formato" />
+                  <Label layoutX="20.0" layoutY="136.0" text="Tipo de acervo" />
+                  <Label layoutX="24.0" layoutY="76.0" text="Id" />
+                  <Text layoutX="24.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dados do acervo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutX="1081.0" layoutY="9.0" prefHeight="341.0" prefWidth="165.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Button layoutX="57.0" layoutY="32.0" mnemonicParsing="false" text="Cadastrar" />
+                        <Button layoutX="56.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Alterar" />
+                        <Button layoutX="57.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Remover" />
+                        <Button layoutX="57.0" layoutY="198.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Novo" />
+                        <Button layoutX="57.0" layoutY="282.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Cancelar" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </items>
       </SplitPane>
-      <ComboBox layoutX="271.0" layoutY="194.0" prefHeight="25.0" prefWidth="123.0" />
-      <Label layoutX="217.0" layoutY="198.0" text="Editora">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextArea layoutX="82.0" layoutY="238.0" prefHeight="100.0" prefWidth="372.0" />
-      <Label layoutX="22.0" layoutY="280.0" text="Sinopse">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField layoutX="510.0" layoutY="194.0" prefHeight="25.0" prefWidth="142.0" />
-      <Label layoutX="402.0" layoutY="198.0" text="Endereço-acervo">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXButton layoutX="473.0" layoutY="351.0" text="Cadastrar">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="578.0" layoutY="351.0" text="Cancelar">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
-      <Label layoutX="492.0" layoutY="74.0" text="Cod-Barra">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ComboBox layoutX="293.0" layoutY="70.0" prefHeight="25.0" prefWidth="72.0" />
-      <TextField layoutX="414.0" layoutY="70.0" prefHeight="25.0" prefWidth="64.0" />
-      <ComboBox layoutX="88.0" layoutY="194.0" prefHeight="25.0" prefWidth="114.0" />
-      <Label layoutX="376.0" layoutY="74.0" text="ISBN">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="23.0" layoutY="198.0" text="Categoria">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="250.0" layoutY="119.0" text="Tipo de acervo">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="264.0" layoutY="156.0" text="NºPaginas">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="238.0" layoutY="74.0" text="Idioma">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField layoutX="194.0" layoutY="152.0" prefHeight="25.0" prefWidth="55.0" />
-      <TextField layoutX="72.0" layoutY="152.0" prefHeight="25.0" prefWidth="55.0" />
-      <TextField layoutX="84.0" layoutY="115.0" />
-      <TextField layoutX="72.0" layoutY="70.0" />
-      <Label layoutX="146.0" layoutY="156.0" text="Volume">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="24.0" layoutY="156.0" text="Edição">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="24.0" layoutY="119.0" text="Subtitulo">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="24.0" layoutY="74.0" prefHeight="17.0" prefWidth="43.0" text="Titulo">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Text layoutX="24.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastro de Acervo" textAlignment="CENTER" wrappingWidth="567.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>
