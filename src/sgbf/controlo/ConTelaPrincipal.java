@@ -153,7 +153,7 @@ public class ConTelaPrincipal implements Initializable {
     
     @FXML
     public void BotaoMenuItemAcervo() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroAcervo.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/ViewTodosAcervos.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
 }
