@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -9,233 +10,95 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="639.0" prefWidth="989.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.ViewAllController">
+<AnchorPane id="AnchorPane" prefHeight="655.0" prefWidth="884.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.ViewAllController">
     <stylesheets>
         <URL value="@/sgbf/util/viewall.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.494949494949495" layoutX="1.0" orientation="VERTICAL" prefHeight="641.0" prefWidth="989.0">
+      <SplitPane dividerPositions="0.40722291407222916" layoutX="1.0" orientation="VERTICAL" prefHeight="699.0" prefWidth="1118.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="347.0" prefWidth="987.0">
                <children>
-                  <Text layoutX="-4.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detalhes do Acervo" textAlignment="CENTER" wrappingWidth="996.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <GridPane layoutX="10.0" layoutY="34.0" prefHeight="278.0" prefWidth="968.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="269.0" prefWidth="854.0" style="-fx-border-style: solid;">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="82.0" text="ID">
+                        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesquisar Acervo" wrappingWidth="948.0">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="14.0" />
                            </font>
-                        </Label>
-                        <Label prefHeight="17.0" prefWidth="84.0" text="Titulo" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="17.0" prefWidth="74.0" text="Subtitulo" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Tipo de acervo" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Formato" GridPane.rowIndex="4">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Edição" GridPane.rowIndex="5">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Volume" GridPane.rowIndex="6">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Editora" GridPane.rowIndex="7">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Idioma" GridPane.rowIndex="8">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Codigo de barra" GridPane.rowIndex="9">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="17.0" prefWidth="86.0" text="ISBN" GridPane.rowIndex="10">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Número de paginas" GridPane.rowIndex="11">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Categoria" GridPane.rowIndex="12">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Estoque" GridPane.rowIndex="13">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Ano de lançamento" GridPane.rowIndex="14">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Data de registro" GridPane.rowIndex="15">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Data de modificação" GridPane.rowIndex="16">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoIdAcervo" text="Label" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoTituloAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoSubtituloAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampotipoAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoFormtoAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoEdicaoAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoVolumeAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoEditoraAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoIdiomaAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoCodBarraAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoIsbnAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoNumPagAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoCategoriaAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoEstoqueAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="13">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoAnoLancamentoAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="14">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoDataRegistroAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="15">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="CampoDataModificacaoAcervo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="16">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        </Text>
+                        <Label layoutX="14.0" layoutY="53.0" prefHeight="17.0" prefWidth="44.0" text="Nome" />
+                        <TextField layoutX="207.0" layoutY="49.0" prefHeight="25.0" prefWidth="532.0" />
+                        <Button layoutX="765.0" layoutY="49.0" mnemonicParsing="false" text="Pesquisar" />
+                        <TableView layoutX="14.0" layoutY="87.0" prefHeight="173.0" prefWidth="820.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Id" />
+                            <TableColumn prefWidth="241.0" text="Titulo" />
+                              <TableColumn prefWidth="220.0" text="Autor" />
+                              <TableColumn prefWidth="75.0" text="Edição" />
+                              <TableColumn prefWidth="75.0" text="Ano" />
+                              <TableColumn prefWidth="85.0" text="Quantidade" />
+                          </columns>
+                        </TableView>
                      </children>
-                  </GridPane>
+                  </Pane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="987.0">
                <children>
-                  <TableView layoutY="1.0" prefHeight="246.0" prefWidth="987.0">
-                    <columns>
-                      <TableColumn fx:id="colunatabelaIDAcervo" prefWidth="88.0" text="ID" />
-                      <TableColumn fx:id="colunatabelaTituloAcervo" prefWidth="304.0" text="Titulo" />
-                        <TableColumn fx:id="colunatabelaSubtituloTituloAcervo" prefWidth="272.0" text="Subtitulo" />
-                        <TableColumn fx:id="colunatabelaCodBarraAcervo" prefWidth="183.0" text="Cod-Barra" />
-                        <TableColumn fx:id="colunatabelaIsbnAcervo" prefWidth="139.0" text="ISBN" />
-                    </columns>
-                  </TableView>
-                  <JFXButton fx:id="BotaoCadastrar" layoutX="790.0" layoutY="275.0" text="Cadastrar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="130.0" />
-                  <JFXButton fx:id="BotaoAlterar" layoutX="857.0" layoutY="275.0" text="Alterar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="78.0" />
-                  <JFXButton fx:id="BotaoRemover" layoutX="909.0" layoutY="275.0" text="Remover" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="14.0" />
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="389.0" prefWidth="854.0" style="-fx-border-style: solid;">
+                     <children>
+                        <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dados do acervo">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Label layoutX="14.0" layoutY="66.0" text="Id" />
+                        <Label layoutX="185.0" layoutY="66.0" text="Titulo" />
+                        <Label layoutX="445.0" layoutY="66.0" text="Subtitulo" />
+                        <Label layoutX="10.0" layoutY="126.0" text="Tipo de acervo" />
+                        <Label layoutX="275.0" layoutY="126.0" text="Formato" />
+                        <Label layoutX="690.0" layoutY="66.0" text="Edição" />
+                        <Label layoutX="469.0" layoutY="126.0" text="Volume" />
+                        <Label layoutX="693.0" layoutY="126.0" text="Nº-paginas" />
+                        <Label layoutX="10.0" layoutY="182.0" text="Cod-Barra" />
+                        <Label layoutX="275.0" layoutY="182.0" text="ISBN" />
+                        <Label layoutX="445.0" layoutY="182.0" text="Idioma" />
+                        <Label layoutX="693.0" layoutY="182.0" text="Ano " />
+                        <Label layoutX="10.0" layoutY="241.0" text="Categoria" />
+                        <Label layoutX="274.0" layoutY="241.0" text="Estoque" />
+                        <Label layoutX="445.0" layoutY="241.0" text="Editora" />
+                        <Label layoutX="679.0" layoutY="241.0" text="Autor" />
+                        <Label layoutX="10.0" layoutY="301.0" text="Endereço acervo" />
+                        <Label layoutX="442.0" layoutY="301.0" text="Sinopse" />
+                        <TextField layoutX="55.0" layoutY="62.0" prefHeight="25.0" prefWidth="66.0" />
+                        <TextField layoutX="235.0" layoutY="62.0" prefHeight="25.0" prefWidth="181.0" />
+                        <TextField layoutX="519.0" layoutY="62.0" />
+                        <TextField layoutX="766.0" layoutY="62.0" prefHeight="25.0" prefWidth="66.0" />
+                        <TextField layoutX="519.0" layoutY="122.0" prefHeight="25.0" prefWidth="66.0" />
+                        <TextField layoutX="766.0" layoutY="122.0" prefHeight="25.0" prefWidth="66.0" />
+                        <TextField layoutX="88.0" layoutY="178.0" prefHeight="25.0" prefWidth="104.0" />
+                        <TextField layoutX="317.0" layoutY="178.0" prefHeight="25.0" prefWidth="87.0" />
+                        <TextField layoutX="519.0" layoutY="178.0" prefHeight="25.0" prefWidth="104.0" />
+                        <TextField layoutX="766.0" layoutY="178.0" prefHeight="25.0" prefWidth="66.0" />
+                        <TextField layoutX="111.0" layoutY="297.0" prefHeight="25.0" prefWidth="170.0" />
+                        <TextArea layoutX="510.0" layoutY="274.0" prefHeight="96.0" prefWidth="326.0" />
+                        <ComboBox layoutX="104.0" layoutY="122.0" prefWidth="150.0" />
+                        <ComboBox layoutX="334.0" layoutY="122.0" prefHeight="25.0" prefWidth="121.0" />
+                        <ComboBox layoutX="88.0" layoutY="237.0" prefHeight="25.0" prefWidth="137.0" />
+                        <ComboBox layoutX="334.0" layoutY="237.0" prefHeight="25.0" prefWidth="87.0" />
+                        <ComboBox layoutX="518.0" layoutY="237.0" prefHeight="25.0" prefWidth="149.0" />
+                        <ComboBox layoutX="724.0" layoutY="237.0" prefHeight="25.0" prefWidth="115.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="890.0" layoutY="14.0" prefHeight="389.0" prefWidth="200.0" style="-fx-border-style: solid;">
+                     <children>
+                        <Button layoutX="74.0" layoutY="32.0" mnemonicParsing="false" text="Cadastrar" />
+                        <Button layoutX="74.0" layoutY="106.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Alterar" />
+                        <Button layoutX="74.0" layoutY="184.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Remover" />
+                        <Button layoutX="74.0" layoutY="258.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Novo" />
+                        <Button layoutX="74.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
         </items>
