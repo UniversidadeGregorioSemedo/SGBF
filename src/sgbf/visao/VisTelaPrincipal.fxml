@@ -112,7 +112,7 @@
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="menuitemCadastroUtente" mnemonicParsing="false" text="Utente">
+                        <MenuItem fx:id="menuitemCadastroUtente" mnemonicParsing="false" onAction="#BotaoMenuItemUtente" text="Utente">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
