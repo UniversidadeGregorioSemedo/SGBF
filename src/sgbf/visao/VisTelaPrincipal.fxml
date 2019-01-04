@@ -39,7 +39,7 @@
             <items>
                   <Menu mnemonicParsing="false" text="Novo Cadastro">
                     <items>
-                      <MenuItem fx:id="menuitemCadastroAcervo" mnemonicParsing="false" text="Acervo">
+                      <MenuItem fx:id="menuitemCadastroAcervo" mnemonicParsing="false" onAction="#BotaoMenuItemAcervo" text="Acervo">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -48,7 +48,7 @@
                               </ImageView>
                            </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="menuitemCadastroArea" mnemonicParsing="false" text="Area">
+                        <MenuItem fx:id="menuitemCadastroArea" mnemonicParsing="false" onAction="#BotaoMenuItemArea" text="Area">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -66,7 +66,7 @@
                               </ImageView>
                            </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="menuitemCadastroCategoria" mnemonicParsing="false" text="Categoria">
+                        <MenuItem fx:id="menuitemCadastroCategoria" mnemonicParsing="false" onAction="#BotaoMenuItemCategoria" text="Categoria">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -75,12 +75,12 @@
                               </ImageView>
                            </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="menuitemCadastroEditora" mnemonicParsing="false" text="Editora">
+                        <MenuItem fx:id="menuitemCadastroEditora" mnemonicParsing="false" onAction="#BotaoMenuItemEditora" text="Editora">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="menuitemCadastroEstante" mnemonicParsing="false" text="Estante">
+                        <MenuItem fx:id="menuitemCadastroEstante" mnemonicParsing="false" onAction="#BotaoMenuItemEstante" text="Estante">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -98,7 +98,7 @@
                               </ImageView>
                            </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="menuitemCadastroFuncionario" mnemonicParsing="false" text="Funcionario">
+                        <MenuItem fx:id="menuitemCadastroFuncionario" mnemonicParsing="false" onAction="#BotaoMenuItemFuncionario" text="Funcionario">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
