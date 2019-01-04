@@ -9,25 +9,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.VisCadastroCategoriaController">
+<AnchorPane id="AnchorPane" prefHeight="201.0" prefWidth="544.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroCategoriaController">
     <stylesheets>
         <URL value="@/sgbf/util/viscadastrocategoria.css" />
     </stylesheets>
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="372.0" prefWidth="573.0" style="-fx-border-style: solid; -fx-border-width: 2px;">
-         <children>
-            <Text layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Cadastro da Categoria" textAlignment="JUSTIFY" wrappingWidth="573.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Label layoutX="14.0" layoutY="75.0" text="Designação" />
-            <Label layoutX="259.0" layoutY="75.0" text="ID Estante" />
-            <TextField layoutX="88.0" layoutY="71.0" />
-            <TextField layoutX="320.0" layoutY="71.0" prefHeight="25.0" prefWidth="113.0" />
-            <JFXButton layoutX="507.0" layoutY="322.0" text="Cancelar" />
-            <JFXButton layoutX="433.0" layoutY="322.0" text="Cadastrar" />
-         </children>
-      </Pane>
+      <SplitPane layoutY="1.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="583.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <JFXButton layoutX="431.0" layoutY="148.0" text="Cadastrar">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="505.0" layoutY="148.0" text="Cancelar">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <Label layoutX="14.0" layoutY="91.0" text="Designação">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="291.0" layoutY="91.0" text="Id Estante">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="106.0" layoutY="88.0" />
+                  <ComboBox layoutX="376.0" layoutY="88.0" prefHeight="25.0" prefWidth="73.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <Text layoutX="10.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="  Cadastro da Categoria" textAlignment="CENTER" wrappingWidth="573.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
