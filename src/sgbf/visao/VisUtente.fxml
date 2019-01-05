@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="763.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisUtente">
+    <stylesheets>
+        <URL value="@/sgbf/util/viscadastroutente.css" />
+    </stylesheets>
+   <children>
+      <SplitPane dividerPositions="0.448062015503876" orientation="VERTICAL" prefHeight="582.0" prefWidth="945.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="679.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="234.0" prefWidth="764.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="Pesquisar utente" />
+                        <Label layoutX="14.0" layoutY="39.0" text="Nome" />
+                        <TextField layoutX="194.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" />
+                        <JFXButton layoutX="652.0" layoutY="35.0" prefHeight="25.0" prefWidth="33.0" text=" " />
+                        <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="652.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Pesquisa.png" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tableUtente" layoutX="14.0" layoutY="66.0" prefHeight="161.0" prefWidth="739.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Id" />
+                            <TableColumn prefWidth="204.0" text="Primeiro nome" />
+                              <TableColumn prefWidth="195.0" text="Segundo nome" />
+                              <TableColumn prefWidth="178.0" text="Nº Id" />
+                              <TableColumn prefWidth="86.0" text="Usuário" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="664.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="289.0" prefWidth="764.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Dados do utente">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="53.0" text="Id" />
+                        <Label layoutX="118.0" layoutY="53.0" text="Primeiro nome" />
+                        <Label layoutX="393.0" layoutY="53.0" text="Segundo nome" />
+                        <Label layoutX="10.0" layoutY="100.0" text="Genero" />
+                        <Label layoutX="196.0" layoutY="100.0" text="Tipo Identificação" />
+                        <Label layoutX="474.0" layoutY="100.0" text="Nº Identificação" />
+                        <Label layoutX="10.0" layoutY="151.0" text="Contacto" />
+                        <Label layoutX="229.0" layoutY="151.0" text="Email" />
+                        <Label layoutX="502.0" layoutY="151.0" text="Endereço" />
+                        <Label layoutX="10.0" layoutY="203.0" text="Categoria" />
+                        <Label layoutX="243.0" layoutY="203.0" text="Usuário" />
+                        <Label layoutX="499.0" layoutY="203.0" text="Senha" />
+                        <TextField fx:id="texteFiedId" layoutX="36.0" layoutY="49.0" prefHeight="25.0" prefWidth="60.0" />
+                        <TextField fx:id="texteFiedPrimeiroNome" layoutX="209.0" layoutY="49.0" prefHeight="25.0" prefWidth="163.0" />
+                        <TextField fx:id="texteFiedSegundoNome" layoutX="493.0" layoutY="49.0" prefHeight="25.0" prefWidth="163.0" />
+                        <TextField fx:id="texteFiedNumIden" layoutX="575.0" layoutY="96.0" prefHeight="25.0" prefWidth="156.0" />
+                        <TextField fx:id="texteFiedContacto" layoutX="73.0" layoutY="147.0" prefHeight="25.0" prefWidth="118.0" />
+                        <TextField fx:id="texteFiedEmail" layoutX="275.0" layoutY="147.0" prefHeight="25.0" prefWidth="209.0" />
+                        <TextField fx:id="texteFiedEndereco" layoutX="569.0" layoutY="147.0" prefHeight="25.0" prefWidth="163.0" />
+                        <TextField fx:id="texteFiedUsuario" layoutX="298.0" layoutY="199.0" />
+                        <PasswordField fx:id="texteFiedSenha" layoutX="569.0" layoutY="199.0" prefHeight="25.0" prefWidth="163.0" />
+                        <ComboBox fx:id="comboBoxGenero" layoutX="57.0" layoutY="96.0" prefHeight="25.0" prefWidth="118.0" />
+                        <ComboBox fx:id="comboBoxTipoIndentificacao" layoutX="307.0" layoutY="96.0" prefHeight="25.0" prefWidth="138.0" />
+                        <ComboBox fx:id="comboBoxCategoria" layoutX="73.0" layoutY="199.0" prefWidth="150.0" />
+                     </children>
+                  </Pane>
+                  <Label layoutX="23.0" layoutY="267.0" text="Endereço de imagem" />
+                  <TextField fx:id="texteFiedEnderecoImagem" layoutX="160.0" layoutY="263.0" prefHeight="25.0" prefWidth="178.0" />
+                  <Pane layoutX="785.0" layoutY="14.0" prefHeight="289.0" prefWidth="138.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Button fx:id="botaoCancelar" layoutX="35.0" layoutY="250.0" mnemonicParsing="false" onAction="#bloquearItensDaJanela" prefHeight="25.0" prefWidth="69.0" text="Cancelar" />
+                        <Button fx:id="botaoNovo" layoutX="35.0" layoutY="180.0" mnemonicParsing="false" onAction="#desbloquearItensDaJanela" prefHeight="25.0" prefWidth="68.0" text="Novo" />
+                        <Button fx:id="botaoRemover" layoutX="35.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" text="Remover" />
+                        <Button fx:id="botaoAlterar" layoutX="34.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Alterar" />
+                        <Button fx:id="botaoCadastrar" layoutX="35.0" layoutY="14.0" mnemonicParsing="false" text="Cadastrar" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
