@@ -21,7 +21,7 @@ import sgbf.util.UtilControloExcessao;
  */
 public class ConTelaPrincipal implements Initializable {
 
-     @FXML
+    @FXML
     private MenuItem menuitemCadastroAcervo;
     @FXML
     private MenuItem menuitemCadastroArea;
@@ -75,7 +75,7 @@ public class ConTelaPrincipal implements Initializable {
     private AnchorPane anchorPane;
     @FXML
     private MenuBar menuBar;
-    private final UtilControloExcessao confirmar = new UtilControloExcessao();
+   
 
     /**
      * Initializes the controller class.
@@ -85,40 +85,10 @@ public class ConTelaPrincipal implements Initializable {
         // TODO
     }    
     
-    public void accaoDoMenuItem(ActionEvent accao){
-       Stage propriedadeDaJanela = (Stage) menuBar.getScene().getWindow();
-       
-        if(accao.getSource() == menuItemTerminarSessao){
-           menuItemTerminarSessao.setOnAction(e ->terminarSessao(menuItemTerminarSessao.getText(),propriedadeDaJanela));
-        }else{
-            if(accao.getSource() == menuItemSairDoSistema){
-                menuItemSairDoSistema.setOnAction(e ->ConPrincipal.sairdoSistema(menuItemSairDoSistema.getText(), propriedadeDaJanela));
-            }
-        }
-    }
-    
-    private void terminarSessao(String operacao, Stage propriedadeDaJanela){
-        final String mensagem = "Tem a certeza que pretende terminar sessão ?";
-        if(confirmar.temCerteza(operacao, mensagem)){
-            try {
-                propriedadeDaJanela.close();
-
-                Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
-                Scene scene = new Scene(root);
-                propriedadeDaJanela.setScene(scene);
-                propriedadeDaJanela.setTitle("Sistema de Gestão de Biblioteca");
-                propriedadeDaJanela.setResizable(false);
-                propriedadeDaJanela.setMaximized(false);
-                propriedadeDaJanela.show();
-            } catch (IOException ex) {
-                throw new UtilControloExcessao(operacao, "Erro "+operacao+"\nErro: "+ex.getMessage(), Alert.AlertType.ERROR);
-            }
-        }
-    }
     
     @FXML
     public void BotaoMenuItemUtente() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroUtente.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisUtente.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     @FXML
@@ -156,4 +126,29 @@ public class ConTelaPrincipal implements Initializable {
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroAcervo.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
+    
+    @FXML
+    public void botaoMenuItemTerminarSessao()  throws IOException{
+        UtilControloExcessao confirmar = new UtilControloExcessao();
+        final String mensagem = "Tem a certeza que pretende terminar sessão ?";
+        if(confirmar.temCerteza(menuItemTerminarSessao.getText(), mensagem)){
+            Stage propriedadeDaJanela = (Stage) menuBar.getScene().getWindow();
+            propriedadeDaJanela.close();
+
+            Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
+            Scene scene = new Scene(root);
+            propriedadeDaJanela.setScene(scene);
+            propriedadeDaJanela.setTitle("Sistema de Gestão de Biblioteca");
+            propriedadeDaJanela.setResizable(false);
+            propriedadeDaJanela.setMaximized(false);
+            propriedadeDaJanela.show();
+        }
+    }
+    
+    @FXML
+    public void botaoMenuItemSairDoSistema(){
+        Stage propriedadeDaJanela = (Stage) menuBar.getScene().getWindow();
+        ConPrincipal.sairdoSistema(menuItemSairDoSistema.getText(), propriedadeDaJanela);
+    }
+    
 }
