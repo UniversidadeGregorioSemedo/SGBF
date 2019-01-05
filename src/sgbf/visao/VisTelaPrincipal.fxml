@@ -23,8 +23,8 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem fx:id="menuItemTerminarSessao" mnemonicParsing="false" onAction="#accaoDoMenuItem" text="Terminar Sessão" />
-                  <MenuItem fx:id="menuItemSairDoSistema" mnemonicParsing="false" onAction="#accaoDoMenuItem" text="Sair do sistema">
+                  <MenuItem fx:id="menuItemTerminarSessao" mnemonicParsing="false" onAction="#botaoMenuItemTerminarSessao" text="Terminar Sessão" />
+                  <MenuItem fx:id="menuItemSairDoSistema" mnemonicParsing="false" onAction="#botaoMenuItemSairDoSistema" text="Sair do sistema">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
