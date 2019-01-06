@@ -12,7 +12,6 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModUtente;
-import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -28,8 +27,8 @@ public class ConUtente extends ConCRUD {
         try{
             super.query = "INSERT INTO tcc.utente (primeiro_nome, segundo_nome, genero,"
                         + " tipo_identidicacao, numero_identidicacao, contacto, email, "
-                        + "endereco, endereco_imagem, categoria, usuario, senha, Instiuicao_idInstiuicao)"
-                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        + "endereco, endereco_imagem, categoria, usuario, senha)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
             super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
@@ -43,7 +42,6 @@ public class ConUtente extends ConCRUD {
             super.preparedStatement.setString(10, utenteMod.getCategoria());
             super.preparedStatement.setString(11, utenteMod.getUsuario());
             super.preparedStatement.setString(12, utenteMod.getSenha());
-            //super.preparedStatement.setInt(13, utenteMod.get().getIdArea());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao, "Erro ao "+operacao+" !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
@@ -58,7 +56,7 @@ public class ConUtente extends ConCRUD {
         try{
             super.query = "update tcc.utente set primeiro_nome=?, segundo_nome=?, genero=?,"
                         + " tipo_identidicacao=?, numero_identidicacao=?, contacto=?, email=?, "
-                        + "endereco=?, endereco_imagem=?, categoria=?, usuario=?, senha=?, Instiuicao_idInstiuicao=? where idUtente=?";
+                        + "endereco=?, endereco_imagem=?, categoria=?, usuario=?, senha=? where idUtente=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
             super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
@@ -72,7 +70,6 @@ public class ConUtente extends ConCRUD {
             super.preparedStatement.setString(10, utenteMod.getCategoria());
             super.preparedStatement.setString(11, utenteMod.getUsuario());
             super.preparedStatement.setString(12, utenteMod.getSenha());
-            //super.preparedStatement.setInt(13, utenteMod.get().getIdArea());
             super.preparedStatement.setInt(14, utenteMod.getIdUtente());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
