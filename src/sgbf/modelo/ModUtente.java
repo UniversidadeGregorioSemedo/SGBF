@@ -7,14 +7,14 @@ package sgbf.modelo;
 
 import javafx.scene.control.Alert;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
+import sgbf.util.UtilEmail;
 
 /**
  *
  * @author Look
  */
 public abstract class ModUtente {
-    
+
     protected Integer idUtente;
     protected String primeiro_nome;
     protected String segundo_nome;
@@ -31,7 +31,6 @@ public abstract class ModUtente {
     protected String data_registo;
     protected String data_modificacao;
 
- 
     public Integer getIdUtente() {
         return idUtente;
     }
@@ -45,7 +44,11 @@ public abstract class ModUtente {
     }
 
     public void setPrimeiro_nome(String primeiro_nome, String operacao) {
-        this.primeiro_nome = primeiro_nome;
+        if ((primeiro_nome == null) || (primeiro_nome.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Introduza o primeiro nome", Alert.AlertType.INFORMATION);
+        } else {
+            this.primeiro_nome = primeiro_nome;
+        }
     }
 
     public String getSegundo_nome() {
@@ -53,7 +56,11 @@ public abstract class ModUtente {
     }
 
     public void setSegundo_nome(String segundo_nome, String operacao) {
-        this.segundo_nome = segundo_nome;
+        if ((segundo_nome == null) || (segundo_nome.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Introduza o segundo nome", Alert.AlertType.INFORMATION);
+        } else {
+            this.segundo_nome = segundo_nome;
+        }
     }
 
     public String getGenero() {
@@ -61,7 +68,12 @@ public abstract class ModUtente {
     }
 
     public void setGenero(String genero, String operacao) {
-        this.genero = genero;
+        if ((genero == null) || (genero.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Seleccione o Gênero", Alert.AlertType.INFORMATION);
+        } else {
+            this.genero = genero;
+        }
+
     }
 
     public String getTipo_identificacao() {
@@ -69,7 +81,11 @@ public abstract class ModUtente {
     }
 
     public void setTipo_identificacao(String tipo_identificacao, String operacao) {
-        this.tipo_identificacao = tipo_identificacao;
+        if ((tipo_identificacao == null) || (tipo_identificacao.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Seleccione o tipo de identificação", Alert.AlertType.INFORMATION);
+        } else {
+            this.tipo_identificacao = tipo_identificacao;
+        }
     }
 
     public String getNumero() {
@@ -80,21 +96,33 @@ public abstract class ModUtente {
         return contacto;
     }
 
-    public void setContacto(String contacto) {
-        this.contacto = contacto;
+    public void setContacto(String contacto, String operacao) {
+        if ((contacto == null) || (contacto.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Introduza o Contacto", Alert.AlertType.INFORMATION);
+        } else {
+            this.contacto = contacto;
+        }
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email, String operacao) {
+        if ((email != null) || (!email.isEmpty())) {
+            UtilEmail emailUtil = new UtilEmail();
+            if (emailUtil.emailValido(email)) {
+                this.email = email;
+            }
+        }
     }
-    
 
     public void setNumero(String numero, String operacao) {
-        this.numero = numero;
+        if ((numero == null) || (numero.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Introduza o número de identificação", Alert.AlertType.INFORMATION);
+        } else {
+            this.numero = numero;
+        }
     }
 
     public String getEndereco() {
@@ -102,14 +130,18 @@ public abstract class ModUtente {
     }
 
     public void setEndereco(String endereco, String operacao) {
-        this.endereco = endereco;
+        if ((endereco == null) || (endereco.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Introduza o Endereço do Utente", Alert.AlertType.INFORMATION);
+        } else {
+            this.endereco = endereco;
+        }
     }
 
     public String getEndereco_imagem() {
         return endereco_imagem;
     }
 
-    public void setEndereco_imagem(String endereco_imagem) {
+    public void setEndereco_imagem(String endereco_imagem, String operacao) {
         this.endereco_imagem = endereco_imagem;
     }
 
@@ -117,24 +149,24 @@ public abstract class ModUtente {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategoria(String categoria, String operacao) {
+        if ((categoria == null) || (categoria.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Seleccione a categoria", Alert.AlertType.INFORMATION);
+        } else {
+            this.categoria = categoria;
+
+        }
     }
-    
 
     public String getUsuario() {
         return usuario;
     }
 
     public void setUsuario(String usuario, String operacao) {
-        if(usuario == null){
-            throw new UtilControloExcessao(operacao,"Introduza o nome do usuário !", Alert.AlertType.WARNING);
-        }else{
-            if(usuario.isEmpty()){
-                throw new UtilControloExcessao(operacao,"Introduza o nome do usuário !", Alert.AlertType.WARNING);
-            }else{
-                this.usuario = usuario;
-            }
+        if ((usuario == null) || (usuario.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Introduza o nome do usuário !", Alert.AlertType.INFORMATION);
+        } else {
+            this.usuario = usuario;
         }
     }
 
@@ -143,17 +175,13 @@ public abstract class ModUtente {
     }
 
     public void setSenha(String senha, String operacao) {
-        if(senha == null){
-            throw new UtilControloExcessao(operacao,"Introduza a senha !", Alert.AlertType.WARNING);
-        }else{
-            if(senha.isEmpty()){
-                throw new UtilControloExcessao(operacao,"Introduza a senha !", Alert.AlertType.WARNING);
-            }else{
-                this.senha = senha;
-            }
+        if ((senha == null) || (senha.isEmpty())) {
+            throw new UtilControloExcessao(operacao, "Introduza a senha !", Alert.AlertType.INFORMATION);
+        } else {
+            this.senha = senha;
         }
     }
-    
+
     public String getData_registo() {
         return data_registo;
     }
@@ -170,4 +198,36 @@ public abstract class ModUtente {
         this.data_modificacao = data_modificacao;
     }
     
+    public boolean equals(ModUtente utenteMod, String operacao){
+        if(this.idUtente != utenteMod.idUtente){
+            if(this.tipo_identificacao.equalsIgnoreCase(utenteMod.tipo_identificacao)){
+                if(this.numero.equalsIgnoreCase(utenteMod.numero)){
+                    throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);
+                }else{
+                    if(this.contacto.equalsIgnoreCase(utenteMod.contacto)){
+                        throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);
+                    }else{
+                        if(this.usuario.equalsIgnoreCase(utenteMod.usuario)){
+                            throw new UtilControloExcessao(operacao, "O usuário introduzido já existe", Alert.AlertType.WARNING);
+                        }else{
+                           return false;
+                        }
+                    }
+                }
+            }else{
+                if(this.contacto.equalsIgnoreCase(utenteMod.contacto)){
+                    throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);
+                }else{
+                    if(this.usuario.equalsIgnoreCase(utenteMod.usuario)){
+                        throw new UtilControloExcessao(operacao, "O usuário introduzido já existe", Alert.AlertType.WARNING);
+                    }else{
+                       return false;
+                    }
+                }
+            }
+        }else{
+            return false;
+        }
+    }
+
 }
