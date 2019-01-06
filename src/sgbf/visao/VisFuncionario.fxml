@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.5782918149466192" orientation="VERTICAL" prefHeight="564.0" prefWidth="752.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="295.0" prefWidth="725.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Pesquisar funcionario">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="57.0" text="Nome" />
+                        <TextField layoutX="182.0" layoutY="53.0" prefHeight="25.0" prefWidth="418.0" />
+                        <TableView layoutX="14.0" layoutY="86.0" prefHeight="200.0" prefWidth="693.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Id" />
+                            <TableColumn prefWidth="272.0" text="Nome" />
+                              <TableColumn prefWidth="197.0" text="Cargo" />
+                              <TableColumn prefWidth="148.0" text="Codigo funcionario" />
+                          </columns>
+                        </TableView>
+                        <JFXButton layoutX="607.0" layoutY="50.0" prefHeight="32.0" prefWidth="24.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="208.0" prefWidth="584.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Dados do funcionario">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="60.0" text="Cargo" />
+                        <Label layoutX="14.0" layoutY="107.0" text="Id utente" />
+                        <Label layoutX="286.0" layoutY="60.0" text="Codigo funcionario" />
+                        <ComboBox layoutX="62.0" layoutY="56.0" prefWidth="150.0" />
+                        <ComboBox layoutX="79.0" layoutY="103.0" prefWidth="150.0" />
+                        <TextField layoutX="405.0" layoutY="56.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="606.0" layoutY="11.0" prefHeight="208.0" prefWidth="136.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Button layoutX="59.0" layoutY="14.0" mnemonicParsing="false" text="Cadastrar" />
+                        <Button layoutX="59.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Alterar" />
+                        <Button layoutX="59.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Remover" />
+                        <Button layoutX="59.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Novo" />
+                        <Button layoutX="59.0" layoutY="169.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

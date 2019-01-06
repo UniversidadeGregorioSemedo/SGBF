@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="298.0" prefWidth="503.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroEstanteController">
+    <stylesheets>
+        <URL value="@/sgbf/util/viscadastroestante.css" />
+    </stylesheets>
+   <children>
+      <SplitPane dividerPositions="0.4698544698544699" orientation="VERTICAL" prefHeight="483.0" prefWidth="654.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="624.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Pesquisar estante" />
+                        <Label layoutX="14.0" layoutY="52.0" text="Designação" />
+                        <TextField layoutX="147.0" layoutY="48.0" prefHeight="25.0" prefWidth="341.0" />
+                        <TableView layoutX="6.0" layoutY="79.0" prefHeight="113.0" prefWidth="603.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Id" />
+                            <TableColumn prefWidth="174.0" text="Designação" />
+                              <TableColumn prefWidth="143.0" text="Descrição" />
+                              <TableColumn prefWidth="67.0" text="Linha" />
+                              <TableColumn prefWidth="68.0" text="Coluna" />
+                              <TableColumn prefWidth="75.0" text="Area" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="652.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="190.0" prefWidth="457.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Dados da estante" />
+                        <Label layoutX="14.0" layoutY="57.0" text="Designação" />
+                        <Label layoutX="14.0" layoutY="104.0" text="Descrição" />
+                        <Label layoutX="259.0" layoutY="57.0" text="Linha" />
+                        <Label layoutX="259.0" layoutY="104.0" text="Coluna" />
+                        <TextField layoutX="88.0" layoutY="53.0" />
+                        <TextField layoutX="88.0" layoutY="100.0" />
+                        <TextField layoutX="320.0" layoutY="53.0" prefHeight="25.0" prefWidth="113.0" />
+                        <TextField layoutX="320.0" layoutY="100.0" prefHeight="25.0" prefWidth="113.0" />
+                        <Label layoutX="14.0" layoutY="150.0" text="Area" />
+                        <ComboBox layoutX="87.0" layoutY="146.0" prefWidth="150.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="478.0" layoutY="14.0" prefHeight="232.0" prefWidth="160.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Button layoutX="54.0" layoutY="20.0" mnemonicParsing="false" text="Cadastrar" />
+                        <Button layoutX="54.0" layoutY="59.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Alterar" />
+                        <Button layoutX="54.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Novo" />
+                        <Button layoutX="54.0" layoutY="97.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Remover" />
+                        <Button layoutX="54.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
