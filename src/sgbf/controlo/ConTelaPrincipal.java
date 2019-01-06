@@ -93,37 +93,37 @@ public class ConTelaPrincipal implements Initializable {
     }
     @FXML
     public void BotaoMenuItemFuncionario() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroFuncionario.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisFuncionario.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
     @FXML
     public void BotaoMenuItemEstante() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroEstante.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisEstante.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
     @FXML
     public void BotaoMenuItemEditora() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroEditora.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisEditora.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
     @FXML
     public void BotaoMenuItemCategoria() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroCategoria.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCategoria.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
     @FXML
     public void BotaoMenuItemArea() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroArea.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisArea.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
     @FXML
     public void BotaoMenuItemAcervo() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastroAcervo.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisAcervo.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
