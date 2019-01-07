@@ -70,7 +70,7 @@ public class ConUtente extends ConCRUD {
             super.preparedStatement.setString(10, utenteMod.getCategoria());
             super.preparedStatement.setString(11, utenteMod.getUsuario());
             super.preparedStatement.setString(12, utenteMod.getSenha());
-            super.preparedStatement.setInt(14, utenteMod.getIdUtente());
+            super.preparedStatement.setInt(13, utenteMod.getIdUtente());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao, "Erro ao "+operacao+" !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
@@ -141,6 +141,7 @@ public class ConUtente extends ConCRUD {
         visitanteMod.setIdUtente(setResult.getInt("idUtente"), operacao);
         visitanteMod.setPrimeiro_nome(setResult.getString("primeiro_nome"), operacao);
         visitanteMod.setSegundo_nome(setResult.getString("segundo_nome"), operacao);
+        visitanteMod.setNome(visitanteMod.getPrimeiro_nome()+" "+visitanteMod.getSegundo_nome(), operacao);
         visitanteMod.setGenero(setResult.getString("genero"), operacao);
         visitanteMod.setTipo_identificacao(setResult.getString("tipo_identidicacao"), operacao);
         visitanteMod.setNumero(setResult.getString("numero_identidicacao"), operacao);
