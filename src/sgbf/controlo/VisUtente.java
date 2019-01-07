@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -21,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 
@@ -32,7 +34,7 @@ import sgbf.util.UtilControloExcessao;
 public class VisUtente implements Initializable {
 
     @FXML
-    private Button botaoPesquisar,  botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar,botaoSair;
+    private Button botaoPesquisar,  botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar;
     @FXML
     private TextField texteFiedPesquisar,texteFiedId, texteFiedPrimeiroNome, texteFiedSegundoNome;
     @FXML
@@ -53,6 +55,13 @@ public class VisUtente implements Initializable {
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
     private final ConUtente utenteCon = new ConUtente();
+    @FXML
+    private Button btnFechar;
+    
+     @FXML
+    private void fechar(ActionEvent event) {
+        AnchorPaneUtente.setVisible(false);
+    }
 
     
     @Override
@@ -135,11 +144,6 @@ public class VisUtente implements Initializable {
         }
     }
     
-    @FXML
-    private void botaoSair(){
-        
-        
-    }
 
    
     
@@ -182,7 +186,6 @@ public class VisUtente implements Initializable {
         this.botaoCadastrar.setDisable(false);
     }
     
-    @FXML
     private void limparItensDaJanela(){
         this.texteFiedId.setText(null);
         this.texteFiedPrimeiroNome.setText(null);
@@ -251,5 +254,5 @@ public class VisUtente implements Initializable {
         } 
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
- 
+    
 }
