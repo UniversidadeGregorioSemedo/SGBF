@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="763.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisUtente">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="540.0" prefWidth="763.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisUtente">
     <stylesheets>
         <URL value="@/sgbf/util/viscadastroutente.css" />
     </stylesheets>
@@ -21,26 +21,26 @@
                <children>
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="234.0" prefWidth="764.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Label layoutX="14.0" layoutY="6.0" text="Pesquisar utente" />
-                        <Label layoutX="14.0" layoutY="39.0" text="Nome" />
-                        <TextField layoutX="194.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" />
-                        <JFXButton layoutX="645.0" layoutY="32.0" prefHeight="32.0" prefWidth="19.0" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Pesquisa.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></JFXButton>
-                        <TableView fx:id="tableUtente" layoutX="14.0" layoutY="66.0" prefHeight="161.0" prefWidth="739.0">
+                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="36.0" prefHeight="25.0" prefWidth="444.0" />
+                        <JFXButton layoutX="652.0" layoutY="35.0" prefHeight="25.0" prefWidth="33.0" text=" " />
+                        <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="474.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Pesquisa.png" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tableViewUtente" layoutX="14.0" layoutY="66.0" prefHeight="161.0" prefWidth="739.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Id" />
-                            <TableColumn prefWidth="204.0" text="Nome" />
-                              <TableColumn prefWidth="195.0" text="T. Identificação" />
-                              <TableColumn prefWidth="178.0" text="Nº Identificação" />
-                              <TableColumn prefWidth="86.0" text="Usuário" />
+                            <TableColumn fx:id="tableColumId" prefWidth="75.0" text="Id" />
+                            <TableColumn fx:id="tableColumNome" prefWidth="204.0" text="Nome" />
+                              <TableColumn fx:id="tableColumIdTipoIdentificacao" prefWidth="195.0" text="T. Identificação" />
+                              <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="178.0" text="Nº Identificação" />
+                              <TableColumn fx:id="tableColumCategoria" prefWidth="86.0" text="Categoria" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
+                        <Button fx:id="botaoPesquisar" layoutX="509.0" layoutY="36.0" mnemonicParsing="false" onAction="#pesquisarUtente" text="Pesquisar" />
                      </children>
                   </Pane>
                </children>
@@ -82,13 +82,14 @@
                   </Pane>
                   <Label layoutX="23.0" layoutY="267.0" text="Endereço de imagem" />
                   <TextField fx:id="texteFiedEnderecoImagem" layoutX="160.0" layoutY="263.0" prefHeight="25.0" prefWidth="178.0" />
-                  <Pane layoutX="785.0" layoutY="14.0" prefHeight="289.0" prefWidth="138.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="784.0" layoutY="14.0" prefHeight="289.0" prefWidth="138.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Button fx:id="botaoCancelar" layoutX="35.0" layoutY="250.0" mnemonicParsing="false" onAction="#bloquearItensDaJanela" prefHeight="25.0" prefWidth="69.0" text="Cancelar" />
-                        <Button fx:id="botaoNovo" layoutX="35.0" layoutY="180.0" mnemonicParsing="false" onAction="#desbloquearItensDaJanela" prefHeight="25.0" prefWidth="68.0" text="Novo" />
-                        <Button fx:id="botaoRemover" layoutX="35.0" layoutY="121.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="69.0" text="Remover" />
-                        <Button fx:id="botaoAlterar" layoutX="34.0" layoutY="67.0" mnemonicParsing="false" onAction="#alterarUtente" prefHeight="25.0" prefWidth="68.0" text="Alterar" />
-                        <Button fx:id="botaoCadastrar" layoutX="35.0" layoutY="14.0" mnemonicParsing="false" onAction="#cadastrarUtente" text="Cadastrar" />
+                        <Button fx:id="botaoCancelar" layoutX="35.0" layoutY="203.0" mnemonicParsing="false" onAction="#bloquearItensDaJanela" prefHeight="25.0" prefWidth="69.0" text="Cancelar" />
+                        <Button fx:id="botaoNovo" layoutX="34.0" layoutY="14.0" mnemonicParsing="false" onAction="#desbloquearItensDaJanela" prefHeight="25.0" prefWidth="68.0" text="Novo" />
+                        <Button fx:id="botaoRemover" layoutX="35.0" layoutY="159.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="69.0" text="Remover" />
+                        <Button fx:id="botaoAlterar" layoutX="33.0" layoutY="109.0" mnemonicParsing="false" onAction="#alterarUtente" prefHeight="25.0" prefWidth="68.0" text="Alterar" />
+                        <Button fx:id="botaoCadastrar" layoutX="34.0" layoutY="56.0" mnemonicParsing="false" onAction="#cadastrarUtente" text="Cadastrar" />
+                        <Button fx:id="botaoSair" layoutX="33.0" layoutY="243.0" mnemonicParsing="false" onAction="#botaoSair" prefHeight="25.0" prefWidth="69.0" text="Sair" />
                      </children>
                   </Pane>
                </children>
