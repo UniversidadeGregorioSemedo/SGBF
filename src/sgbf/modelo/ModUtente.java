@@ -16,6 +16,7 @@ import sgbf.util.UtilEmail;
 public abstract class ModUtente {
 
     protected Integer idUtente;
+    protected String nome;
     protected String primeiro_nome;
     protected String segundo_nome;
     protected String genero;
@@ -38,6 +39,16 @@ public abstract class ModUtente {
     public void setIdUtente(Integer idUtente, String operacao) {
         this.idUtente = idUtente;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome, String operacao) {
+        this.nome = nome;
+    }
+    
+    
 
     public String getPrimeiro_nome() {
         return primeiro_nome;
@@ -109,10 +120,16 @@ public abstract class ModUtente {
     }
 
     public void setEmail(String email, String operacao) {
-        if ((email != null) || (!email.isEmpty())) {
-            UtilEmail emailUtil = new UtilEmail();
-            if (emailUtil.emailValido(email)) {
-                this.email = email;
+         if(email == null){
+            
+        }else{
+            if(email.isEmpty()){
+                
+            }else{
+                UtilEmail emailUtil = new UtilEmail();
+                if (emailUtil.emailValido(email)) {
+                    this.email = email;
+                }
             }
         }
     }
