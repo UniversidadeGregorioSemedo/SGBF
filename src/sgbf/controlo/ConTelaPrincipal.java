@@ -83,8 +83,14 @@ public class ConTelaPrincipal implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }  
     
+    
+    @FXML
+    public void BotaoMenuItemAutor() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisAutor.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
     
     @FXML
     public void BotaoMenuItemUtente() throws IOException{
