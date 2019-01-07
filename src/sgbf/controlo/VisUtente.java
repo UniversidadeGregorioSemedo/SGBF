@@ -239,7 +239,7 @@ public class VisUtente implements Initializable {
     
     private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
         tableColumId.setCellValueFactory(new PropertyValueFactory<>("idUtente"));
-        tableColumNome.setCellValueFactory(new PropertyValueFactory<>("primeiro_nome"));
+        tableColumNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumIdTipoIdentificacao.setCellValueFactory(new PropertyValueFactory<>("tipo_identificacao"));
         tableColumNmeroIdentificacao.setCellValueFactory(new PropertyValueFactory<>("numero"));
         tableColumCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
