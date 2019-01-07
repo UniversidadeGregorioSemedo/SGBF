@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
-import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModUtente;
+import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -92,7 +92,7 @@ public class ConUtente extends ConCRUD {
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Utente !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+"!\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -103,7 +103,7 @@ public class ConUtente extends ConCRUD {
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
         try{
-            super.query = "select * from tcc.Estante designacao by nome, data_modificacao asc";
+            super.query = "select * from tcc.utente order by primeiro_nome, data_modificacao asc";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
@@ -111,7 +111,7 @@ public class ConUtente extends ConCRUD {
             }
             return todosRegistos;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+"Utente(s) !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -120,36 +120,39 @@ public class ConUtente extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        ModEstante estanteMod = (ModEstante)objecto_pesquisar;
+        ModVisitante visitanteMod = (ModVisitante)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.Estante where idEstante=? or "
-                        + "designacao like '%"+estanteMod.getDesignacao()+"%'";
+            super.query = "select * from tcc.utente where idUtente=? or "
+                        + "primeiro_nome like '%"+visitanteMod.getPrimeiro_nome()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+            super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+"Utente(s) !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
     
-    private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
-        ModEstante estanteMod = new ModEstante();
-        /*estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
-        estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
-        estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
-        estanteMod.setLinha(setResultset.getByte("linha"), operacao);
-        estanteMod.setColuna(setResultset.getByte("coluna"), operacao);
-        estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
-        estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
-        */
-        return estanteMod;
+    private Object pegarRegistos(ResultSet setResult,String operacao) throws SQLException{
+        ModVisitante visitanteMod = new ModVisitante();
+        visitanteMod.setIdUtente(setResult.getInt("idUtente"), operacao);
+        visitanteMod.setPrimeiro_nome(setResult.getString("primeiro_nome"), operacao);
+        visitanteMod.setSegundo_nome(setResult.getString("segundo_nome"), operacao);
+        visitanteMod.setGenero(setResult.getString("genero"), operacao);
+        visitanteMod.setTipo_identificacao(setResult.getString("tipo_identidicacao"), operacao);
+        visitanteMod.setNumero(setResult.getString("numero_identidicacao"), operacao);
+        visitanteMod.setContacto(setResult.getString("contacto"), operacao);
+        visitanteMod.setEndereco(setResult.getString("endereco"), operacao);
+        visitanteMod.setEndereco_imagem(setResult.getString("endereco_imagem"), operacao);
+        visitanteMod.setCategoria(setResult.getString("categoria"), operacao);
+        visitanteMod.setUsuario(setResult.getString("usuario"), operacao);
+        visitanteMod.setSenha(setResult.getString("senha"), operacao);
+        visitanteMod.setData_registo(setResult.getString("data_registo"), operacao);
+        visitanteMod.setData_modificacao(setResult.getString("data_modificacao"),    operacao);
+        return visitanteMod;
     }
     
     private boolean temDadosRelacionados(ModUtente utenteMod, String operacao) throws SQLException{
