@@ -3,6 +3,7 @@ package sgbf.controlo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -124,6 +125,11 @@ public class VisTelaPrincipal implements Initializable {
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisAcervo.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
+    @FXML
+    public void BotaoMenuItemAutor() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisAutor.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
     
     @FXML
     public void botaoMenuItemTerminarSessao()  throws IOException{
@@ -148,5 +154,6 @@ public class VisTelaPrincipal implements Initializable {
         Stage propriedadeDaJanela = (Stage) menuBar.getScene().getWindow();
         ConPrincipal.sairdoSistema(menuItemSairDoSistema.getText(), propriedadeDaJanela);
     }
+
     
 }

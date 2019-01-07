@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisTelaPrincipal">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisTelaPrincipal">
    <children>
       <MenuBar fx:id="menuBar">
         <menus>
@@ -39,6 +39,15 @@
             <items>
                   <Menu mnemonicParsing="false" text="Novo Cadastro">
                     <items>
+                        <MenuItem fx:id="menuitemCadastroAutor" mnemonicParsing="false" onAction="#BotaoMenuItemAutor" text="Autor">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Classroom_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
                       <MenuItem fx:id="menuitemCadastroAcervo" mnemonicParsing="false" onAction="#BotaoMenuItemAcervo" text="Acervo">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -53,15 +62,6 @@
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../icones/Map%20Marker_48px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </MenuItem>
-                    <MenuItem fx:id="menuitemCadastroAutor" mnemonicParsing="false" text="Autor">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Edit%20Property_48px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -249,6 +249,6 @@
             </Menu>
         </menus>
       </MenuBar>
-      <AnchorPane fx:id="anchorPane" prefHeight="456.0" prefWidth="701.0" style="-fx-background-color: #2a363f;" />
+      <AnchorPane fx:id="anchorPane" prefHeight="721.0" prefWidth="701.0" style="-fx-background-color: #2a363f;" />
    </children>
 </VBox>
