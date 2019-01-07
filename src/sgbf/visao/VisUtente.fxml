@@ -89,7 +89,7 @@
                         <Button fx:id="botaoRemover" layoutX="35.0" layoutY="159.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="69.0" text="Remover" />
                         <Button fx:id="botaoAlterar" layoutX="33.0" layoutY="109.0" mnemonicParsing="false" onAction="#alterarUtente" prefHeight="25.0" prefWidth="68.0" text="Alterar" />
                         <Button fx:id="botaoCadastrar" layoutX="34.0" layoutY="56.0" mnemonicParsing="false" onAction="#cadastrarUtente" text="Cadastrar" />
-                        <Button fx:id="botaoSair" layoutX="33.0" layoutY="243.0" mnemonicParsing="false" onAction="#botaoSair" prefHeight="25.0" prefWidth="69.0" text="Sair" />
+                        <Button fx:id="btnFechar" layoutX="33.0" layoutY="243.0" mnemonicParsing="false" onAction="#fechar" prefHeight="25.0" prefWidth="69.0" text="Sair" />
                      </children>
                   </Pane>
                </children>
