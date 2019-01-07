@@ -115,7 +115,6 @@ public class VisUtente implements Initializable {
         if(utenteCon.remover(utenteARemover, operacao)){
            this.tableViewUtente.getItems().remove(utenteARemover);
            this.bloquearItensDaJanela();
-           this.limparItensDaJanela();
            throw new UtilControloExcessao(operacao, "Utente removido com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
@@ -195,6 +194,7 @@ public class VisUtente implements Initializable {
         this.texteFiedSenha.setText(null);
         this.texteFiedEndereco.setText(null);
         this.texteFiedEnderecoImagem.setText(null);
+        this.tableViewUtente.getItems().clear();
         this.comboBoxGenero.setPromptText("Gênero");
         this.comboBoxTipoIndentificacao.setPromptText("Identificação");
         this.comboBoxCategoria.setPromptText("Categoria");
