@@ -147,6 +147,7 @@ public class ConUtente extends ConCRUD {
         visitanteMod.setNumero(setResult.getString("numero_identidicacao"), operacao);
         visitanteMod.setContacto(setResult.getString("contacto"), operacao);
         visitanteMod.setEndereco(setResult.getString("endereco"), operacao);
+        visitanteMod.setEmail(setResult.getString("email"), operacao);
         visitanteMod.setEndereco_imagem(setResult.getString("endereco_imagem"), operacao);
         visitanteMod.setCategoria(setResult.getString("categoria"), operacao);
         visitanteMod.setUsuario(setResult.getString("usuario"), operacao);

@@ -136,6 +136,11 @@ public class VisUtente implements Initializable {
     }
     
     @FXML
+    private void novo(){
+        this.desbloquearItensDaJanela();
+        this.limparItensDaJanela();
+    }
+    @FXML
     private void cancelar(){
         this.bloquearItensDaJanela();
         this.limparItensDaJanela();
@@ -220,9 +225,14 @@ public class VisUtente implements Initializable {
             texteFiedEndereco.setText(visitanteMod.getEndereco());
             texteFiedUsuario.setText(visitanteMod.getUsuario());
             texteFiedSenha.setText(visitanteMod.getSenha());
+            comboBoxGenero.getSelectionModel().select(visitanteMod.getGenero());
+            comboBoxTipoIndentificacao.getSelectionModel().select(visitanteMod.getTipo_identificacao());
+            comboBoxCategoria.getSelectionModel().select(visitanteMod.getCategoria());
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
+            this.desbloquearItensDaJanela();
             botaoNovo.setDisable(true);
+            botaoCadastrar.setDisable(true);
         }else{
             botaoAlterar.setDisable(true);
             botaoRemover.setDisable(true);
