@@ -120,15 +120,17 @@ public abstract class ModUtente {
     }
 
     public void setEmail(String email, String operacao) {
-         if(email == null){
-            
+        UtilEmail emailUtil = new UtilEmail();
+        if(email == null){
+            this.email = email;
         }else{
             if(email.isEmpty()){
-                
+                this.email = email;
             }else{
-                UtilEmail emailUtil = new UtilEmail();
                 if (emailUtil.emailValido(email)) {
                     this.email = email;
+                }else{
+                    throw new UtilControloExcessao(operacao, "Email inconsistente !", Alert.AlertType.INFORMATION);
                 }
             }
         }
