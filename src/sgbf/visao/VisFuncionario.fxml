@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.*?>
 <?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.5782918149466192" orientation="VERTICAL" prefHeight="564.0" prefWidth="752.0">
         <items>
@@ -18,60 +19,47 @@
                <children>
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="295.0" prefWidth="725.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Pesquisar funcionario">
+                        <Label layoutX="14.0" layoutY="14.0" text="Dados do Utente">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="57.0" text="Nome" />
-                        <TextField layoutX="182.0" layoutY="53.0" prefHeight="25.0" prefWidth="418.0" />
-                        <TableView layoutX="14.0" layoutY="86.0" prefHeight="200.0" prefWidth="693.0">
+                        <TextField layoutX="23.0" layoutY="49.0" prefHeight="25.0" prefWidth="228.0" />
+                        <TableView layoutX="14.0" layoutY="86.0" prefHeight="200.0" prefWidth="694.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Id" />
-                            <TableColumn prefWidth="272.0" text="Nome" />
-                              <TableColumn prefWidth="197.0" text="Cargo" />
-                              <TableColumn prefWidth="148.0" text="Codigo funcionario" />
+                            <TableColumn prefWidth="75.0" text="Nome" />
+                            <TableColumn prefWidth="272.0" text="T.Identificação" />
+                              <TableColumn prefWidth="197.0" text="Número" />
+                              <TableColumn prefWidth="148.0" text="Categoria" />
                           </columns>
                         </TableView>
-                        <JFXButton layoutX="607.0" layoutY="50.0" prefHeight="32.0" prefWidth="24.0" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Pesquisa.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
+                        <JFXButton layoutX="265.0" layoutY="46.0" prefHeight="32.0" prefWidth="120.0" text=" Pesquisar utente" />
                      </children>
                   </Pane>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="269.0" prefWidth="750.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="208.0" prefWidth="584.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Dados do funcionario">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="60.0" text="Cargo" />
-                        <Label layoutX="14.0" layoutY="107.0" text="Id utente" />
-                        <Label layoutX="286.0" layoutY="60.0" text="Codigo funcionario" />
-                        <ComboBox layoutX="62.0" layoutY="56.0" prefWidth="150.0" />
-                        <ComboBox layoutX="79.0" layoutY="103.0" prefWidth="150.0" />
-                        <TextField layoutX="405.0" layoutY="56.0" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="606.0" layoutY="11.0" prefHeight="208.0" prefWidth="136.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
-                     <children>
-                        <Button layoutX="59.0" layoutY="14.0" mnemonicParsing="false" text="Cadastrar" />
-                        <Button layoutX="59.0" layoutY="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Alterar" />
-                        <Button layoutX="59.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Remover" />
-                        <Button layoutX="59.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Novo" />
-                        <Button layoutX="59.0" layoutY="169.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
-                     </children>
-                  </Pane>
+                  <TableView layoutX="27.0" layoutY="51.0" prefHeight="169.0" prefWidth="483.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <TextField layoutX="27.0" layoutY="14.0" prefHeight="25.0" prefWidth="228.0" />
+                  <JFXButton layoutX="267.0" layoutY="14.0" prefHeight="25.0" prefWidth="136.0" text="Pesquisar Funcionário" />
+                  <Label layoutX="524.0" layoutY="31.0" text="Cargo" />
+                  <ComboBox layoutX="578.0" layoutY="27.0" prefWidth="150.0" />
+                  <Label layoutX="524.0" layoutY="66.0" text="C. Funcionário" />
+                  <TextField layoutX="608.0" layoutY="60.0" prefHeight="25.0" prefWidth="120.0" />
+                  <Button layoutX="524.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Novo" />
+                  <Button layoutX="646.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Cadastrar" />
+                  <Button layoutX="525.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Alterar" />
+                  <Button layoutX="646.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Remover" />
+                  <Button layoutX="525.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Cancelar" />
+                  <Button layoutX="646.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Sair" />
+                  <Label layoutX="525.0" layoutY="97.0" prefHeight="17.0" prefWidth="53.0" text="C. Utente" />
+                  <TextField layoutX="608.0" layoutY="93.0" prefHeight="25.0" prefWidth="120.0" />
                </children>
             </AnchorPane>
         </items>
