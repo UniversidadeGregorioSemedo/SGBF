@@ -27,8 +27,8 @@
                           <columns>
                             <TableColumn prefWidth="45.0" text="Id" />
                             <TableColumn prefWidth="197.0" text="Nome" />
-                              <TableColumn prefWidth="159.0" text="Column X" />
-                              <TableColumn prefWidth="138.0" text="Column X" />
+                              <TableColumn prefWidth="159.0" text="Identificação" />
+                              <TableColumn prefWidth="138.0" text="Categoria" />
                           </columns>
                         </TableView>
                         <TableView layoutX="582.0" layoutY="128.0" prefHeight="137.0" prefWidth="438.0">
