@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.ReservaController">
+    <stylesheets>
+        <URL value="@/sgbf/util/reserva.css" />
+    </stylesheets>
+   <children>
+      <SplitPane dividerPositions="0.6776406035665294" layoutX="10.0" layoutY="10.0" orientation="VERTICAL" prefHeight="731.0" prefWidth="1056.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="470.0" prefWidth="1034.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="6.0" layoutY="6.0" text="Pesquisar reserva" />
+                        <Label layoutX="14.0" layoutY="30.0" text="Pesquisar por" />
+                        <RadioButton layoutX="106.0" layoutY="30.0" mnemonicParsing="false" text="Utente" />
+                        <RadioButton layoutX="181.0" layoutY="30.0" mnemonicParsing="false" text="Acervo" />
+                        <TextField layoutX="86.0" layoutY="60.0" prefHeight="25.0" prefWidth="466.0" />
+                        <TableView layoutX="14.0" layoutY="128.0" prefHeight="137.0" prefWidth="540.0">
+                           <columns>
+                              <TableColumn prefWidth="45.0" text="Id" />
+                              <TableColumn prefWidth="197.0" text="Nome" />
+                              <TableColumn prefWidth="159.0" text="Identificação" />
+                              <TableColumn prefWidth="138.0" text="Categoria" />
+                           </columns>
+                        </TableView>
+                        <TableView layoutX="582.0" layoutY="128.0" prefHeight="137.0" prefWidth="438.0">
+                           <columns>
+                              <TableColumn prefWidth="46.0" text="Id" />
+                              <TableColumn prefWidth="186.0" text="Titulo" />
+                              <TableColumn prefWidth="70.0" text="ISBN" />
+                              <TableColumn prefWidth="135.0" text="Editora" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="103.0" text="Selecione o utente" />
+                        <Label layoutX="582.0" layoutY="103.0" text="Selecione o acervo" />
+                        <Label layoutX="16.0" layoutY="299.0" text="Reserva" />
+                        <TableView layoutX="14.0" layoutY="322.0" prefHeight="137.0" prefWidth="827.0">
+                           <columns>
+                              <TableColumn prefWidth="45.0" text="Id" />
+                              <TableColumn prefWidth="270.0" text="Nome utente" />
+                              <TableColumn prefWidth="241.0" text="Titulo acervo" />
+                              <TableColumn prefWidth="131.0" text="Data de reserva" />
+                              <TableColumn prefWidth="139.0" text="Data de vencimento" />
+                           </columns>
+                        </TableView>
+                        <JFXButton layoutX="556.0" layoutY="60.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="738.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="8.0" layoutY="6.0" text="Dados da reserva" />
+                        <Label layoutX="14.0" layoutY="51.0" text="Id" />
+                        <Label layoutX="13.0" layoutY="94.0" text="Id Utente" />
+                        <Label layoutX="10.0" layoutY="148.0" text="Id Funcionario" />
+                        <Label layoutX="215.0" layoutY="51.0" text="Estado" />
+                        <Label layoutX="215.0" layoutY="94.0" text="Dias remanescente" />
+                        <Label layoutX="464.0" layoutY="51.0" text="Data de reserva" />
+                        <Label layoutX="464.0" layoutY="94.0" text="Data de vencimento" />
+                        <TextField layoutX="52.0" layoutY="47.0" prefHeight="25.0" prefWidth="72.0" />
+                        <TextField layoutX="86.0" layoutY="90.0" prefHeight="25.0" prefWidth="72.0" />
+                        <TextField layoutX="98.0" layoutY="144.0" prefHeight="25.0" prefWidth="72.0" />
+                        <TextField layoutX="589.0" layoutY="47.0" prefHeight="25.0" prefWidth="129.0" />
+                        <TextField layoutX="589.0" layoutY="90.0" prefHeight="25.0" prefWidth="129.0" />
+                        <TextField layoutX="333.0" layoutY="90.0" prefHeight="25.0" prefWidth="72.0" />
+                        <ComboBox layoutX="270.0" layoutY="47.0" prefHeight="25.0" prefWidth="164.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="765.0" layoutY="14.0" prefHeight="200.0" prefWidth="175.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Button layoutX="52.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Novo" />
+                        <Button layoutX="52.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Reservar" />
+                        <Button layoutX="52.0" layoutY="82.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Devolver" />
+                        <Button layoutX="52.0" layoutY="115.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cancelar" />
+                        <Button layoutX="52.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Sair" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
