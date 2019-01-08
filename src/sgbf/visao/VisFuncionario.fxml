@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroFuncionario">
    <children>
       <SplitPane dividerPositions="0.5782918149466192" orientation="VERTICAL" prefHeight="564.0" prefWidth="752.0">
         <items>
@@ -19,47 +19,48 @@
                <children>
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="295.0" prefWidth="725.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Dados do Utente">
+                        <Label layoutX="23.0" layoutY="14.0" text="Dados do Utente">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="23.0" layoutY="49.0" prefHeight="25.0" prefWidth="228.0" />
-                        <TableView layoutX="14.0" layoutY="86.0" prefHeight="200.0" prefWidth="694.0">
+                        <TableView fx:id="tableViewVisitane" layoutX="14.0" layoutY="86.0" prefHeight="200.0" prefWidth="694.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Nome" />
-                            <TableColumn prefWidth="272.0" text="T.Identificação" />
-                              <TableColumn prefWidth="197.0" text="Número" />
-                              <TableColumn prefWidth="148.0" text="Categoria" />
+                            <TableColumn fx:id="tableColumNomeUtente" prefWidth="213.0" text="Nome" />
+                            <TableColumn fx:id="tableColumIdTipoIdentificacaoUtente" prefWidth="193.0" text="T.Identificação" />
+                              <TableColumn fx:id="tableColumNmeroIdentificacaoUtente" prefWidth="163.0" text="Número" />
+                              <TableColumn fx:id="tableColumContactoUtente" prefWidth="123.0" text="Contacto" />
                           </columns>
                         </TableView>
-                        <JFXButton layoutX="265.0" layoutY="46.0" prefHeight="32.0" prefWidth="120.0" text=" Pesquisar utente" />
+                        <JFXButton fx:id="botaoPesquisarUtente" layoutX="265.0" layoutY="46.0" onAction="#pesquisarUtente" prefHeight="32.0" prefWidth="120.0" text=" Pesquisar utente" />
+                        <javafx.scene.control.TextField fx:id="texteFiedPesquisarUtente" layoutX="14.0" layoutY="50.0" prefHeight="25.0" prefWidth="228.0" />
                      </children>
                   </Pane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="269.0" prefWidth="750.0">
                <children>
-                  <TableView layoutX="27.0" layoutY="51.0" prefHeight="169.0" prefWidth="483.0">
+                  <TableView fx:id="tableViewFuncionario" layoutX="27.0" layoutY="51.0" prefHeight="169.0" prefWidth="483.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="tableColumNomeFuncionario" prefWidth="229.0" text="Nome" />
+                        <TableColumn fx:id="tableColumCategoriaFuncionario" prefWidth="109.0" text="Categoria" />
+                        <TableColumn fx:id="tableColumContactoFuncionario" prefWidth="143.0" text="Contacto" />
                     </columns>
                   </TableView>
-                  <TextField layoutX="27.0" layoutY="14.0" prefHeight="25.0" prefWidth="228.0" />
-                  <JFXButton layoutX="267.0" layoutY="14.0" prefHeight="25.0" prefWidth="136.0" text="Pesquisar Funcionário" />
+                  <javafx.scene.control.TextField fx:id="texteFiedPesquisarFuncionario" layoutX="27.0" layoutY="14.0" prefHeight="25.0" prefWidth="228.0" />
+                  <JFXButton fx:id="botaoPesquisarFuncionario" layoutX="267.0" layoutY="14.0" prefHeight="25.0" prefWidth="136.0" text="Pesquisar Funcionário" />
                   <Label layoutX="524.0" layoutY="31.0" text="Cargo" />
-                  <ComboBox layoutX="578.0" layoutY="27.0" prefWidth="150.0" />
+                  <ComboBox fx:id="comboBoxCargo" layoutX="578.0" layoutY="27.0" prefWidth="150.0" />
                   <Label layoutX="524.0" layoutY="66.0" text="C. Funcionário" />
-                  <TextField layoutX="608.0" layoutY="60.0" prefHeight="25.0" prefWidth="120.0" />
-                  <Button layoutX="524.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Novo" />
-                  <Button layoutX="646.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Cadastrar" />
-                  <Button layoutX="525.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Alterar" />
-                  <Button layoutX="646.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Remover" />
-                  <Button layoutX="525.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Cancelar" />
-                  <Button layoutX="646.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Sair" />
+                  <javafx.scene.control.TextField fx:id="texteFiedcodigoFuncionario" layoutX="608.0" layoutY="60.0" prefHeight="25.0" prefWidth="120.0" />
+                  <Button fx:id="botaoNovo" layoutX="524.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Novo" />
+                  <Button fx:id="botaoCadastrar" layoutX="646.0" layoutY="123.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Cadastrar" />
+                  <Button fx:id="botaoAlterar" layoutX="525.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Alterar" />
+                  <Button fx:id="botaoRemover" layoutX="646.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Remover" />
+                  <Button fx:id="botaoCancelar" layoutX="525.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Cancelar" />
+                  <Button fx:id="botaoSair" layoutX="646.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Sair" />
                   <Label layoutX="525.0" layoutY="97.0" prefHeight="17.0" prefWidth="53.0" text="C. Utente" />
-                  <TextField layoutX="608.0" layoutY="93.0" prefHeight="25.0" prefWidth="120.0" />
+                  <javafx.scene.control.TextField fx:id="texteFiedcodigoUtente" layoutX="608.0" layoutY="93.0" prefHeight="25.0" prefWidth="120.0" />
                </children>
             </AnchorPane>
         </items>
