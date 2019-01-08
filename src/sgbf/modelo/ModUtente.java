@@ -217,19 +217,17 @@ public abstract class ModUtente {
         this.data_modificacao = data_modificacao;
     }
     
-    public boolean equals(ModUtente utenteMod, String operacao){
+    public void equals(ModUtente utenteMod, String operacao){
         if(this.idUtente != utenteMod.idUtente){
             if(this.tipo_identificacao.equalsIgnoreCase(utenteMod.tipo_identificacao)){
                 if(this.numero.equalsIgnoreCase(utenteMod.numero)){
-                    throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);
+                    throw new UtilControloExcessao(operacao, "Já existe um Utente com esta identificação", Alert.AlertType.WARNING);
                 }else{
                     if(this.contacto.equalsIgnoreCase(utenteMod.contacto)){
                         throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);
                     }else{
                         if(this.usuario.equalsIgnoreCase(utenteMod.usuario)){
                             throw new UtilControloExcessao(operacao, "O usuário introduzido já existe", Alert.AlertType.WARNING);
-                        }else{
-                           return false;
                         }
                     }
                 }
@@ -239,13 +237,9 @@ public abstract class ModUtente {
                 }else{
                     if(this.usuario.equalsIgnoreCase(utenteMod.usuario)){
                         throw new UtilControloExcessao(operacao, "O usuário introduzido já existe", Alert.AlertType.WARNING);
-                    }else{
-                       return false;
                     }
                 }
             }
-        }else{
-            return false;
         }
     }
 
