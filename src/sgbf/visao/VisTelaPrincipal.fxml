@@ -123,7 +123,7 @@
                            </graphic>
                         </MenuItem>
                         <MenuItem fx:id="menuAcervoEscrito" mnemonicParsing="false" onAction="#BotaoMenuItemAcervoEscrito" text="Acervo escrito" />
-                        <MenuItem fx:id="menuitemCategoriaEstante" mnemonicParsing="false" text="Categoria da estante" />
+                        <MenuItem fx:id="menuitemCategoriaEstante" mnemonicParsing="false" onAction="#BotaoMenuItemCategoriaEstante" text="Categoria da estante" />
                     </items>
                   </Menu>
             </items>
