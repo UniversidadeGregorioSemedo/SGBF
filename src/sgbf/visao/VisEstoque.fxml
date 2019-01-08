@@ -47,12 +47,29 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="275.0" prefWidth="661.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="275.0" prefWidth="553.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Label layoutX="8.0" layoutY="6.0" text="Dados estoque" />
                         <Label layoutX="14.0" layoutY="58.0" text="Id" />
-                        <Label layoutX="173.0" layoutY="58.0" text="Quantidade total" />
-                        <Label layoutX="431.0" layoutY="58.0" text="Quantidade em falta" />
+                        <Label layoutX="114.0" layoutY="58.0" text="Quantidade total" />
+                        <Label layoutX="331.0" layoutY="58.0" text="Quantidade em falta" />
+                        <Label layoutX="8.0" layoutY="129.0" text="Quantidade de acervos emprestados" />
+                        <Label layoutX="14.0" layoutY="199.0" text="Quantidade de acervos reservados" />
+                        <TextField layoutX="39.0" layoutY="54.0" prefHeight="25.0" prefWidth="57.0" />
+                        <TextField layoutX="223.0" layoutY="54.0" prefHeight="25.0" prefWidth="90.0" />
+                        <TextField layoutX="454.0" layoutY="54.0" prefHeight="25.0" prefWidth="90.0" />
+                        <TextField layoutX="223.0" layoutY="125.0" prefHeight="25.0" prefWidth="80.0" />
+                        <TextField layoutX="210.0" layoutY="195.0" prefHeight="25.0" prefWidth="80.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="576.0" layoutY="14.0" prefHeight="275.0" prefWidth="173.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Button layoutX="51.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Novo" />
+                        <Button layoutX="51.0" layoutY="58.0" mnemonicParsing="false" text="Cadastrar" />
+                        <Button layoutX="51.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Alterar" />
+                        <Button layoutX="51.0" layoutY="132.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Remover" />
+                        <Button layoutX="53.0" layoutY="167.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
+                        <Button layoutX="57.0" layoutY="236.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Sair" />
                      </children>
                   </Pane>
                </children>
