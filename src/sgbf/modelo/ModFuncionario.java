@@ -5,19 +5,23 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
+import sgbf.util.UtilControloExcessao;
 
 /**
  *
  * @author Look
  */
 public class ModFuncionario extends ModUtente  {
+    private Integer idFuncionario;
     private String cargo;
-    private Integer codigo_funcionario;
+    private String codigoFuncionario;
     private ModUsuario usuarioMod;
 
     public ModFuncionario() {
         this.idUtente = 0;
+        this.idFuncionario = 0;
         this.primeiro_nome = null;
         this.segundo_nome = null;
         this.genero = null;
@@ -27,8 +31,16 @@ public class ModFuncionario extends ModUtente  {
         this.data_registo = String.valueOf(UtilControloDaData.dataActual());
         this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
         this.cargo = null;
-        this.codigo_funcionario = 0;
+        this.codigoFuncionario = null;
         this.usuarioMod = new ModUsuario();
+    }
+
+    public Integer getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIdFuncionario(Integer idFuncionario, String operacao) {
+        this.idFuncionario = idFuncionario;
     }
 
     public String getCargo() {
@@ -39,12 +51,12 @@ public class ModFuncionario extends ModUtente  {
         this.cargo = cargo;
     }
 
-    public Integer getCodigo_funcionario() {
-        return codigo_funcionario;
+    public String getCodigoFuncionario() {
+        return codigoFuncionario;
     }
 
-    public void setCodigo_funcionario(Integer codigo_funcionario, String operacao) {
-        this.codigo_funcionario = codigo_funcionario;
+    public void setCodigoFuncionario(String codigoFuncionario, String operacao) {
+        this.codigoFuncionario = codigoFuncionario;
     }
 
     public ModUsuario getUsuarioMod() {
@@ -53,6 +65,18 @@ public class ModFuncionario extends ModUtente  {
 
     public void setUsuarioMod(ModUsuario usuarioMod, String operacao) {
         this.usuarioMod = usuarioMod;
+    }
+    
+    public boolean equals(ModFuncionario funcionarioMod, String operacao){
+        if(this.idFuncionario != funcionarioMod.idFuncionario){
+            if(this.getIdUtente() != funcionarioMod.getIdUtente()){
+                throw new UtilControloExcessao(operacao, "Já existe registo deste funcionário", Alert.AlertType.NONE);
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
     
 }

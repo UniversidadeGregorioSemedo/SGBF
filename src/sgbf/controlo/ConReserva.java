@@ -33,7 +33,7 @@ public class ConReserva extends ConCRUD {
             super.preparedStatement.setByte(3, reservaMod.getDias_remanescente());
             //super.preparedStatement.setByte(4, reservaMod.get());
             super.preparedStatement.setInt(5, reservaMod.getUtenteMod().getIdUtente());
-            super.preparedStatement.setInt(6, reservaMod.getFuncionarioMod().getCodigo_funcionario());
+            super.preparedStatement.setInt(6, reservaMod.getFuncionarioMod().getIdFuncionario());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Reserva !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
@@ -54,7 +54,7 @@ public class ConReserva extends ConCRUD {
             super.preparedStatement.setByte(3, reservaMod.getDias_remanescente());
             //super.preparedStatement.setByte(4, reservaMod.get());
             super.preparedStatement.setInt(5, reservaMod.getUtenteMod().getIdUtente());
-            super.preparedStatement.setInt(6, reservaMod.getFuncionarioMod().getCodigo_funcionario());
+            super.preparedStatement.setInt(6, reservaMod.getFuncionarioMod().getIdFuncionario());
             super.preparedStatement.setInt(7, reservaMod.getIdReserva());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){

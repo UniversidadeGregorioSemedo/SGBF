@@ -30,7 +30,7 @@ public class ConDevolucao extends ConCRUD{
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
             super.preparedStatement.setInt(2, devolucaoMod.getQuantidade_devolvida());
-            super.preparedStatement.setInt(3, devolucaoMod.getFuncionarioMod().getCodigo_funcionario());
+            super.preparedStatement.setInt(3, devolucaoMod.getFuncionarioMod().getIdFuncionario());
             super.preparedStatement.setInt(4, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
             super.preparedStatement.setInt(5, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
             return !super.preparedStatement.execute();
@@ -50,7 +50,7 @@ public class ConDevolucao extends ConCRUD{
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
             super.preparedStatement.setInt(2, devolucaoMod.getQuantidade_devolvida());
-            super.preparedStatement.setInt(3, devolucaoMod.getFuncionarioMod().getCodigo_funcionario());
+            super.preparedStatement.setInt(3, devolucaoMod.getFuncionarioMod().getIdFuncionario());
             super.preparedStatement.setInt(4, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
             super.preparedStatement.setInt(5, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
             super.preparedStatement.setInt(5, devolucaoMod.getIdDevolucao());

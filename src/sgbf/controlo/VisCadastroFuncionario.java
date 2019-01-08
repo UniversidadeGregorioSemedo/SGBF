@@ -64,18 +64,18 @@ public class VisCadastroFuncionario implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       this.bloquearItensDaJanela();
-       this.carregarValorNasComboxs();
-       this.tableViewVisitane.getSelectionModel().selectedItemProperty().addListener(
+        this.bloquearItensDaJanela();
+        this.carregarValorNasComboxs();
+        this.tableViewVisitane.getSelectionModel().selectedItemProperty().addListener(
               (observable, oldValue, newValue) -> this.exibirDadosDoUtenteNosCampos(newValue));
-       this.tableViewFuncionario.getSelectionModel().selectedItemProperty().addListener(
+        this.tableViewFuncionario.getSelectionModel().selectedItemProperty().addListener(
                (observable, oldValue, newValue) -> this.exibirDadosDoFuncionarioNosCampos(newValue));
     }  
     
     @FXML
     private void cadastrarFuncionario(){
         operacao = "Registar Funcionário";
-        funcionarioMod.setCodigo_funcionario(Integer.valueOf(texteFiedcodigoFuncionario.getText()), operacao);
+        funcionarioMod.setCodigoFuncionario(texteFiedcodigoFuncionario.getText(), operacao);
         funcionarioMod.setCargo(comboBoxCargo.getSelectionModel().getSelectedItem(), operacao);
         funcionarioMod.setIdUtente(Integer.valueOf(texteFiedcodigoUtente.getText()), operacao);
         if(funcionarioCon.registar(funcionarioMod, operacao)){
@@ -153,7 +153,7 @@ public class VisCadastroFuncionario implements Initializable {
     
     private void exibirDadosDoFuncionarioNosCampos(ModFuncionario funcionario){
         if(tableViewFuncionario.getSelectionModel().getSelectedCells().size() == 1){
-            texteFiedcodigoFuncionario.setText(String.valueOf(funcionario.getCodigo_funcionario()));
+            texteFiedcodigoFuncionario.setText(funcionario.getCodigoFuncionario());
             comboBoxCargo.getSelectionModel().select(funcionario.getCargo());
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);

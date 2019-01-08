@@ -30,7 +30,7 @@ public class ConEmprestimo extends ConCRUD{
             super.preparedStatement.setString(1, emprestimoteMod.getEstado());
             super.preparedStatement.setInt(2, emprestimoteMod.getDias_atrazo());
             super.preparedStatement.setDouble(3, emprestimoteMod.getMulta());
-            super.preparedStatement.setInt(4, emprestimoteMod.getFuncionarioMod().getCodigo_funcionario());
+            super.preparedStatement.setInt(4, emprestimoteMod.getFuncionarioMod().getIdFuncionario());
             super.preparedStatement.setInt(5, emprestimoteMod.getReservaMod().getIdReserva());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
@@ -50,7 +50,7 @@ public class ConEmprestimo extends ConCRUD{
             super.preparedStatement.setString(1, emprestimoteMod.getEstado());
             super.preparedStatement.setInt(2, emprestimoteMod.getDias_atrazo());
             super.preparedStatement.setDouble(3, emprestimoteMod.getMulta());
-            super.preparedStatement.setInt(4, emprestimoteMod.getFuncionarioMod().getCodigo_funcionario());
+            super.preparedStatement.setInt(4, emprestimoteMod.getFuncionarioMod().getIdFuncionario());
             super.preparedStatement.setInt(5, emprestimoteMod.getReservaMod().getIdReserva());
             super.preparedStatement.setInt(6, emprestimoteMod.getIdEmprestimo());
             return !super.preparedStatement.execute();
