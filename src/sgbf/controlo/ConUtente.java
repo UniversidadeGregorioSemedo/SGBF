@@ -25,24 +25,28 @@ public class ConUtente extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModUtente utenteMod = (ModUtente)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.utente (primeiro_nome, segundo_nome, genero,"
-                        + " tipo_identidicacao, numero_identidicacao, contacto, email, "
-                        + "endereco, endereco_imagem, categoria, usuario, senha)"
-                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
-            super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
-            super.preparedStatement.setString(3, utenteMod.getGenero());
-            super.preparedStatement.setString(4, utenteMod.getTipo_identificacao());
-            super.preparedStatement.setString(5, utenteMod.getNumero());
-            super.preparedStatement.setString(6, utenteMod.getContacto());
-            super.preparedStatement.setString(7, utenteMod.getEmail());
-            super.preparedStatement.setString(8, utenteMod.getEndereco());
-            super.preparedStatement.setString(9, utenteMod.getEndereco_imagem());
-            super.preparedStatement.setString(10, utenteMod.getCategoria());
-            super.preparedStatement.setString(11, utenteMod.getUsuario());
-            super.preparedStatement.setString(12, utenteMod.getSenha());
-            return !super.preparedStatement.execute();
+            if(this.jaExiste(utenteMod, operacao)){
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados do Utente", Alert.AlertType.ERROR);
+            }else{
+                super.query = "INSERT INTO tcc.utente (primeiro_nome, segundo_nome, genero,"
+                            + " tipo_identidicacao, numero_identidicacao, contacto, email, "
+                            + "endereco, endereco_imagem, categoria, usuario, senha)"
+                            + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
+                super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
+                super.preparedStatement.setString(3, utenteMod.getGenero());
+                super.preparedStatement.setString(4, utenteMod.getTipo_identificacao());
+                super.preparedStatement.setString(5, utenteMod.getNumero());
+                super.preparedStatement.setString(6, utenteMod.getContacto());
+                super.preparedStatement.setString(7, utenteMod.getEmail());
+                super.preparedStatement.setString(8, utenteMod.getEndereco());
+                super.preparedStatement.setString(9, utenteMod.getEndereco_imagem());
+                super.preparedStatement.setString(10, utenteMod.getCategoria());
+                super.preparedStatement.setString(11, utenteMod.getUsuario());
+                super.preparedStatement.setString(12, utenteMod.getSenha());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao, "Erro ao "+operacao+" !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }finally{
@@ -54,24 +58,28 @@ public class ConUtente extends ConCRUD {
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModUtente utenteMod = (ModUtente)objecto_alterar;
         try{
-            super.query = "update tcc.utente set primeiro_nome=?, segundo_nome=?, genero=?,"
-                        + " tipo_identidicacao=?, numero_identidicacao=?, contacto=?, email=?, "
-                        + "endereco=?, endereco_imagem=?, categoria=?, usuario=?, senha=? where idUtente=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
-            super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
-            super.preparedStatement.setString(3, utenteMod.getGenero());
-            super.preparedStatement.setString(4, utenteMod.getTipo_identificacao());
-            super.preparedStatement.setString(5, utenteMod.getNumero());
-            super.preparedStatement.setString(6, utenteMod.getContacto());
-            super.preparedStatement.setString(7, utenteMod.getEmail());
-            super.preparedStatement.setString(8, utenteMod.getEndereco());
-            super.preparedStatement.setString(9, utenteMod.getEndereco_imagem());
-            super.preparedStatement.setString(10, utenteMod.getCategoria());
-            super.preparedStatement.setString(11, utenteMod.getUsuario());
-            super.preparedStatement.setString(12, utenteMod.getSenha());
-            super.preparedStatement.setInt(13, utenteMod.getIdUtente());
-            return !super.preparedStatement.execute();
+            if(this.jaExiste(utenteMod, operacao)){
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados do Utente", Alert.AlertType.ERROR);
+            }else{
+                super.query = "update tcc.utente set primeiro_nome=?, segundo_nome=?, genero=?,"
+                            + " tipo_identidicacao=?, numero_identidicacao=?, contacto=?, email=?, "
+                            + "endereco=?, endereco_imagem=?, categoria=?, usuario=?, senha=? where idUtente=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
+                super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
+                super.preparedStatement.setString(3, utenteMod.getGenero());
+                super.preparedStatement.setString(4, utenteMod.getTipo_identificacao());
+                super.preparedStatement.setString(5, utenteMod.getNumero());
+                super.preparedStatement.setString(6, utenteMod.getContacto());
+                super.preparedStatement.setString(7, utenteMod.getEmail());
+                super.preparedStatement.setString(8, utenteMod.getEndereco());
+                super.preparedStatement.setString(9, utenteMod.getEndereco_imagem());
+                super.preparedStatement.setString(10, utenteMod.getCategoria());
+                super.preparedStatement.setString(11, utenteMod.getUsuario());
+                super.preparedStatement.setString(12, utenteMod.getSenha());
+                super.preparedStatement.setInt(13, utenteMod.getIdUtente());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao, "Erro ao "+operacao+" !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }finally{
@@ -169,6 +177,14 @@ public class ConUtente extends ConCRUD {
             super.preparedStatement.setInt(1, utenteMod.getIdUtente());
             return super.setResultset.next();
         }
+    }
+    
+    private boolean jaExiste(ModUtente utenteIntroduzido, String operacao){
+        for(Object todosRegistos:  this.listarTodos(operacao)){
+            ModUtente utenteRegistado = (ModUtente)todosRegistos;
+            utenteRegistado.equals(utenteIntroduzido, operacao);
+        }
+        return false;
     }
 
 }
