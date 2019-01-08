@@ -64,6 +64,10 @@ public class VisCadastroFuncionario implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        this.bloquearItensDaJanela();
        this.carregarValorNasComboxs();
+       this.tableViewVisitane.getSelectionModel().selectedItemProperty().addListener(
+              (observable, oldValue, newValue) -> this.exibirDadosDoUtenteNosCampos(newValue));
+       this.tableViewFuncionario.getSelectionModel().selectedItemProperty().addListener(
+               (observable, oldValue, newValue) -> this.exibirDadosDoFuncionarioNosCampos(newValue));
     }  
     
     @FXML
@@ -124,6 +128,31 @@ public class VisCadastroFuncionario implements Initializable {
         this.comboBoxCargo.getItems().addAll("Administrador","Bibliotecario","Supervisor");
     }
     
+    private void exibirDadosDoUtenteNosCampos(ModVisitante visitanteMod){
+        if(tableViewVisitane.getSelectionModel().getSelectedCells().size() == 1){
+            texteFiedcodigoUtente.setText(String.valueOf(visitanteMod.getIdUtente()));
+        }else{
+            texteFiedcodigoUtente.setText(null);
+        }
+    }
+    
+    private void exibirDadosDoFuncionarioNosCampos(ModFuncionario funcionario){
+        if(tableViewFuncionario.getSelectionModel().getSelectedCells().size() == 1){
+            texteFiedcodigoFuncionario.setText(String.valueOf(funcionario.getCodigo_funcionario()));
+            comboBoxCargo.getSelectionModel().select(funcionario.getCargo());
+            botaoAlterar.setDisable(false);
+            botaoRemover.setDisable(false);
+            this.desbloquearItensDaJanela();
+            botaoNovo.setDisable(true);
+            botaoCadastrar.setDisable(true);
+        }else{
+            botaoAlterar.setDisable(true);
+            botaoRemover.setDisable(true);
+            botaoNovo.setDisable(false);
+            this.limparItensDaJanela();
+        }
+    }
+    
     private void limparItensDaJanela(){
         this.texteFiedPesquisarUtente.setText(null);
         this.texteFiedPesquisarFuncionario.setText(null);
@@ -171,6 +200,5 @@ public class VisCadastroFuncionario implements Initializable {
             return FXCollections.observableArrayList(listaDosRegistosWncontrados);
         }
     }
-    
-    
+        
 }
