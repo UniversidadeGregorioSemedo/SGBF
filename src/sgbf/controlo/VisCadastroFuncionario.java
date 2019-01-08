@@ -58,7 +58,9 @@ public class VisCadastroFuncionario implements Initializable {
     
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
+    private final ModFuncionario funcionarioMod = new ModFuncionario();
     private final ConUtente utenteCon = new ConUtente();
+    private final ConFuncionario funcionarioCon = new ConFuncionario();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,6 +71,19 @@ public class VisCadastroFuncionario implements Initializable {
        this.tableViewFuncionario.getSelectionModel().selectedItemProperty().addListener(
                (observable, oldValue, newValue) -> this.exibirDadosDoFuncionarioNosCampos(newValue));
     }  
+    
+    @FXML
+    private void cadastrarFuncionario(){
+        operacao = "Registar Funcionário";
+        funcionarioMod.setCodigo_funcionario(Integer.valueOf(texteFiedcodigoFuncionario.getText()), operacao);
+        funcionarioMod.setCargo(comboBoxCargo.getSelectionModel().getSelectedItem(), operacao);
+        funcionarioMod.setIdUtente(Integer.valueOf(texteFiedcodigoUtente.getText()), operacao);
+        if(funcionarioCon.registar(funcionarioMod, operacao)){
+           this.bloquearItensDaJanela();
+           this.limparItensDaJanela();
+           throw new UtilControloExcessao(operacao, "Funcionário Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
+        }
+    }
     
     @FXML
     private void pesquisarUtente(){
@@ -200,5 +215,5 @@ public class VisCadastroFuncionario implements Initializable {
             return FXCollections.observableArrayList(listaDosRegistosWncontrados);
         }
     }
-        
+
 }
