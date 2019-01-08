@@ -15,19 +15,14 @@
         <URL value="@/sgbf/util/viscadastroutente.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.448062015503876" orientation="VERTICAL" prefHeight="582.0" prefWidth="945.0">
+      <SplitPane dividerPositions="0.448062015503876" orientation="VERTICAL" prefHeight="582.0" prefWidth="945.0" AnchorPane.rightAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="679.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="234.0" prefWidth="764.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="12.0" prefHeight="234.0" prefWidth="764.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="36.0" prefHeight="25.0" prefWidth="444.0" />
                         <JFXButton layoutX="652.0" layoutY="35.0" prefHeight="25.0" prefWidth="33.0" text=" " />
-                        <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="474.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Pesquisa.png" />
-                           </image>
-                        </ImageView>
                         <TableView fx:id="tableViewUtente" layoutX="14.0" layoutY="66.0" prefHeight="161.0" prefWidth="739.0">
                           <columns>
                             <TableColumn fx:id="tableColumId" prefWidth="75.0" text="Id" />
@@ -40,7 +35,14 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button fx:id="botaoPesquisar" layoutX="509.0" layoutY="36.0" mnemonicParsing="false" onAction="#pesquisarUtente" text="Pesquisar" />
+                        <Button fx:id="botaoPesquisar" layoutX="464.0" layoutY="33.0" mnemonicParsing="false" onAction="#pesquisarUtente">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </Pane>
                </children>
