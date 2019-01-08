@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -61,7 +62,8 @@ public class VisCadastroFuncionario implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       this.bloquearItensDaJanela();
+       this.carregarValorNasComboxs();
     }  
     
     @FXML
@@ -73,14 +75,63 @@ public class VisCadastroFuncionario implements Initializable {
         }else{
             todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
             if(todosRegistosEncontrados.isEmpty()){
-                //this.bloquearItensDaJanela();
-                //this.limparItensDaJanela();
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
                throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
             }else{
                 this.carregarResultadosNaTablea(todosRegistosEncontrados);
-               // this.bloquearItensDaJanela();
+               this.bloquearItensDaJanela();
             }
         }
+    }
+    
+    @FXML
+    private void novo(){
+        this.desbloquearItensDaJanela();
+        this.limparItensDaJanela();
+    }
+    
+    @FXML
+    private void cancelar(){
+        this.bloquearItensDaJanela();
+        this.limparItensDaJanela();
+    }
+    
+    @FXML
+    private void sair(ActionEvent event) {
+        AnchorPaneFuncionario.setVisible(false);
+    }
+    
+    @FXML
+    private void desbloquearItensDaJanela(){
+        this.texteFiedcodigoFuncionario.setDisable(false);
+        this.comboBoxCargo.setDisable(false);
+        this.botaoNovo.setDisable(true);
+        this.botaoCadastrar.setDisable(false);
+    }
+    
+    private void bloquearItensDaJanela(){
+        this.texteFiedcodigoFuncionario.setDisable(true);
+        this.texteFiedcodigoUtente.setDisable(true);
+        this.comboBoxCargo.setDisable(true);
+        this.botaoNovo.setDisable(false);
+        this.botaoCadastrar.setDisable(true);
+        this.botaoAlterar.setDisable(true);
+        this.botaoRemover.setDisable(true);
+    }
+    
+    private void carregarValorNasComboxs(){
+        this.comboBoxCargo.getItems().addAll("Administrador","Bibliotecario","Supervisor");
+    }
+    
+    private void limparItensDaJanela(){
+        this.texteFiedPesquisarUtente.setText(null);
+        this.texteFiedPesquisarFuncionario.setText(null);
+        this.texteFiedcodigoFuncionario.setText(null);
+        this.texteFiedcodigoUtente.setText(null);
+        this.tableViewVisitane.getItems().clear();
+        this.tableViewFuncionario.getItems().clear();
+        this.comboBoxCargo.setPromptText("Carga");
     }
     
     private ModVisitante pegarDadosDaPesquisa(){
