@@ -127,6 +127,8 @@ public class VisUtente implements Initializable {
         }else{
             todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
             if(todosRegistosEncontrados.isEmpty()){
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
                throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
             }else{
                 this.carregarResultadosNaTablea(todosRegistosEncontrados);
