@@ -7,34 +7,87 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.EmprestimoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.EmprestimoController">
     <stylesheets>
         <URL value="@/sgbf/util/emprestimo.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.49596122778675283" orientation="VERTICAL" prefHeight="731.0" prefWidth="1056.0">
+      <SplitPane dividerPositions="0.6776406035665294" orientation="VERTICAL" prefHeight="731.0" prefWidth="1056.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="335.0" prefWidth="605.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="470.0" prefWidth="1034.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Label layoutX="6.0" layoutY="6.0" text="Pesquisar emprestimo" />
                         <Label layoutX="14.0" layoutY="30.0" text="Pesquisar por" />
                         <RadioButton layoutX="106.0" layoutY="30.0" mnemonicParsing="false" text="Utente" />
                         <RadioButton layoutX="181.0" layoutY="30.0" mnemonicParsing="false" text="Acervo" />
                         <TextField layoutX="86.0" layoutY="60.0" prefHeight="25.0" prefWidth="466.0" />
-                        <TableView layoutX="14.0" layoutY="92.0" prefHeight="200.0" prefWidth="200.0">
+                        <TableView layoutX="14.0" layoutY="128.0" prefHeight="137.0" prefWidth="540.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Id" />
-                            <TableColumn prefWidth="75.0" text="Nome" />
-                              <TableColumn prefWidth="75.0" text="Column X" />
+                            <TableColumn prefWidth="45.0" text="Id" />
+                            <TableColumn prefWidth="197.0" text="Nome" />
+                              <TableColumn prefWidth="159.0" text="Column X" />
+                              <TableColumn prefWidth="138.0" text="Column X" />
+                          </columns>
+                        </TableView>
+                        <TableView layoutX="582.0" layoutY="128.0" prefHeight="137.0" prefWidth="438.0">
+                          <columns>
+                            <TableColumn prefWidth="46.0" text="Id" />
+                            <TableColumn prefWidth="186.0" text="Titulo" />
+                              <TableColumn prefWidth="70.0" text="ISBN" />
+                              <TableColumn prefWidth="135.0" text="Editora" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="14.0" layoutY="103.0" text="Selecione o utente" />
+                        <Label layoutX="582.0" layoutY="103.0" text="Selecione o acervo" />
+                        <Label layoutX="16.0" layoutY="299.0" text="Emprestimo" />
+                        <TableView layoutX="14.0" layoutY="322.0" prefHeight="137.0" prefWidth="827.0">
+                          <columns>
+                            <TableColumn prefWidth="45.0" text="Id" />
+                            <TableColumn prefWidth="270.0" text="Nome utente" />
+                              <TableColumn prefWidth="241.0" text="Titulo acervo" />
+                              <TableColumn prefWidth="131.0" text="Data de emprestimo" />
+                              <TableColumn prefWidth="139.0" text="Data de devolução" />
                           </columns>
                         </TableView>
                      </children>
                   </Pane>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="738.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Label layoutX="8.0" layoutY="6.0" text="Dados do emprestimo" />
+                        <Label layoutX="14.0" layoutY="51.0" text="Id" />
+                        <Label layoutX="13.0" layoutY="94.0" text="Id Reserva" />
+                        <Label layoutX="10.0" layoutY="148.0" text="Id Funcionario" />
+                        <Label layoutX="215.0" layoutY="51.0" text="Estado" />
+                        <Label layoutX="215.0" layoutY="94.0" text="Dias em atraso" />
+                        <Label layoutX="215.0" layoutY="148.0" text="Multa" />
+                        <Label layoutX="464.0" layoutY="51.0" text="Data de empresimo" />
+                        <Label layoutX="464.0" layoutY="94.0" text="Data de devolução" />
+                        <TextField layoutX="52.0" layoutY="47.0" prefHeight="25.0" prefWidth="72.0" />
+                        <TextField layoutX="86.0" layoutY="90.0" prefHeight="25.0" prefWidth="72.0" />
+                        <TextField layoutX="98.0" layoutY="144.0" prefHeight="25.0" prefWidth="72.0" />
+                        <TextField layoutX="589.0" layoutY="47.0" prefHeight="25.0" prefWidth="129.0" />
+                        <TextField layoutX="589.0" layoutY="90.0" prefHeight="25.0" prefWidth="129.0" />
+                        <TextField layoutX="261.0" layoutY="144.0" prefHeight="25.0" prefWidth="72.0" />
+                        <TextField layoutX="309.0" layoutY="90.0" prefHeight="25.0" prefWidth="72.0" />
+                        <ComboBox layoutX="270.0" layoutY="47.0" prefHeight="25.0" prefWidth="164.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="765.0" layoutY="14.0" prefHeight="200.0" prefWidth="175.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                     <children>
+                        <Button layoutX="52.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Novo" />
+                        <Button layoutX="52.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Emprestar" />
+                        <Button layoutX="52.0" layoutY="82.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Devolver" />
+                        <Button layoutX="52.0" layoutY="115.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cancelar" />
+                        <Button layoutX="52.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Sair" />
+                     </children>
+                  </Pane>
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </children>
