@@ -90,6 +90,23 @@ public class VisCadastroFuncionario implements Initializable {
     }
     
     @FXML
+    private void alterarFuncionario(){
+        operacao = "Alterar Funcionário";
+        if(tableViewFuncionario.getSelectionModel().getSelectedCells().size() == 1){
+            funcionarioMod.setCodigoFuncionario(texteFiedcodigoFuncionario.getText(), operacao);
+            funcionarioMod.setCargo(comboBoxCargo.getSelectionModel().getSelectedItem(), operacao);
+            funcionarioMod.setIdUtente(Integer.valueOf(texteFiedcodigoUtente.getText()), operacao);
+            if(funcionarioCon.alterar(funcionarioMod, operacao)){
+               this.bloquearItensDaJanela();
+               this.limparItensDaJanela();
+               throw new UtilControloExcessao(operacao, "Funcionário editado com sucesso", Alert.AlertType.CONFIRMATION);
+            }
+        }else{
+           throw new UtilControloExcessao(operacao, "Seleccione o Funcionário a alterar", Alert.AlertType.WARNING);
+        }
+    }
+    
+    @FXML
     private void pesquisarUtente(){
         operacao = "Pesquisar Utente";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
@@ -179,6 +196,7 @@ public class VisCadastroFuncionario implements Initializable {
             texteFiedcodigoFuncionario.setText(funcionarioMod.getCodigoFuncionario());
             comboBoxCargo.getSelectionModel().select(funcionarioMod.getCargo());
             texteFiedcodigoUtente.setText(String.valueOf(funcionarioMod.getIdUtente()));
+            this.funcionarioMod.setIdFuncionario(funcionarioMod.getIdFuncionario(), operacao);
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
             this.desbloquearItensDaJanela();

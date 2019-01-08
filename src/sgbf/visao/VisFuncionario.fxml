@@ -55,7 +55,7 @@
                   <javafx.scene.control.TextField fx:id="texteFiedcodigoFuncionario" layoutX="608.0" layoutY="60.0" prefHeight="25.0" prefWidth="120.0" />
                   <Button fx:id="botaoNovo" layoutX="524.0" layoutY="123.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="89.0" text="Novo" />
                   <Button fx:id="botaoCadastrar" layoutX="646.0" layoutY="123.0" mnemonicParsing="false" onAction="#cadastrarFuncionario" prefHeight="25.0" prefWidth="76.0" text="Cadastrar" />
-                  <Button fx:id="botaoAlterar" layoutX="525.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Alterar" />
+                  <Button fx:id="botaoAlterar" layoutX="525.0" layoutY="160.0" mnemonicParsing="false" onAction="#alterarFuncionario" prefHeight="25.0" prefWidth="89.0" text="Alterar" />
                   <Button fx:id="botaoRemover" layoutX="646.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Remover" />
                   <Button fx:id="botaoCancelar" layoutX="525.0" layoutY="195.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="89.0" text="Cancelar" />
                   <Button fx:id="botaoSair" layoutX="646.0" layoutY="195.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="76.0" text="Sair" />
