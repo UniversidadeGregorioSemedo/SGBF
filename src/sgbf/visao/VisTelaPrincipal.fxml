@@ -124,6 +124,7 @@
                         </MenuItem>
                         <MenuItem fx:id="menuAcervoEscrito" mnemonicParsing="false" onAction="#BotaoMenuItemAcervoEscrito" text="Acervo escrito" />
                         <MenuItem fx:id="menuitemCategoriaEstante" mnemonicParsing="false" onAction="#BotaoMenuItemCategoriaEstante" text="Categoria da estante" />
+                        <MenuItem fx:id="menuitemSolicitacao" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoSolicitacao" text="Item Solicitado" />
                     </items>
                   </Menu>
             </items>
@@ -234,7 +235,7 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem fx:id="menuitemMovimentacaoDevolucao" mnemonicParsing="false" text="Devolução">
+                  <MenuItem fx:id="menuitemMovimentacaoDevolucao" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoDevolucao" text="Devolução">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
