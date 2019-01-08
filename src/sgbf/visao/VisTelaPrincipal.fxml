@@ -216,7 +216,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Movimentação">
               <items>
-                <MenuItem fx:id="menuitemMovimentacaoEmprestimo" mnemonicParsing="false" text="Emprestimo">
+                <MenuItem fx:id="menuitemMovimentacaoEmprestimo" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoEmprestimo" text="Emprestimo">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
