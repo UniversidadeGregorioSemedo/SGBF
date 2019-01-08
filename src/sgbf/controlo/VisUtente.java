@@ -135,14 +135,35 @@ public class VisUtente implements Initializable {
         }
     }
     
+    @FXML
+    private void cancelar(){
+        this.bloquearItensDaJanela();
+        this.limparItensDaJanela();
+    }
     
     @FXML
     private void sair(ActionEvent event) {
         AnchorPaneUtente.setVisible(false);
     }
    
-    
     @FXML
+    private void desbloquearItensDaJanela(){
+        this.texteFiedPrimeiroNome.setDisable(false);
+        this.texteFiedSegundoNome.setDisable(false);
+        this.texteFiedNumIden.setDisable(false);
+        this.texteFiedContacto.setDisable(false);
+        this.texteFiedEmail.setDisable(false);
+        this.texteFiedUsuario.setDisable(false);
+        this.texteFiedSenha.setDisable(false);
+        this.texteFiedEndereco.setDisable(false);
+        this.texteFiedEnderecoImagem.setDisable(false);
+        this.comboBoxGenero.setDisable(false);
+        this.comboBoxTipoIndentificacao.setDisable(false);
+        this.comboBoxCategoria.setDisable(false);
+        this.botaoNovo.setDisable(true);
+        this.botaoCadastrar.setDisable(false);
+    }
+    
     private void bloquearItensDaJanela(){
         this.texteFiedId.setDisable(true);
         this.texteFiedPrimeiroNome.setDisable(true);
@@ -163,24 +184,6 @@ public class VisUtente implements Initializable {
         this.botaoRemover.setDisable(true);
     }
     
-    @FXML
-    private void desbloquearItensDaJanela(){
-        this.texteFiedPrimeiroNome.setDisable(false);
-        this.texteFiedSegundoNome.setDisable(false);
-        this.texteFiedNumIden.setDisable(false);
-        this.texteFiedContacto.setDisable(false);
-        this.texteFiedEmail.setDisable(false);
-        this.texteFiedUsuario.setDisable(false);
-        this.texteFiedSenha.setDisable(false);
-        this.texteFiedEndereco.setDisable(false);
-        this.texteFiedEnderecoImagem.setDisable(false);
-        this.comboBoxGenero.setDisable(false);
-        this.comboBoxTipoIndentificacao.setDisable(false);
-        this.comboBoxCategoria.setDisable(false);
-        this.botaoNovo.setDisable(true);
-        this.botaoCadastrar.setDisable(false);
-    }
-    
     private void limparItensDaJanela(){
         this.texteFiedId.setText(null);
         this.texteFiedPrimeiroNome.setText(null);
@@ -192,6 +195,7 @@ public class VisUtente implements Initializable {
         this.texteFiedSenha.setText(null);
         this.texteFiedEndereco.setText(null);
         this.texteFiedEnderecoImagem.setText(null);
+        this.texteFiedPesquisar.setText(null);
         this.tableViewUtente.getItems().clear();
         this.comboBoxGenero.setPromptText("Gênero");
         this.comboBoxTipoIndentificacao.setPromptText("Identificação");
