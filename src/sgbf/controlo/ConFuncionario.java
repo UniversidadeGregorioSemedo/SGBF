@@ -24,7 +24,7 @@ public class ConFuncionario extends ConCRUD {
         ModFuncionario funcionarioMod = (ModFuncionario)objecto_registar;
         try{
             if(this.jaExiste(funcionarioMod, operacao)){
-                throw new UtilControloExcessao(operacao,"Já existe registo deste funcionário",Alert.AlertType.WARNING);
+                throw new UtilControloExcessao(operacao,"Já existe registo deste funcionário ",Alert.AlertType.WARNING);
             }else{
                 super.query = "INSERT INTO tcc.funcionario (cargo, cod_funcionario, Utente_idUtente)"
                             + " VALUES (?, ?, ?)";
@@ -67,7 +67,7 @@ public class ConFuncionario extends ConCRUD {
         ModFuncionario funcionarioMod = (ModFuncionario)objecto_remover;
         try{
             if(this.temDadosRelacionados(funcionarioMod, operacao)){
-               throw new UtilControloExcessao("Esta operação não pode ser executada !\nErro: Ofuncionario seleccionado tem resgisto seleccionada tem dados registados !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+               throw new UtilControloExcessao( operacao,"Existem registo importantes deste Funcionário !", Alert.AlertType.INFORMATION);
             }else{
                 super.query = "delete from tcc.funcionario where idFuncionario=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -75,7 +75,7 @@ public class ConFuncionario extends ConCRUD {
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Funcionario !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+           throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -100,23 +100,22 @@ public class ConFuncionario extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        /*ModEstante estanteMod = (ModEstante)objecto_pesquisar;
+        ModFuncionario funcionarioMod = (ModFuncionario)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.Estante where idEstante=? or "
-                        + "designacao like '%"+estanteMod.getDesignacao()+"%'";
+            super.query = "select * from tcc.view_funcionarios where idUtente=? or "
+                        + "(primeiro_nome or segundo_nome) like '%"+funcionarioMod.getPrimeiro_nome()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+            super.preparedStatement.setInt(1, funcionarioMod.getIdUtente());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }*/
-        return todosRegistosEncontrados;
+        }
     }
     
     private Object pegarRegistos(ResultSet setResult,String operacao) throws SQLException{
@@ -156,18 +155,22 @@ public class ConFuncionario extends ConCRUD {
         super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
         super.preparedStatement.setInt(1, funcionarioMod.getIdFuncionario());
         if(super.setResultset.next()){
-            return super.setResultset.next();
+            throw new UtilControloExcessao( operacao,"Esta operação não pode ser executada\nO funcionário seleccionado possui registo de reservas!", Alert.AlertType.INFORMATION);
         }else{
             super.query = "select *from devolucao where Funcionario_idFuncionario=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
             super.preparedStatement.setInt(1, funcionarioMod.getIdFuncionario());
             if(super.setResultset.next()){
-                return super.setResultset.next();
+                throw new UtilControloExcessao( operacao,"Esta operação não pode ser executada\nO funcionário seleccionado possui registo de Devolução!", Alert.AlertType.INFORMATION);
             }else{
                 super.query = "select *from emprestimo where Funcionario_idFuncionario=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
                 super.preparedStatement.setInt(1, funcionarioMod.getIdFuncionario());
-                return super.setResultset.next();
+                if(super.setResultset.next()){
+                    throw new UtilControloExcessao( operacao,"Esta operação não pode ser executada\nO funcionário seleccionado possui registo de Emprestimo!", Alert.AlertType.INFORMATION);
+                }else{
+                    return false;
+                }
             }
         }
     } 

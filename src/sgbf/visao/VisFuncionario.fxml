@@ -48,7 +48,7 @@
                     </columns>
                   </TableView>
                   <javafx.scene.control.TextField fx:id="texteFiedPesquisarFuncionario" layoutX="27.0" layoutY="14.0" prefHeight="25.0" prefWidth="228.0" />
-                  <JFXButton fx:id="botaoPesquisarFuncionario" layoutX="267.0" layoutY="14.0" prefHeight="25.0" prefWidth="136.0" text="Pesquisar Funcionário" />
+                  <JFXButton fx:id="botaoPesquisarFuncionario" layoutX="267.0" layoutY="14.0" onAction="#pesquisarFuncionario" prefHeight="25.0" prefWidth="136.0" text="Pesquisar Funcionário" />
                   <Label layoutX="524.0" layoutY="31.0" text="Cargo" />
                   <ComboBox fx:id="comboBoxCargo" layoutX="578.0" layoutY="27.0" prefWidth="150.0" promptText="Carga" />
                   <Label layoutX="524.0" layoutY="66.0" text="C. Funcionário" />

@@ -96,14 +96,33 @@ public class VisCadastroFuncionario implements Initializable {
         if(this.texteFiedPesquisarUtente.getText().isEmpty()){
            throw new UtilControloExcessao(operacao, "Introduza o código ou nome do Utente", Alert.AlertType.INFORMATION);
         }else{
-            todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
+            todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisaUtente(), operacao);
             if(todosRegistosEncontrados.isEmpty()){
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
                throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
             }else{
-                this.carregarResultadosNaTablea(todosRegistosEncontrados);
+                this.carregarResultadosNaTableaUtente(todosRegistosEncontrados);
                this.bloquearItensDaJanela();
+            }
+        }
+    }
+    
+    @FXML
+    private void pesquisarFuncionario(){
+        operacao = "Pesquisar Funcionário";
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        if(this.texteFiedPesquisarFuncionario.getText().isEmpty()){
+           throw new UtilControloExcessao(operacao, "Introduza o código ou nome do Funcionário", Alert.AlertType.INFORMATION);
+        }else{
+            todosRegistosEncontrados = this.funcionarioCon.pesquisar(this.pegarDadosDaPesquisaFuncionario(), operacao);
+            if(todosRegistosEncontrados.isEmpty()){
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
+               throw new UtilControloExcessao(operacao, "Funcionário não encontradao", Alert.AlertType.INFORMATION);
+            }else{
+                this.carregarResultadosNaTableaUtenteFuncionario(todosRegistosEncontrados);
+                this.bloquearItensDaJanela();
             }
         }
     }
@@ -155,10 +174,11 @@ public class VisCadastroFuncionario implements Initializable {
         }
     }
     
-    private void exibirDadosDoFuncionarioNosCampos(ModFuncionario funcionario){
+    private void exibirDadosDoFuncionarioNosCampos(ModFuncionario funcionarioMod){
         if(tableViewFuncionario.getSelectionModel().getSelectedCells().size() == 1){
-            texteFiedcodigoFuncionario.setText(funcionario.getCodigoFuncionario());
-            comboBoxCargo.getSelectionModel().select(funcionario.getCargo());
+            texteFiedcodigoFuncionario.setText(funcionarioMod.getCodigoFuncionario());
+            comboBoxCargo.getSelectionModel().select(funcionarioMod.getCargo());
+            texteFiedcodigoUtente.setText(String.valueOf(funcionarioMod.getIdUtente()));
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
             this.desbloquearItensDaJanela();
@@ -182,7 +202,7 @@ public class VisCadastroFuncionario implements Initializable {
         this.comboBoxCargo.setPromptText("Carga");
     }
     
-    private ModVisitante pegarDadosDaPesquisa(){
+    private ModVisitante pegarDadosDaPesquisaUtente(){
         if(this.texteFiedPesquisarUtente.getText().contains("123456789")){
            utenteMod.setIdUtente(Integer.valueOf(this.texteFiedPesquisarUtente.getText()), operacao);
            utenteMod.setPrimeiro_nome(this.texteFiedPesquisarUtente.getText(), operacao);
@@ -192,16 +212,32 @@ public class VisCadastroFuncionario implements Initializable {
            return utenteMod;
         }
     }
+    private ModFuncionario pegarDadosDaPesquisaFuncionario(){
+        if(this.texteFiedPesquisarFuncionario.getText().contains("123456789")){
+           funcionarioMod.setIdUtente(Integer.valueOf(this.texteFiedPesquisarFuncionario.getText()), operacao);
+           funcionarioMod.setPrimeiro_nome(this.texteFiedPesquisarFuncionario.getText(), operacao);
+           return funcionarioMod;
+        }else{
+           funcionarioMod.setPrimeiro_nome(this.texteFiedPesquisarFuncionario.getText(), operacao);
+           return funcionarioMod;
+        }
+    }
     
-    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
+    private void carregarResultadosNaTableaUtente(List<Object> todosRegistosEncontrados){
         tableColumNomeUtente.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumIdTipoIdentificacaoUtente.setCellValueFactory(new PropertyValueFactory<>("tipo_identificacao"));
         tableColumNmeroIdentificacaoUtente.setCellValueFactory(new PropertyValueFactory<>("numero"));
         tableColumContactoUtente.setCellValueFactory(new PropertyValueFactory<>("contacto"));
-        tableViewVisitane.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
+        tableViewVisitane.setItems(this.todosUtentesParaCarregar(todosRegistosEncontrados));
+    }
+    private void carregarResultadosNaTableaUtenteFuncionario(List<Object> todosRegistosEncontrados){
+        tableColumNomeFuncionario.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tableColumCategoriaFuncionario.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        tableColumContactoFuncionario.setCellValueFactory(new PropertyValueFactory<>("contacto"));
+        tableViewFuncionario.setItems(this.todosFuncionariosParaCarregar(todosRegistosEncontrados));
     }
     
-    private ObservableList<ModVisitante> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
+    private ObservableList<ModVisitante> todosUtentesParaCarregar(List<Object> todosRegistosEncontrados){
         List<ModVisitante> listaDosRegistosWncontrados = new ArrayList<>();
         for(Object utenteRegistado: todosRegistosEncontrados){
             ModVisitante visitanteMod = (ModVisitante)utenteRegistado;
@@ -218,6 +254,14 @@ public class VisCadastroFuncionario implements Initializable {
         }else{
             return FXCollections.observableArrayList(listaDosRegistosWncontrados);
         }
+    }
+    private ObservableList<ModFuncionario> todosFuncionariosParaCarregar(List<Object> todosRegistosEncontrados){
+        List<ModFuncionario> listaDosRegistosWncontrados = new ArrayList<>();
+        for(Object utenteRegistado: todosRegistosEncontrados){
+            ModFuncionario funcionarioMod = (ModFuncionario)utenteRegistado;
+            listaDosRegistosWncontrados.add(funcionarioMod);
+        }
+        return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
 
 }
