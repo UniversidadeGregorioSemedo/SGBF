@@ -87,7 +87,7 @@
                   <Pane layoutX="784.0" layoutY="14.0" prefHeight="289.0" prefWidth="138.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Button fx:id="botaoCancelar" layoutX="35.0" layoutY="203.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="69.0" text="Cancelar" />
-                        <Button fx:id="botaoNovo" layoutX="34.0" layoutY="14.0" mnemonicParsing="false" onAction="#desbloquearItensDaJanela" prefHeight="25.0" prefWidth="68.0" text="Novo" />
+                        <Button fx:id="botaoNovo" layoutX="34.0" layoutY="14.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="68.0" text="Novo" />
                         <Button fx:id="botaoRemover" layoutX="35.0" layoutY="159.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="69.0" text="Remover" />
                         <Button fx:id="botaoAlterar" layoutX="33.0" layoutY="109.0" mnemonicParsing="false" onAction="#alterarUtente" prefHeight="25.0" prefWidth="68.0" text="Alterar" />
                         <Button fx:id="botaoCadastrar" layoutX="34.0" layoutY="56.0" mnemonicParsing="false" onAction="#cadastrarUtente" text="Cadastrar" />
