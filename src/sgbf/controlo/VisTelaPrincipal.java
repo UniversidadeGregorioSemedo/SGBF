@@ -132,6 +132,12 @@ public class VisTelaPrincipal implements Initializable {
     }
     
     @FXML
+    public void BotaoMenuItemEstoque() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisEstoque.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    
+    @FXML
     public void botaoMenuItemTerminarSessao()  throws IOException{
         UtilControloExcessao confirmar = new UtilControloExcessao();
         final String mensagem = "Tem a certeza que pretende terminar sessão ?";
