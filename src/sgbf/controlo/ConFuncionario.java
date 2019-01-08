@@ -121,7 +121,7 @@ public class ConFuncionario extends ConCRUD {
     
     private Object pegarRegistos(ResultSet setResult,String operacao) throws SQLException{
         ModFuncionario funcionarioMod = new ModFuncionario();
-        funcionarioMod.setIdUtente(setResult.getInt("idUtente"), operacao);
+        funcionarioMod.setIdUtente(setResult.getInt("Utente_idUtente"), operacao);
         funcionarioMod.setPrimeiro_nome(setResult.getString("primeiro_nome"), operacao);
         funcionarioMod.setSegundo_nome(setResult.getString("segundo_nome"), operacao);
         funcionarioMod.setNome(funcionarioMod.getPrimeiro_nome()+" "+funcionarioMod.getSegundo_nome(), operacao);

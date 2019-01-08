@@ -69,8 +69,8 @@ public class ModFuncionario extends ModUtente  {
     
     public boolean equals(ModFuncionario funcionarioMod, String operacao){
         if(this.idFuncionario != funcionarioMod.idFuncionario){
-            if(this.getIdUtente() != funcionarioMod.getIdUtente()){
-                throw new UtilControloExcessao(operacao, "Já existe registo deste funcionário", Alert.AlertType.NONE);
+            if(this.getIdUtente() == funcionarioMod.getIdUtente()){
+                throw new UtilControloExcessao(operacao, "Já existe registo deste funcionário", Alert.AlertType.WARNING);
             }else{
                 return false;
             }

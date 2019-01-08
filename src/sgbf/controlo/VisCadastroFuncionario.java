@@ -75,13 +75,17 @@ public class VisCadastroFuncionario implements Initializable {
     @FXML
     private void cadastrarFuncionario(){
         operacao = "Registar Funcionário";
-        funcionarioMod.setCodigoFuncionario(texteFiedcodigoFuncionario.getText(), operacao);
-        funcionarioMod.setCargo(comboBoxCargo.getSelectionModel().getSelectedItem(), operacao);
-        funcionarioMod.setIdUtente(Integer.valueOf(texteFiedcodigoUtente.getText()), operacao);
-        if(funcionarioCon.registar(funcionarioMod, operacao)){
-           this.bloquearItensDaJanela();
-           this.limparItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Funcionário Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
+        if(tableViewVisitane.getSelectionModel().getSelectedCells().size() == 1){
+            funcionarioMod.setCodigoFuncionario(texteFiedcodigoFuncionario.getText(), operacao);
+            funcionarioMod.setCargo(comboBoxCargo.getSelectionModel().getSelectedItem(), operacao);
+            funcionarioMod.setIdUtente(Integer.valueOf(texteFiedcodigoUtente.getText()), operacao);
+            if(funcionarioCon.registar(funcionarioMod, operacao)){
+               this.bloquearItensDaJanela();
+               this.limparItensDaJanela();
+               throw new UtilControloExcessao(operacao, "Funcionário Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
+            }
+        }else{
+           throw new UtilControloExcessao(operacao, "Seleccione o Utente a Cadastrar", Alert.AlertType.WARNING);
         }
     }
     
@@ -173,7 +177,7 @@ public class VisCadastroFuncionario implements Initializable {
         this.texteFiedPesquisarFuncionario.setText(null);
         this.texteFiedcodigoFuncionario.setText(null);
         this.texteFiedcodigoUtente.setText(null);
-        this.tableViewVisitane.getItems().clear();
+       // this.tableViewVisitane.getItems().clear();
         this.tableViewFuncionario.getItems().clear();
         this.comboBoxCargo.setPromptText("Carga");
     }
