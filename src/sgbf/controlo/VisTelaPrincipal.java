@@ -80,6 +80,8 @@ public class VisTelaPrincipal implements Initializable {
     private MenuBar menuBar;
     @FXML
     private MenuItem menuitemCategoriaEstante;
+    @FXML
+    private MenuItem menuitemSolicitacao;
    
 
     /**
@@ -170,6 +172,16 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     public void BotaoMenuItemMovimentacaoReserva() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/Reserva.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    @FXML
+    public void BotaoMenuItemMovimentacaoDevolucao() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/Devolução.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    @FXML
+    public void BotaoMenuItemMovimentacaoSolicitacao() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisItemSolicitado.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
