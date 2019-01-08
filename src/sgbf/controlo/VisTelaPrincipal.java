@@ -78,6 +78,8 @@ public class VisTelaPrincipal implements Initializable {
     private AnchorPane anchorPane;
     @FXML
     private MenuBar menuBar;
+    @FXML
+    private MenuItem menuitemCategoriaEstante;
    
 
     /**
@@ -140,7 +142,7 @@ public class VisTelaPrincipal implements Initializable {
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisEstoque.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
-    @FXML
+    
     public void BotaoMenuItemProveniencia() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisProveniencia.fxml"));
         anchorPane.getChildren().setAll(x);         
@@ -153,6 +155,11 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     public void BotaoMenuItemAcervoEscrito() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisAcervoEscrito.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    @FXML
+    public void BotaoMenuItemCategoriaAcervo() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCategoriaEstante.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
