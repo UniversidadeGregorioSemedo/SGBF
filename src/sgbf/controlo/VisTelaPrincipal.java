@@ -39,6 +39,8 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuItem menuitemCadastroProveniencia;
     @FXML
+    private MenuItem menuitemProvenienciaAcervo;
+    @FXML
     private MenuItem menuitemCadastroUtente;
     @FXML
     private MenuItem menuitemVerUtentes;
@@ -134,6 +136,16 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     public void BotaoMenuItemEstoque() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisEstoque.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    @FXML
+    public void BotaoMenuItemProveniencia() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisProveniencia.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    @FXML
+    public void BotaoMenuItemProvenienciaAcervo() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisItensProvenientes.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
