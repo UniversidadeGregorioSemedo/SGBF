@@ -39,6 +39,7 @@
             <items>
                   <Menu mnemonicParsing="false" text="Novo Cadastro">
                     <items>
+                        <MenuItem fx:id="menuitemProvenienciaAcervo" mnemonicParsing="false" onAction="#BotaoMenuItemProvenienciaAcervo" text="Proveniencia dos acervos" />
                         <MenuItem fx:id="menuitemCadastroAutor" mnemonicParsing="false" onAction="#BotaoMenuItemAutor" text="Autor">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
