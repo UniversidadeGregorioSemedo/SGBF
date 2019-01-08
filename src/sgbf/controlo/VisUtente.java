@@ -22,7 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 
@@ -34,7 +33,7 @@ import sgbf.util.UtilControloExcessao;
 public class VisUtente implements Initializable {
 
     @FXML
-    private Button botaoPesquisar,  botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar;
+    private Button botaoPesquisar,  botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoFechar;
     @FXML
     private TextField texteFiedPesquisar,texteFiedId, texteFiedPrimeiroNome, texteFiedSegundoNome;
     @FXML
@@ -55,15 +54,7 @@ public class VisUtente implements Initializable {
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
     private final ConUtente utenteCon = new ConUtente();
-    @FXML
-    private Button btnFechar;
-    
-     @FXML
-    private void fechar(ActionEvent event) {
-        AnchorPaneUtente.setVisible(false);
-    }
 
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        this.bloquearItensDaJanela();
@@ -71,7 +62,6 @@ public class VisUtente implements Initializable {
        tableViewUtente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     }
     
-   
     
     @FXML
     private void cadastrarUtente(){
@@ -140,11 +130,16 @@ public class VisUtente implements Initializable {
                throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
             }else{
                 this.carregarResultadosNaTablea(todosRegistosEncontrados);
+                this.bloquearItensDaJanela();
             }
         }
     }
     
-
+    
+    @FXML
+    private void sair(ActionEvent event) {
+        AnchorPaneUtente.setVisible(false);
+    }
    
     
     @FXML
@@ -211,21 +206,27 @@ public class VisUtente implements Initializable {
 
     
     private void exibirDadosNosCampos(ModVisitante visitanteMod){
-        texteFiedId.setText(String.valueOf(visitanteMod.getIdUtente()));
-        
-        //Habilitar os Botões de Editar e Remover
         if(tableViewUtente.getSelectionModel().getSelectedCells().size() == 1){
+            texteFiedId.setText(String.valueOf(visitanteMod.getIdUtente()));
+            texteFiedPrimeiroNome.setText(visitanteMod.getPrimeiro_nome());
+            texteFiedSegundoNome.setText(visitanteMod.getSegundo_nome());
+            texteFiedNumIden.setText(visitanteMod.getNumero());
+            texteFiedContacto.setText(visitanteMod.getContacto());
+            texteFiedEmail.setText(visitanteMod.getEmail());
+            texteFiedEndereco.setText(visitanteMod.getEndereco());
+            texteFiedUsuario.setText(visitanteMod.getUsuario());
+            texteFiedSenha.setText(visitanteMod.getSenha());
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
+            botaoNovo.setDisable(true);
         }else{
             botaoAlterar.setDisable(true);
             botaoRemover.setDisable(true);
+            botaoNovo.setDisable(false);
+            this.limparItensDaJanela();
         }
     }
     
-    
-    
-        
     private ModVisitante pegarDadosDaPesquisa(){
         if(this.texteFiedPesquisar.getText().contains("123456789")){
            utenteMod.setIdUtente(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
