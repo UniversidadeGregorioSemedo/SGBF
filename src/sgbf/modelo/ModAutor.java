@@ -5,6 +5,7 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilEmail;
@@ -16,6 +17,7 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  */
 public class ModAutor {
     private Integer idAutor;
+    private String nomeCompleto;
     private String primeiro_nome;
     private String segundo_nome;
     private String contacto;
@@ -24,6 +26,7 @@ public class ModAutor {
     
     public ModAutor(){
         this.idAutor = 0;
+        this.nomeCompleto = null;
         this.primeiro_nome = null;
         this.segundo_nome = null;
         this.contacto = null;
@@ -38,6 +41,16 @@ public class ModAutor {
     public void setIdAutor(Integer idAutor, String operacao) {
         this.idAutor = idAutor;
     }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto, String operacao) {
+        this.nomeCompleto = nomeCompleto;
+    }
+    
+    
 
     public String getPrimeiro_nome() {
         return primeiro_nome;
@@ -85,10 +98,18 @@ public class ModAutor {
 
     public void setEmail(String email, String operacao) {
         UtilEmail emailUtil = new UtilEmail();
-        if(emailUtil.emailValido(email)){
+        if(email == null){
             this.email = email;
         }else{
-            throw new UtilControloExcessao("Erro ao "+operacao+"\nErro: "+email+" é um email inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            if(email.isEmpty()){
+                this.email = email;
+            }else{
+                if (emailUtil.emailValido(email)) {
+                    this.email = email;
+                }else{
+                    throw new UtilControloExcessao(operacao, "Email inconsistente !", Alert.AlertType.INFORMATION);
+                }
+            }
         }
     }
 

@@ -131,7 +131,7 @@ public class ConUtente extends ConCRUD {
         ModVisitante visitanteMod = (ModVisitante)objecto_pesquisar;
         try{
             super.query = "select * from tcc.utente where idUtente=? or "
-                        + "primeiro_nome like '%"+visitanteMod.getPrimeiro_nome()+"%'";
+                        + "(primeiro_nome or segundo_nome) like '%"+visitanteMod.getPrimeiro_nome()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset  = super.preparedStatement.executeQuery();

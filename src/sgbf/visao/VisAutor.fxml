@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.VisAutorController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneAutor" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisAutor">
     <stylesheets>
         <URL value="@/sgbf/util/visautor.css" />
     </stylesheets>
@@ -20,10 +20,8 @@
                <children>
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="283.0" prefWidth="826.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Pesquisar autor" />
-                        <Label layoutX="14.0" layoutY="38.0" text="Nome" />
-                        <TextField layoutX="120.0" layoutY="34.0" prefHeight="25.0" prefWidth="444.0" />
-                        <JFXButton layoutX="572.0" layoutY="31.0" prefHeight="32.0" prefWidth="39.0" text=" ">
+                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" />
+                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" prefHeight="32.0" prefWidth="39.0" text=" ">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -32,13 +30,12 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <TableView layoutX="14.0" layoutY="67.0" prefHeight="200.0" prefWidth="796.0">
+                        <TableView fx:id="tableViewAutor" layoutX="14.0" layoutY="67.0" prefHeight="200.0" prefWidth="796.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Id" />
-                            <TableColumn prefWidth="186.0" text="Primeiro nome" />
-                              <TableColumn prefWidth="191.0" text="Sobrenome" />
-                              <TableColumn prefWidth="136.0" text="Contacto" />
-                              <TableColumn prefWidth="207.0" text="Email" />
+                            <TableColumn fx:id="tableColumId" prefWidth="99.0" text="Id" />
+                            <TableColumn fx:id="tableColumNome" prefWidth="300.0" text="Nome completo" />
+                              <TableColumn fx:id="tableColumContacto" prefWidth="165.0" text="Contacto" />
+                              <TableColumn fx:id="tableColumEmail" prefWidth="231.0" text="Email" />
                           </columns>
                         </TableView>
                      </children>
@@ -54,20 +51,20 @@
                         <Label layoutX="285.0" layoutY="61.0" text="Sobrenome" />
                         <Label layoutX="14.0" layoutY="171.0" text="Contacto" />
                         <Label layoutX="285.0" layoutY="171.0" prefHeight="17.0" prefWidth="33.0" text="Email" />
-                        <TextField layoutX="115.0" layoutY="57.0" prefHeight="25.0" prefWidth="147.0" />
-                        <TextField layoutX="364.0" layoutY="57.0" prefHeight="25.0" prefWidth="180.0" />
-                        <TextField layoutX="115.0" layoutY="167.0" prefHeight="25.0" prefWidth="147.0" />
-                        <TextField layoutX="364.0" layoutY="167.0" prefHeight="25.0" prefWidth="180.0" />
+                        <TextField fx:id="texteFiedPrimeiroNome" layoutX="115.0" layoutY="57.0" prefHeight="25.0" prefWidth="147.0" />
+                        <TextField fx:id="texteFiedSegundoNome" layoutX="364.0" layoutY="57.0" prefHeight="25.0" prefWidth="180.0" />
+                        <TextField fx:id="texteFiedContacto" layoutX="115.0" layoutY="167.0" prefHeight="25.0" prefWidth="147.0" />
+                        <TextField fx:id="texteFiedEmail" layoutX="364.0" layoutY="167.0" prefHeight="25.0" prefWidth="180.0" />
                      </children>
                   </Pane>
                   <Pane layoutX="639.0" layoutY="14.0" prefHeight="283.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Button layoutX="64.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Novo" />
-                        <Button layoutX="65.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cadastrar" />
-                        <Button layoutX="64.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Alterar" />
-                        <Button layoutX="64.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Remover" />
-                        <Button layoutX="64.0" layoutY="157.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cancelar" />
-                        <Button layoutX="65.0" layoutY="244.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Sair" />
+                        <Button fx:id="botaoNovo" layoutX="64.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Novo" />
+                        <Button fx:id="botaoCadastrar" layoutX="65.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cadastrar" />
+                        <Button fx:id="botaoAlterar" layoutX="64.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Alterar" />
+                        <Button fx:id="botaoRemover" layoutX="64.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Remover" />
+                        <Button fx:id="botaoCancelar" layoutX="64.0" layoutY="157.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cancelar" />
+                        <Button fx:id="botaoFechar" layoutX="65.0" layoutY="244.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Sair" />
                      </children>
                   </Pane>
                </children>

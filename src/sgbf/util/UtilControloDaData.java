@@ -80,6 +80,4 @@ public class UtilControloDaData {
         return (data_introduzida != null);
     }
     
-    //Método para verificar se uma data é superior a outra
-    //Método para calcular a próxima data baseado no número de dias  
 }
