@@ -194,6 +194,11 @@ public class VisTelaPrincipal implements Initializable {
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/TabelaVerAcervo.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
+    @FXML
+    public void BotaoMenuItemVerEditora() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/TabelaVerEditora.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
     
     @FXML
     public void botaoMenuItemTerminarSessao()  throws IOException{
