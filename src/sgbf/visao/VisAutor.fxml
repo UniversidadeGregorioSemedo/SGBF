@@ -21,7 +21,7 @@
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="283.0" prefWidth="826.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" />
-                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" prefHeight="32.0" prefWidth="39.0" text=" ">
+                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" onAction="#pesquisarUtente" prefHeight="32.0" prefWidth="39.0" text=" ">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -59,12 +59,12 @@
                   </Pane>
                   <Pane layoutX="639.0" layoutY="14.0" prefHeight="283.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Button fx:id="botaoNovo" layoutX="64.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Novo" />
-                        <Button fx:id="botaoCadastrar" layoutX="65.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cadastrar" />
-                        <Button fx:id="botaoAlterar" layoutX="64.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Alterar" />
-                        <Button fx:id="botaoRemover" layoutX="64.0" layoutY="124.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Remover" />
-                        <Button fx:id="botaoCancelar" layoutX="64.0" layoutY="157.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Cancelar" />
-                        <Button fx:id="botaoFechar" layoutX="65.0" layoutY="244.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Sair" />
+                        <Button fx:id="botaoNovo" layoutX="64.0" layoutY="21.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="72.0" text="Novo" />
+                        <Button fx:id="botaoCadastrar" layoutX="65.0" layoutY="55.0" mnemonicParsing="false" onAction="#cadastrarAutor" prefHeight="25.0" prefWidth="72.0" text="Cadastrar" />
+                        <Button fx:id="botaoAlterar" layoutX="64.0" layoutY="88.0" mnemonicParsing="false" onAction="#alterarAutor" prefHeight="25.0" prefWidth="72.0" text="Alterar" />
+                        <Button fx:id="botaoRemover" layoutX="64.0" layoutY="124.0" mnemonicParsing="false" onAction="#removerAutor" prefHeight="25.0" prefWidth="72.0" text="Remover" />
+                        <Button fx:id="botaoCancelar" layoutX="64.0" layoutY="157.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="72.0" text="Cancelar" />
+                        <Button fx:id="botaoFechar" layoutX="65.0" layoutY="244.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="72.0" text="Sair" />
                      </children>
                   </Pane>
                </children>

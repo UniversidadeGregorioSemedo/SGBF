@@ -112,6 +112,15 @@ public class ModAutor {
             }
         }
     }
+    
+    public boolean equals(ModAutor autorMod, String operacao){
+        if(this.idAutor != autorMod.idAutor){
+            if(this.contacto.equalsIgnoreCase(autorMod.contacto)){
+                throw new UtilControloExcessao(operacao, "Já existe um autor com este contacto !", Alert.AlertType.INFORMATION);
+            }
+        }
+        return false;
+    }
 
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
