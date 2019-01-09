@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
+import sgbf.modelo.ModAcervosEscritos;
 import sgbf.modelo.ModAutor;
 import sgbf.modelo.ModUtente;
 import sgbf.util.UtilControloExcessao;
@@ -71,13 +72,13 @@ public class ConAutor extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModAutor autorMod = (ModAutor)objecto_remover;
         try{
-            if(this.temDadosRelacionados(autorMod, operacao)){
-               throw new UtilControloExcessao("Esta operação não pode ser executada\nO autor seleccionado possui dados relacionados ", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-            }else{
+            if(this.removerTodosRegistos(autorMod, operacao)){
                 super.query = "delete from tcc.Autor where idAutor=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setInt(1,autorMod.getIdAutor());
                 return !super.preparedStatement.execute();
+            }else{
+               throw new UtilControloExcessao(operacao,"Erro ao remover registos vincolados ",Alert.AlertType.ERROR);
             }
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Autor !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
@@ -138,11 +139,11 @@ public class ConAutor extends ConCRUD {
         return autorMod;
     }
     
-    private boolean temDadosRelacionados(ModAutor autorMod, String operacao) throws SQLException{
-        super.query = "select *from acervosescritos where Autor_idAutor=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
-        super.preparedStatement.setInt(1, autorMod.getIdAutor());
-        return super.setResultset.next();
+    private boolean removerTodosRegistos(ModAutor autorMod, String operacao) throws SQLException{
+        ModAcervosEscritos acervosEscritosMod = new ModAcervosEscritos();
+        ConAcervosEscreitos acervosEscreitosCon = new ConAcervosEscreitos();
+        acervosEscritosMod.setAutorMod(autorMod, operacao);
+        return acervosEscreitosCon.remover(acervosEscritosMod, operacao);
     }
     
     private boolean jaExiste(ModAutor autorIntroduzido, String operacao){

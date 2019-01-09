@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
+import sgbf.modelo.ModAcervosEscritos;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -61,14 +63,15 @@ public class ConAcervosEscreitos extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-       ModEstante estanteMod = (ModEstante)objecto_remover;
+        ModAcervosEscritos acervosEscritosMod = (ModAcervosEscritos)objecto_remover;
         try{
-            super.query = "delete from tcc.Estante where idEstante=?";
+            super.query = "delete from tcc.acervosescritos where Acervos_idAcervos=? or Autor_idAutor=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,estanteMod.getIdEstante());
+            super.preparedStatement.setInt(1,acervosEscritosMod.getAcervoMod().getIdAcervo());
+            super.preparedStatement.setInt(2,acervosEscritosMod.getAutorMod().getIdAutor());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+           throw new UtilControloExcessao(operacao,"Erro ao Registos do Autor !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }

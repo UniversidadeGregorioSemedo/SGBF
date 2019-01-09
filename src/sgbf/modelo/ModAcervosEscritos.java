@@ -12,6 +12,12 @@ package sgbf.modelo;
 public class ModAcervosEscritos {
     private ModAcervo acervoMod;
     private ModAutor autorMod;
+    
+    public ModAcervosEscritos(){
+        this.acervoMod = new ModAcervoFisico();
+        this.autorMod = new ModAutor();
+    }
+    
 
     public ModAcervo getAcervoMod() {
         return acervoMod;
