@@ -24,7 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModAutor;
-import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 
 /**

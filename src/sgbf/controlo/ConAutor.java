@@ -9,7 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModAutor;
+import sgbf.modelo.ModUtente;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -23,16 +25,20 @@ public class ConAutor extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModAutor autorMod = (ModAutor)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.Autor (primeiro_nome,segundo_nome,contacto,email)"
-                        + " VALUES (?,?,?,?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, autorMod.getPrimeiro_nome());
-            super.preparedStatement.setString(2, autorMod.getSegundo_nome());
-            super.preparedStatement.setString(3, autorMod.getContacto());
-            super.preparedStatement.setString(4, autorMod.getEmail());
-            return !super.preparedStatement.execute();
+            if(this.jaExiste(autorMod, operacao)){
+                throw new UtilControloExcessao(operacao,"Erro ao verificar dados do Autor",Alert.AlertType.ERROR);
+            }else{
+                super.query = "INSERT INTO tcc.Autor (primeiro_nome,segundo_nome,contacto,email)"
+                            + " VALUES (?,?,?,?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, autorMod.getPrimeiro_nome());
+                super.preparedStatement.setString(2, autorMod.getSegundo_nome());
+                super.preparedStatement.setString(3, autorMod.getContacto());
+                super.preparedStatement.setString(4, autorMod.getEmail());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Autor !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Autor !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -132,6 +138,14 @@ public class ConAutor extends ConCRUD {
         super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
         super.preparedStatement.setInt(1, autorMod.getIdAutor());
         return super.setResultset.next();
+    }
+    
+    private boolean jaExiste(ModAutor autorIntroduzido, String operacao){
+        for(Object todosRegistos:  this.listarTodos(operacao)){
+            ModAutor autorRegistado = (ModAutor)todosRegistos;
+            autorRegistado.equals(autorIntroduzido, operacao);
+        }
+        return false;
     }
 
 }
