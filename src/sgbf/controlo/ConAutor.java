@@ -121,13 +121,14 @@ public class ConAutor extends ConCRUD {
         }
     }
     
-    private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
+    private Object pegarRegistos(ResultSet setResult,String operacao) throws SQLException{
         ModAutor autorMod = new ModAutor();
-        autorMod.setIdAutor(setResultset.getInt("idAutor"), operacao);
-        autorMod.setPrimeiro_nome(setResultset.getString("primeiro_nome"), operacao);
-        autorMod.setSegundo_nome(setResultset.getString("segundo_nome"), operacao);
-        autorMod.setContacto(setResultset.getString("contacto"), operacao);
-        autorMod.setEmail(setResultset.getString("email"), operacao);
+        autorMod.setIdAutor(setResult.getInt("idAutor"), operacao);
+        autorMod.setPrimeiro_nome(setResult.getString("primeiro_nome"), operacao);
+        autorMod.setSegundo_nome(setResult.getString("segundo_nome"), operacao);
+        autorMod.setNomeCompleto(autorMod.getPrimeiro_nome()+" "+autorMod.getSegundo_nome(), operacao);
+        autorMod.setContacto(setResult.getString("contacto"), operacao);
+        autorMod.setEmail(setResult.getString("email"), operacao);
         autorMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         autorMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return autorMod;

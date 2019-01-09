@@ -132,8 +132,8 @@ public class ConFuncionario extends ConCRUD {
         funcionarioMod.setCategoria(setResult.getString("categoria"), operacao);
         funcionarioMod.setUsuario(setResult.getString("usuario"), operacao);
         funcionarioMod.setSenha(setResult.getString("senha"), operacao);
-        funcionarioMod.setData_registo(setResult.getString("data_registo"), operacao);
-        funcionarioMod.setData_modificacao(setResult.getString("data_modificacao"),    operacao);
+        funcionarioMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
+        funcionarioMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         funcionarioMod.setIdFuncionario(setResult.getInt("idFuncionario"), operacao);
         funcionarioMod.setCargo(setResult.getString("cargo"), operacao);
         funcionarioMod.setCodigoFuncionario(setResult.getString("cod_funcionario"), operacao);

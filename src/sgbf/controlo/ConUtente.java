@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
+import sgbf.modelo.ModAutor;
 import sgbf.modelo.ModUtente;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
@@ -128,19 +129,19 @@ public class ConUtente extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        ModVisitante visitanteMod = (ModVisitante)objecto_pesquisar;
+        ModAutor autorMod = (ModAutor)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.utente where idUtente=? or "
-                        + "(primeiro_nome or segundo_nome) like '%"+visitanteMod.getPrimeiro_nome()+"%'";
+            super.query = "select * from tcc.autor where idAutor=? or "
+                        + "(primeiro_nome or segundo_nome) like '%"+autorMod.getPrimeiro_nome()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
+            super.preparedStatement.setInt(1, autorMod.getIdAutor());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+"Utente(s) !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+"Autor(es) !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
     
@@ -160,8 +161,8 @@ public class ConUtente extends ConCRUD {
         visitanteMod.setCategoria(setResult.getString("categoria"), operacao);
         visitanteMod.setUsuario(setResult.getString("usuario"), operacao);
         visitanteMod.setSenha(setResult.getString("senha"), operacao);
-        visitanteMod.setData_registo(setResult.getString("data_registo"), operacao);
-        visitanteMod.setData_modificacao(setResult.getString("data_modificacao"),    operacao);
+        visitanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
+        visitanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return visitanteMod;
     }
     

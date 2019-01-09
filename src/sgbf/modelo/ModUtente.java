@@ -6,6 +6,7 @@
 package sgbf.modelo;
 
 import javafx.scene.control.Alert;
+import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilEmail;
 
@@ -29,8 +30,7 @@ public abstract class ModUtente {
     protected String categoria;
     protected String usuario;
     protected String senha;
-    protected String data_registo;
-    protected String data_modificacao;
+    private UtilControloDaData utilControloDaData = new UtilControloDaData();
 
     public Integer getIdUtente() {
         return idUtente;
@@ -201,20 +201,8 @@ public abstract class ModUtente {
         }
     }
 
-    public String getData_registo() {
-        return data_registo;
-    }
-
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
     
     public void equals(ModUtente utenteMod, String operacao){

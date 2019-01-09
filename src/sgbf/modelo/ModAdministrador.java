@@ -21,8 +21,6 @@ public final class ModAdministrador extends ModFuncionario {
         this.tipo_identificacao = null;
         this.numero = null;
         this.endereco = null;
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
     }
     
     

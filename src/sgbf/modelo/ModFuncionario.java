@@ -28,8 +28,6 @@ public class ModFuncionario extends ModUtente  {
         this.tipo_identificacao = null;
         this.numero = null;
         this.endereco = null;
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
         this.cargo = null;
         this.codigoFuncionario = null;
         this.usuarioMod = new ModUsuario();
