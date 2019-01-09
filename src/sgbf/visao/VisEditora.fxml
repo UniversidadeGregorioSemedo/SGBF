@@ -32,12 +32,14 @@
                               <TableColumn fx:id="tableColumEndereco" prefWidth="167.0" text="Endereço" />
                           </columns>
                         </TableView>
-                        <JFXButton fx:id="botaoPesquisar" layoutX="499.0" layoutY="47.0" onAction="#pesquisarUtente" prefHeight="32.0" prefWidth="9.0" text=" " />
-                        <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="501.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Pesquisa.png" />
-                           </image>
-                        </ImageView>
+                        <JFXButton fx:id="botaoPesquisar" layoutX="499.0" layoutY="47.0" onAction="#pesquisarUtente" prefHeight="32.0" prefWidth="9.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></JFXButton>
                      </children>
                   </Pane>
                </children>
