@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.TabelaVerAcervoController">
+    <stylesheets>
+        <URL value="@/sgbf/util/tabelaveracervo.css" />
+    </stylesheets>
+   <children>
+      <SplitPane orientation="VERTICAL" prefHeight="574.0" prefWidth="1445.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="562.0" prefWidth="789.0">
+               <children>
+                  <Label layoutX="8.0" layoutY="6.0" text="Pesquisar utente" />
+                  <TableView layoutX="6.0" layoutY="98.0" prefHeight="450.0" prefWidth="1346.0">
+                     <columns>
+                        <TableColumn prefWidth="44.0" text="Id" />
+                        <TableColumn prefWidth="166.0" text="Titulo" />
+                        <TableColumn prefWidth="92.0" text="Tipo de acervo" />
+                        <TableColumn prefWidth="60.0" text="Formato" />
+                        <TableColumn prefWidth="44.0" text="Edição" />
+                        <TableColumn prefWidth="48.0" text="Volume" />
+                        <TableColumn prefWidth="63.0" text="NºPag" />
+                        <TableColumn prefWidth="73.0" text="Cod-Barra" />
+                        <TableColumn prefWidth="73.0" text="ISBN" />
+                        <TableColumn prefWidth="101.0" text="Idioma" />
+                        <TableColumn prefWidth="59.0" text="Ano" />
+                        <TableColumn prefWidth="104.0" text="Categoria" />
+                        <TableColumn prefWidth="133.0" text="Editora" />
+                        <TableColumn minWidth="0.0" prefWidth="66.0" text="Estoque" />
+                        <TableColumn minWidth="0.0" prefWidth="59.0" text="Area" />
+                        <TableColumn prefWidth="84.0" text="Registro" />
+                        <TableColumn prefWidth="75.0" text="Modificação" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="14.0" layoutY="49.0" text="Nome" />
+                  <TextField layoutX="114.0" layoutY="45.0" prefHeight="25.0" prefWidth="517.0" />
+                  <JFXButton layoutX="634.0" layoutY="45.0" text="Pesquisar" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
