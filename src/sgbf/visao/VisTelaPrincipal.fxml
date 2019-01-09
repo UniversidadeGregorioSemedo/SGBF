@@ -58,7 +58,7 @@
                               </ImageView>
                            </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="menuitemCadastroArea" mnemonicParsing="false" onAction="#BotaoMenuItemArea" text="Area">
+                        <MenuItem fx:id="menuitemCadastroArea" mnemonicParsing="false" text="Area">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -131,7 +131,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Ver">
             <items>
-                  <MenuItem fx:id="menuitemVerUtentes" mnemonicParsing="false" text="Todos utentes">
+                  <MenuItem fx:id="menuitemVerUtentes" mnemonicParsing="false" onAction="#BotaoMenuItemVerUtente" text="Todos utentes">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -195,7 +195,7 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem fx:id="menuitemVerAreas" mnemonicParsing="false" text="Todas areas">
+                  <MenuItem fx:id="menuitemVerAreas" mnemonicParsing="false" onAction="#BotaoMenuItemVerArea" text="Todas areas">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
