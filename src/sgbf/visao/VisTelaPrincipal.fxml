@@ -131,7 +131,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Ver">
             <items>
-                  <MenuItem fx:id="menuitemVerUtentes" mnemonicParsing="false" onAction="#BotaoMenuItemVerUtente" text="Todos utentes">
+                  <MenuItem fx:id="menuitemVerUtentes" mnemonicParsing="false" text="Todos utentes">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -204,7 +204,7 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem fx:id="menuitenmVerAcervos" mnemonicParsing="false" text="Todos acervos">
+                  <MenuItem fx:id="menuitenmVerAcervos" mnemonicParsing="false" onAction="#BotaoMenuItemVerAcervo" text="Todos acervos">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
