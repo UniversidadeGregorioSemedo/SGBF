@@ -52,7 +52,7 @@ public class ConEditora extends ConCRUD{
                 throw new UtilControloExcessao("Erro ao verificar dados da Editora !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
             }else{
                 super.query = "UPDATE tcc.Editora set nome=?, contacto=?, email=?, fax=?, endereco=?"
-                            + " VALUES (?, ?, ?, ?, ?) where idEditora=?";
+                            + " where idEditora=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setString(1, editoraMod.getNome());
                 super.preparedStatement.setString(2, editoraMod.getContacto());
