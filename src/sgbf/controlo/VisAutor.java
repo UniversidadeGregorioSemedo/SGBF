@@ -79,6 +79,7 @@ public class VisAutor implements Initializable {
     @FXML
     private void alterarAutor(){
         operacao = "Editar Autor";
+        autorMod.setIdAutor(this.tableViewAutor.getSelectionModel().getSelectedItem().getIdAutor(), operacao);
         autorMod.setPrimeiro_nome(texteFiedPrimeiroNome.getText(), operacao);
         autorMod.setSegundo_nome(texteFiedSegundoNome.getText(), operacao);
         autorMod.setContacto(texteFiedContacto.getText(), operacao);

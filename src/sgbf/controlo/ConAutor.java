@@ -48,14 +48,18 @@ public class ConAutor extends ConCRUD {
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModAutor autorMod = (ModAutor)objecto_alterar;
         try{
-            super.query = "UPDATE tcc.Autor set primeiro_nome=?, segundo_nome=?, contacto=?, email=? where idAutor=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, autorMod.getPrimeiro_nome());
-            super.preparedStatement.setString(2, autorMod.getSegundo_nome());
-            super.preparedStatement.setString(3, autorMod.getContacto());
-            super.preparedStatement.setString(4, autorMod.getEmail());
-            super.preparedStatement.setInt(5, autorMod.getIdAutor());
-            return !super.preparedStatement.execute();
+            if(this.jaExiste(autorMod, operacao)){
+                throw new UtilControloExcessao(operacao,"Erro ao verificar dados do Autor",Alert.AlertType.ERROR);
+            }else{
+                super.query = "UPDATE tcc.Autor set primeiro_nome=?, segundo_nome=?, contacto=?, email=? where idAutor=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, autorMod.getPrimeiro_nome());
+                super.preparedStatement.setString(2, autorMod.getSegundo_nome());
+                super.preparedStatement.setString(3, autorMod.getContacto());
+                super.preparedStatement.setString(4, autorMod.getEmail());
+                super.preparedStatement.setInt(5, autorMod.getIdAutor());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Autor !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
