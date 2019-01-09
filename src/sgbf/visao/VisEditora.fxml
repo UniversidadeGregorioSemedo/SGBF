@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="249.0" prefWidth="583.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroEditoraController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="249.0" prefWidth="583.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroEditora">
     <stylesheets>
         <URL value="@/sgbf/util/viscadastroeditora.css" />
     </stylesheets>
@@ -23,16 +23,16 @@
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Pesquisar editora" />
                         <Label layoutX="14.0" layoutY="51.0" text="Nome" />
-                        <TextField layoutX="130.0" layoutY="47.0" prefHeight="25.0" prefWidth="361.0" />
-                        <TableView layoutX="14.0" layoutY="78.0" prefHeight="158.0" prefWidth="698.0">
+                        <TextField fx:id="texteFiedPesquisar" layoutX="130.0" layoutY="47.0" prefHeight="25.0" prefWidth="361.0" />
+                        <TableView fx:id="tableViewEditora" layoutX="14.0" layoutY="78.0" prefHeight="158.0" prefWidth="698.0">
                           <columns>
-                            <TableColumn prefWidth="201.0" text="Nome" />
-                            <TableColumn prefWidth="122.0" text="Contacto" />
-                              <TableColumn prefWidth="207.0" text="Email" />
-                              <TableColumn prefWidth="167.0" text="Endereço" />
+                            <TableColumn fx:id="tableColumNome" prefWidth="201.0" text="Nome" />
+                            <TableColumn fx:id="tableColumContacto" prefWidth="122.0" text="Contacto" />
+                              <TableColumn fx:id="tableColumEmail" prefWidth="207.0" text="Email" />
+                              <TableColumn fx:id="tableColumEndereco" prefWidth="167.0" text="Endereço" />
                           </columns>
                         </TableView>
-                        <JFXButton layoutX="499.0" layoutY="47.0" prefHeight="32.0" prefWidth="9.0" text=" " />
+                        <JFXButton fx:id="botaoPesquisar" layoutX="499.0" layoutY="47.0" onAction="#pesquisarUtente" prefHeight="32.0" prefWidth="9.0" text=" " />
                         <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="501.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icones/Pesquisa.png" />
@@ -44,7 +44,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="245.0" prefWidth="488.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="245.0" prefWidth="512.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Dados da editora" />
                         <Label layoutX="15.0" layoutY="77.0" text="Nome">
@@ -72,20 +72,21 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="89.0" layoutY="73.0" />
-                        <TextField layoutX="89.0" layoutY="120.0" />
-                        <TextField layoutX="89.0" layoutY="176.0" />
-                        <TextField layoutX="334.0" layoutY="124.0" prefHeight="25.0" prefWidth="139.0" />
-                        <TextField layoutX="334.0" layoutY="72.0" prefHeight="25.0" prefWidth="139.0" />
+                        <TextField fx:id="texteFiedNome" layoutX="89.0" layoutY="73.0" />
+                        <TextField fx:id="texteFiedEmail" layoutX="89.0" layoutY="120.0" />
+                        <TextField fx:id="texteFiedEndereco" layoutX="89.0" layoutY="176.0" prefHeight="25.0" prefWidth="384.0" />
+                        <TextField fx:id="texteFiedFax" layoutX="334.0" layoutY="124.0" prefHeight="25.0" prefWidth="139.0" />
+                        <TextField fx:id="texteFiedContacto" layoutX="334.0" layoutY="72.0" prefHeight="25.0" prefWidth="139.0" />
                      </children>
                   </Pane>
-                  <Pane layoutX="511.0" layoutY="14.0" prefHeight="245.0" prefWidth="179.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="549.0" layoutY="13.0" prefHeight="245.0" prefWidth="179.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Button layoutX="55.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Cadastro" />
-                        <Button layoutX="55.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Alterar" />
-                        <Button layoutX="55.0" layoutY="98.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Remover" />
-                        <Button layoutX="55.0" layoutY="141.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Novo" />
-                        <Button layoutX="55.0" layoutY="206.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Cancelar" />
+                        <Button fx:id="botaoCadastrar" layoutX="55.0" layoutY="46.0" mnemonicParsing="false" onAction="#cadastrarEditora" prefHeight="25.0" prefWidth="70.0" text="Cadastro" />
+                        <Button fx:id="botaoAlterar" layoutX="55.0" layoutY="81.0" mnemonicParsing="false" onAction="#alterarEditora" prefHeight="25.0" prefWidth="70.0" text="Alterar" />
+                        <Button fx:id="botaoRemover" layoutX="55.0" layoutY="123.0" mnemonicParsing="false" onAction="#removerEditora" prefHeight="25.0" prefWidth="70.0" text="Remover" />
+                        <Button fx:id="botaoNovo" layoutX="55.0" layoutY="14.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="70.0" text="Novo" />
+                        <Button fx:id="botaoCancelar" layoutX="55.0" layoutY="158.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="70.0" text="Cancelar" />
+                        <Button fx:id="botaoSair" layoutX="55.0" layoutY="195.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="70.0" text="Sair" />
                      </children>
                   </Pane>
                </children>
