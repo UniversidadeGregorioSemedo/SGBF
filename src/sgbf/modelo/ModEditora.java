@@ -6,6 +6,7 @@
 package sgbf.modelo;
 
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilEmail;
@@ -73,10 +74,18 @@ public class ModEditora {
 
     public void setEmail(String email, String operacao) {
         UtilEmail emailUtil = new UtilEmail();
-        if(emailUtil.emailValido(email)){
+        if(email == null){
             this.email = email;
         }else{
-            throw new UtilControloExcessao("Erro ao "+operacao+"\nErro: "+email+" é um email inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            if(email.isEmpty()){
+                this.email = email;
+            }else{
+                if (emailUtil.emailValido(email)) {
+                    this.email = email;
+                }else{
+                    throw new UtilControloExcessao(operacao, "Email inconsistente !", Alert.AlertType.INFORMATION);
+                }
+            }
         }
     }
 
@@ -103,7 +112,7 @@ public class ModEditora {
     public void equals(ModEditora editoraMod, String operacao){
         if(this.iEditora != editoraMod.iEditora){
             if(this.nome.equalsIgnoreCase(editoraMod.nome)){
-                throw new UtilControloExcessao("Já existe uma Editora com este Nome !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Já existe uma Editora com este Nome !",Alert.AlertType.WARNING);
             }
         }
     }

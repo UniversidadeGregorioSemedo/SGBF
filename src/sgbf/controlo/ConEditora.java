@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModEditora;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -23,8 +24,8 @@ public class ConEditora extends ConCRUD{
     public boolean registar(Object objecto_registar, String operacao) {
         ModEditora editoraMod = (ModEditora)objecto_registar;
         try{
-            if(this.jaExisteEssaEditora(editoraMod, operacao)){
-                throw new UtilControloExcessao("Erro ao verificar dados da Editora !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            if(this.jaExiste(editoraMod, operacao)){
+                throw new UtilControloExcessao(operacao,"Erro ao verificar dados da Editora !",Alert.AlertType.INFORMATION);
             }else{
                 super.query = "INSERT INTO tcc.Editora (nome, contacto, email, fax, endereco)"
                             + " VALUES (?, ?, ?, ?, ?)";
@@ -37,7 +38,7 @@ public class ConEditora extends ConCRUD{
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Editora !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -47,7 +48,7 @@ public class ConEditora extends ConCRUD{
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModEditora editoraMod = (ModEditora)objecto_alterar;
         try{
-            if(this.jaExisteEssaEditora(editoraMod, operacao)){
+            if(this.jaExiste(editoraMod, operacao)){
                 throw new UtilControloExcessao("Erro ao verificar dados da Editora !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
             }else{
                 super.query = "UPDATE tcc.Editora set nome=?, contacto=?, email=?, fax=?, endereco=?"
@@ -135,7 +136,7 @@ public class ConEditora extends ConCRUD{
         return editoraMod;
     }
     
-    private boolean jaExisteEssaEditora(ModEditora editoraMod, String operacao){
+    private boolean jaExiste(ModEditora editoraMod, String operacao){
         for(Object todosRegistos: this.listarTodos(operacao)){
             ModEditora editoraRegistada = (ModEditora)todosRegistos;
             editoraRegistada.equals(editoraMod, operacao);
