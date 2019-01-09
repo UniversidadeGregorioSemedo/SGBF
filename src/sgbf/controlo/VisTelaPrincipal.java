@@ -123,8 +123,8 @@ public class VisTelaPrincipal implements Initializable {
     }
     
     @FXML
-    public void BotaoMenuItemArea() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisArea.fxml"));
+    public void BotaoMenuItemVerArea() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/TabelaVerArea.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     
