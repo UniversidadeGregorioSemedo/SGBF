@@ -49,18 +49,18 @@
                   </TableView>
                   <javafx.scene.control.TextField fx:id="texteFiedPesquisarFuncionario" layoutX="27.0" layoutY="14.0" prefHeight="25.0" prefWidth="228.0" />
                   <JFXButton fx:id="botaoPesquisarFuncionario" layoutX="267.0" layoutY="14.0" onAction="#pesquisarFuncionario" prefHeight="25.0" prefWidth="136.0" text="Pesquisar Funcionário" />
-                  <Label layoutX="524.0" layoutY="31.0" text="Cargo" />
-                  <ComboBox fx:id="comboBoxCargo" layoutX="578.0" layoutY="27.0" prefWidth="150.0" promptText="Carga" />
-                  <Label layoutX="524.0" layoutY="66.0" text="C. Funcionário" />
-                  <javafx.scene.control.TextField fx:id="texteFiedcodigoFuncionario" layoutX="608.0" layoutY="60.0" prefHeight="25.0" prefWidth="120.0" />
+                  <Label layoutX="524.0" layoutY="18.0" text="Cargo" />
+                  <ComboBox fx:id="comboBoxCargo" layoutX="578.0" layoutY="14.0" prefWidth="150.0" promptText="Carga" />
+                  <Label layoutX="524.0" layoutY="57.0" text="C. Funcionário" />
+                  <javafx.scene.control.TextField fx:id="texteFiedcodigoFuncionario" layoutX="608.0" layoutY="51.0" prefHeight="25.0" prefWidth="120.0" />
                   <Button fx:id="botaoNovo" layoutX="524.0" layoutY="123.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="89.0" text="Novo" />
                   <Button fx:id="botaoCadastrar" layoutX="646.0" layoutY="123.0" mnemonicParsing="false" onAction="#cadastrarFuncionario" prefHeight="25.0" prefWidth="76.0" text="Cadastrar" />
                   <Button fx:id="botaoAlterar" layoutX="525.0" layoutY="160.0" mnemonicParsing="false" onAction="#alterarFuncionario" prefHeight="25.0" prefWidth="89.0" text="Alterar" />
-                  <Button fx:id="botaoRemover" layoutX="646.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Remover" />
+                  <Button fx:id="botaoRemover" layoutX="646.0" layoutY="160.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="76.0" text="Remover" />
                   <Button fx:id="botaoCancelar" layoutX="525.0" layoutY="195.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="89.0" text="Cancelar" />
                   <Button fx:id="botaoSair" layoutX="646.0" layoutY="195.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="76.0" text="Sair" />
-                  <Label layoutX="525.0" layoutY="97.0" prefHeight="17.0" prefWidth="53.0" text="C. Utente" />
-                  <javafx.scene.control.TextField fx:id="texteFiedcodigoUtente" layoutX="608.0" layoutY="93.0" prefHeight="25.0" prefWidth="120.0" />
+                  <Label layoutX="525.0" layoutY="89.0" prefHeight="17.0" prefWidth="53.0" text="C. Utente" />
+                  <javafx.scene.control.TextField fx:id="texteFiedcodigoUtente" layoutX="608.0" layoutY="85.0" prefHeight="25.0" prefWidth="120.0" />
                </children>
             </AnchorPane>
         </items>

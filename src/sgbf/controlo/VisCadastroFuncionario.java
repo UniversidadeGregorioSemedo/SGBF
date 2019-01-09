@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -66,6 +67,7 @@ public class VisCadastroFuncionario implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.bloquearItensDaJanela();
         this.carregarValorNasComboxs();
+        this.exibirMensagemNasTabelas();
         this.tableViewVisitane.getSelectionModel().selectedItemProperty().addListener(
               (observable, oldValue, newValue) -> this.exibirDadosDoUtenteNosCampos(newValue));
         this.tableViewFuncionario.getSelectionModel().selectedItemProperty().addListener(
@@ -103,6 +105,21 @@ public class VisCadastroFuncionario implements Initializable {
             }
         }else{
            throw new UtilControloExcessao(operacao, "Seleccione o Funcionário a alterar", Alert.AlertType.WARNING);
+        }
+    }
+    
+    @FXML
+    private void removerUtente(){
+        operacao = "Remover Funcionário";
+        if(tableViewFuncionario.getSelectionModel().getSelectedCells().size() == 1){
+            ModFuncionario funcionarioARemover = this.tableViewFuncionario.getSelectionModel().getSelectedItem();
+            if(funcionarioCon.remover(funcionarioARemover, operacao)){
+               this.tableViewFuncionario.getItems().remove(funcionarioARemover);
+               this.bloquearItensDaJanela();
+               throw new UtilControloExcessao(operacao, "Funcionário removido com sucesso", Alert.AlertType.CONFIRMATION);
+            }
+        }else{
+           throw new UtilControloExcessao(operacao, "Seleccione o Funcionário a remover", Alert.AlertType.WARNING);
         }
     }
     
@@ -154,6 +171,7 @@ public class VisCadastroFuncionario implements Initializable {
     private void cancelar(){
         this.bloquearItensDaJanela();
         this.limparItensDaJanela();
+        this.tableViewVisitane.getItems().clear();
     }
     
     @FXML
@@ -181,6 +199,11 @@ public class VisCadastroFuncionario implements Initializable {
     
     private void carregarValorNasComboxs(){
         this.comboBoxCargo.getItems().addAll("Administrador","Bibliotecario","Supervisor");
+    }
+
+    private void exibirMensagemNasTabelas(){
+        this.tableViewVisitane.setPlaceholder(new Label("Utentes não listados"));
+        this.tableViewFuncionario.setPlaceholder(new Label("Funcionários não listados"));
     }
     
     private void exibirDadosDoUtenteNosCampos(ModVisitante visitanteMod){

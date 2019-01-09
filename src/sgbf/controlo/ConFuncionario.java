@@ -69,9 +69,9 @@ public class ConFuncionario extends ConCRUD {
             if(this.temDadosRelacionados(funcionarioMod, operacao)){
                throw new UtilControloExcessao( operacao,"Existem registo importantes deste Funcionário !", Alert.AlertType.INFORMATION);
             }else{
-                super.query = "delete from tcc.funcionario where idFuncionario=?";
+                super.query = "delete from tcc.funcionario where Utente_idUtente=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setInt(1,funcionarioMod.getIdFuncionario());
+                super.preparedStatement.setInt(1,funcionarioMod.getIdUtente());
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
@@ -113,8 +113,6 @@ public class ConFuncionario extends ConCRUD {
             return todosRegistosEncontrados;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
     
