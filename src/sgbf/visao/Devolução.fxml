@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="272.0" prefWidth="781.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.DevoluçãoController">
+<AnchorPane id="AnchorPane" prefHeight="272.0" prefWidth="781.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.DevoluçãoController">
     <stylesheets>
         <URL value="@/sgbf/util/devolução.css" />
     </stylesheets>
@@ -18,7 +18,7 @@
                <children>
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="247.0" prefWidth="562.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Label layoutX="8.0" layoutY="6.0" text="Dados do emprestimo" />
+                        <Label layoutX="8.0" layoutY="6.0" text="Dados da devolução" />
                         <Label layoutX="14.0" layoutY="51.0" text="Id" />
                         <Label layoutX="14.0" layoutY="92.0" text="Id Funcionario" />
                         <Label layoutX="192.0" layoutY="92.0" text="Tipo de devolução" />
