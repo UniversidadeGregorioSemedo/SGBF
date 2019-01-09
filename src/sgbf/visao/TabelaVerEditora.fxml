@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.TabelaVerEditoraController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.TabelaVerEditoraController">
     <stylesheets>
         <URL value="@/sgbf/util/tabelavereditora.css" />
     </stylesheets>
@@ -17,7 +17,7 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="562.0" prefWidth="789.0">
                <children>
-                  <Label layoutX="8.0" layoutY="6.0" text="Pesquisar autor" />
+                  <Label layoutX="8.0" layoutY="6.0" text="Pesquisar editora" />
                   <TableView layoutX="7.0" layoutY="99.0" prefHeight="450.0" prefWidth="1209.0">
                      <columns>
                         <TableColumn prefWidth="44.0" text="Id" />
