@@ -58,14 +58,14 @@ public class TabelaVerArea implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        this.bloquearItensDaJanela();
-       this.tableViewArea.setPlaceholder(new Label("Area não listadas"));
+       this.tableViewArea.setPlaceholder(new Label("Areas não listadas"));
        tableViewArea.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     }
     
     
      
     @FXML
-    private void cadastrarUtente(){
+    private void cadastrarArea(){
         operacao = "Registar Area";
         areaMod.setSector(texteFiedSector.getText(), operacao);
         if(areaCon.registar(areaMod, operacao)){
@@ -77,7 +77,7 @@ public class TabelaVerArea implements Initializable {
     
     
     @FXML
-    private void alterarUtente(){
+    private void alterarArea(){
         operacao = "Editar Area";
         areaMod.setIdArea(this.tableViewArea.getSelectionModel().getSelectedItem().getIdArea(), operacao);
         areaMod.setSector(texteFiedSector.getText(), operacao);
@@ -89,7 +89,7 @@ public class TabelaVerArea implements Initializable {
     }
     
     @FXML
-    private void removerUtente(){
+    private void removerArea(){
         operacao = "Remover Area";
         ModArea areaARemover = this.tableViewArea.getSelectionModel().getSelectedItem();
         if(areaCon.remover(areaARemover, operacao)){
@@ -100,7 +100,7 @@ public class TabelaVerArea implements Initializable {
     }
     
     @FXML
-    private void pesquisarUtente(){
+    private void pesquisarArea(){
         operacao = "Pesquisar Area";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         if(this.texteFiedPesquisar.getText().isEmpty()){

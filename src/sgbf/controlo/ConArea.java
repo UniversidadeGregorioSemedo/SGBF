@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModArea;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -23,8 +24,8 @@ public class ConArea extends ConCRUD{
     public boolean registar(Object objecto_registar, String operacao) {
         ModArea areaMod = (ModArea)objecto_registar;
         try{
-            if(this.jaExisteEssaArea(areaMod, operacao)){
-                throw new UtilControloExcessao("Erro ao verificar dados da Área !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            if(this.jaExiste(areaMod, operacao)){
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Área !", Alert.AlertType.ERROR);
             }else{
                 super.query = "INSERT INTO tcc.area (sector) VALUES (?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -32,7 +33,7 @@ public class ConArea extends ConCRUD{
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Área !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao "+operacao+" Área !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -42,8 +43,8 @@ public class ConArea extends ConCRUD{
     public boolean alterar(Object objecto_alterar, String operacao) {
          ModArea areaMod = (ModArea)objecto_alterar;
         try{
-            if(this.jaExisteEssaArea(areaMod, operacao)){
-                throw new UtilControloExcessao("Erro ao verificar dados da Área !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            if(this.jaExiste(areaMod, operacao)){
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Área !", Alert.AlertType.ERROR);
             }else{
                 super.query = "UPDATE tcc.area set sector=? where idArea=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -52,7 +53,7 @@ public class ConArea extends ConCRUD{
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Área !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao "+operacao+" Área !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -90,8 +91,6 @@ public class ConArea extends ConCRUD{
             return todosRegistos;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Area(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
@@ -111,12 +110,10 @@ public class ConArea extends ConCRUD{
             return todosRegistosEncontrados;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
     
-    private boolean jaExisteEssaArea(ModArea areaMod, String operacao){
+    private boolean jaExiste(ModArea areaMod, String operacao){
         for(Object todosRegistos: this.listarTodos(operacao)){
             ModArea areaRegistada = (ModArea)todosRegistos;
             areaRegistada.equals(areaMod, operacao);

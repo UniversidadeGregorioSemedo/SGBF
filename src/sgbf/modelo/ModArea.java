@@ -5,6 +5,7 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -60,7 +61,7 @@ public class ModArea {
     public void equals(ModArea areaMod, String operacao){
         if(this.idArea != areaMod.idArea){
             if(this.sector.equalsIgnoreCase(areaMod.sector)){
-                throw new UtilControloExcessao("Já existe Sector com esta designação !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao( operacao,"Já existe Sector com esta designação !", Alert.AlertType.WARNING);
             }
         }
     }

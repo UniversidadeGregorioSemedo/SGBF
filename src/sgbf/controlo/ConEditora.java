@@ -97,8 +97,6 @@ public class ConEditora extends ConCRUD{
             return todosRegistos;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
@@ -118,8 +116,6 @@ public class ConEditora extends ConCRUD{
             return todosRegistosEncontrados;
         }catch(SQLException erro){
             throw new UtilControloExcessao( operacao, "Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
     
