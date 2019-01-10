@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sgbf.dao;
 
 import java.sql.Connection;
@@ -10,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -24,13 +21,12 @@ public class DaoCominhoDaBaseDados {
     private final String senha = "";
     
    
-    
     public Connection baseDeDados(String nome_da_operacao){
         try {
             System.setProperty("jdbc.Driver", driver);
             return DriverManager.getConnection(caminho_base_dados, usuario, senha);
         } catch (SQLException ex) {
-            throw new UtilControloExcessao("Erro ao Efectuar Conexão com o Servidor de Base de Dados !\nErro: "+ex.getMessage(), nome_da_operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(nome_da_operacao,"Erro ao Efectuar Conexão com o Servidor de Base de Dados !\nErro: "+ex.getMessage(),Alert.AlertType.ERROR);
         }
     }
     

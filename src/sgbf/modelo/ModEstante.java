@@ -98,11 +98,9 @@ public class ModEstante {
     }
 
     public boolean equals(ModEstante estanteMod, String operacao){
-        if(this.getAreaMod().getIdArea() == estanteMod.getAreaMod().getIdArea()){
-            if(this.idEstante != estanteMod.idEstante){
-                if(this.designacao.equalsIgnoreCase(estanteMod.designacao)){
-                    throw new UtilControloExcessao(operacao,"Já existe uma estante nesta Área", Alert.AlertType.WARNING);
-                }
+        if(this.idEstante != estanteMod.idEstante){
+            if(this.designacao.equalsIgnoreCase(estanteMod.designacao)){
+                throw new UtilControloExcessao(operacao,"Já existe uma estante com esta designação", Alert.AlertType.WARNING);
             }
         }
         return false;

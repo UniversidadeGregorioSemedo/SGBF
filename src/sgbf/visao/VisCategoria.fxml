@@ -21,15 +21,14 @@
                   <Pane layoutX="14.0" layoutY="17.0" prefHeight="216.0" prefWidth="578.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Pesquisar categoria" />
-                        <Label layoutX="17.0" layoutY="50.0" text="Designaçao" />
-                        <TextField layoutX="149.0" layoutY="46.0" prefHeight="25.0" prefWidth="316.0" />
-                        <TableView layoutX="14.0" layoutY="81.0" prefHeight="128.0" prefWidth="450.0">
+                        <TextField layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="279.0" />
+                        <TableView layoutX="14.0" layoutY="81.0" prefHeight="128.0" prefWidth="546.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Id" />
-                            <TableColumn prefWidth="231.0" text="Designação" />
-                              <TableColumn prefWidth="143.0" text="Estante" />
+                            <TableColumn prefWidth="74.0" text="Id" />
+                            <TableColumn prefWidth="467.0" text="Designação" />
                           </columns>
                         </TableView>
+                        <JFXButton layoutX="303.0" layoutY="46.0" prefHeight="25.0" prefWidth="67.0" text="Pesquisar" />
                      </children>
                   </Pane>
                </children>
@@ -39,20 +38,20 @@
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="465.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Dados da categoria" />
+                        <TextField layoutX="108.0" layoutY="69.0" prefHeight="25.0" prefWidth="341.0" />
+                        <Label layoutX="23.0" layoutY="72.0" text="Designação">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="110.0" layoutY="106.0" prefHeight="25.0" prefWidth="341.0" />
+                        <Label layoutX="25.0" layoutY="109.0" text="Estante">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
-                  <ComboBox layoutX="386.0" layoutY="98.0" prefHeight="25.0" prefWidth="73.0" />
-                  <TextField layoutX="116.0" layoutY="98.0" />
-                  <Label layoutX="301.0" layoutY="101.0" text="Id Estante">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="24.0" layoutY="101.0" text="Designação">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
                   <Pane layoutX="488.0" layoutY="13.0" prefHeight="200.0" prefWidth="149.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Button layoutX="49.0" layoutY="14.0" mnemonicParsing="false" text="Cadastrar" />

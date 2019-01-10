@@ -129,12 +129,14 @@ public class ConUtente extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        ModAutor autorMod = (ModAutor)objecto_pesquisar;
+        ModVisitante visitanteMod = (ModVisitante)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.autor where idAutor=? or "
-                        + "(primeiro_nome or segundo_nome) like '%"+autorMod.getPrimeiro_nome()+"%'";
+            super.query = "select * from tcc.utente where idUtente=? or \n" +
+                        "primeiro_nome like '%"+visitanteMod.getPrimeiro_nome()+"%'"
+                      + " or segundo_nome like '%"+visitanteMod.getPrimeiro_nome()+"%'";
+            System.out.println("Nome: "+visitanteMod.getPrimeiro_nome());
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, autorMod.getIdAutor());
+            super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
