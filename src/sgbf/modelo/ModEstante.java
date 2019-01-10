@@ -5,6 +5,7 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -68,7 +69,7 @@ public class ModEstante {
         return linha;
     }
 
-    public void setLinha(Byte linha, String operacao) {
+    public void setLinha(Byte linha, String operacao) throws NumberFormatException{
         if(linha <=0 ){
             throw new UtilControloExcessao("O número de linha é inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }else{
@@ -84,7 +85,7 @@ public class ModEstante {
         return coluna;
     }
 
-    public void setColuna(Byte coluna, String operacao) {
+    public void setColuna(Byte coluna, String operacao)throws NumberFormatException {
         if(linha <=0 ){
             throw new UtilControloExcessao("O número de colunas é inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }else{
@@ -96,7 +97,16 @@ public class ModEstante {
         }
     }
 
-   
+    public boolean equals(ModEstante estanteMod, String operacao){
+        if(this.getAreaMod().getIdArea() == estanteMod.getAreaMod().getIdArea()){
+            if(this.idEstante != estanteMod.idEstante){
+                if(this.designacao.equalsIgnoreCase(estanteMod.designacao)){
+                    throw new UtilControloExcessao(operacao,"Já existe uma estante nesta Área", Alert.AlertType.WARNING);
+                }
+            }
+        }
+        return false;
+    }
 
     public void setAreaMod(ModArea areaMod, String operacao) {
         this.areaMod = areaMod;

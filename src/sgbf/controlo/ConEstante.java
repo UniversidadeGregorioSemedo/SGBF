@@ -9,7 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModEstante;
+import sgbf.modelo.ModUtente;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -23,17 +25,21 @@ public class ConEstante extends ConCRUD{
     public boolean registar(Object objecto_registar, String operacao) {
         ModEstante estanteMod = (ModEstante)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.Estante (designacao, descricacao, linha, coluna, Area_idArea)"
-                        + " VALUES (?, ?, ?, ?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, estanteMod.getDesignacao());
-            super.preparedStatement.setString(2, estanteMod.getDescricao());
-            super.preparedStatement.setByte(3, estanteMod.getLinha());
-            super.preparedStatement.setByte(4, estanteMod.getColuna());
-            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
-            return !super.preparedStatement.execute();
+            if(this.jaExiste(estanteMod, operacao)){
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Estante", Alert.AlertType.ERROR);
+            }else{
+                super.query = "INSERT INTO tcc.Estante (designacao, descricacao, linha, coluna, Area_idArea)"
+                            + " VALUES (?, ?, ?, ?, ?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, estanteMod.getDesignacao());
+                super.preparedStatement.setString(2, estanteMod.getDescricao());
+                super.preparedStatement.setByte(3, estanteMod.getLinha());
+                super.preparedStatement.setByte(4, estanteMod.getColuna());
+                super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -43,17 +49,21 @@ public class ConEstante extends ConCRUD{
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModEstante estanteMod = (ModEstante)objecto_alterar;
         try{
-            super.query = "UPDATE tcc.Estante set designacao=?, descricacao=?, linha=?, coluna=?, Area_idArea=? where idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, estanteMod.getDesignacao());
-            super.preparedStatement.setString(2, estanteMod.getDescricao());
-            super.preparedStatement.setByte(3, estanteMod.getLinha());
-            super.preparedStatement.setByte(4, estanteMod.getColuna());
-            super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
-            super.preparedStatement.setInt(6, estanteMod.getIdEstante());
-            return !super.preparedStatement.execute();
+            if(this.jaExiste(estanteMod, operacao)){
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Estante", Alert.AlertType.ERROR);
+            }else{
+                super.query = "UPDATE tcc.Estante set designacao=?, descricacao=?, linha=?, coluna=?, Area_idArea=? where idEstante=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, estanteMod.getDesignacao());
+                super.preparedStatement.setString(2, estanteMod.getDescricao());
+                super.preparedStatement.setByte(3, estanteMod.getLinha());
+                super.preparedStatement.setByte(4, estanteMod.getColuna());
+                super.preparedStatement.setInt(5, estanteMod.getAreaMod().getIdArea());
+                super.preparedStatement.setInt(6, estanteMod.getIdEstante());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -82,7 +92,7 @@ public class ConEstante extends ConCRUD{
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
         try{
-            super.query = "select * from tcc.Estante designacao by nome, data_modificacao asc";
+            super.query = "select * from tcc.Estante order by designacao, data_modificacao asc";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
@@ -91,8 +101,6 @@ public class ConEstante extends ConCRUD{
             return todosRegistos;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Estante(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
@@ -112,8 +120,6 @@ public class ConEstante extends ConCRUD{
             return todosRegistosEncontrados;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
     
@@ -135,6 +141,14 @@ public class ConEstante extends ConCRUD{
         super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
         super.preparedStatement.setInt(1, estanteMod.getIdEstante());
         return super.setResultset.next();
+    }
+    
+    private boolean jaExiste(ModEstante estanteIntroduzida, String operacao){
+        for(Object todosRegistos:  this.listarTodos(operacao)){
+            ModEstante estanteRegistado = (ModEstante)todosRegistos;
+            estanteRegistado.equals(estanteIntroduzida, operacao);
+        }
+        return false;
     }
     
 }

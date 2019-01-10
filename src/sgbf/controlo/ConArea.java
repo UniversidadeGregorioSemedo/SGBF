@@ -64,7 +64,7 @@ public class ConArea extends ConCRUD{
         ModArea areaMod = (ModArea)objecto_remover;
         try{
             if(this.temDadosRelacionados(areaMod, operacao)){
-                throw new UtilControloExcessao("Esta operação não pode ser executada\n A Área seleccionada possui Registos !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Esta operação não pode ser executada\n A Área seleccionada possui Registos !",Alert.AlertType.WARNING);
             }else{
                 super.query = "delete from tcc.area where idArea=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -72,9 +72,7 @@ public class ConArea extends ConCRUD{
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Área(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            throw new UtilControloExcessao(operacao, "Erro ao "+operacao+" Área !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
     
@@ -122,9 +120,10 @@ public class ConArea extends ConCRUD{
     }
     
     private boolean temDadosRelacionados(ModArea areaMod, String operacao) throws SQLException{
-        super.query = "select *from estante where Area_idArea=?";
+        super.query = "select * from estante where Area_idArea=?";
         super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
         super.preparedStatement.setInt(1, areaMod.getIdArea());
+        super.setResultset = super.preparedStatement.executeQuery();
         return super.setResultset.next();
     }
     

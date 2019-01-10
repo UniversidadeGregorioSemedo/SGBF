@@ -27,7 +27,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModArea;
 import sgbf.modelo.ModEstante;
-import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 
 /**
@@ -69,15 +68,20 @@ public class VisCadastroEstante implements Initializable {
     @FXML
     private void cadastrarEstante(){
         operacao = "Registar Estante";
-        estanteMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
-        estanteMod.setLinha(Byte.valueOf(texteFiedLinha.getText()), operacao);
-        estanteMod.setColuna(Byte.valueOf(texteFiedColuna.getText()), operacao);
-        estanteMod.setDescricao(texteFiedDescricao.getText(), operacao);
-        estanteMod.setAreaMod(comboBoxArea.getSelectionModel().getSelectedItem(), operacao);
-        if(estanteCon.registar(estanteMod, operacao)){
-           this.bloquearItensDaJanela();
-           this.limparItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Estante Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+        try{
+            estanteMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
+            estanteMod.setLinha(Byte.valueOf(texteFiedLinha.getText()), operacao);
+            estanteMod.setColuna(Byte.valueOf(texteFiedColuna.getText()), operacao);
+            estanteMod.setDescricao(texteFiedDescricao.getText(), operacao);
+            estanteMod.setAreaMod(comboBoxArea.getSelectionModel().getSelectedItem(), operacao);
+            if(estanteCon.registar(estanteMod, operacao)){
+               this.bloquearItensDaJanela();
+               this.limparItensDaJanela();
+               throw new UtilControloExcessao(operacao, "Estante Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+            }
+        }catch(NumberFormatException erro){
+           throw new UtilControloExcessao(operacao, "Esta operção não poder executada\n"
+                   + "Erro: A linha ou coluna excedeu o valor máximo (127) permitido", Alert.AlertType.WARNING);
         }
     }
     
@@ -85,16 +89,21 @@ public class VisCadastroEstante implements Initializable {
     @FXML
     private void alterarEstante(){
         operacao = "Editar Estante";
-        estanteMod.setIdEstante(this.tableViewEstante.getSelectionModel().getSelectedItem().getIdEstante(), operacao);
-        estanteMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
-        estanteMod.setLinha(Byte.valueOf(texteFiedLinha.getText()), operacao);
-        estanteMod.setColuna(Byte.valueOf(texteFiedColuna.getText()), operacao);
-        estanteMod.setDescricao(texteFiedDescricao.getText(), operacao);
-        estanteMod.setAreaMod(comboBoxArea.getSelectionModel().getSelectedItem(), operacao);
-        if(estanteCon.alterar(estanteMod, operacao)){
-           this.bloquearItensDaJanela();
-           this.limparItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Estante Editada com sucesso", Alert.AlertType.CONFIRMATION);
+        try{
+            estanteMod.setIdEstante(this.tableViewEstante.getSelectionModel().getSelectedItem().getIdEstante(), operacao);
+            estanteMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
+            estanteMod.setLinha(Byte.valueOf(texteFiedLinha.getText()), operacao);
+            estanteMod.setColuna(Byte.valueOf(texteFiedColuna.getText()), operacao);
+            estanteMod.setDescricao(texteFiedDescricao.getText(), operacao);
+            estanteMod.setAreaMod(comboBoxArea.getSelectionModel().getSelectedItem(), operacao);
+            if(estanteCon.alterar(estanteMod, operacao)){
+               this.bloquearItensDaJanela();
+               this.limparItensDaJanela();
+               throw new UtilControloExcessao(operacao, "Estante Editada com sucesso", Alert.AlertType.CONFIRMATION);
+            }
+        }catch(NumberFormatException erro){
+           throw new UtilControloExcessao(operacao, "Esta operção não poder executada\n"
+                   + "Erro: A linha ou coluna excedeu o valor máximo (127) permitido", Alert.AlertType.WARNING);
         }
     }
     
@@ -195,7 +204,12 @@ public class VisCadastroEstante implements Initializable {
             texteFiedLinha.setText(String.valueOf(estanteMod.getLinha()));
             texteFiedDescricao.setText(estanteMod.getDescricao());
             texteFiedColuna.setText(String.valueOf(estanteMod.getColuna()));
-            comboBoxArea.getSelectionModel().select(estanteMod.getAreaMod());
+            for(int i=0; i<comboBoxArea.getItems().size();i++){
+                comboBoxArea.getSelectionModel().select(i);
+                if(estanteMod.getAreaMod().getIdArea() == comboBoxArea.getSelectionModel().getSelectedItem().getIdArea()){
+                    break;
+                }
+            }
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
             this.desbloquearItensDaJanela();
