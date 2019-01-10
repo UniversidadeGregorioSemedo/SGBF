@@ -111,7 +111,7 @@ public class VisCadastroEstante implements Initializable {
     private void removerEstante(){
         operacao = "Remover Estante";
         ModEstante estanteARemover = this.tableViewEstante.getSelectionModel().getSelectedItem();
-        if(estanteCon.remover(estanteMod, operacao)){
+        if(estanteCon.remover(estanteARemover, operacao)){
            this.tableViewEstante.getItems().remove(estanteARemover);
            this.bloquearItensDaJanela();
            throw new UtilControloExcessao(operacao, "Estante removida com sucesso", Alert.AlertType.CONFIRMATION);

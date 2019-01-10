@@ -74,7 +74,7 @@ public class ConEstante extends ConCRUD{
        ModEstante estanteMod = (ModEstante)objecto_remover;
         try{
             if(this.temDadosRelacionados(estanteMod, operacao)){
-                throw new UtilControloExcessao("Esta operação não pode ser executada\n A Estante seleccionada possui registo !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Esta operação não pode ser executada\n A Estante seleccionada possui registo !",Alert.AlertType.ERROR);
             }else{
                 super.query = "delete from tcc.Estante where idEstante=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -82,7 +82,7 @@ public class ConEstante extends ConCRUD{
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -137,9 +137,10 @@ public class ConEstante extends ConCRUD{
     }
     
     private boolean temDadosRelacionados(ModEstante estanteMod, String operacao) throws SQLException{
-        super.query = "select *from categoriasdaestante where Estante_idEstante=?";
+        super.query = "select * from categoriasdaestante where Estante_idEstante=?";
         super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
         super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+        super.setResultset = super.preparedStatement.executeQuery();
         return super.setResultset.next();
     }
     
