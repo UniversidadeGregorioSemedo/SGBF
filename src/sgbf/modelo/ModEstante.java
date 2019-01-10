@@ -96,6 +96,13 @@ public class ModEstante {
         }
     }
 
+   
+
+    public void setAreaMod(ModArea areaMod, String operacao) {
+        this.areaMod = areaMod;
+    }
+    
+    
     public ModArea getAreaMod() {
         return areaMod;
     }

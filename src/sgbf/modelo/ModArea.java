@@ -50,6 +50,10 @@ public class ModArea {
         }
     }
 
+     @Override
+    public String toString() {
+        return this.getSector();
+    }
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
     }
