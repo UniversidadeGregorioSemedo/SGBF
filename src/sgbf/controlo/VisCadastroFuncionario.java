@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModFuncionario;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilValidarDados;
 
 /**
  * FXML Controller class
@@ -244,7 +245,7 @@ public class VisCadastroFuncionario implements Initializable {
     }
     
     private ModVisitante pegarDadosDaPesquisaUtente(){
-        if(this.texteFiedPesquisarUtente.getText().contains("123456789")){
+        if(UtilValidarDados.eNumero(this.texteFiedPesquisarUtente.getText())){
            utenteMod.setIdUtente(Integer.valueOf(this.texteFiedPesquisarUtente.getText()), operacao);
            utenteMod.setPrimeiro_nome(this.texteFiedPesquisarUtente.getText(), operacao);
            return utenteMod;
@@ -254,7 +255,7 @@ public class VisCadastroFuncionario implements Initializable {
         }
     }
     private ModFuncionario pegarDadosDaPesquisaFuncionario(){
-        if(this.texteFiedPesquisarFuncionario.getText().contains("123456789")){
+        if(UtilValidarDados.eNumero(this.texteFiedPesquisarFuncionario.getText())){
            funcionarioMod.setIdUtente(Integer.valueOf(this.texteFiedPesquisarFuncionario.getText()), operacao);
            funcionarioMod.setPrimeiro_nome(this.texteFiedPesquisarFuncionario.getText(), operacao);
            return funcionarioMod;

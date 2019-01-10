@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sgbf.controlo;
 
 import com.jfoenix.controls.JFXButton;
@@ -25,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModAutor;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilValidarDados;
 
 /**
  * FXML Controller class
@@ -188,7 +185,7 @@ public class VisAutor implements Initializable {
     }
     
     private ModAutor pegarDadosDaPesquisa(){
-        if(this.texteFiedPesquisar.getText().contains("123456789")){
+        if(UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())){
            autorMod.setIdAutor(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
            autorMod.setPrimeiro_nome(this.texteFiedPesquisar.getText(), operacao);
            return autorMod;

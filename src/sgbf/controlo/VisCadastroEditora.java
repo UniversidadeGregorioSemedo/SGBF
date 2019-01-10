@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModEditora;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilValidarDados;
 
 /**
  * FXML Controller class
@@ -195,7 +196,7 @@ public class VisCadastroEditora implements Initializable {
     }
     
     private ModEditora pegarDadosDaPesquisa(){
-        if(this.texteFiedPesquisar.getText().contains("123456789")){
+       if(UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())){
            editoraMod.setiEditora(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
            editoraMod.setNome(this.texteFiedPesquisar.getText(), operacao);
            return editoraMod;

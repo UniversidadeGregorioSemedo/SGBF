@@ -28,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModArea;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilValidarDados;
 
 /**
  * FXML Controller class
@@ -224,7 +225,7 @@ public class VisCadastroEstante implements Initializable {
     }
     
     private ModEstante pegarDadosDaPesquisa(){
-        if(this.texteFiedPesquisar.getText().contains("123456789")){
+        if(UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())){
            estanteMod.setIdEstante(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
            estanteMod.setDesignacao(this.texteFiedPesquisar.getText(), operacao);
            return estanteMod;

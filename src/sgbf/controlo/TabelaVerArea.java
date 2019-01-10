@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModArea;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilValidarDados;
 
 /**
  * FXML Controller class
@@ -172,7 +173,7 @@ public class TabelaVerArea implements Initializable {
     }
     
     private ModArea pegarDadosDaPesquisa(){
-        if(this.texteFiedPesquisar.getText().contains("123456789")){
+        if(UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())){
            areaMod.setIdArea(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
            areaMod.setSector(this.texteFiedPesquisar.getText(), operacao);
            return areaMod;
