@@ -133,8 +133,8 @@ public class ConUtente extends ConCRUD {
         try{
             super.query = "select * from tcc.utente where idUtente=? or \n" +
                         "primeiro_nome like '%"+visitanteMod.getPrimeiro_nome()+"%'"
-                      + " or segundo_nome like '%"+visitanteMod.getPrimeiro_nome()+"%'";
-            System.out.println("Nome: "+visitanteMod.getPrimeiro_nome());
+                        + " or segundo_nome like '%"+visitanteMod.getPrimeiro_nome()+"%'";
+            System.out.println("Nome: "+visitanteMod.getIdUtente());
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset  = super.preparedStatement.executeQuery();

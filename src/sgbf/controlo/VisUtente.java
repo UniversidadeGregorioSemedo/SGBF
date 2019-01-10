@@ -214,7 +214,7 @@ public class VisUtente implements Initializable {
     private void carregarValorNasComboxs(){
         this.comboBoxGenero.getItems().addAll("Masculino","Femenino","Outro");
         this.comboBoxTipoIndentificacao.getItems().addAll("BI","Carta de condução","Passport","Cartão Escolar");
-        this.comboBoxCategoria.getItems().addAll("Administrador", "Funcionário", "Professor", "Estudante");
+        this.comboBoxCategoria.getItems().addAll("Funcionário", "Professor", "Estudante");
     }
 
     
@@ -246,7 +246,7 @@ public class VisUtente implements Initializable {
     }
     
     private ModVisitante pegarDadosDaPesquisa(){
-        if(this.texteFiedPesquisar.getText().contains("123456789")){
+        if(this.texteFiedPesquisar.getText().matches("123456789")){
            utenteMod.setIdUtente(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
            utenteMod.setPrimeiro_nome(this.texteFiedPesquisar.getText(), operacao);
            return utenteMod;

@@ -102,8 +102,9 @@ public class ConFuncionario extends ConCRUD {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         ModFuncionario funcionarioMod = (ModFuncionario)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.view_funcionarios where idUtente=? or "
-                        + "(primeiro_nome or segundo_nome) like '%"+funcionarioMod.getPrimeiro_nome()+"%'";
+            super.query = "select * from tcc.view_funcionarios where idUtente=? or \n" +
+                        "primeiro_nome like '%"+funcionarioMod.getPrimeiro_nome()+"%'"
+                        + " or segundo_nome like '%"+funcionarioMod.getPrimeiro_nome()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, funcionarioMod.getIdUtente());
             super.setResultset  = super.preparedStatement.executeQuery();
