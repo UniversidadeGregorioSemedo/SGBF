@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModCategoria;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -28,7 +29,7 @@ public class ConCategoria extends ConCRUD {
             super.preparedStatement.setString(1, categoriaMod.getDesignacao());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -108,9 +109,25 @@ public class ConCategoria extends ConCRUD {
         }
     }
     
+    public Integer proximoCodigoASerRegistado(String operacao) {
+        try{
+            super.query= "select max(idcategoria) from categoria";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.setResultset  = super.preparedStatement.executeQuery();
+            if(super.setResultset.next()){
+                return super.setResultset.getInt("max(idcategoria)")+1;
+            }else{
+                return 1;
+            }
+        }catch(SQLException ex){
+            throw new UtilControloExcessao(operacao,"Erro ao Listar Código da Categoria!\nErro: "+ex.getMessage(),Alert.AlertType.ERROR);
+        }
+    }
+    
+    
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
         ModCategoria categoriaMod = new ModCategoria();
-        categoriaMod.setIdCategoria(setResultset.getInt("idEstante"), operacao);
+        categoriaMod.setIdCategoria(setResultset.getInt("idcategoria"), operacao);
         categoriaMod.setDesignacao(setResultset.getString("designacao"), operacao);
         categoriaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         categoriaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
@@ -122,5 +139,7 @@ public class ConCategoria extends ConCRUD {
         super.preparedStatement.setInt(1, categoriModMod.getIdCategoria());
         return super.setResultset.next();
     }
+    
+    
 
 }

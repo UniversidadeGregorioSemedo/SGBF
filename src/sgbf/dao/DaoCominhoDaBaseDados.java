@@ -16,9 +16,9 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  */
 public class DaoCominhoDaBaseDados {
     private final String driver = "org.mysql.Driver";
-    private final String caminho_base_dados = "jdbc:mysql://localhost:3307/tcc";
+    private final String caminho_base_dados = "jdbc:mysql://localhost:3306/tcc";
     private final String usuario = "root";
-    private final String senha = "";
+    private final String senha = "__Gestline18";
     
    
     public Connection baseDeDados(String nome_da_operacao){

@@ -53,6 +53,7 @@ public class VisCadastroCategoria implements Initializable {
     private String operacao = null;
     private final ModCategoria categoriaMod = new ModCategoria();
     private final ConCategoria categoriaCon = new ConCategoria();
+    private final ConCategoriaDaEstante categoriaDaEstanteCon = new ConCategoriaDaEstante();
     
     
     
@@ -68,6 +69,7 @@ public class VisCadastroCategoria implements Initializable {
     @FXML
     private void cadastrarCategoria(){
         operacao = "Registar Categoria";
+        categoriaMod.setIdCategoria(categoriaCon.proximoCodigoASerRegistado(operacao), operacao);
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
         categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
         if(categoriaCon.registar(categoriaMod, operacao)){
@@ -163,7 +165,7 @@ public class VisCadastroCategoria implements Initializable {
         ConEstante estanteCon = new ConEstante();
         List<ModEstante> todasEstantes = new ArrayList<>();
         ObservableList todasEstantesParaCombox =null;
-        
+        todasEstantes.add(null);
         for(Object todosRegistos: estanteCon.listarTodos("Cadastramento de Categoria")){
             ModEstante estanteRegistada = (ModEstante)todosRegistos;
             todasEstantes.add(estanteRegistada);
@@ -176,12 +178,13 @@ public class VisCadastroCategoria implements Initializable {
     private void exibirDadosNosCampos(ModCategoria categoriaMod){
         if(tableViewCategoria.getSelectionModel().getSelectedCells().size() == 1){
             texteFiedDesigancao.setText(String.valueOf(categoriaMod.getDesignacao()));
-            for(int i=0; i<comboBoxEstante.getItems().size();i++){
+            /*for(int i=0; i<comboBoxEstante.getItems().size();i++){
                 comboBoxEstante.getSelectionModel().select(i);
                 if(categoriaMod.getEstanteMod().getIdEstante()== comboBoxEstante.getSelectionModel().getSelectedItem().getIdEstante()){
                     break;
                 }
-            }
+            }*/
+            System.out.println("Yh");
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
             this.desbloquearItensDaJanela();
