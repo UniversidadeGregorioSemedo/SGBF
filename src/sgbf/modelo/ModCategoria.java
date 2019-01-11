@@ -16,11 +16,13 @@ import sgbf.util.UtilIconesDaJOPtionPane;
 public class ModCategoria {
     private Integer idCategoria;
     private String designacao;
+    private ModEstante estanteMod;
     private UtilControloDaData utilControloDaData;
     
     public ModCategoria(){
         this.idCategoria = 0;
         this.designacao = null;
+        this.estanteMod = null;
         this.utilControloDaData = new UtilControloDaData();
     }
 
@@ -48,6 +50,14 @@ public class ModCategoria {
         }
     }
 
+    public ModEstante getEstanteMod() {
+        return estanteMod;
+    }
+
+    public void setEstanteMod(ModEstante estanteMod, String operacao) {
+        this.estanteMod = estanteMod;
+    }
+    
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
     }
@@ -57,5 +67,7 @@ public class ModCategoria {
             throw new UtilControloExcessao("Já existe uma Categoria com este Nome !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }
     }
+    
+    
     
 }

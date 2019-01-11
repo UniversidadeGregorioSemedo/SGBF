@@ -58,15 +58,6 @@
                               </ImageView>
                            </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="menuitemCadastroArea" mnemonicParsing="false" text="Area">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Map%20Marker_48px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </MenuItem>
                         <MenuItem fx:id="menuitemCadastroCategoria" mnemonicParsing="false" onAction="#BotaoMenuItemCategoria" text="Categoria">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

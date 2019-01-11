@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="201.0" prefWidth="544.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroCategoriaController">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneCategoria" prefHeight="201.0" prefWidth="544.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroCategoria">
     <stylesheets>
         <URL value="@/sgbf/util/viscadastrocategoria.css" />
     </stylesheets>
@@ -21,30 +21,30 @@
                   <Pane layoutX="14.0" layoutY="17.0" prefHeight="216.0" prefWidth="578.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Pesquisar categoria" />
-                        <TextField layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="279.0" />
-                        <TableView layoutX="14.0" layoutY="81.0" prefHeight="128.0" prefWidth="546.0">
+                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="279.0" />
+                        <TableView fx:id="tableViewCategoria" layoutX="14.0" layoutY="81.0" prefHeight="128.0" prefWidth="546.0">
                           <columns>
-                            <TableColumn prefWidth="74.0" text="Id" />
-                            <TableColumn prefWidth="467.0" text="Designação" />
+                            <TableColumn fx:id="tableColumID" prefWidth="74.0" text="Id" />
+                            <TableColumn fx:id="tableColumDesignacao" prefWidth="471.0" text="Designação" />
                           </columns>
                         </TableView>
-                        <JFXButton layoutX="303.0" layoutY="46.0" prefHeight="25.0" prefWidth="67.0" text="Pesquisar" />
+                        <JFXButton fx:id="botaoPesquisar" layoutX="303.0" layoutY="46.0" onAction="#pesquisarCategoria" prefHeight="25.0" prefWidth="67.0" text="Pesquisar" />
                      </children>
                   </Pane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="465.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="16.0" prefHeight="206.0" prefWidth="465.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" text="Dados da categoria" />
-                        <TextField layoutX="108.0" layoutY="69.0" prefHeight="25.0" prefWidth="341.0" />
+                        <TextField fx:id="texteFiedDesigancao" layoutX="110.0" layoutY="60.0" prefHeight="25.0" prefWidth="341.0" />
                         <Label layoutX="23.0" layoutY="72.0" text="Designação">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="110.0" layoutY="106.0" prefHeight="25.0" prefWidth="341.0" />
+                        <ComboBox fx:id="comboBoxEstante" layoutX="110.0" layoutY="106.0" prefHeight="25.0" prefWidth="341.0" />
                         <Label layoutX="25.0" layoutY="109.0" text="Estante">
                            <font>
                               <Font size="13.0" />
@@ -52,13 +52,14 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="488.0" layoutY="13.0" prefHeight="200.0" prefWidth="149.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="488.0" layoutY="13.0" prefHeight="206.0" prefWidth="149.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
-                        <Button layoutX="49.0" layoutY="14.0" mnemonicParsing="false" text="Cadastrar" />
-                        <Button layoutX="49.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="alterar" />
-                        <Button layoutX="49.0" layoutY="82.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Remover" />
-                        <Button layoutX="49.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Novo" />
-                        <Button layoutX="49.0" layoutY="161.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
+                        <Button fx:id="botaoCadastrar" layoutX="49.0" layoutY="39.0" mnemonicParsing="false" onAction="#cadastrarCategoria" text="Cadastrar" />
+                        <Button fx:id="botaoAlterar" layoutX="49.0" layoutY="75.0" mnemonicParsing="false" onAction="#alterarCategoria" prefHeight="25.0" prefWidth="66.0" text="alterar" />
+                        <Button fx:id="botaoRemover" layoutX="49.0" layoutY="108.0" mnemonicParsing="false" onAction="#removerCategoria" prefHeight="25.0" prefWidth="66.0" text="Remover" />
+                        <Button fx:id="botaoNovo" layoutX="49.0" layoutY="8.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="66.0" text="Novo" />
+                        <Button fx:id="botaoCancelar" layoutX="49.0" layoutY="141.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
+                        <Button fx:id="botaoSair" layoutX="49.0" layoutY="173.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="66.0" text="Sair" />
                      </children>
                   </Pane>
                </children>

@@ -190,12 +190,18 @@ public class VisCadastroEstante implements Initializable {
         ConArea areaCon = new ConArea();
         List<ModArea> todasAreas = new ArrayList<>();
         ObservableList todasAreasParaCombox =null;
-        for(Object todosRegistos: areaCon.listarTodos("Cadastramento de Estante")){
-            ModArea areaRegistada = (ModArea)todosRegistos;
-            todasAreas.add(areaRegistada);
+        
+        if(areaCon.listarTodos("Cadastramento de Estante").isEmpty()){
+            this.AnchorPaneEstante.setVisible(false);
+            throw new UtilControloExcessao("Cadastramento de Estante", "Esta operação naõ poder ser executada\n Não registo de Áreas !", Alert.AlertType.WARNING);
+        }else{
+            for(Object todosRegistos: areaCon.listarTodos("Cadastramento de Estante")){
+                ModArea areaRegistada = (ModArea)todosRegistos;
+                todasAreas.add(areaRegistada);
+            }
+            todasAreasParaCombox = FXCollections.observableArrayList(todasAreas);
+            this.comboBoxArea.setItems(todasAreasParaCombox);
         }
-        todasAreasParaCombox = FXCollections.observableArrayList(todasAreas);
-        this.comboBoxArea.setItems(todasAreasParaCombox);
     }
 
     
