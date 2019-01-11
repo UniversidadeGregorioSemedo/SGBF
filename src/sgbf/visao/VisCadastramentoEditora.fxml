@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="249.0" prefWidth="583.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroEditora">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="249.0" prefWidth="583.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoEditora">
     <stylesheets>
         <URL value="@/sgbf/util/viscadastroeditora.css" />
     </stylesheets>

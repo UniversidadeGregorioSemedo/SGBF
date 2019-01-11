@@ -32,7 +32,7 @@ import sgbf.util.UtilValidarDados;
  *
  * @author Marron
  */
-public class TabelaVerArea implements Initializable {
+public class VisVerArea implements Initializable {
 
     
     @FXML

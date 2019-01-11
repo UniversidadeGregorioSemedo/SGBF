@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author Marron
  */
-public class EmprestimoController implements Initializable {
+public class VisVerAcervo implements Initializable {
 
     /**
      * Initializes the controller class.

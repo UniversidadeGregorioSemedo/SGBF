@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author Marron
  */
-public class ReservaController implements Initializable {
+public class VisVerEditora implements Initializable {
 
     /**
      * Initializes the controller class.

@@ -35,7 +35,7 @@ import sgbf.util.UtilValidarDados;
  *
  * @author Marron
  */
-public class VisCadastroEstante implements Initializable {
+public class VisCadastramentoEstante implements Initializable {
     
     @FXML
     private JFXButton botaoPesquisar;

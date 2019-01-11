@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPaneEstante" prefHeight="298.0" prefWidth="503.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastroEstante">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneEstante" prefHeight="298.0" prefWidth="503.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoEstante">
     <stylesheets>
         <URL value="@/sgbf/util/viscadastroestante.css" />
     </stylesheets>

@@ -28,7 +28,7 @@ import sgbf.util.UtilValidarDados;
  *
  * @author Marron
  */
-public class VisAutor implements Initializable {
+public class VisCadastramentoAutor implements Initializable {
 
   
     @FXML

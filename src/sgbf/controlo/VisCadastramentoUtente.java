@@ -32,7 +32,7 @@ import sgbf.util.UtilValidarDados;
  *
  * @author Marron
  */
-public class VisUtente implements Initializable {
+public class VisCadastramentoUtente implements Initializable {
 
     @FXML
     private Button botaoPesquisar,  botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoFechar;

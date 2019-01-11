@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="400.0" prefWidth="524.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.TabelaVerArea">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="400.0" prefWidth="524.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerArea">
     <stylesheets>
         <URL value="@/sgbf/util/tabelaverarea.css" />
     </stylesheets>

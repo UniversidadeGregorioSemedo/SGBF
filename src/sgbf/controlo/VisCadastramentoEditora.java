@@ -32,7 +32,7 @@ import sgbf.util.UtilValidarDados;
  *
  * @author Marron
  */
-public class VisCadastroEditora implements Initializable {
+public class VisCadastramentoEditora implements Initializable {
 
     
     @FXML

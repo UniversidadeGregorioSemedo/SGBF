@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author Marron
  */
-public class TabelaVerAcervoController implements Initializable {
+public class VisMovimentacaoEmprestimo implements Initializable {
 
     /**
      * Initializes the controller class.

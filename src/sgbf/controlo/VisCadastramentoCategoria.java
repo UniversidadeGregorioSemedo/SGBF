@@ -30,7 +30,7 @@ import sgbf.util.UtilValidarDados;
  *
  * @author Marron
  */
-public class VisCadastroCategoria implements Initializable {
+public class VisCadastramentoCategoria implements Initializable {
 
    
     @FXML
