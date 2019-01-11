@@ -5,6 +5,7 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -40,10 +41,10 @@ public class ModCategoria {
 
     public void setDesignacao(String designacao, String operacao) {
         if(designacao == null){
-            throw new UtilControloExcessao("Categoria não definida !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Categoria não definida !",Alert.AlertType.INFORMATION);
         }else{
             if(designacao.isEmpty()){
-                throw new UtilControloExcessao("Categoria não definida !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao( operacao,"Categoria não definida !",Alert.AlertType.INFORMATION);
             }else{
                 this.designacao = designacao;
             }
@@ -63,8 +64,12 @@ public class ModCategoria {
     }
 
     public void equals(ModCategoria categoriaMod, String operacao){
-        if(this.designacao.equalsIgnoreCase(categoriaMod.designacao)){
-            throw new UtilControloExcessao("Já existe uma Categoria com este Nome !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+        if(this.getEstanteMod()!= null){
+            if(this.getEstanteMod().getIdEstante() == categoriaMod.getEstanteMod().getIdEstante()){
+                if(this.designacao.equalsIgnoreCase(categoriaMod.designacao)){
+                    throw new UtilControloExcessao( operacao,"Já existe uma Categoria com esta designação nesta Estante !",Alert.AlertType.WARNING);
+                }
+            }
         }
     }
     

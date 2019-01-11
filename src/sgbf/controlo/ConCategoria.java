@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModCategoria;
+import sgbf.modelo.ModCategoriaDaEstante;
+import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -23,11 +25,15 @@ public class ConCategoria extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModCategoria categoriaMod = (ModCategoria)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.categoria (designacao)"
-                        + " VALUES (?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, categoriaMod.getDesignacao());
-            return !super.preparedStatement.execute();
+            if(this.jaExiste(categoriaMod, operacao)){
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Categoria", Alert.AlertType.ERROR);
+            }else{
+                super.query = "INSERT INTO tcc.categoria (designacao)"
+                            + " VALUES (?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, categoriaMod.getDesignacao());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
@@ -39,13 +45,17 @@ public class ConCategoria extends ConCRUD {
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModCategoria categoriaMod = (ModCategoria)objecto_alterar;
         try{
-            super.query = "UPDATE tcc.categoria set designacao=? where idcategoria=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, categoriaMod.getDesignacao());
-            super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
-            return !super.preparedStatement.execute();
+            if(this.jaExiste(categoriaMod, operacao)){
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Categoria", Alert.AlertType.ERROR);
+            }else{
+                super.query = "UPDATE tcc.categoria set designacao=? where idcategoria=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, categoriaMod.getDesignacao());
+                super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
+                return !super.preparedStatement.execute();
+            }
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -55,8 +65,11 @@ public class ConCategoria extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModCategoria categoriaMod = (ModCategoria)objecto_remover;
         try{
-            if(this.temDadosRelacionados(categoriaMod, operacao)){
-               throw new UtilControloExcessao("Esta operação não pode ser executada\nA Categoria seleccionada tem registo !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            if(this.removerTodosRegistos(categoriaMod, operacao)){
+                super.query = "delete from tcc.categoria where idcategoria=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1,categoriaMod.getIdCategoria());
+                return !super.preparedStatement.execute();
             }else{
                 super.query = "delete from tcc.categoria where idcategoria=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -64,7 +77,7 @@ public class ConCategoria extends ConCRUD {
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -129,11 +142,21 @@ public class ConCategoria extends ConCRUD {
         categoriaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return categoriaMod;
     }
-    private boolean temDadosRelacionados(ModCategoria categoriModMod, String operacao) throws SQLException{
-        super.query = "select *from categoriasdaestante where categoria_idcategoria=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
-        super.preparedStatement.setInt(1, categoriModMod.getIdCategoria());
-        return super.setResultset.next();
+    
+    private boolean removerTodosRegistos(ModCategoria categoriModMod, String operacao) throws SQLException{
+        ModCategoriaDaEstante categoriaDaEstanteMod = new ModCategoriaDaEstante();
+        ConCategoriaDaEstante categoriasDaEstanteCon = new ConCategoriaDaEstante();
+        categoriaDaEstanteMod.setCategoriaMod(categoriModMod, operacao);
+        categoriaDaEstanteMod.setEstanteMod(new ModEstante(), operacao);
+        return categoriasDaEstanteCon.remover(categoriaDaEstanteMod, operacao);
+    }
+    
+    private boolean jaExiste(ModCategoria categoriaIntroduzida, String operacao){
+        for(Object todosRegistos:  this.listarTodos(operacao)){
+            ModCategoria categoriaRegistado = (ModCategoria)todosRegistos;
+            categoriaRegistado.equals(categoriaIntroduzida, operacao);
+        }
+        return false;
     }
     
     

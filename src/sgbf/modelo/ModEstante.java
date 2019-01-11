@@ -106,6 +106,13 @@ public class ModEstante {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return designacao ;
+    }
+    
+    
+    
     public void setAreaMod(ModArea areaMod, String operacao) {
         this.areaMod = areaMod;
     }

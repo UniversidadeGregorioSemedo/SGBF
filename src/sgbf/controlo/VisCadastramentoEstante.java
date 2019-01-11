@@ -193,7 +193,7 @@ public class VisCadastramentoEstante implements Initializable {
         
         if(areaCon.listarTodos("Cadastramento de Estante").isEmpty()){
             this.AnchorPaneEstante.setVisible(false);
-            throw new UtilControloExcessao("Cadastramento de Estante", "Esta operação naõ poder ser executada\n Não registo de Áreas !", Alert.AlertType.WARNING);
+            throw new UtilControloExcessao("Cadastramento de Estante", "Esta operação naõ poder ser executada\n Não há registo de Áreas !", Alert.AlertType.WARNING);
         }else{
             for(Object todosRegistos: areaCon.listarTodos("Cadastramento de Estante")){
                 ModArea areaRegistada = (ModArea)todosRegistos;

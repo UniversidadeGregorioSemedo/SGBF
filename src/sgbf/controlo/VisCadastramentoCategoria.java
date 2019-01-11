@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModCategoria;
+import sgbf.modelo.ModCategoriaDaEstante;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
@@ -32,7 +33,6 @@ import sgbf.util.UtilValidarDados;
  */
 public class VisCadastramentoCategoria implements Initializable {
 
-   
     @FXML
     private JFXButton botaoPesquisar;
     @FXML
@@ -53,6 +53,7 @@ public class VisCadastramentoCategoria implements Initializable {
     private String operacao = null;
     private final ModCategoria categoriaMod = new ModCategoria();
     private final ConCategoria categoriaCon = new ConCategoria();
+    private final ModCategoriaDaEstante categoriaDaEstanteMod = new ModCategoriaDaEstante();
     private final ConCategoriaDaEstante categoriaDaEstanteCon = new ConCategoriaDaEstante();
     
     
@@ -72,10 +73,14 @@ public class VisCadastramentoCategoria implements Initializable {
         categoriaMod.setIdCategoria(categoriaCon.proximoCodigoASerRegistado(operacao), operacao);
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
         categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
+        categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
+        categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
         if(categoriaCon.registar(categoriaMod, operacao)){
-           this.bloquearItensDaJanela();
-           this.limparItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Categoria Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+            if(categoriaDaEstanteCon.registar(categoriaDaEstanteMod, operacao)){
+               this.bloquearItensDaJanela();
+               this.limparItensDaJanela();
+               throw new UtilControloExcessao(operacao, "Categoria Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+            }
         }
     }
     
@@ -87,6 +92,7 @@ public class VisCadastramentoCategoria implements Initializable {
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
         categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
         if(categoriaCon.alterar(categoriaMod, operacao)){
+           categoriaDaEstanteCon.alterar(categoriaMod, operacao);
            this.bloquearItensDaJanela();
            this.limparItensDaJanela();
            throw new UtilControloExcessao(operacao, "Categoria editada com sucesso", Alert.AlertType.CONFIRMATION);
@@ -100,7 +106,7 @@ public class VisCadastramentoCategoria implements Initializable {
         if(categoriaCon.remover(categoriaARemover, operacao)){
            this.tableViewCategoria.getItems().remove(categoriaARemover);
            this.bloquearItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Caategoria removida com sucesso", Alert.AlertType.CONFIRMATION);
+           throw new UtilControloExcessao(operacao, "Categoria removida com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
     
@@ -166,7 +172,6 @@ public class VisCadastramentoCategoria implements Initializable {
         ConEstante estanteCon = new ConEstante();
         List<ModEstante> todasEstantes = new ArrayList<>();
         ObservableList todasEstantesParaCombox =null;
-        todasEstantes.add(null);
         for(Object todosRegistos: estanteCon.listarTodos("Cadastramento de Categoria")){
             ModEstante estanteRegistada = (ModEstante)todosRegistos;
             todasEstantes.add(estanteRegistada);
@@ -175,16 +180,17 @@ public class VisCadastramentoCategoria implements Initializable {
         this.comboBoxEstante.setItems(todasEstantesParaCombox);
     }
 
-    
     private void exibirDadosNosCampos(ModCategoria categoriaMod){
         if(tableViewCategoria.getSelectionModel().getSelectedCells().size() == 1){
             texteFiedDesigancao.setText(String.valueOf(categoriaMod.getDesignacao()));
-            /*for(int i=0; i<comboBoxEstante.getItems().size();i++){
+            for(int i=0; i<comboBoxEstante.getItems().size();i++){
+                if(categoriaMod.getEstanteMod() != null){
                 comboBoxEstante.getSelectionModel().select(i);
-                if(categoriaMod.getEstanteMod().getIdEstante()== comboBoxEstante.getSelectionModel().getSelectedItem().getIdEstante()){
-                    break;
+                    if(categoriaMod.getEstanteMod().getIdEstante()== comboBoxEstante.getSelectionModel().getSelectedItem().getIdEstante()){
+                        break;
+                    }
                 }
-            }*/
+            }
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
             this.desbloquearItensDaJanela();

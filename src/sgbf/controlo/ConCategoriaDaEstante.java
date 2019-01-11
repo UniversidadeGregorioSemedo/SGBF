@@ -24,27 +24,36 @@ public class ConCategoriaDaEstante extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModCategoriaDaEstante categoriaDaEstanteMod = (ModCategoriaDaEstante)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.categoriasdaestante(categoria_idcategoria, Estante_idEstante) VALUES (?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
-            super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
-            return !super.preparedStatement.execute();
+            if(this.temCategoriaEEstante(categoriaDaEstanteMod)){
+                super.query = "INSERT INTO tcc.categoriasdaestante(categoria_idcategoria, Estante_idEstante) VALUES (?, ?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
+                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
+                return !super.preparedStatement.execute();
+            }else{
+                return true;
+            }
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
+    
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModCategoriaDaEstante categoriaDaEstanteMod = (ModCategoriaDaEstante)objecto_alterar;
         try{
-            super.query = "update tcc.categoriasdaestante set Estante_idEstante=? where categoria_idcategoria=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
-            super.preparedStatement.setInt(2, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
-            return !super.preparedStatement.execute();
+            if(this.temCategoriaEEstante(categoriaDaEstanteMod)){
+                super.query = "update tcc.categoriasdaestante set Estante_idEstante=? where categoria_idcategoria=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
+                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
+                return !super.preparedStatement.execute();
+            }else{
+                return this.remover(categoriaDaEstanteMod, operacao);
+            }
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
@@ -68,6 +77,22 @@ public class ConCategoriaDaEstante extends ConCRUD {
         }
     }
 
+    private boolean temCategoriaEEstante(ModCategoriaDaEstante categoriaDaEstanteMod){
+        if(categoriaDaEstanteMod.getCategoriaMod().getIdCategoria() !=0){
+            if(categoriaDaEstanteMod.getCategoriaMod().getEstanteMod()!=null){
+                if(categoriaDaEstanteMod.getCategoriaMod().getEstanteMod().getIdEstante()!=0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+               return false;
+            }
+        }else{
+            return false;
+        }
+    }
+    
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();

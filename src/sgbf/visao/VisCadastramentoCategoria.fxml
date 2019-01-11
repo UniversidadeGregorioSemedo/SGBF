@@ -44,7 +44,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboBoxEstante" layoutX="110.0" layoutY="106.0" prefHeight="25.0" prefWidth="341.0" />
+                        <ComboBox fx:id="comboBoxEstante" layoutX="110.0" layoutY="106.0" prefHeight="25.0" prefWidth="341.0" promptText="Seleccione a estante" />
                         <Label layoutX="25.0" layoutY="109.0" text="Estante">
                            <font>
                               <Font size="13.0" />
