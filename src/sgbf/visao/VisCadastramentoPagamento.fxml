@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="310.0" prefWidth="544.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sgbf.controlo.PagamentoController">
+<AnchorPane id="AnchorPane" prefHeight="310.0" prefWidth="544.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoPagamento">
     <stylesheets>
         <URL value="@/sgbf/util/pagamento.css" />
     </stylesheets>

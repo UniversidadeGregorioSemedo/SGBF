@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author Marron
  */
-public class VisEstoqueController implements Initializable {
+public class VisCadastramentoPagamento implements Initializable {
 
     /**
      * Initializes the controller class.
