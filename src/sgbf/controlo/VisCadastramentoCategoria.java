@@ -86,7 +86,7 @@ public class VisCadastramentoCategoria implements Initializable {
         categoriaMod.setIdCategoria(this.tableViewCategoria.getSelectionModel().getSelectedItem().getIdCategoria(), operacao);
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
         categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
-        if(categoriaCon.registar(categoriaMod, operacao)){
+        if(categoriaCon.alterar(categoriaMod, operacao)){
            this.bloquearItensDaJanela();
            this.limparItensDaJanela();
            throw new UtilControloExcessao(operacao, "Categoria editada com sucesso", Alert.AlertType.CONFIRMATION);
@@ -157,8 +157,9 @@ public class VisCadastramentoCategoria implements Initializable {
     }
     
     private void limparItensDaJanela(){
-        this.texteFiedDesigancao.setText(null);
         this.texteFiedPesquisar.setText(null);
+        this.texteFiedDesigancao.setText(null);
+        this.tableViewCategoria.getItems().clear();
     }
    
     private void carregarValorNasComboxs(){
@@ -184,7 +185,6 @@ public class VisCadastramentoCategoria implements Initializable {
                     break;
                 }
             }*/
-            System.out.println("Yh");
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
             this.desbloquearItensDaJanela();

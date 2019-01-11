@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModEstante;
-import sgbf.modelo.ModUtente;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
