@@ -22,7 +22,7 @@
                         <Label layoutX="7.0" layoutY="6.0" text="Pesquisar proveniencia" />
                         <Label layoutX="14.0" layoutY="44.0" text="Tipo" />
                         <TextField fx:id="TextFieldPesquisarProveniencia" layoutX="140.0" layoutY="40.0" prefHeight="25.0" prefWidth="324.0" />
-                        <JFXButton fx:id="botaoPesquisarProveniencia" layoutX="470.0" layoutY="40.0" />
+                        <JFXButton fx:id="botaoPesquisarProveniencia" layoutX="470.0" layoutY="40.0" onAction="#pesquisarProveniencia" text="Button" />
                         <TableView fx:id="tabelaViewProveniencia" layoutX="63.0" layoutY="75.0" prefHeight="200.0" prefWidth="459.0">
                           <columns>
                             <TableColumn fx:id="tabelaColunaId" prefWidth="75.0" text="Id" />
@@ -48,10 +48,10 @@
                   </Pane>
                   <Pane layoutX="263.0" layoutY="26.0" prefHeight="104.0" prefWidth="265.0" style="-fx-border-style: solid;">
                      <children>
-                        <Button fx:id="botaoNovo" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Novo" />
-                        <Button fx:id="BotaoCadastrar" layoutX="14.0" layoutY="48.0" mnemonicParsing="false" text="Cadastrar" />
-                        <Button fx:id="BotaoAlterar" layoutX="100.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Alterar" />
-                        <Button fx:id="BotaoRemover" layoutX="100.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Remover" />
+                        <Button fx:id="botaoNovo" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="66.0" text="Novo" />
+                        <Button fx:id="BotaoCadastrar" layoutX="14.0" layoutY="48.0" mnemonicParsing="false" onAction="#cadastrarProveniencia" text="Cadastrar" />
+                        <Button fx:id="BotaoAlterar" layoutX="100.0" layoutY="14.0" mnemonicParsing="false" onAction="#alterarProveniencia" prefHeight="25.0" prefWidth="66.0" text="Alterar" />
+                        <Button fx:id="BotaoRemover" layoutX="100.0" layoutY="48.0" mnemonicParsing="false" onAction="#removerProvenienica" prefHeight="25.0" prefWidth="66.0" text="Remover" />
                         <Button fx:id="BotaoSair" layoutX="185.0" layoutY="48.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="66.0" text="Sair" />
                         <Button fx:id="botaoCancelar" layoutX="185.0" layoutY="14.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="66.0" text="Cancelar" />
                      </children>
