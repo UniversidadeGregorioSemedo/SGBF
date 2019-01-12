@@ -145,7 +145,7 @@ public class VisTelaPrincipal implements Initializable {
     }
     
     public void BotaoMenuItemProveniencia() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisProveniencia.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastramentoProveniencia.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
     @FXML
