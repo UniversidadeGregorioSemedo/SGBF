@@ -138,31 +138,12 @@ public class VisTelaPrincipal implements Initializable {
         anchorPane.getChildren().setAll(x);         
     }
     
-    @FXML
-    public void BotaoMenuItemEstoque() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisEstoque.fxml"));
-        anchorPane.getChildren().setAll(x);         
-    }
-    
+ 
     public void BotaoMenuItemProveniencia() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastramentoProveniencia.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
-    @FXML
-    public void BotaoMenuItemProvenienciaAcervo() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisItensProvenientes.fxml"));
-        anchorPane.getChildren().setAll(x);         
-    }
-    @FXML
-    public void BotaoMenuItemAcervoEscrito() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisAcervoEscrito.fxml"));
-        anchorPane.getChildren().setAll(x);         
-    }
-    @FXML
-    public void BotaoMenuItemCategoriaEstante() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCategoriaEstante.fxml"));
-        anchorPane.getChildren().setAll(x);         
-    }
+   
     @FXML
     public void BotaoMenuItemMovimentacaoEmprestimo() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisMovimentacaoEmprestimo.fxml"));
@@ -178,11 +159,7 @@ public class VisTelaPrincipal implements Initializable {
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisMovimentacaoDevolucao.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
-    @FXML
-    public void BotaoMenuItemMovimentacaoSolicitacao() throws IOException{
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisItemSolicitado.fxml"));
-        anchorPane.getChildren().setAll(x);         
-    }
+  
     @FXML
     public void BotaoMenuItemVerUtente() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisVerUtente.fxml"));
