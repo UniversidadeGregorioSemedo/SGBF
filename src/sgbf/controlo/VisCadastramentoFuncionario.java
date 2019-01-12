@@ -241,7 +241,7 @@ public class VisCadastramentoFuncionario implements Initializable {
         this.texteFiedcodigoUtente.setText(null);
        // this.tableViewVisitane.getItems().clear();
         this.tableViewFuncionario.getItems().clear();
-        this.comboBoxCargo.setPromptText("Carga");
+        this.comboBoxCargo.setPromptText("Cargo");
     }
     
     private ModVisitante pegarDadosDaPesquisaUtente(){
