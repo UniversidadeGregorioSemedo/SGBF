@@ -25,9 +25,9 @@
                         <TableView fx:id="tabelaViewProveniencia" layoutX="21.0" layoutY="75.0" prefHeight="200.0" prefWidth="501.0">
                           <columns>
                             <TableColumn fx:id="tabelaColunaId" prefWidth="75.0" text="Id" />
-                            <TableColumn fx:id="tabelaColunaTipo" prefWidth="159.0" text="Tipo" />
+                            <TableColumn fx:id="tabelaColunaTipo" prefWidth="199.0" text="Tipo" />
                               <TableColumn fx:id="tabelaColunaRegistro" prefWidth="102.0" text="Data de registro" />
-                              <TableColumn fx:id="tabelaColunaModificacao" prefWidth="122.0" text="Data de modificação" />
+                              <TableColumn fx:id="tabelaColunaModificacao" prefWidth="124.0" text="Data de modificação" />
                           </columns>
                         </TableView>
                      </children>
