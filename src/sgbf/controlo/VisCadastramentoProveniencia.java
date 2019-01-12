@@ -44,18 +44,19 @@ public class VisCadastramentoProveniencia implements Initializable {
     @FXML
     private ComboBox<String> combocadproveniencia;
     @FXML
-    private Button botaoNovo,BotaoCadastrar,BotaoAlterar,BotaoRemover,BotaoSair;
+    private Button botaoNovo,BotaoCadastrar,BotaoAlterar,BotaoRemover,BotaoSair,botaoCancelar;
     @FXML
     private AnchorPane anchoPaneProveniencia;
-
-    private String operacao = null;
-    private final ModProveniencia provenienciamod = new ModProveniencia();
-    private final ConProveniencia provenienciacom = new ConProveniencia();
     @FXML
     private TableColumn<ModProveniencia, Integer> tabelaColunaId;
     @FXML
     private TableColumn<ModProveniencia, String> tabelaColunaTipo,tabelaColunaRegistro,tabelaColunaModificacao;
-  
+    
+    
+    private String operacao = null;
+    private final ModProveniencia provenienciamod = new ModProveniencia();
+    private final ConProveniencia provenienciacom = new ConProveniencia();
+ 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,7 +66,8 @@ public class VisCadastramentoProveniencia implements Initializable {
         tabelaViewProveniencia.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     } 
     private void bloquearItensDaJanela(){
-        this.TextFieldPesquisarProveniencia.setDisable(true);
+        //this.TextFieldPesquisarProveniencia.setDisable(false);
+        this.textFieldCodigoProveniencia.setDisable(true);
         this.combocadproveniencia.setDisable(true);
         this.botaoNovo.setDisable(false);
         this.BotaoCadastrar.setDisable(true);
@@ -73,7 +75,7 @@ public class VisCadastramentoProveniencia implements Initializable {
         this.BotaoRemover.setDisable(true);
 }
     private void desbloquearItensDaJanela(){
-        this.TextFieldPesquisarProveniencia.setDisable(false);
+        this.textFieldCodigoProveniencia.setDisable(true);
         this.combocadproveniencia.setDisable(false);
         this.botaoNovo.setDisable(true);
         this.BotaoCadastrar.setDisable(false); 
@@ -83,6 +85,7 @@ public class VisCadastramentoProveniencia implements Initializable {
         this.textFieldCodigoProveniencia.setText(null);
         this.tabelaViewProveniencia.getItems().clear();
     }
+    
     @FXML
     private void novo(){
         this.desbloquearItensDaJanela();
@@ -110,7 +113,7 @@ public class VisCadastramentoProveniencia implements Initializable {
     }
     
     @FXML
-    private void alterarArea(){
+    private void alterarProveniencia(){
         operacao = "Alterar Proveniencia";
         provenienciamod.setIdProveniencia(this.tabelaViewProveniencia.getSelectionModel().getSelectedItem().getIdProveniencia(), operacao);
         provenienciamod.setTipo(combocadproveniencia.getSelectionModel().getSelectedItem(), operacao);
@@ -120,6 +123,7 @@ public class VisCadastramentoProveniencia implements Initializable {
         throw new UtilControloExcessao(operacao, "Proveniencia Alterada com sucesso", Alert.AlertType.CONFIRMATION);
         } 
     }
+    
     
     @FXML
     private void removerProvenienica(){
@@ -133,7 +137,7 @@ public class VisCadastramentoProveniencia implements Initializable {
     }    
     
     @FXML
-private void pesquisarProveniencia(){
+    private void pesquisarProveniencia(){
     operacao = "Pesquisar Proveniencia";
     List<Object> todosRegistosEncontrados = new ArrayList<>();
     if(this.TextFieldPesquisarProveniencia.getText().isEmpty()){
@@ -181,7 +185,7 @@ private void pesquisarProveniencia(){
          tabelaColunaId.setCellValueFactory(new PropertyValueFactory<>("idProveniencia"));
         tabelaColunaTipo.setCellValueFactory(new PropertyValueFactory<>("Tipo"));
         tabelaColunaRegistro.setCellValueFactory(new PropertyValueFactory<>("data_registo"));
-        tabelaColunaModificacao.setCellValueFactory(new PropertyValueFactory<>("data_modificacao"));
+        tabelaColunaModificacao.setCellValueFactory(new PropertyValueFactory<>("data_modificao"));
         tabelaViewProveniencia.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
      }
       private ObservableList<ModProveniencia> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
