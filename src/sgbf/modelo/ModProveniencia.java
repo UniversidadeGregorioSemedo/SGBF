@@ -5,7 +5,9 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
+import sgbf.util.UtilControloExcessao;
 
 /**
  *
@@ -17,14 +19,15 @@ public class ModProveniencia {
     private String tipo;
     private String data_registo;
     private String data_modificacao;
-
+    private UtilControloDaData utilControloDaData;
+    
     public ModProveniencia() {
         this.idProveniencia = 0;
         this.tipo = null;
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
 
+    
     public Integer getIdProveniencia() {
         return idProveniencia;
     }
@@ -41,20 +44,16 @@ public class ModProveniencia {
         this.tipo = tipo;
     }
 
-    public String getData_registo() {
-        return data_registo;
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
-
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
+    
+    public void equals(ModProveniencia provenienciaMod, String operacao){
+        if(this.idProveniencia != provenienciaMod.getIdProveniencia()){
+            if(this.tipo.equalsIgnoreCase(provenienciaMod.getTipo())){
+                throw new UtilControloExcessao(operacao, "A proveniência introduzida já existe !", Alert.AlertType.WARNING);
+            }
+        }
     }
     
     enum Tipo{

@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
-import sgbf.modelo.ModAutor;
 import sgbf.modelo.ModUtente;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;

@@ -82,6 +82,7 @@ public class VisCadastramentoProveniencia implements Initializable {
     }
     private void limparItensDaJanela(){
         this.combocadproveniencia.setPromptText("Proveniencia");
+        this.TextFieldPesquisarProveniencia.setText(null);
         this.textFieldCodigoProveniencia.setText(null);
         this.tabelaViewProveniencia.getItems().clear();
     }
@@ -171,30 +172,33 @@ public class VisCadastramentoProveniencia implements Initializable {
             this.limparItensDaJanela();
         }
     }
+    
     private ModProveniencia pegarDadosDaPesquisa(){
         if(UtilValidarDados.eNumero(this.TextFieldPesquisarProveniencia.getText())){
            provenienciamod.setIdProveniencia(Integer.valueOf(this.TextFieldPesquisarProveniencia.getText()),operacao);
-           //Estou sem ideia como pesquisar a proveniencia pelo tipo!!
+           provenienciamod.setTipo(this.TextFieldPesquisarProveniencia.getText(), operacao);
            return provenienciamod;
         }else{
-            //Estou sem ideia como pesquisar a proveniencia pelo tipo!!
+           provenienciamod.setTipo(this.TextFieldPesquisarProveniencia.getText(), operacao);
             return provenienciamod;
         }   
     }
-     private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
-         tabelaColunaId.setCellValueFactory(new PropertyValueFactory<>("idProveniencia"));
-        tabelaColunaTipo.setCellValueFactory(new PropertyValueFactory<>("Tipo"));
+    
+    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
+        tabelaColunaId.setCellValueFactory(new PropertyValueFactory<>("idProveniencia"));
+        tabelaColunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tabelaColunaRegistro.setCellValueFactory(new PropertyValueFactory<>("data_registo"));
         tabelaColunaModificacao.setCellValueFactory(new PropertyValueFactory<>("data_modificao"));
         tabelaViewProveniencia.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
-     }
-      private ObservableList<ModProveniencia> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
-        List<ModProveniencia> listaDosRegistosWncontrados = new ArrayList<>();
-        for(Object utenteRegistado: todosRegistosEncontrados){
-            ModProveniencia provenienciamod = (ModProveniencia)utenteRegistado;
-            listaDosRegistosWncontrados.add(this.provenienciamod);
+    }
+    
+    private ObservableList<ModProveniencia> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
+        List<ModProveniencia> listaDosRegistosEncontrados = new ArrayList<>();
+        for(Object provenienciaRegistado: todosRegistosEncontrados){
+            ModProveniencia proveniencia = (ModProveniencia)provenienciaRegistado;
+            listaDosRegistosEncontrados.add(proveniencia);
         } 
-        return FXCollections.observableArrayList(listaDosRegistosWncontrados);
+        return FXCollections.observableArrayList(listaDosRegistosEncontrados);
     }
 
      
