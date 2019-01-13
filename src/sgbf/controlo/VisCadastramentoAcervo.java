@@ -99,11 +99,10 @@ public class VisCadastramentoAcervo implements Initializable {
             if(acervoCon.registar(acervoMod, operacao)){
                this.bloquearItensDaJanela();
                this.limparItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Estante Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+               throw new UtilControloExcessao(operacao, "Acervo Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
             }
         }catch(NumberFormatException erro){
-           throw new UtilControloExcessao(operacao, "Esta operção não poder executada\n"
-                   + "Erro: A linha ou coluna excedeu o valor máximo (127) permitido", Alert.AlertType.WARNING);
+           throw new UtilControloExcessao(operacao, "Edição ou volume ultrapassou o limite permitdo", Alert.AlertType.WARNING);
         }
     }
     
@@ -120,26 +119,23 @@ public class VisCadastramentoAcervo implements Initializable {
             acervoMod.setEdicao(Byte.valueOf(texteFiedEdicao.getText()), operacao);
             acervoMod.setVolume(Byte.valueOf(texteFiedVolume.getText()), operacao);
             acervoMod.setNumero_paginas(Short.valueOf(texteFiedNumPaginas.getText()), operacao);
-            acervoMod.setAno_lancamento( Integer.valueOf(texteFieldAno.getText()), operacao);
-            acervoMod.setIdioma(comboBoxIdioma.getSelectionModel().getSelectedItem(), operacao);
-            acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setCodigo_barra(texteFiedCodigoBarra.getText(), operacao);
             acervoMod.setIsbn(texteFiedISBN.getText(), operacao);
+            acervoMod.setIdioma(comboBoxIdioma.getSelectionModel().getSelectedItem(), operacao);
+            acervoMod.setAno_lancamento( Integer.valueOf(texteFieldAno.getText()), operacao);
             acervoMod.setSinopse(textAreaSinopese.getText(), operacao);
-            acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
-            acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setEndereco_acervo(texteFiedEndereco.getText(), operacao);
+            acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
+            acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
+            //acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
             if(acervoCon.alterar(acervoMod, operacao)){
                this.bloquearItensDaJanela();
                this.limparItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Estante Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+               throw new UtilControloExcessao(operacao, "Acervo Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
             }
         }catch(NumberFormatException erro){
-           throw new UtilControloExcessao(operacao, "Esta operção não poder executada\n"
-                   + "Erro: A linha ou coluna excedeu o valor máximo (127) permitido", Alert.AlertType.WARNING);
+           throw new UtilControloExcessao(operacao, "Edição ou volume ultrapassou o limite permitdo", Alert.AlertType.WARNING);
         }
-       
-        
     }
     
     @FXML
@@ -155,16 +151,18 @@ public class VisCadastramentoAcervo implements Initializable {
     
     @FXML
     private void pesquisarAcervo(){
-        operacao = "Pesquisar Estante";
+        operacao = "Pesquisar Acervos";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         if(this.texteFiedPesquisar.getText().isEmpty()){
-           throw new UtilControloExcessao(operacao, "Introduza o código ou designação da estante", Alert.AlertType.INFORMATION);
+            System.out.println("Número: "+this.texteFiedPesquisar.getText());
+           throw new UtilControloExcessao(operacao, "Introduza o código ou título do acervos", Alert.AlertType.INFORMATION);
         }else{
+            System.out.println("Número: "+this.texteFiedPesquisar.getText());
             todosRegistosEncontrados = this.acervoCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
             if(todosRegistosEncontrados.isEmpty()){
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Estante não encontrada", Alert.AlertType.INFORMATION);
+               throw new UtilControloExcessao(operacao, "Acervo não encontrada", Alert.AlertType.INFORMATION);
             }else{
                 this.carregarResultadosNaTablea(todosRegistosEncontrados);
                 this.bloquearItensDaJanela();

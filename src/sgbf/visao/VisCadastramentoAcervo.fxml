@@ -35,7 +35,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXButton fx:id="botaoPesquisar" layoutX="575.0" layoutY="29.0" prefHeight="20.0" prefWidth="25.0" text=" ">
+                        <JFXButton fx:id="botaoPesquisar" layoutX="575.0" layoutY="29.0" onAction="#pesquisarAcervo" prefHeight="20.0" prefWidth="25.0" text=" ">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

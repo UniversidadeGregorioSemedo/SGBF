@@ -6,7 +6,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModAcervo;
-import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -124,8 +123,6 @@ public class ConAcervo extends ConCRUD {
             return todosRegistos;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Acervo(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }*/
         return todosRegistos;
     }
@@ -133,12 +130,12 @@ public class ConAcervo extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        /*ModEstante estanteMod = (ModEstante)objecto_pesquisar;
+        ModAcervo acervoeMod = (ModAcervo)objecto_pesquisar;
         try{
             super.query = "select * from tcc.acervos where idAcervos=? or "
-                        + "titulo like '%"+estanteMod.getDesignacao()+"%'";
+                        + "titulo like '%"+acervoeMod.getTitulo()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+            super.preparedStatement.setInt(1, acervoeMod.getIdAcervo());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
@@ -146,23 +143,32 @@ public class ConAcervo extends ConCRUD {
             return todosRegistosEncontrados;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Acervo(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }*/
-        return todosRegistosEncontrados;
+        }
     }
     
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
-        ModEstante estanteMod = new ModEstante();
-        /*estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
-        estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
-        estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
-        estanteMod.setLinha(setResultset.getByte("linha"), operacao);
-        estanteMod.setColuna(setResultset.getByte("coluna"), operacao);
-        estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
-        estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);*/
-        return estanteMod;
+        ModAcervo acervoMod = new ModAcervo();
+        acervoMod.setIdAcervo(setResultset.getInt("idAcervos"), operacao);
+        acervoMod.setTitulo(setResultset.getString("titulo"), operacao);
+        acervoMod.setSub_titulo(setResultset.getString("subtittulo"), operacao);
+        acervoMod.setTipo_acervo(setResultset.getString("tipo_acervo"), operacao);
+        acervoMod.setFormato(setResultset.getString("formato"), operacao);
+        acervoMod.setEdicao(setResultset.getByte("edicao"), operacao);
+        acervoMod.setVolume(setResultset.getByte("volume"), operacao);
+        acervoMod.setNumero_paginas(setResultset.getShort("numero_paginas"), operacao);
+        acervoMod.setCodigo_barra(setResultset.getString("codigo_barra"), operacao);
+        acervoMod.setIsbn(setResultset.getString("isbn"), operacao);
+        acervoMod.setIdioma(setResultset.getString("idioma"), operacao);
+        acervoMod.setAno_lancamento(setResultset.getInt("ano_lancamento"), operacao);
+        acervoMod.setSinopse(setResultset.getString("sinopse"), operacao);
+        acervoMod.setEndereco_acervo(setResultset.getString("endereco_acervo"), operacao);
+        acervoMod.getCategoriaMod().setIdCategoria(setResultset.getInt("categoria_idcategoria"), operacao);
+        if(setResultset.getString("Editora_idEditora")!= null){
+            acervoMod.getEditoraMod().setiEditora(setResultset.getInt("Editora_idEditora"), operacao);
+        }
+        acervoMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
+        acervoMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        return acervoMod;
     }
 
     
