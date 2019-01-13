@@ -157,7 +157,6 @@ public class VisCadastramentoAcervo implements Initializable {
             System.out.println("Número: "+this.texteFiedPesquisar.getText());
            throw new UtilControloExcessao(operacao, "Introduza o código ou título do acervos", Alert.AlertType.INFORMATION);
         }else{
-            System.out.println("Número: "+this.texteFiedPesquisar.getText());
             todosRegistosEncontrados = this.acervoCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
             if(todosRegistosEncontrados.isEmpty()){
                 this.bloquearItensDaJanela();
@@ -302,13 +301,13 @@ public class VisCadastramentoAcervo implements Initializable {
         }
         todasAutoresParaCombox = FXCollections.observableArrayList(todosAutores);
         this.comboBoxAutor.setItems(todasAutoresParaCombox);
-        
     }
     
     
     private void exibirDadosNosCampos(ModAcervo acervoMod){
         if(tableViewAcervo.getSelectionModel().getSelectedCells().size() == 1){
-            this.texteFiedTitulo.setText(acervoMod.getTipo_acervo());
+            this.carregarValorNasComboxs();
+            this.texteFiedTitulo.setText(acervoMod.getTitulo());
             this.texteFiedSubTitulo.setText(acervoMod.getSub_titulo());
             this.texteFiedEdicao.setText(String.valueOf(acervoMod.getEdicao()));
             this.texteFiedVolume.setText(String.valueOf(acervoMod.getEdicao()));
@@ -320,15 +319,9 @@ public class VisCadastramentoAcervo implements Initializable {
             comboBoxTipo.getSelectionModel().select(acervoMod.getTipo_acervo());
             comboBoxFormato.getSelectionModel().select(acervoMod.getFormato());
             comboBoxIdioma.getSelectionModel().select(acervoMod.getIdioma());
-            for(int i=0; i<comboBoxEditora.getItems().size();i++){
-                comboBoxEditora.getSelectionModel().select(i);
-                if(acervoMod.getEditoraMod().getiEditora()== comboBoxEditora.getSelectionModel().getSelectedItem().getiEditora()){
-                    break;
-                }
-            }
-            for(int i=0; i<comboBoxAutor.getItems().size();i++){
-                comboBoxAutor.getSelectionModel().select(i);
-                if(acervoMod.getAutorMod().getIdAutor()== comboBoxAutor.getSelectionModel().getSelectedItem().getIdAutor()){
+            for(int i=0; i<comboBoxCategoria.getItems().size();i++){
+                comboBoxCategoria.getSelectionModel().select(i);
+                if(acervoMod.getCategoriaMod().getIdCategoria()== comboBoxCategoria.getSelectionModel().getSelectedItem().getIdCategoria()){
                     break;
                 }
             }
