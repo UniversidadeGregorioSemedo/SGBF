@@ -253,6 +253,10 @@ public class  ModAcervo {
     public void setAutorMod(ModAutor autorMod, String operacao) {
         this.autorMod = autorMod;
     }
+
+    public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
+        this.categoriaMod = categoriaMod;
+    }
     
     
     

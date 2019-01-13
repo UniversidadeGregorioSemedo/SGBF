@@ -23,7 +23,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModAutor;
+import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModEditora;
+import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
 
@@ -49,6 +51,10 @@ public class VisCadastramentoAcervo implements Initializable {
     @FXML
     private ComboBox<ModEditora> comboBoxEditora;
     @FXML
+    private ComboBox<ModEstante> comboBoxEstante;
+    @FXML
+    private ComboBox<ModCategoria> comboBoxCategoria;
+    @FXML
     private TableView<ModAcervo> tableViewAcervo; 
     @FXML
     private TableColumn<ModAcervo, String> tableColumTitulo,tableColumSubTitulo,tableColumEdicao,tableColumISBN,
@@ -57,7 +63,7 @@ public class VisCadastramentoAcervo implements Initializable {
     private JFXTextArea textAreaSinopese;
     @FXML
     private AnchorPane AnchorPaneAcervo;
-    
+ 
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
@@ -89,6 +95,7 @@ public class VisCadastramentoAcervo implements Initializable {
             acervoMod.setIsbn(texteFiedISBN.getText(), operacao);
             acervoMod.setSinopse(textAreaSinopese.getText(), operacao);
             acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
+            acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setEndereco_acervo(texteFiedEndereco.getText(), operacao);
             if(acervoCon.registar(acervoMod, operacao)){
                this.bloquearItensDaJanela();
@@ -121,6 +128,7 @@ public class VisCadastramentoAcervo implements Initializable {
             acervoMod.setIsbn(texteFiedISBN.getText(), operacao);
             acervoMod.setSinopse(textAreaSinopese.getText(), operacao);
             acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
+            acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setEndereco_acervo(texteFiedEndereco.getText(), operacao);
             if(acervoCon.alterar(acervoMod, operacao)){
                this.bloquearItensDaJanela();
@@ -197,6 +205,8 @@ public class VisCadastramentoAcervo implements Initializable {
         this.texteFiedISBN.setDisable(false);
         this.textAreaSinopese.setDisable(false);
         this.comboBoxAutor.setDisable(false);
+        this.comboBoxEstante.setDisable(false);
+        this.comboBoxCategoria.setDisable(false);
         this.botaoNovo.setDisable(true);
         this.botaoCadastrar.setDisable(false);
     }
@@ -216,6 +226,8 @@ public class VisCadastramentoAcervo implements Initializable {
         this.texteFiedISBN.setDisable(true);
         this.textAreaSinopese.setDisable(true);
         this.comboBoxAutor.setDisable(true);
+        this.comboBoxEstante.setDisable(true);
+        this.comboBoxCategoria.setDisable(true);
         this.botaoNovo.setDisable(false);
         this.botaoCadastrar.setDisable(true);
         this.botaoAlterar.setDisable(true);
@@ -257,8 +269,6 @@ public class VisCadastramentoAcervo implements Initializable {
         }
         todasAutoresParaCombox = FXCollections.observableArrayList(todosAutores);
         this.comboBoxAutor.setItems(todasAutoresParaCombox);
-      
-        
     }
 
     

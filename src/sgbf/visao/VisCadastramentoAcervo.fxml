@@ -12,9 +12,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="AnchorPaneAcervo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1085.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoAcervo">
+<AnchorPane fx:id="AnchorPaneAcervo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoAcervo">
    <children>
-      <SplitPane dividerPositions="0.4753577106518283" orientation="VERTICAL" prefHeight="631.0" prefWidth="1083.0">
+      <SplitPane dividerPositions="0.4753577106518283" orientation="VERTICAL" prefHeight="657.0" prefWidth="1181.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="1199.0">
                <children>
@@ -47,18 +47,18 @@
                   </Pane>
                </children>
             </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="1067.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="1117.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="39.0" prefHeight="279.0" prefWidth="1046.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="39.0" prefHeight="279.0" prefWidth="1063.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <Label layoutX="273.0" layoutY="72.0" text="Nº Paginas" />
                         <TextField fx:id="texteFiedNumPaginas" layoutX="341.0" layoutY="66.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="78.0" />
                         <TextField fx:id="texteFieldAno" layoutX="486.0" layoutY="66.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="66.0" />
                         <Label layoutX="435.0" layoutY="70.0" text="Ano " />
-                        <Label layoutX="588.0" layoutY="74.0" text="Idioma" />
-                        <ComboBox fx:id="comboBoxEditora" layoutX="909.0" layoutY="67.0" prefHeight="25.0" prefWidth="121.0" promptText="Seleccione a editora" />
-                        <Label layoutX="853.0" layoutY="71.0" text="Editora" />
-                        <TextField fx:id="texteFiedEndereco" disable="true" layoutX="109.0" layoutY="221.0" prefHeight="25.0" prefWidth="376.0" />
+                        <Label layoutX="587.0" layoutY="70.0" text="Idioma" />
+                        <ComboBox fx:id="comboBoxEditora" layoutX="909.0" layoutY="67.0" prefHeight="25.0" prefWidth="138.0" promptText="Seleccione a editora" />
+                        <Label layoutX="849.0" layoutY="66.0" text="Editora" />
+                        <TextField fx:id="texteFiedEndereco" disable="true" layoutX="109.0" layoutY="221.0" prefHeight="25.0" prefWidth="446.0" />
                         <Label layoutX="12.0" layoutY="225.0" text="Endereço acervo" />
                         <Label layoutX="18.0" layoutY="26.0" text="Titulo" />
                         <TextField fx:id="texteFiedTitulo" layoutX="67.0" layoutY="19.0" prefHeight="25.0" prefWidth="191.0" />
@@ -70,28 +70,32 @@
                         <Label layoutX="137.0" layoutY="72.0" text="Volume" />
                         <TextField fx:id="texteFiedISBN" layoutX="341.0" layoutY="117.0" prefHeight="25.0" prefWidth="211.0" />
                         <Label layoutX="297.0" layoutY="121.0" text="ISBN" />
-                        <Label layoutX="15.0" layoutY="130.0" text="C. Barra" />
+                        <Label layoutX="12.0" layoutY="121.0" text="C. Barra" />
                         <ComboBox fx:id="comboBoxTipo" layoutX="682.0" layoutY="14.0" prefWidth="150.0" promptText="Seleccione o tipo" />
-                        <Label layoutX="588.0" layoutY="18.0" text="Tipo de acervo" />
-                        <ComboBox fx:id="comboBoxFormato" layoutX="909.0" layoutY="14.0" prefHeight="25.0" prefWidth="121.0" promptText="Seleccione o formato" />
-                        <Label layoutX="850.0" layoutY="18.0" text="Formato" />
+                        <Label layoutX="585.0" layoutY="23.0" text="Tipo de acervo" />
+                        <ComboBox fx:id="comboBoxFormato" layoutX="909.0" layoutY="14.0" prefHeight="25.0" prefWidth="138.0" promptText="Seleccione o formato" />
+                        <Label layoutX="845.0" layoutY="18.0" text="Formato" />
                         <ComboBox fx:id="comboBoxIdioma" layoutX="682.0" layoutY="62.0" prefWidth="150.0" promptText="Seleccione o idioma" />
-                        <TextField fx:id="texteFiedCodigoBarra" layoutX="74.0" layoutY="125.0" prefHeight="25.0" prefWidth="185.0" />
-                        <Button fx:id="botaoCadastrar" layoutX="640.0" layoutY="221.0" mnemonicParsing="false" onAction="#cadastrarAcervos" text="Cadastrar" />
-                        <Button fx:id="botaoAlterar" layoutX="723.0" layoutY="221.0" mnemonicParsing="false" onAction="#alterarAcervo" prefHeight="25.0" prefWidth="68.0" text="Alterar" />
-                        <Button fx:id="botaoRemover" layoutX="803.0" layoutY="221.0" mnemonicParsing="false" onAction="#removerAcervo" prefHeight="25.0" prefWidth="69.0" text="Remover" />
-                        <Button fx:id="botaoNovo" layoutX="559.0" layoutY="221.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="68.0" text="Novo" />
-                        <Button fx:id="botaoCancelar" layoutX="890.0" layoutY="221.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="69.0" text="Cancelar" />
-                        <Button fx:id="botaoSair" layoutX="970.0" layoutY="221.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="69.0" text="Sair" />
-                        <Label layoutX="588.0" layoutY="129.0" text="Sinopse:" />
+                        <TextField fx:id="texteFiedCodigoBarra" layoutX="70.0" layoutY="117.0" prefHeight="25.0" prefWidth="185.0" />
+                        <Label layoutX="598.0" layoutY="166.0" text="Sinopse:" />
                         <Label layoutX="16.0" layoutY="177.0" prefHeight="17.0" prefWidth="42.0" text="Autor" />
-                        <ComboBox fx:id="comboBoxAutor" layoutX="74.0" layoutY="173.0" prefHeight="25.0" prefWidth="569.0" promptText="Seleccione o autor" />
-                        <JFXTextArea fx:id="textAreaSinopese" disable="true" editable="false" layoutX="660.0" layoutY="104.0" prefHeight="105.0" prefWidth="367.0" />
-                        <Button disable="true" layoutX="493.0" layoutY="221.0" mnemonicParsing="false" text="Carregar" />
+                        <ComboBox fx:id="comboBoxAutor" layoutX="74.0" layoutY="173.0" prefHeight="25.0" prefWidth="480.0" promptText="Seleccione o autor" />
+                        <JFXTextArea fx:id="textAreaSinopese" layoutX="665.0" layoutY="173.0" prefHeight="73.0" prefWidth="367.0" />
+                        <Button disable="true" layoutX="575.0" layoutY="221.0" mnemonicParsing="false" text="Carregar" />
+                        <Label layoutX="586.0" layoutY="121.0" text="Estante" />
+                        <ComboBox fx:id="comboBoxEstante" layoutX="682.0" layoutY="113.0" prefWidth="150.0" promptText="Seleccione a estante" />
+                        <Label layoutX="841.0" layoutY="117.0" text="Categoria" />
+                        <ComboBox fx:id="comboBoxCategoria" layoutX="909.0" layoutY="113.0" prefHeight="25.0" prefWidth="138.0" promptText="Seleccione a categoria" />
                      </children>
                   </Pane>
                   <JFXButton layoutX="808.0" layoutY="64.0" prefHeight="20.0" prefWidth="25.0" text=" " />
                   <Label layoutX="15.0" layoutY="14.0" text="Dados do Acervo" />
+                  <Button fx:id="botaoNovo" layoutX="1090.0" layoutY="45.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="68.0" text="Novo" />
+                  <Button fx:id="botaoCadastrar" layoutX="1090.0" layoutY="97.0" mnemonicParsing="false" onAction="#cadastrarAcervos" text="Cadastrar" />
+                  <Button fx:id="botaoAlterar" layoutX="1090.0" layoutY="146.0" mnemonicParsing="false" onAction="#alterarAcervo" prefHeight="25.0" prefWidth="68.0" text="Alterar" />
+                  <Button fx:id="botaoRemover" layoutX="1090.0" layoutY="195.0" mnemonicParsing="false" onAction="#removerAcervo" prefHeight="25.0" prefWidth="69.0" text="Remover" />
+                  <Button fx:id="botaoCancelar" layoutX="1090.0" layoutY="244.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="69.0" text="Cancelar" />
+                  <Button fx:id="botaoSair" layoutX="1089.0" layoutY="293.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="69.0" text="Sair" />
                </children>
             </AnchorPane>
          </items>
