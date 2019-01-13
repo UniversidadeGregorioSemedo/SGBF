@@ -14,7 +14,7 @@ public class ModAcervosEscritos {
     private ModAutor autorMod;
     
     public ModAcervosEscritos(){
-        this.acervoMod = new ModAcervoFisico();
+        this.acervoMod = new ModAcervo();
         this.autorMod = new ModAutor();
     }
     

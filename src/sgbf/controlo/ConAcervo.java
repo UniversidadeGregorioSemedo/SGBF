@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModAcervo;
-import sgbf.modelo.ModAcervoFisico;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -18,7 +17,7 @@ public class ConAcervo extends ConCRUD {
     
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
-        ModAcervo acervoMod = (ModAcervoFisico)objecto_registar;
+        ModAcervo acervoMod = (ModAcervo)objecto_registar;
         try{
             super.query = "INSERT INTO tcc.acervos (titulo, subtittulo, tipo_acervo, formato, edicao, volume,"
                         + " numero_paginas, codigo_barra, isbn, idioma, ano_lancamento, sinopse, endereco_acervo,"
@@ -51,7 +50,7 @@ public class ConAcervo extends ConCRUD {
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
-        ModAcervo acervoMod = (ModAcervoFisico)objecto_alterar;
+        ModAcervo acervoMod = (ModAcervo)objecto_alterar;
         try{
             super.query = "UPDATE tcc.acervos set titulo=?, subtittulo=?, tipo_acervo=?, formato=?, edicao=?, volume=?,"
                         + " numero_paginas=?, codigo_barra=?, isbn=?, idioma=?, ano_lancamento=?, sinopse=?, endereco_acervo=?,"
@@ -84,7 +83,7 @@ public class ConAcervo extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-         ModAcervo acervoMod = (ModAcervoFisico)objecto_remover;
+         ModAcervo acervoMod = (ModAcervo)objecto_remover;
         try{
             if(this.temDadosRelacionados(acervoMod, operacao)){
                throw new UtilControloExcessao("Esta operacao não pode ser executada\nO Acervo seleccionado possui registo ! ", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());

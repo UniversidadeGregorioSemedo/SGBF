@@ -13,21 +13,49 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  *
  * @author Look
  */
-public abstract class  ModAcervo {
-    protected Integer idAcervo;
-    protected String titulo;
-    protected String sub_titulo;
-    protected String tipo_acervo;
-    protected String formato;
-    protected Byte edicao;
-    protected Byte volume;
-    protected Short numero_paginas;
-    protected Integer ano_lancamento;
-    protected String idioma;
-    protected ModEstoque estoqueMod;
-    protected ModCategoria categoriaMod;
-    protected UtilControloDaData utilControloDaData;
+public class  ModAcervo {
+    private Integer idAcervo;
+    private String titulo;
+    private String sub_titulo;
+    private String tipo_acervo;
+    private String formato;
+    private Byte edicao;
+    private Byte volume;
+    private Short numero_paginas;
+    private Integer ano_lancamento;
+    private String idioma;
+    private String codigo_barra;
+    private String isbn;
+    private String endereco_acervo;
+    private String sinopse;
+    private ModEstoque estoqueMod;
+    private ModEditora editoraMod;
+    private ModAutor autorMod;
+    private ModCategoria categoriaMod;
+    private UtilControloDaData utilControloDaData;
 
+    
+    public ModAcervo(){
+        this.idAcervo = 0;
+        this.titulo = null;
+        this.sub_titulo = null;
+        this.tipo_acervo = null;
+        this.formato = null;
+        this.edicao = 0;
+        this.volume = 0;
+        this.numero_paginas = 0;
+        this.ano_lancamento = 0;
+        this.idioma = null;
+        this.codigo_barra = null;
+        this.isbn = null;
+        this.endereco_acervo = null;
+        this.sinopse = null;
+        this.estoqueMod = new ModEstoque();
+        this.editoraMod = new ModEditora();
+        this.autorMod = new ModAutor();
+        this.categoriaMod = new ModCategoria();
+        this.utilControloDaData = new UtilControloDaData();
+    }
 
     public Integer getIdAcervo() {
         return idAcervo;
@@ -164,11 +192,71 @@ public abstract class  ModAcervo {
             }
         }
     }
+    
+    
+    public String getCodigo_barra() {
+        return codigo_barra;
+    }
+
+    public void setCodigo_barra(String codigo_barra, String operacao) {
+        this.codigo_barra = codigo_barra;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn, String operacao) {
+        this.isbn = isbn;
+    }
 
     public ModEstoque getEstoqueMod() {
         return estoqueMod;
     }
 
+    public ModEditora getEditoraMod() {
+        return editoraMod;
+    }
+
+    public void setEditoraMod(ModEditora editoraMod, String operacao) {
+        this.editoraMod = editoraMod;
+    }
+
+     public String getEndereco_acervo() {
+        return endereco_acervo;
+    }
+
+    public void setEndereco_acervo(String endereco_acervo, String operacao) {
+        if(endereco_acervo == null){
+            throw new UtilControloExcessao("Erro ao inserir Imagem", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+        }else{
+            if(endereco_acervo.isEmpty()){
+                throw new UtilControloExcessao("Erro ao inserir Imagem", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            }else{
+                this.endereco_acervo = endereco_acervo;
+            }
+        }
+    }
+
+    public String getSinopse() {
+        return sinopse;
+    }
+
+    public void setSinopse(String sinopse, String operacao) {
+        this.sinopse = sinopse;
+    }
+
+    public ModAutor getAutorMod() {
+        return autorMod;
+    }
+
+    public void setAutorMod(ModAutor autorMod, String operacao) {
+        this.autorMod = autorMod;
+    }
+    
+    
+    
+    
     public ModCategoria getCategoriaMod() {
         return categoriaMod;
     }

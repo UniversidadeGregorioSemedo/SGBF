@@ -14,22 +14,22 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  */
 public class ModItemSolicitado {
     
-    private ModAcervoFisico fisicoAcervoMod;
+    private ModAcervo acervoMod;
     private ModReserva reservaMod;
     private Byte quantidade_revervada;
 
     public ModItemSolicitado() {
-        this.fisicoAcervoMod = null;
+        this.acervoMod = null;
         this.reservaMod = null;
         this.quantidade_revervada = 0;
     }
 
-    public ModAcervoFisico getFisicoAcervoMod() {
-        return fisicoAcervoMod;
+    public ModAcervo getFisicoAcervoMod() {
+        return acervoMod;
     }
 
-    public void setFisicoAcervoMod(ModAcervoFisico fisicoAcervoMod, String operacao) {
-        this.fisicoAcervoMod = fisicoAcervoMod;
+    public void setFisicoAcervoMod(ModAcervo fisicoAcervoMod, String operacao) {
+        this.acervoMod = fisicoAcervoMod;
     }
 
     public ModReserva getReservaMod() {
