@@ -267,6 +267,7 @@ public class VisCadastramentoAcervo implements Initializable {
         ObservableList todasCategoriasPAraCombox = null;
         ObservableList todasAutoresParaCombox = null;
         //Listar Editoras
+        todasEditoras.add(new ModEditora());
         for(Object todosRegistos: editoraCon.listarTodos(operacao)){
             ModEditora editoraRegistada = (ModEditora)todosRegistos;
             todasEditoras.add(editoraRegistada);
@@ -320,6 +321,12 @@ public class VisCadastramentoAcervo implements Initializable {
             for(int i=0; i<comboBoxCategoria.getItems().size();i++){
                 comboBoxCategoria.getSelectionModel().select(i);
                 if(acervoMod.getCategoriaMod().getIdCategoria()== comboBoxCategoria.getSelectionModel().getSelectedItem().getIdCategoria()){
+                    break;
+                }
+            }
+            for(int i=0; i<comboBoxEditora.getItems().size();i++){
+                comboBoxEditora.getSelectionModel().select(i);
+                if(acervoMod.getEditoraMod().getiEditora()== comboBoxEditora.getSelectionModel().getSelectedItem().getiEditora()){
                     break;
                 }
             }

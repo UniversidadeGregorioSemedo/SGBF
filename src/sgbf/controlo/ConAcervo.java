@@ -10,7 +10,6 @@ import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModAcervosEscritos;
 import sgbf.modelo.ModItemSolicitado;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -48,7 +47,7 @@ public class ConAcervo extends ConCRUD {
             }
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -84,7 +83,7 @@ public class ConAcervo extends ConCRUD {
             super.preparedStatement.setInt(16, acervoMod.getIdAcervo());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -96,7 +95,7 @@ public class ConAcervo extends ConCRUD {
         ModItemSolicitado itemSolicitadoMod = new ModItemSolicitado();
         ModAcervosEscritos acervosEscritosMod = new ModAcervosEscritos();
         ConEstoque estoqueCon = new ConEstoque();
-        ConItemSolicitado itemSolicitadoCon= new ConItemSolicitado();
+        ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
         ConAcervosEscreitos acervosEscreitosCon = new ConAcervosEscreitos();
         try{
             if(estoqueCon.remover(acervoMod, operacao)){
@@ -154,7 +153,7 @@ public class ConAcervo extends ConCRUD {
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Acervo(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
     
