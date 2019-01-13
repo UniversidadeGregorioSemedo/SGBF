@@ -109,7 +109,7 @@ public class VisCadastramentoAcervo implements Initializable {
     
     @FXML
     private void alterarAcervo(){
-        operacao = "Editar Estante";
+        operacao = "Editar Acervo";
         try{
             acervoMod.setIdAcervo(this.tableViewAcervo.getSelectionModel().getSelectedItem().getIdAcervo(), operacao);
             acervoMod.setTitulo(texteFiedTitulo.getText(), operacao);
@@ -131,7 +131,7 @@ public class VisCadastramentoAcervo implements Initializable {
             if(acervoCon.alterar(acervoMod, operacao)){
                this.bloquearItensDaJanela();
                this.limparItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Acervo Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
+               throw new UtilControloExcessao(operacao, "Acervo alterado com sucesso", Alert.AlertType.CONFIRMATION);
             }
         }catch(NumberFormatException erro){
            throw new UtilControloExcessao(operacao, "Edição ou volume ultrapassou o limite permitdo", Alert.AlertType.WARNING);
@@ -140,12 +140,12 @@ public class VisCadastramentoAcervo implements Initializable {
     
     @FXML
     private void removerAcervo(){
-        operacao = "Remover Estante";
+        operacao = "Remover Acervo";
         ModAcervo acervoARemover = this.tableViewAcervo.getSelectionModel().getSelectedItem();
         if(acervoCon.remover(acervoARemover, operacao)){
            this.tableViewAcervo.getItems().remove(acervoARemover);
            this.bloquearItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Estante removida com sucesso", Alert.AlertType.CONFIRMATION);
+           throw new UtilControloExcessao(operacao, "Acervo removido com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
     
@@ -154,7 +154,6 @@ public class VisCadastramentoAcervo implements Initializable {
         operacao = "Pesquisar Acervos";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         if(this.texteFiedPesquisar.getText().isEmpty()){
-            System.out.println("Número: "+this.texteFiedPesquisar.getText());
            throw new UtilControloExcessao(operacao, "Introduza o código ou título do acervos", Alert.AlertType.INFORMATION);
         }else{
             todosRegistosEncontrados = this.acervoCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
