@@ -106,7 +106,6 @@ public class VisCadastramentoAcervo implements Initializable {
         }
     }
     
-    
     @FXML
     private void alterarAcervo(){
         operacao = "Editar Acervo";

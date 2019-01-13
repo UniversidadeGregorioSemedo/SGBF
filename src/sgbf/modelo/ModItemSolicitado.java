@@ -19,8 +19,8 @@ public class ModItemSolicitado {
     private Byte quantidade_revervada;
 
     public ModItemSolicitado() {
-        this.acervoMod = null;
-        this.reservaMod = null;
+        this.acervoMod = new ModAcervo();
+        this.reservaMod = new ModReserva();
         this.quantidade_revervada = 0;
     }
 

@@ -9,8 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
+import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModEstoque;
+import sgbf.modelo.ModItemProveniente;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -61,22 +64,24 @@ public class ConEstoque extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-       ModEstoque estoqueMod = (ModEstoque)objecto_remover;
+        ModAcervo acervoMod = (ModAcervo)objecto_remover;
+        ModItemProveniente itemProvenienteMod = new ModItemProveniente();
+        ContItemProveniente itemProvenienteCon = new ContItemProveniente();
+        itemProvenienteMod.setEstoqueMod(acervoMod.getEstoqueMod(), operacao);
         try{
-            if(this.temDadosRelacionados(estoqueMod, operacao)){
-                throw new UtilControloExcessao("Esta operação não pode ser executada\nO estoque seleccionado possui registos ", operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-            }else{
-                super.query = "delete from tcc.estoque where idEstoque=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setInt(1,estoqueMod.getIdEstoque());
+            if(itemProvenienteCon.remover(itemProvenienteMod, operacao)){
+                super.query = "delete from estoque where Acervos_idAcervos=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+                super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
                 return !super.preparedStatement.execute();
+            }else{
+               throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Estoque !", Alert.AlertType.ERROR);
             }
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
+    
 
     @Override
     public List<Object> listarTodos(String operacao) {
@@ -133,12 +138,7 @@ public class ConEstoque extends ConCRUD {
         return estanteMod;
     }
     
-    private boolean temDadosRelacionados(ModEstoque estoqueMod, String operacao) throws SQLException{
-        super.query = "select *from itensProvenientes where Estoque_idEstoque=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
-        super.preparedStatement.setInt(1, estoqueMod.getIdEstoque());
-        return super.setResultset.next();
-    }
+   
 
     
 }

@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModAcervo;
+import sgbf.modelo.ModAcervosEscritos;
+import sgbf.modelo.ModItemSolicitado;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -89,18 +92,23 @@ public class ConAcervo extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-         ModAcervo acervoMod = (ModAcervo)objecto_remover;
+        ModAcervo acervoMod = (ModAcervo)objecto_remover;
+        ModItemSolicitado itemSolicitadoMod = new ModItemSolicitado();
+        ModAcervosEscritos acervosEscritosMod = new ModAcervosEscritos();
+        ConEstoque estoqueCon = new ConEstoque();
+        ConItemSolicitado itemSolicitadoCon= new ConItemSolicitado();
+        ConAcervosEscreitos acervosEscreitosCon = new ConAcervosEscreitos();
         try{
-            if(this.temDadosRelacionados(acervoMod, operacao)){
-               throw new UtilControloExcessao("Esta operacao não pode ser executada\nO Acervo seleccionado possui registo ! ", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-            }else{
+            if(estoqueCon.remover(acervoMod, operacao)){
                 super.query = "delete from tcc.acervos where idAcervos=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setInt(1,acervoMod.getIdAcervo());
                 return !super.preparedStatement.execute();
+            }else{
+               throw new UtilControloExcessao( operacao,"Erro ao remover estoque ! ", Alert.AlertType.ERROR);
             }
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+           throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -112,6 +120,7 @@ public class ConAcervo extends ConCRUD {
         super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
         return super.setResultset.next();
     }
+  
 
     @Override
     public List<Object> listarTodos(String operacao) {

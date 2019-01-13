@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModItemProveniente;
 import sgbf.util.UtilControloExcessao;
@@ -19,7 +20,8 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  * @author Look
  */
 public class ContItemProveniente extends ConCRUD {
-        @Override
+    
+    @Override
     public boolean registar(Object objecto_registar, String operacao) {
         ModItemProveniente itemProvenienteMod = (ModItemProveniente)objecto_registar;
         try{
@@ -60,15 +62,13 @@ public class ContItemProveniente extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModItemProveniente itemProvenienteMod = (ModItemProveniente)objecto_remover;
         try{
-            super.query = "delete from tcc.itensprovenientes where Estoque_idEstoque=? and Proveniencia_idProveniencia=?";
+            super.query = "delete from tcc.itensprovenientes where Estoque_idEstoque=? or Proveniencia_idProveniencia=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1,itemProvenienteMod.getEstoqueMod().getIdEstoque());
             super.preparedStatement.setInt(2,itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+"!\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+           throw new UtilControloExcessao( operacao, "Erro ao "+operacao+"!\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

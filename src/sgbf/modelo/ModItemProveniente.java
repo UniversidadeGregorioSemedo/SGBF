@@ -27,6 +27,8 @@ public class ModItemProveniente {
         this.quantidade_entrada = 0;
         this.custo_unitario = 0.0;
         this.subtotaltotal = 0.0;
+        this.estoqueMod = new ModEstoque();
+        this.provenienciaMod = new ModProveniencia();
         this.data_registo = String.valueOf(UtilControloDaData.dataActual());
         this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
        
