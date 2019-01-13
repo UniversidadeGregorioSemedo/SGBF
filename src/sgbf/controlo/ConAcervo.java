@@ -2,6 +2,7 @@ package sgbf.controlo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModAcervo;
@@ -21,8 +22,8 @@ public class ConAcervo extends ConCRUD {
         try{
             super.query = "INSERT INTO tcc.acervos (titulo, subtittulo, tipo_acervo, formato, edicao, volume,"
                         + " numero_paginas, codigo_barra, isbn, idioma, ano_lancamento, sinopse, endereco_acervo,"
-                        + " categoria_idcategoria, Editora_idEditora, Estoque_idEstoque)"
-                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        + " categoria_idcategoria, Editora_idEditora)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, acervoMod.getTitulo());
             super.preparedStatement.setString(2, acervoMod.getSub_titulo());
@@ -31,15 +32,18 @@ public class ConAcervo extends ConCRUD {
             super.preparedStatement.setByte(5, acervoMod.getEdicao());
             super.preparedStatement.setByte(6, acervoMod.getVolume());
             super.preparedStatement.setInt(7, acervoMod.getNumero_paginas());
-            //super.preparedStatement.setByte(8, acervoMod.get());
-            //super.preparedStatement.setByte(9, acervoMod.getEdicao());
+            super.preparedStatement.setString(8, acervoMod.getCodigo_barra());
+            super.preparedStatement.setString(9, acervoMod.getIsbn());
             super.preparedStatement.setString(10, acervoMod.getIdioma());
             super.preparedStatement.setInt(11, acervoMod.getAno_lancamento());
-            //super.preparedStatement.setByte(12, acervoMod.getEdicao());
-            //super.preparedStatement.setByte(13, acervoMod.getEdicao());
+            super.preparedStatement.setString(12, acervoMod.getSinopse());
+            super.preparedStatement.setString(13, acervoMod.getEndereco_acervo());
             super.preparedStatement.setInt(14, acervoMod.getCategoriaMod().getIdCategoria());
-            //super.preparedStatement.setByte(15, acervoMod.get());
-            super.preparedStatement.setInt(16, acervoMod.getEstoqueMod().getIdEstoque());
+            if( acervoMod.getEditoraMod().getiEditora() == 0){
+                super.preparedStatement.setNull(15, Types.INTEGER);
+            }else{
+                super.preparedStatement.setInt(15, acervoMod.getEditoraMod().getiEditora());
+            }
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());

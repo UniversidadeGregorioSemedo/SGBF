@@ -109,6 +109,13 @@ public class ModEditora {
         return utilControloDaData;
     }
 
+    @Override
+    public String toString() {
+        return this.nome;
+    }
+
+    
+    
     public void equals(ModEditora editoraMod, String operacao){
         if(this.iEditora != editoraMod.iEditora){
             if(this.nome.equalsIgnoreCase(editoraMod.nome)){

@@ -71,7 +71,6 @@ public class VisCadastramentoAcervo implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        this.bloquearItensDaJanela();
-       this.carregarValorNasComboxs();
        this.tableViewAcervo.setPlaceholder(new Label("Acervos não listados"));
        tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     }    
@@ -88,15 +87,15 @@ public class VisCadastramentoAcervo implements Initializable {
             acervoMod.setEdicao(Byte.valueOf(texteFiedEdicao.getText()), operacao);
             acervoMod.setVolume(Byte.valueOf(texteFiedVolume.getText()), operacao);
             acervoMod.setNumero_paginas(Short.valueOf(texteFiedNumPaginas.getText()), operacao);
-            acervoMod.setAno_lancamento( Integer.valueOf(texteFieldAno.getText()), operacao);
-            acervoMod.setIdioma(comboBoxIdioma.getSelectionModel().getSelectedItem(), operacao);
-            acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setCodigo_barra(texteFiedCodigoBarra.getText(), operacao);
             acervoMod.setIsbn(texteFiedISBN.getText(), operacao);
+            acervoMod.setIdioma(comboBoxIdioma.getSelectionModel().getSelectedItem(), operacao);
+            acervoMod.setAno_lancamento( Integer.valueOf(texteFieldAno.getText()), operacao);
             acervoMod.setSinopse(textAreaSinopese.getText(), operacao);
-            acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
-            acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setEndereco_acervo(texteFiedEndereco.getText(), operacao);
+            acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
+            acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
+            //acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
             if(acervoCon.registar(acervoMod, operacao)){
                this.bloquearItensDaJanela();
                this.limparItensDaJanela();
@@ -177,6 +176,7 @@ public class VisCadastramentoAcervo implements Initializable {
     private void novo(){
         this.desbloquearItensDaJanela();
         this.limparItensDaJanela();
+        this.carregarValorNasComboxs();
     }
     @FXML
     private void cancelar(){
@@ -245,32 +245,68 @@ public class VisCadastramentoAcervo implements Initializable {
         this.texteFiedISBN.setText(null);
         this.textAreaSinopese.setText(null);
         this.texteFiedPesquisar.setText(null);
+        this.comboBoxAutor.getItems().clear();
+        this.comboBoxCategoria.getItems().clear();
+        this.comboBoxEditora.getItems().clear();
+        this.comboBoxEstante.getItems().clear();
+        this.comboBoxFormato.getItems().clear();
+        this.comboBoxIdioma.getItems().clear();
+        this.comboBoxTipo.getItems().clear();
         this.tableViewAcervo.getItems().clear();
     }
    
     private void carregarValorNasComboxs(){
         ConEditora editoraCon = new ConEditora();
+        ConEstante estanteCon = new ConEstante();
+        ConCategoria categoriaCon = new ConCategoria();
         ConAutor autorCon = new ConAutor();
+        this.comboBoxTipo.getItems().addAll("Monografia", "Jornal", "Livro", "Revista", "Apostilha");
+        this.comboBoxFormato.getItems().addAll("Digital", "Físico");
+        this.comboBoxIdioma.getItems().addAll("Protuguês","Inglês","Outra");
         List<ModEditora> todasEditoras = new ArrayList<>();
+        List<ModEstante> todasEstante = new ArrayList<>();
+        List<ModCategoria> todasCategorias = new ArrayList<>();
         List<ModAutor> todosAutores = new ArrayList<>();
-        ObservableList todasEditorasParaCombox =null;
-        ObservableList todasAutoresParaCombox =null;
-        
-        for(Object todosRegistos: editoraCon.listarTodos("Cadastramento de Estante")){
+        ObservableList todasEditorasParaCombox = null;
+        ObservableList todasEstanteParaCombox = null;
+        ObservableList todasCategoriasPAraCombox = null;
+        ObservableList todasAutoresParaCombox = null;
+        //Listar Editoras
+        for(Object todosRegistos: editoraCon.listarTodos(operacao)){
             ModEditora editoraRegistada = (ModEditora)todosRegistos;
             todasEditoras.add(editoraRegistada);
         }
         todasEditorasParaCombox = FXCollections.observableArrayList(todasEditoras);
         this.comboBoxEditora.setItems(todasEditorasParaCombox);
-      
-        for(Object todosRegistos: autorCon.listarTodos("Cadastramento de Estante")){
+        //Listar Estantes
+        for(Object todosRegistos: estanteCon.listarTodos(operacao)){
+            ModEstante estanteMod = (ModEstante)todosRegistos;
+            todasEstante.add(estanteMod);
+        }
+        todasEstanteParaCombox = FXCollections.observableArrayList(todasEstante);
+        this.comboBoxEstante.setItems(todasEstanteParaCombox);
+        //Listar as categorias
+        if(categoriaCon.listarTodos(operacao).isEmpty()){
+            this.AnchorPaneAcervo.setVisible(false);
+            throw new UtilControloExcessao(operacao, "Não há registo de Categorias", Alert.AlertType.WARNING);
+        }else{
+            for(Object todosRegistos: categoriaCon.listarTodos(operacao)){
+                ModCategoria categoriaMod = (ModCategoria)todosRegistos;
+                todasCategorias.add(categoriaMod);
+            }
+            todasCategoriasPAraCombox = FXCollections.observableArrayList(todasCategorias);
+            this.comboBoxCategoria.setItems(todasCategoriasPAraCombox);
+        }
+        //Listar Autores
+        for(Object todosRegistos: autorCon.listarTodos(operacao)){
             ModAutor autorRegistado = (ModAutor)todosRegistos;
             todosAutores.add(autorRegistado);
         }
         todasAutoresParaCombox = FXCollections.observableArrayList(todosAutores);
         this.comboBoxAutor.setItems(todasAutoresParaCombox);
+        
     }
-
+    
     
     private void exibirDadosNosCampos(ModAcervo acervoMod){
         if(tableViewAcervo.getSelectionModel().getSelectedCells().size() == 1){

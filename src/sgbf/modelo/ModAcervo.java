@@ -5,6 +5,7 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -219,7 +220,11 @@ public class  ModAcervo {
     }
 
     public void setEditoraMod(ModEditora editoraMod, String operacao) {
-        this.editoraMod = editoraMod;
+        if(editoraMod == null){
+            editoraMod = new ModEditora();
+        }else{
+            this.editoraMod = editoraMod;
+        }
     }
 
      public String getEndereco_acervo() {
@@ -227,12 +232,18 @@ public class  ModAcervo {
     }
 
     public void setEndereco_acervo(String endereco_acervo, String operacao) {
-        if(endereco_acervo == null){
-            throw new UtilControloExcessao("Erro ao inserir Imagem", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }else{
-            if(endereco_acervo.isEmpty()){
-                throw new UtilControloExcessao("Erro ao inserir Imagem", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+        if(this.formato.equalsIgnoreCase("Digital")){
+            if(endereco_acervo == null){
+                throw new UtilControloExcessao( operacao,"Erro ao inserir Imagem",Alert.AlertType.WARNING);
             }else{
+                if(endereco_acervo.isEmpty()){
+                    throw new UtilControloExcessao( operacao,"Erro ao inserir Imagem",Alert.AlertType.WARNING);
+                }else{
+                    this.endereco_acervo = endereco_acervo;
+                }
+            }
+        }else{
+            if(this.formato.equalsIgnoreCase("Físico")){
                 this.endereco_acervo = endereco_acervo;
             }
         }
@@ -255,11 +266,12 @@ public class  ModAcervo {
     }
 
     public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
-        this.categoriaMod = categoriaMod;
+        if(this.categoriaMod == null){
+            throw new UtilControloExcessao(operacao, "Seleccione a Categoria !", Alert.AlertType.INFORMATION);
+        }else{
+            this.categoriaMod = categoriaMod;
+        }
     }
-    
-    
-    
     
     public ModCategoria getCategoriaMod() {
         return categoriaMod;

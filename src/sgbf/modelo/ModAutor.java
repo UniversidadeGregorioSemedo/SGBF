@@ -112,6 +112,14 @@ public class ModAutor {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return nomeCompleto;
+    }
+    
+    
+    
     
     public boolean equals(ModAutor autorMod, String operacao){
         if(this.idAutor != autorMod.idAutor){

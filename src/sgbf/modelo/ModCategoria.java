@@ -51,6 +51,13 @@ public class ModCategoria {
         }
     }
 
+    @Override
+    public String toString() {
+        return designacao ;
+    }
+
+    
+    
     public ModEstante getEstanteMod() {
         return estanteMod;
     }
