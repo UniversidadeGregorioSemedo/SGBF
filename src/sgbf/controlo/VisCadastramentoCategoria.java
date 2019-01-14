@@ -172,14 +172,20 @@ public class VisCadastramentoCategoria implements Initializable {
         ConEstante estanteCon = new ConEstante();
         List<ModEstante> todasEstantes = new ArrayList<>();
         ObservableList todasEstantesParaCombox =null;
-        for(Object todosRegistos: estanteCon.listarTodos("Cadastramento de Categoria")){
+        
+        if(estanteCon.listarTodos("Cadastramento de categoria").isEmpty()){
+            this.AnchorPaneCategoria.setVisible(false);
+            throw new UtilControloExcessao("Cadastramento da Categoria", "Esta operação naõ poder ser executada\n Não há registo de Estantes !", Alert.AlertType.WARNING);
+        }else{
+            for(Object todosRegistos: estanteCon.listarTodos("Cadastramento de Categoria")){
             ModEstante estanteRegistada = (ModEstante)todosRegistos;
             todasEstantes.add(estanteRegistada);
-        }
-        todasEstantesParaCombox = FXCollections.observableArrayList(todasEstantes);
-        this.comboBoxEstante.setItems(todasEstantesParaCombox);
+            }
+            todasEstantesParaCombox = FXCollections.observableArrayList(todasEstantes);
+            this.comboBoxEstante.setItems(todasEstantesParaCombox);
+        }    
     }
-
+    
     private void exibirDadosNosCampos(ModCategoria categoriaMod){
         if(tableViewCategoria.getSelectionModel().getSelectedCells().size() == 1){
             texteFiedDesigancao.setText(String.valueOf(categoriaMod.getDesignacao()));
