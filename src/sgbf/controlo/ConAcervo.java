@@ -124,8 +124,8 @@ public class ConAcervo extends ConCRUD {
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
-        /*try{
-            super.query = "select * from tcc.acervos order by titulo, data_modificacao asc";
+        try{
+            super.query = "select * from tcc.view_acervoComEstoque order by titulo, data_modificacao asc";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
@@ -133,9 +133,8 @@ public class ConAcervo extends ConCRUD {
             }
             return todosRegistos;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Acervo(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }*/
-        return todosRegistos;
+            throw new UtilControloExcessao( operacao, "Erro ao "+operacao+" Acervo(s) !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
+        }
     }
 
     @Override
@@ -143,7 +142,7 @@ public class ConAcervo extends ConCRUD {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         ModAcervo acervoeMod = (ModAcervo)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.acervos where idAcervos=? or "
+            super.query = "select * from tcc.view_acervoComEstoque where idAcervos=? or "
                         + "titulo like '%"+acervoeMod.getTitulo()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, acervoeMod.getIdAcervo());
@@ -177,6 +176,11 @@ public class ConAcervo extends ConCRUD {
         if(setResultset.getString("Editora_idEditora")!= null){
             acervoMod.getEditoraMod().setiEditora(setResultset.getInt("Editora_idEditora"), operacao);
         }
+        acervoMod.getEstoqueMod().setIdEstoque(setResultset.getInt("idAcervos"), operacao);
+        acervoMod.getEstoqueMod().setQuantidade_total(setResultset.getShort("quantidade_total"), operacao);
+        acervoMod.getEstoqueMod().setQuantidade_em_falta(setResultset.getShort("quantidade_em_falta"), operacao);
+        acervoMod.getEstoqueMod().setQuantidade_acervos_emprestados(setResultset.getShort("quantidade_acervos_emprestados"), operacao);
+        acervoMod.getEstoqueMod().setQuantidade_acervos_resercados(setResultset.getShort("quantidade_acervos_reservados"), operacao);
         acervoMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         acervoMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return acervoMod;

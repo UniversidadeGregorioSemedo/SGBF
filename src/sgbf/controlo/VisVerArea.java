@@ -7,6 +7,7 @@ package sgbf.controlo;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModArea;
+import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
 
@@ -44,7 +46,9 @@ public class VisVerArea implements Initializable {
     @FXML
     private TableView<ModArea> tableViewArea; 
     @FXML
-    private TableColumn<ModArea, String> tableColumSector,tableColumIDataRegisto,tableColumNmeroDataModificacao;
+    private TableColumn<ModArea, String> tableColumSector;
+    @FXML
+    private TableColumn<UtilControloDaData, Timestamp> tableColumIDataRegisto,tableColumNmeroDataModificacao;
     @FXML
     private TableColumn<ModArea, Integer> tableColumId;
     @FXML
