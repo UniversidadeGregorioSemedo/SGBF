@@ -120,7 +120,6 @@ public class ModAutor {
     
     
     
-    
     public boolean equals(ModAutor autorMod, String operacao){
         if(this.idAutor != autorMod.idAutor){
             if(this.contacto.equalsIgnoreCase(autorMod.contacto)){

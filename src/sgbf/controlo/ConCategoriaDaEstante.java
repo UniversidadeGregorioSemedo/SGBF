@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModCategoriaDaEstante;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
@@ -96,21 +97,17 @@ public class ConCategoriaDaEstante extends ConCRUD {
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
-        /*try{
-            super.query = "select * from tcc.Estante designacao by nome, data_modificacao asc";
+        try{
+            super.query = "select * from view_CategoriaDaEstante";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
                 todosRegistos.add(this.pegarRegistos(super.setResultset,operacao));
-                return todosRegistos;
             }
+            return todosRegistos;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Estante(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
-        */
-        return todosRegistos;
     }
 
     @Override
@@ -137,17 +134,14 @@ public class ConCategoriaDaEstante extends ConCRUD {
     }
     
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
-        ModEstante estanteMod = new ModEstante();
-        /*estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
-        estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
-        estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
-        estanteMod.setLinha(setResultset.getByte("linha"), operacao);
-        estanteMod.setColuna(setResultset.getByte("coluna"), operacao);
-        estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
-        estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
-        */
-        return estanteMod;
+        ModCategoria categoriaMod = new ModCategoria();
+        categoriaMod.setIdCategoria(setResultset.getInt("idcategoria"), operacao);
+        categoriaMod.getEstanteMod().setIdEstante(setResultset.getInt("idEstante"), operacao);
+        categoriaMod.setDesignacao(setResultset.getString("categoria"), operacao);
+        categoriaMod.getEstanteMod().setDesignacao(setResultset.getString("estante"), operacao);
+        categoriaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
+        categoriaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        return categoriaMod;
     }
 
 }

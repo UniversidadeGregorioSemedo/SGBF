@@ -181,6 +181,19 @@ public class ConAcervo extends ConCRUD {
         acervoMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return acervoMod;
     }
-
     
+    public Integer proximoCodigoASerRegistado(String operacao) {
+        try{
+            super.query= "select max(idAcervos) from acervos";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.setResultset  = super.preparedStatement.executeQuery();
+            if(super.setResultset.next()){
+                return super.setResultset.getInt("max(idAcervos)")+1;
+            }else{
+                return 1;
+            }
+        }catch(SQLException ex){
+            throw new UtilControloExcessao(operacao,"Erro ao Listar Código do Acervos!\nErro: "+ex.getMessage(),Alert.AlertType.ERROR);
+        }
+    }
 }

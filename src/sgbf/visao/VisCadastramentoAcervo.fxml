@@ -79,11 +79,11 @@
                         <TextField fx:id="texteFiedCodigoBarra" layoutX="70.0" layoutY="117.0" prefHeight="25.0" prefWidth="185.0" />
                         <Label layoutX="598.0" layoutY="166.0" text="Sinopse:" />
                         <Label layoutX="16.0" layoutY="177.0" prefHeight="17.0" prefWidth="42.0" text="Autor" />
-                        <ComboBox fx:id="comboBoxAutor" layoutX="74.0" layoutY="189.0" prefHeight="25.0" prefWidth="480.0" promptText="Seleccione o autor" />
+                        <ComboBox fx:id="comboBoxAutor" layoutX="70.0" layoutY="171.0" prefHeight="25.0" prefWidth="480.0" promptText="Seleccione o autor" />
                         <JFXTextArea fx:id="textAreaSinopese" layoutX="665.0" layoutY="173.0" prefHeight="73.0" prefWidth="367.0" />
                         <Button disable="true" layoutX="575.0" layoutY="221.0" mnemonicParsing="false" text="Carregar" />
                         <Label layoutX="586.0" layoutY="121.0" text="Estante" />
-                        <ComboBox fx:id="comboBoxEstante" layoutX="682.0" layoutY="113.0" prefWidth="150.0" promptText="Seleccione a estante" />
+                        <ComboBox fx:id="comboBoxEstante" layoutX="682.0" layoutY="113.0" onAction="#categoriasDaEstante" prefWidth="150.0" promptText="Seleccione a estante" />
                         <Label layoutX="841.0" layoutY="117.0" text="Categoria" />
                         <ComboBox fx:id="comboBoxCategoria" layoutX="909.0" layoutY="113.0" prefHeight="25.0" prefWidth="138.0" promptText="Seleccione a categoria" />
                      </children>

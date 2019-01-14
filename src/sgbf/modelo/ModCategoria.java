@@ -8,7 +8,6 @@ package sgbf.modelo;
 import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -23,7 +22,7 @@ public class ModCategoria {
     public ModCategoria(){
         this.idCategoria = 0;
         this.designacao = null;
-        this.estanteMod = null;
+        this.estanteMod = new ModEstante();
         this.utilControloDaData = new UtilControloDaData();
     }
 
