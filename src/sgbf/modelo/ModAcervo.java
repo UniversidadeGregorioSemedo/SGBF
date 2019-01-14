@@ -172,7 +172,7 @@ public class  ModAcervo {
 
     public void setAno_lancamento(Integer ano_lancamento, String operacao) {
         if(volume <= 0){
-            throw new UtilControloExcessao("O ano de lançamento é inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("O ano de lançamento é inválido !", operacao, Alert.AlertType.WARNING);
         }else{
             this.ano_lancamento = ano_lancamento;
         }
@@ -234,10 +234,10 @@ public class  ModAcervo {
     public void setEndereco_acervo(String endereco_acervo, String operacao) {
         if(this.formato.equalsIgnoreCase("Digital")){
             if(endereco_acervo == null){
-                throw new UtilControloExcessao( operacao,"Erro ao inserir Imagem",Alert.AlertType.WARNING);
+                throw new UtilControloExcessao( operacao,"Introduza o Acervo",Alert.AlertType.WARNING);
             }else{
                 if(endereco_acervo.isEmpty()){
-                    throw new UtilControloExcessao( operacao,"Erro ao inserir Imagem",Alert.AlertType.WARNING);
+                throw new UtilControloExcessao( operacao,"Introduza o Acervo",Alert.AlertType.WARNING);
                 }else{
                     this.endereco_acervo = endereco_acervo;
                 }
@@ -286,29 +286,4 @@ public class  ModAcervo {
         return utilControloDaData;
     }
     
-    enum tipo_acervo{
-        Monografia("Monografia"),Jornal("Jornal"), Livro("Livro"), Revista("Revista"), Apostilha("Apostilha"), Trabalho("Trabalho");
-        private String tipo_acervo = null;
-        
-        private tipo_acervo(String tipo){
-            this.tipo_acervo = tipo;
-        }
-        
-        public String getTipoAcervo(){
-            return this.tipo_acervo;
-        }
-    }
-    
-    enum formato{
-        Fisico("Físico"), Digital("Digital");
-        private String formato = null;
-        
-        private formato(String formato){
-            this.formato = formato;
-        }
-        
-        public String getFormato(){
-            return this.formato;
-        }
-    }
 }

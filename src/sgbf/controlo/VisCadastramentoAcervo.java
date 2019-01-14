@@ -21,6 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModAutor;
 import sgbf.modelo.ModCategoria;
@@ -39,7 +41,7 @@ public class VisCadastramentoAcervo implements Initializable {
     @FXML
     private JFXButton botaoPesquisar;
     @FXML
-    private Button botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoSair;
+    private Button botaoCarregar,botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoSair;
     @FXML
     private TextField texteFiedPesquisar,texteFiedTitulo, texteFiedSubTitulo, texteFiedEdicao,
             texteFiedVolume, texteFiedNumPaginas, texteFieldAno, texteFiedCodigoBarra, texteFiedISBN,
@@ -173,6 +175,16 @@ public class VisCadastramentoAcervo implements Initializable {
         }
     }
     
+   
+    @FXML
+    private void carregarAcervo(){
+        FileChooser carregarAcervo = new FileChooser();
+        carregarAcervo.setTitle("Seleccione o Acervo");
+        Stage propriedadeDaJanela = (Stage) AnchorPaneAcervo.getScene().getWindow();
+        String enderecoAcervo=carregarAcervo.showOpenDialog(propriedadeDaJanela).getName();
+        texteFiedEndereco.setText(enderecoAcervo);
+    }
+    
     @FXML
     private void novo(){
         this.desbloquearItensDaJanela();
@@ -226,9 +238,11 @@ public class VisCadastramentoAcervo implements Initializable {
         this.texteFiedCodigoBarra.setDisable(true);
         this.texteFiedISBN.setDisable(true);
         this.textAreaSinopese.setDisable(true);
+        this.texteFiedEndereco.setDisable(true);
         this.comboBoxAutor.setDisable(true);
         this.comboBoxEstante.setDisable(true);
         this.comboBoxCategoria.setDisable(true);
+        this.botaoCarregar.setDisable(true);
         this.botaoNovo.setDisable(false);
         this.botaoCadastrar.setDisable(true);
         this.botaoAlterar.setDisable(true);
@@ -246,6 +260,7 @@ public class VisCadastramentoAcervo implements Initializable {
         this.texteFiedISBN.setText(null);
         this.textAreaSinopese.setText(null);
         this.texteFiedPesquisar.setText(null);
+        this.texteFiedEndereco.setText(null);
         this.comboBoxAutor.getItems().clear();
         this.comboBoxCategoria.getItems().clear();
         this.comboBoxEditora.getItems().clear();
@@ -327,6 +342,7 @@ public class VisCadastramentoAcervo implements Initializable {
             this.texteFiedCodigoBarra.setText(acervoMod.getCodigo_barra());
             this.texteFiedISBN.setText(acervoMod.getIsbn());
             this.textAreaSinopese.setText(acervoMod.getSinopse());
+            this.texteFiedEndereco.setText(acervoMod.getEndereco_acervo());
             comboBoxTipo.getSelectionModel().select(acervoMod.getTipo_acervo());
             comboBoxFormato.getSelectionModel().select(acervoMod.getFormato());
             comboBoxIdioma.getSelectionModel().select(acervoMod.getIdioma());
@@ -412,6 +428,21 @@ public class VisCadastramentoAcervo implements Initializable {
                 }
                 todasCategoriasPAraCombox = FXCollections.observableArrayList(todasCategorias);
                 this.comboBoxCategoria.setItems(todasCategoriasPAraCombox);
+            }
+        }
+    }
+    
+    @FXML
+    private void introduzirEndereco(){
+        if(this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Físico")){
+            texteFiedEndereco.setText(null);
+            texteFiedEndereco.setDisable(true);
+            botaoCarregar.setDisable(true);
+        }else{
+            if(this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Digital")){
+                texteFiedEndereco.setDisable(false);
+                texteFiedEndereco.setEditable(false);
+                botaoCarregar.setDisable(false);
             }
         }
     }
