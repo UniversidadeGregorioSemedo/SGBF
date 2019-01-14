@@ -44,9 +44,16 @@ public class ModProveniencia {
         this.tipo = tipo;
     }
 
+    @Override
+    public String toString() {
+        return tipo;
+    }
+
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
     }
+    
+    
     
     public void equals(ModProveniencia provenienciaMod, String operacao){
         if(this.idProveniencia != provenienciaMod.getIdProveniencia()){
@@ -55,18 +62,6 @@ public class ModProveniencia {
             }
         }
     }
-    
-    enum Tipo{
-        DOACAO("Doação"),COMPRA("Compra"), OUTROS("Outros");
-        private String tipo;
-        
-        private Tipo(String tipo){
-            this.tipo = tipo;
-        }
-        
-        private String getTipo(){
-            return this.tipo;
-        }
-    }
+   
     
 }

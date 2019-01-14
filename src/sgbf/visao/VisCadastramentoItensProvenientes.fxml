@@ -87,7 +87,7 @@
                   <Button fx:id="botaoRemover" layoutX="447.0" layoutY="241.0" mnemonicParsing="false" onAction="#removerProveniencia" prefHeight="25.0" prefWidth="68.0" text="Remover" />
                   <Button fx:id="botaoNovo" layoutX="447.0" layoutY="203.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="68.0" text="Novo" />
                   <Label layoutX="442.0" layoutY="53.0" text="Tipo de Proveniencia" />
-                  <ComboBox fx:id="comboProveniencia" layoutX="557.0" layoutY="49.0" prefWidth="150.0" />
+                  <ComboBox fx:id="comboxProveniencia" layoutX="557.0" layoutY="49.0" prefWidth="150.0" promptText="Sel. Proveniencia" />
                   <Button fx:id="botaoCadastrar" layoutX="543.0" layoutY="203.0" mnemonicParsing="false" onAction="#cadastrarProveniencia" prefHeight="25.0" prefWidth="68.0" text="Cadastrar" />
                </children>
             </AnchorPane>

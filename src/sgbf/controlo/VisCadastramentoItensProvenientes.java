@@ -49,7 +49,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private TextField texteFiedPesquisarAcervo, texteFiedPesquisarEntrada, texteFiedQuantidade,
             texteFiedSubtotal;
     @FXML
-    private ComboBox<ModProveniencia> comboProveniencia;
+    private ComboBox<ModProveniencia> comboxProveniencia;
     @FXML
     private TableView<ModItemProveniente> tableViewItemProveniente;
     @FXML
@@ -74,7 +74,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //this.bloquearItensDaJanela();
+        this.bloquearItensDaJanela();
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listadas"));
         this.tableViewItemProveniente.setPlaceholder(new Label("Entradas não listadas"));
         tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCamposAcervo(newValue));
@@ -157,6 +157,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private void novo() {
         this.desbloquearItensDaJanela();
         this.limparItensDaJanela();
+        this.carregarValorNasComboxs();
     }
 
     @FXML
@@ -174,7 +175,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private void desbloquearItensDaJanela() {
         this.texteFiedQuantidade.setDisable(false);
         this.texteFiedSubtotal.setDisable(false);
-        this.comboProveniencia.setDisable(false);
+        this.comboxProveniencia.setDisable(false);
         this.botaoNovo.setDisable(true);
         this.botaoCadastrar.setDisable(false);
     }
@@ -182,7 +183,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private void bloquearItensDaJanela() {
         this.texteFiedQuantidade.setDisable(true);
         this.texteFiedSubtotal.setDisable(true);
-        this.comboProveniencia.setDisable(true);
+        this.comboxProveniencia.setDisable(true);
         this.botaoNovo.setDisable(false);
         this.botaoCadastrar.setDisable(true);
         this.botaoAlterar.setDisable(true);
@@ -194,15 +195,34 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         this.texteFiedPesquisarEntrada.setText(null);
         this.texteFiedQuantidade.setText(null);
         this.texteFiedSubtotal.setText(null);
-        this.comboProveniencia.getItems().clear();
+        this.comboxProveniencia.getItems().clear();
         this.tableViewAcervo.getItems().clear();
         this.tableViewItemProveniente.getItems().clear();
+    }
+    
+    private void carregarValorNasComboxs(){
+        ConProveniencia provenienciaCon = new ConProveniencia();
+        List<ModProveniencia> todasProveniencias = new ArrayList<>();
+        ObservableList todasProvenienciasParaCombox = null;        
+        todasProveniencias.add(new ModProveniencia());
+        for(Object todosRegistos: provenienciaCon.listarTodos(operacao)){
+            ModProveniencia provenienciaRegistada = (ModProveniencia)todosRegistos;
+            todasProveniencias.add(provenienciaRegistada);
+        }
+        todasProvenienciasParaCombox = FXCollections.observableArrayList(todasProveniencias);
+        this.comboxProveniencia.setItems(todasProvenienciasParaCombox);
     }
 
     private void exibirDadosNosCamposAcervo(ModAcervo acervo) {
        
-        /*if (tableViewArea.getSelectionModel().getSelectedCells().size() == 1) {
-            texteFiedSector.setText(areaMod.getSector());
+        if (tableViewAcervo.getSelectionModel().getSelectedCells().size() == 1) {
+            this.carregarValorNasComboxs();
+            /*for(int i=0; i<comboxProveniencia.getItems().size();i++){
+                comboxProveniencia.getSelectionModel().select(i);
+                if(acervoMod.getCategoriaMod().getIdCategoria()== comboxProveniencia.getSelectionModel().getSelectedItem().getIdProveniencia()){
+                    break;
+                }
+            }*/
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
             this.desbloquearItensDaJanela();
@@ -213,7 +233,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             botaoRemover.setDisable(true);
             botaoNovo.setDisable(false);
             this.limparItensDaJanela();
-        }*/
+        }
     }
     
     private void exibirDadosNosProveniencias(ModArea areaMod) {
