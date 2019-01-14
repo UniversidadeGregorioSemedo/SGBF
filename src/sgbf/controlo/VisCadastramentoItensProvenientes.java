@@ -49,11 +49,14 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private TextField texteFiedPesquisarAcervo, texteFiedPesquisarEntrada, texteFiedQuantidade,
             texteFiedSubtotal;
     @FXML
-    private TableView<ModAcervo> tableViewAcervo;
-    @FXML
     private ComboBox<ModProveniencia> comboProveniencia;
     @FXML
     private TableView<ModItemProveniente> tableViewItemProveniente;
+    @FXML
+    private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente,tableColumQuantidadeEntrada,
+            tableColumCustoUnitario,tableColumSubTotal;
+    @FXML
+    private TableView<ModAcervo> tableViewAcervo;
     @FXML
     private TableColumn<ModAcervo, Integer> tableColumId,tableColumEdicao, tableColumAno;
     @FXML
@@ -114,26 +117,26 @@ public class VisCadastramentoItensProvenientes implements Initializable {
 
     @FXML
     private void pesquisarProveniencia() {
-        /*operacao = "Pesquisar Area";
+        operacao = "Pesquisar Entradas";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        if (this.texteFiedPesquisar.getText().isEmpty()) {
-            throw new UtilControloExcessao(operacao, "Introduza o código ou Sector do Area", Alert.AlertType.INFORMATION);
+        if (this.texteFiedPesquisarEntrada.getText().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Introduza o código ou título do Acervo", Alert.AlertType.INFORMATION);
         } else {
-            todosRegistosEncontrados = this.areaCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
+            todosRegistosEncontrados = this.itemProvenienteCon.pesquisar(this.pegarDadosDaPesquisaProveniencia(), operacao);
             if (todosRegistosEncontrados.isEmpty()) {
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
-                throw new UtilControloExcessao(operacao, "Area não encontrada", Alert.AlertType.INFORMATION);
+                throw new UtilControloExcessao(operacao, "Não há registo de entradas", Alert.AlertType.INFORMATION);
             } else {
-                this.carregarResultadosNaTablea(todosRegistosEncontrados);
+                this.carregarResultadosNaTableaProveniencia(todosRegistosEncontrados);
                 this.bloquearItensDaJanela();
             }
-        }*/
+        }
     }
     
     @FXML
     private void pesquisarAcervos() {
-         operacao = "Pesquisar Acervos";
+        operacao = "Pesquisar Acervos";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         if(this.texteFiedPesquisarAcervo.getText().isEmpty()){
            throw new UtilControloExcessao(operacao, "Introduza o código ou título do acervos", Alert.AlertType.INFORMATION);
@@ -229,16 +232,15 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         }*/
     }
 
-    private ModArea pegarDadosDaPesquisaProveniencia() {
-       /* if (UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())) {
-            areaMod.setIdArea(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
-            areaMod.setSector(this.texteFiedPesquisar.getText(), operacao);
-            return areaMod;
+    private ModItemProveniente pegarDadosDaPesquisaProveniencia() {
+       if (UtilValidarDados.eNumero(this.texteFiedPesquisarEntrada.getText())) {
+            itemProvenienteMod.getAcervoMod().setIdAcervo(Integer.valueOf(this.texteFiedPesquisarEntrada.getText()), operacao);
+            itemProvenienteMod.getAcervoMod().setTitulo(this.texteFiedPesquisarEntrada.getText(), operacao);
+            return itemProvenienteMod;
         } else {
-            areaMod.setSector(this.texteFiedPesquisar.getText(), operacao);
-            return areaMod;
-        }*/
-       return null;
+            itemProvenienteMod.getAcervoMod().setTitulo(this.texteFiedPesquisarEntrada.getText(), operacao);
+            return itemProvenienteMod;
+        }
     }
     
     private ModAcervo pegarDadosDaPesquisaAcervo(){
@@ -269,21 +271,31 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     }
     
     private void carregarResultadosNaTableaProveniencia(List<Object> todosRegistosEncontrados) {
-        /*tableColumId.setCellValueFactory(new PropertyValueFactory<>("idArea"));
-        tableColumSector.setCellValueFactory(new PropertyValueFactory<>("sector"));
-        tableColumIDataRegisto.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModArea,String>, ObservableValue<String>>() {
+        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModArea, String> data) {
-                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_registo());
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
+                return new ReadOnlyStringWrapper(item.getValue().getAcervoMod().getTitulo());
             }
         });
-        tableColumNmeroDataModificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModArea,String>, ObservableValue<String>>() {
+        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModArea, String> data) {
-                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_modificacao());
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
+                return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getQuantidade_entrada()));
             }
         });
-        tableViewArea.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));*/
+        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
+                return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getCusto_unitario()));
+            }
+        });
+        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
+                return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getSubTotal()));
+            }
+        });
+        tableViewItemProveniente.setItems(this.todosRegistosParaCarregarProveniencia(todosRegistosEncontrados));
     }
 
     private ObservableList<ModAcervo> todosRegistosParaCarregarAcervo(List<Object> todosRegistosEncontrados){
@@ -295,13 +307,13 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
       
-    private ObservableList<ModArea> todosRegistosParaCarregarProveniencia(List<Object> todosRegistosEncontrados) {
-        List<ModArea> listaDosRegistosWncontrados = new ArrayList<>();
-        for (Object utenteRegistado : todosRegistosEncontrados) {
-            ModArea areaMod = (ModArea) utenteRegistado;
-            listaDosRegistosWncontrados.add(areaMod);
+    private ObservableList<ModItemProveniente> todosRegistosParaCarregarProveniencia(List<Object> todosRegistosEncontrados) {
+        List<ModItemProveniente> listaDosRegistosEncontrados = new ArrayList<>();
+        for (Object entradasRegistadas : todosRegistosEncontrados) {
+            ModItemProveniente itemProvenienteMod = (ModItemProveniente) entradasRegistadas;
+            listaDosRegistosEncontrados.add(itemProvenienteMod);
         }
-        return FXCollections.observableArrayList(listaDosRegistosWncontrados);
+        return FXCollections.observableArrayList(listaDosRegistosEncontrados);
     }
 
 }

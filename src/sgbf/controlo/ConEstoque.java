@@ -67,7 +67,7 @@ public class ConEstoque extends ConCRUD {
         ModAcervo acervoMod = (ModAcervo)objecto_remover;
         ModItemProveniente itemProvenienteMod = new ModItemProveniente();
         ContItemProveniente itemProvenienteCon = new ContItemProveniente();
-        itemProvenienteMod.setEstoqueMod(acervoMod.getEstoqueMod(), operacao);
+        itemProvenienteMod.setAcervoMod(acervoMod, operacao);
         try{
             if(itemProvenienteCon.remover(itemProvenienteMod, operacao)){
                 super.query = "delete from estoque where Acervos_idAcervos=?";

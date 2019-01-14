@@ -28,7 +28,7 @@ public class ContItemProveniente extends ConCRUD {
             super.query = "INSERT INTO tcc.itensprovenientes (Estoque_idEstoque, Proveniencia_idProveniencia, quantidade_entrada, subtotal)"
                         + " VALUES (?, ?, ?, ?);";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, itemProvenienteMod.getEstoqueMod().getIdEstoque());
+            super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
             super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
             super.preparedStatement.setInt(3, itemProvenienteMod.getQuantidade_entrada());
             super.preparedStatement.setDouble(4, itemProvenienteMod.getSubTotal());
@@ -48,7 +48,7 @@ public class ContItemProveniente extends ConCRUD {
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, itemProvenienteMod.getQuantidade_entrada());
             super.preparedStatement.setDouble(2, itemProvenienteMod.getSubTotal());
-            super.preparedStatement.setInt(3, itemProvenienteMod.getEstoqueMod().getIdEstoque());
+            super.preparedStatement.setInt(3, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
             super.preparedStatement.setInt(4, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
@@ -64,7 +64,7 @@ public class ContItemProveniente extends ConCRUD {
         try{
             super.query = "delete from tcc.itensprovenientes where Estoque_idEstoque=? or Proveniencia_idProveniencia=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,itemProvenienteMod.getEstoqueMod().getIdEstoque());
+            super.preparedStatement.setInt(1,itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
             super.preparedStatement.setInt(2,itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
@@ -94,36 +94,30 @@ public class ContItemProveniente extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        /*ModEstante estanteMod = (ModEstante)objecto_pesquisar;
+        ModItemProveniente itemProvenienteMod = (ModItemProveniente)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.Estante where idEstante=? or "
-                        + "designacao like '%"+estanteMod.getDesignacao()+"%'";
+            super.query = "select * from tcc.view_itensProvenientes where idAcervos=? or "
+                        + "titulo like '%"+itemProvenienteMod.getAcervoMod().getTitulo()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+            super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getIdAcervo());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }*/
-        return todosRegistosEncontrados;
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Entrada de Acervos !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
+        }
     }
     
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
-        ModEstante estanteMod = new ModEstante();
-        estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
-        estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
-        estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
-        estanteMod.setLinha(setResultset.getByte("linha"), operacao);
-        estanteMod.setColuna(setResultset.getByte("coluna"), operacao);
-        estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
-        estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
-        return estanteMod;
+        ModItemProveniente itemProvenienteMod = new ModItemProveniente();
+        itemProvenienteMod.getAcervoMod().setIdAcervo(setResultset.getInt("idAcervos"), operacao);
+        itemProvenienteMod.getAcervoMod().setTitulo(setResultset.getString("titulo"), operacao);
+        itemProvenienteMod.setQuantidade_entrada(setResultset.getShort("quantidade_entrada"), operacao);
+        itemProvenienteMod.setCusto_unitario(setResultset.getDouble("custo_unitario"), operacao);
+        itemProvenienteMod.setSubTotal(setResultset.getDouble("subtotal"), operacao);
+        return itemProvenienteMod;
     }
 
     

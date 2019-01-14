@@ -57,7 +57,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <TextField fx:id="texteFiedPesquisarEntrada" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="223.0" />
-                  <JFXButton layoutX="237.0" layoutY="11.0" onAction="#pesquisarProveniencia" text=" ">
+                  <JFXButton fx:id="botaoPesquisarEntrada" layoutX="237.0" layoutY="11.0" onAction="#pesquisarProveniencia" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -68,10 +68,10 @@
                   </JFXButton>
                   <TableView fx:id="tableViewItemProveniente" layoutX="14.0" layoutY="49.0" prefHeight="221.0" prefWidth="417.0">
                     <columns>
-                      <TableColumn prefWidth="179.0" text="Titulo" />
-                      <TableColumn prefWidth="95.0" text="Quantidade" />
-                        <TableColumn prefWidth="72.0" text="Custo U." />
-                        <TableColumn prefWidth="70.0" text="Subtotal" />
+                      <TableColumn fx:id="tableColumTituloProvaniente" prefWidth="179.0" text="Titulo" />
+                      <TableColumn fx:id="tableColumQuantidadeEntrada" prefWidth="95.0" text="Quantidade" />
+                        <TableColumn fx:id="tableColumCustoUnitario" prefWidth="72.0" text="Custo U." />
+                        <TableColumn fx:id="tableColumSubTotal" prefWidth="70.0" text="Subtotal" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

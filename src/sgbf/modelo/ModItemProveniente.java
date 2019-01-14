@@ -14,7 +14,7 @@ import sgbf.util.UtilControloDaData;
 public class ModItemProveniente {
     
     
-    private ModEstoque estoqueMod;
+    private ModAcervo acervoMod;
     private ModProveniencia provenienciaMod;
     private Short quantidade_entrada;
     private Double custo_unitario;
@@ -27,7 +27,7 @@ public class ModItemProveniente {
         this.quantidade_entrada = 0;
         this.custo_unitario = 0.0;
         this.subtotaltotal = 0.0;
-        this.estoqueMod = new ModEstoque();
+        this.acervoMod = new ModAcervo();
         this.provenienciaMod = new ModProveniencia();
         this.data_registo = String.valueOf(UtilControloDaData.dataActual());
         this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
@@ -59,12 +59,12 @@ public class ModItemProveniente {
         this.subtotaltotal = subtotaltotal;
     }
 
-    public ModEstoque getEstoqueMod() {
-        return estoqueMod;
+    public ModAcervo getAcervoMod() {
+        return acervoMod;
     }
 
-    public void setEstoqueMod(ModEstoque estoqueMod, String operacao) {
-        this.estoqueMod = estoqueMod;
+    public void setAcervoMod(ModAcervo acervoMod, String operacao) {
+        this.acervoMod = acervoMod;
     }
 
     public ModProveniencia getProvenienciaMod() {
