@@ -185,7 +185,6 @@ public class VisVerArea implements Initializable {
     private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados) {
         tableColumId.setCellValueFactory(new PropertyValueFactory<>("idArea"));
         tableColumSector.setCellValueFactory(new PropertyValueFactory<>("sector"));
-        //tableColumIDataRegisto.setCellValueFactory(new PropertyValueFactory<>("data_registo"));
         tableColumIDataRegisto.setCellValueFactory(new Callback<CellDataFeatures<ModArea,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(CellDataFeatures<ModArea, String> data) {
