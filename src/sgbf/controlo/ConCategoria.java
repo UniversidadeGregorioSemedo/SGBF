@@ -52,15 +52,11 @@ public class ConCategoria extends ConCRUD {
             if(this.jaExiste(categoriaMod, operacao)){
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Categoria", Alert.AlertType.ERROR);
             }else{
-                if(this.relacionarComOutraEstante(categoriaMod, operacao)){
-                    return true;
-                }else{
-                    super.query = "UPDATE tcc.categoria set designacao=? where idcategoria=?";
-                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                    super.preparedStatement.setString(1, categoriaMod.getDesignacao());
-                    super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
-                    return !super.preparedStatement.execute();
-                }
+                super.query = "UPDATE tcc.categoria set designacao=? where idcategoria=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, categoriaMod.getDesignacao());
+                super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
+                return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);

@@ -88,11 +88,9 @@ public class VisCadastramentoCategoria implements Initializable {
         categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
         categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
         if (categoriaCon.alterar(categoriaMod, operacao)) {
-            if(categoriaDaEstanteCon.alterar(categoriaMod, operacao)){
-                this.bloquearItensDaJanela();
-                this.limparItensDaJanela();
-                throw new UtilControloExcessao(operacao, "Categoria editada com sucesso", Alert.AlertType.CONFIRMATION);
-            }
+            this.bloquearItensDaJanela();
+            this.limparItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Categoria editada com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
 
