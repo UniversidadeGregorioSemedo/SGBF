@@ -79,7 +79,7 @@
                   </TableView>
                   <Label layoutX="447.0" layoutY="88.0" text="Quantidade de entrada" />
                   <Label layoutX="452.0" layoutY="128.0" text="Subtotal" />
-                  <TextField fx:id="texteFiedQuantidade" layoutX="582.0" layoutY="84.0" prefHeight="25.0" prefWidth="123.0" />
+                  <TextField fx:id="texteFiedQuantidade" layoutX="582.0" layoutY="84.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="123.0" />
                   <TextField fx:id="texteFiedSubtotal" layoutX="510.0" layoutY="124.0" prefHeight="25.0" prefWidth="198.0" />
                   <Button fx:id="botaoSair" layoutX="634.0" layoutY="241.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="68.0" text="Sair" />
                   <Button fx:id="botaoCancelar" layoutX="543.0" layoutY="241.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="68.0" text="Cancelar" />

@@ -25,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
@@ -83,13 +84,16 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     
     @FXML
     private void cadastrarProveniencia() {
-        /*operacao = "Registar Area";
-        areaMod.setSector(texteFiedSector.getText(), operacao);
-        if (areaCon.registar(areaMod, operacao)) {
+        operacao = "Registar Entrada";
+        itemProvenienteMod.setAcervoMod(tableViewAcervo.getSelectionModel().getSelectedItem(), operacao);
+        itemProvenienteMod.setProvenienciaMod(this.comboxProveniencia.getValue(), operacao);
+        itemProvenienteMod.setQuantidade_entrada(UtilValidarDados.validarQuantidade(texteFiedQuantidade.getText(), operacao), operacao);
+        itemProvenienteMod.setSubTotal(UtilValidarDados.subTotal(texteFiedSubtotal.getText(), operacao), operacao);
+        if (itemProvenienteCon.registar(itemProvenienteMod, operacao)) {
             this.bloquearItensDaJanela();
             this.limparItensDaJanela();
-            throw new UtilControloExcessao(operacao, "Area Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
-        }*/
+            throw new UtilControloExcessao(operacao, "Entrada Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+        }
     }
 
     @FXML
@@ -217,18 +221,13 @@ public class VisCadastramentoItensProvenientes implements Initializable {
        
         if (tableViewAcervo.getSelectionModel().getSelectedCells().size() == 1) {
             this.carregarValorNasComboxs();
-            /*for(int i=0; i<comboxProveniencia.getItems().size();i++){
-                comboxProveniencia.getSelectionModel().select(i);
-                if(acervoMod.getCategoriaMod().getIdCategoria()== comboxProveniencia.getSelectionModel().getSelectedItem().getIdProveniencia()){
-                    break;
-                }
-            }*/
-            botaoAlterar.setDisable(false);
-            botaoRemover.setDisable(false);
+            botaoAlterar.setDisable(true);
+            botaoRemover.setDisable(true);
             this.desbloquearItensDaJanela();
             botaoNovo.setDisable(true);
-            botaoCadastrar.setDisable(true);
+            botaoCadastrar.setDisable(false);
         } else {
+            botaoCadastrar.setDisable(true);
             botaoAlterar.setDisable(true);
             botaoRemover.setDisable(true);
             botaoNovo.setDisable(false);
@@ -336,4 +335,12 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         return FXCollections.observableArrayList(listaDosRegistosEncontrados);
     }
 
+    @FXML
+    public void validarDadosNumericos(KeyEvent evt){
+        String caracateresValidos = "1234567890";
+        if(!caracateresValidos.contains(evt.getCharacter()+"")){
+            evt.consume();
+        }
+    }
+    
 }

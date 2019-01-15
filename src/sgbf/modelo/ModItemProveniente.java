@@ -5,7 +5,9 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
+import sgbf.util.UtilControloExcessao;
 
 /**
  *
@@ -40,7 +42,11 @@ public class ModItemProveniente {
     }
 
     public void setQuantidade_entrada(Short quantidade_entrada, String operacao) {
-        this.quantidade_entrada = quantidade_entrada;
+        if(quantidade_entrada <= 0){
+            throw new UtilControloExcessao(operacao, "A quantidade introduzida não é válida", Alert.AlertType.ERROR);
+        }else{
+            this.quantidade_entrada = quantidade_entrada;
+        }
     }
 
     public Double getCusto_unitario() {
@@ -56,7 +62,19 @@ public class ModItemProveniente {
     }
 
     public void setSubTotal(Double subtotaltotal, String operacao) {
-        this.subtotaltotal = subtotaltotal;
+        if(this.provenienciaMod.getTipo() == null){
+            throw new UtilControloExcessao(operacao, "Introduza o tipo de proveniência", Alert.AlertType.WARNING);
+        }else{
+            if(this.provenienciaMod.getTipo().equalsIgnoreCase("Compra")){
+                if(subtotaltotal <= 0){
+                    throw new UtilControloExcessao(operacao, "Introduza o subTotal", Alert.AlertType.WARNING);
+                }else{
+                    this.subtotaltotal = subtotaltotal;
+                }
+            }else{
+                this.subtotaltotal = subtotaltotal;
+            }
+        }
     }
 
     public ModAcervo getAcervoMod() {
@@ -64,7 +82,15 @@ public class ModItemProveniente {
     }
 
     public void setAcervoMod(ModAcervo acervoMod, String operacao) {
-        this.acervoMod = acervoMod;
+        if(acervoMod == null){
+            throw new UtilControloExcessao(operacao, "Seleccione o Acervo", Alert.AlertType.WARNING);
+        }else{
+            if(acervoMod.getIdAcervo() == 0){
+                throw new UtilControloExcessao(operacao, "Dados do acervo inconsistente", Alert.AlertType.WARNING);
+            }else{
+                this.acervoMod = acervoMod;
+            }
+        }
     }
 
     public ModProveniencia getProvenienciaMod() {
@@ -72,7 +98,15 @@ public class ModItemProveniente {
     }
 
     public void setProvenienciaMod(ModProveniencia provenienciaMod, String operacao) {
-        this.provenienciaMod = provenienciaMod;
+        if(provenienciaMod == null){
+            throw new UtilControloExcessao(operacao, "Seleccione a Proveniência", Alert.AlertType.WARNING);
+        }else{
+            if(provenienciaMod.getIdProveniencia()== 0){
+                throw new UtilControloExcessao(operacao, "Selccione uma proveniência válida", Alert.AlertType.WARNING);
+            }else{
+                this.provenienciaMod = provenienciaMod;
+            }
+        }
     }
 
     public String getData_registo() {

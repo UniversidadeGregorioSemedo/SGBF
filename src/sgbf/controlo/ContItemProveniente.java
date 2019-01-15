@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
-import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModItemProveniente;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
@@ -34,7 +33,7 @@ public class ContItemProveniente extends ConCRUD {
             super.preparedStatement.setDouble(4, itemProvenienteMod.getSubTotal());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estoque !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao("Erro ao "+operacao+" Entradas !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
