@@ -110,7 +110,8 @@ public class ConAutor extends ConCRUD {
         ModAutor autorMod = (ModAutor)objecto_pesquisar;
         try{
             super.query = "select * from tcc.Autor where idAutor=? or "
-                        + "(primeiro_nome or segundo_nome) like '%"+autorMod.getPrimeiro_nome()+"%'";
+                        + "primeiro_nome like '%"+autorMod.getPrimeiro_nome()+"%' or "
+                        + "segundo_nome like '%"+autorMod.getPrimeiro_nome()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, autorMod.getIdAutor());
             super.setResultset  = super.preparedStatement.executeQuery();
