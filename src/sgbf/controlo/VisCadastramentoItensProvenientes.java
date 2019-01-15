@@ -296,19 +296,19 @@ public class VisCadastramentoItensProvenientes implements Initializable {
                 return new ReadOnlyStringWrapper(item.getValue().getAcervoMod().getTitulo());
             }
         });
-        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+        tableColumQuantidadeEntrada.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getQuantidade_entrada()));
             }
         });
-        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+        tableColumCustoUnitario.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getCusto_unitario()));
             }
         });
-        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+        tableColumSubTotal.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getSubTotal()));

@@ -62,7 +62,11 @@ public class ModCategoria {
     }
 
     public void setEstanteMod(ModEstante estanteMod, String operacao) {
-        this.estanteMod = estanteMod;
+        if(estanteMod == null){
+            this.estanteMod = new ModEstante();
+        }else{
+            this.estanteMod = estanteMod;
+        }
     }
     
     public UtilControloDaData getUtilControloDaData() {
@@ -71,9 +75,11 @@ public class ModCategoria {
 
     public void equals(ModCategoria categoriaMod, String operacao){
         if(this.getEstanteMod()!= null){
-            if(this.getEstanteMod().getIdEstante() == categoriaMod.getEstanteMod().getIdEstante()){
-                if(this.designacao.equalsIgnoreCase(categoriaMod.designacao)){
-                    throw new UtilControloExcessao( operacao,"Já existe uma Categoria com esta designação nesta Estante !",Alert.AlertType.WARNING);
+            if(this.getEstanteMod().getIdEstante() != 0){
+                if(this.getEstanteMod().getIdEstante() == categoriaMod.getEstanteMod().getIdEstante()){
+                    if(this.designacao.equalsIgnoreCase(categoriaMod.designacao)){
+                        throw new UtilControloExcessao( operacao,"Já existe uma Categoria com esta designação nesta Estante !",Alert.AlertType.WARNING);
+                    }
                 }
             }
         }

@@ -115,10 +115,9 @@ public class ContItemProveniente extends ConCRUD {
         itemProvenienteMod.getAcervoMod().setTitulo(setResultset.getString("titulo"), operacao);
         itemProvenienteMod.setQuantidade_entrada(setResultset.getShort("quantidade_entrada"), operacao);
         itemProvenienteMod.setCusto_unitario(setResultset.getDouble("custo_unitario"), operacao);
-        itemProvenienteMod.setSubTotal(setResultset.getDouble("subtotal"), operacao);
         itemProvenienteMod.getProvenienciaMod().setIdProveniencia(setResultset.getInt("idProveniencia"), operacao);
         itemProvenienteMod.getProvenienciaMod().setTipo(setResultset.getString("tipo"), operacao);
-        
+        itemProvenienteMod.setSubTotal(setResultset.getDouble("subtotal"), operacao);
         return itemProvenienteMod;
     }
 
