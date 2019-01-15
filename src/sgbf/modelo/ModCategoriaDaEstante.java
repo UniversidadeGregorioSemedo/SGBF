@@ -12,7 +12,7 @@ import sgbf.controlo.ConCategoria;
  * @author Look
  */
 public class ModCategoriaDaEstante {
-    
+
     private ModCategoria categoriaMod;
     private ModEstante estanteMod;
 
@@ -28,9 +28,9 @@ public class ModCategoriaDaEstante {
     public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
         ConCategoria categoriaCon = new ConCategoria();
         this.categoriaMod = categoriaMod;
-        for(Object todosRegistos: categoriaCon.listarTodos(operacao)){
-            ModCategoria categoriaRegistada = (ModCategoria)todosRegistos;
-            if(categoriaMod.getDesignacao().equalsIgnoreCase(categoriaRegistada.getDesignacao())){
+        for (Object todosRegistos : categoriaCon.listarTodos(operacao)) {
+            ModCategoria categoriaRegistada = (ModCategoria) todosRegistos;
+            if (categoriaMod.getDesignacao().equalsIgnoreCase(categoriaRegistada.getDesignacao())) {
                 this.categoriaMod = categoriaRegistada;
                 break;
             }
@@ -44,5 +44,5 @@ public class ModCategoriaDaEstante {
     public void setEstanteMod(ModEstante estanteMod, String operacao) {
         this.estanteMod = estanteMod;
     }
-    
+
 }

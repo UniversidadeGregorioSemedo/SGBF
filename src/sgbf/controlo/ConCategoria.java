@@ -28,11 +28,15 @@ public class ConCategoria extends ConCRUD {
             if(this.jaExiste(categoriaMod, operacao)){
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Categoria", Alert.AlertType.ERROR);
             }else{
-                super.query = "INSERT INTO tcc.categoria (designacao)"
-                            + " VALUES (?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setString(1, categoriaMod.getDesignacao());
-                return !super.preparedStatement.execute();
+                if(this.relacionarComOutraEstante(categoriaMod, operacao)){
+                    return true;
+                }else{
+                    super.query = "INSERT INTO tcc.categoria (designacao)"
+                                + " VALUES (?)";
+                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement.setString(1, categoriaMod.getDesignacao());
+                    return !super.preparedStatement.execute();
+                }
             }
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
@@ -48,11 +52,15 @@ public class ConCategoria extends ConCRUD {
             if(this.jaExiste(categoriaMod, operacao)){
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Categoria", Alert.AlertType.ERROR);
             }else{
-                super.query = "UPDATE tcc.categoria set designacao=? where idcategoria=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setString(1, categoriaMod.getDesignacao());
-                super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
-                return !super.preparedStatement.execute();
+                if(this.relacionarComOutraEstante(categoriaMod, operacao)){
+                    return true;
+                }else{
+                    super.query = "UPDATE tcc.categoria set designacao=? where idcategoria=?";
+                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement.setString(1, categoriaMod.getDesignacao());
+                    super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
+                    return !super.preparedStatement.execute();
+                }
             }
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
@@ -161,6 +169,24 @@ public class ConCategoria extends ConCRUD {
             categoriaRegistado.equals(categoriaIntroduzida, operacao);
         }
         return false;
+    }
+    
+     private boolean relacionarComOutraEstante(ModCategoria categoriaIntroduzida, String operacao){
+        if((categoriaIntroduzida.getIdCategoria() !=0) && (categoriaIntroduzida.getEstanteMod().getIdEstante()!=0)){
+            for(Object todosRegistos:  this.listarTodos(operacao)){
+                ModCategoria categoriaRegistado = (ModCategoria)todosRegistos;
+                if(categoriaIntroduzida.getDesignacao().equalsIgnoreCase(categoriaRegistado.getDesignacao())){
+                    return true;
+                }
+            }
+            return false;
+        }else{
+            if(categoriaIntroduzida.getEstanteMod().getIdEstante() == 0){
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
 
 }
