@@ -87,7 +87,7 @@ public class ConCategoria extends ConCRUD {
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
         try{
-            super.query = "select * from tcc.categoria order by designacao, data_modificacao asc";
+            super.query = "select * from tcc.view_categorias";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
@@ -133,7 +133,6 @@ public class ConCategoria extends ConCRUD {
         }
     }
     
-    
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
         ModCategoria categoriaMod = new ModCategoria();
         categoriaMod.setIdCategoria(setResultset.getInt("idcategoria"), operacao);
@@ -163,7 +162,5 @@ public class ConCategoria extends ConCRUD {
         }
         return false;
     }
-    
-    
 
 }

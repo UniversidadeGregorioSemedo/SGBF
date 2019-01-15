@@ -78,19 +78,8 @@ public class ConCategoriaDaEstante extends ConCRUD {
     }
 
     private boolean temCategoriaEEstante(ModCategoriaDaEstante categoriaDaEstanteMod){
-        if(categoriaDaEstanteMod.getCategoriaMod().getIdCategoria() !=0){
-            if(categoriaDaEstanteMod.getCategoriaMod().getEstanteMod()!=null){
-                if(categoriaDaEstanteMod.getCategoriaMod().getEstanteMod().getIdEstante()!=0){
-                    return true;
-                }else{
-                    return false;
-                }
-            }else{
-               return false;
-            }
-        }else{
-            return false;
-        }
+        return (categoriaDaEstanteMod.getCategoriaMod().getIdCategoria() !=0) && 
+               (categoriaDaEstanteMod.getEstanteMod().getIdEstante()!=0);
     }
     
     @Override

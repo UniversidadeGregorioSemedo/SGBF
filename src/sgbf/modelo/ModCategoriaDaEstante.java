@@ -5,6 +5,8 @@
  */
 package sgbf.modelo;
 
+import sgbf.controlo.ConCategoria;
+
 /**
  *
  * @author Look
@@ -24,7 +26,15 @@ public class ModCategoriaDaEstante {
     }
 
     public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
+        ConCategoria categoriaCon = new ConCategoria();
         this.categoriaMod = categoriaMod;
+        for(Object todosRegistos: categoriaCon.listarTodos(operacao)){
+            ModCategoria categoriaRegistada = (ModCategoria)todosRegistos;
+            if(categoriaMod.getDesignacao().equalsIgnoreCase(categoriaRegistada.getDesignacao())){
+                this.categoriaMod = categoriaRegistada;
+                break;
+            }
+        }
     }
 
     public ModEstante getEstanteMod() {
