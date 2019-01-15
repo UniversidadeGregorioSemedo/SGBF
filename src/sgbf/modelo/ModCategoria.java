@@ -12,11 +12,13 @@ public class ModCategoria {
     private Integer idCategoria;
     private String designacao;
     private ModEstante estanteMod;
+    private ModEstante estanteAntiga;
     private UtilControloDaData utilControloDaData;
     
     public ModCategoria(){
         this.idCategoria = 0;
         this.designacao = null;
+        this.estanteAntiga = new ModEstante();
         this.estanteMod = new ModEstante();
         this.utilControloDaData = new UtilControloDaData();
     }
@@ -61,6 +63,18 @@ public class ModCategoria {
             this.estanteMod = new ModEstante();
         }else{
             this.estanteMod = estanteMod;
+        }
+    }
+    
+    public ModEstante getEstanteAntiga() {
+        return estanteAntiga;
+    }
+
+    public void setEstanteModAntiga(ModCategoria categoriaMod, String operacao) {
+        if(categoriaMod.getEstanteAntiga() == null){
+            this.estanteAntiga = new ModEstante();
+        }else{
+            this.estanteAntiga = categoriaMod.getEstanteMod();
         }
     }
     

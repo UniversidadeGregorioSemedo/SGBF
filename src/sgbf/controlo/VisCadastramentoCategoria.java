@@ -85,6 +85,7 @@ public class VisCadastramentoCategoria implements Initializable {
         categoriaMod.setIdCategoria(this.tableViewCategoria.getSelectionModel().getSelectedItem().getIdCategoria(), operacao);
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
         categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
+        categoriaMod.setEstanteModAntiga(this.tableViewCategoria.getSelectionModel().getSelectedItem(), operacao);
         categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
         categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
         if (categoriaCon.alterar(categoriaMod, operacao)) {

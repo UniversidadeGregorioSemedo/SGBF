@@ -49,19 +49,32 @@ public class ConCategoria extends ConCRUD {
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModCategoria categoriaMod = (ModCategoria)objecto_alterar;
         try{
-            if(this.jaExiste(categoriaMod, operacao)){
-                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Categoria", Alert.AlertType.ERROR);
+            if(this.retirarCategoriaDaEstante(categoriaMod, operacao)){
+                return true;
             }else{
-                super.query = "UPDATE tcc.categoria set designacao=? where idcategoria=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setString(1, categoriaMod.getDesignacao());
-                super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
-                return !super.preparedStatement.execute();
+                if(this.jaExiste(categoriaMod, operacao)){
+                    throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Categoria", Alert.AlertType.ERROR);
+                }else{
+                    super.query = "UPDATE tcc.categoria set designacao=? where idcategoria=?";
+                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement.setString(1, categoriaMod.getDesignacao());
+                    super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
+                    return !super.preparedStatement.execute();
+                }
             }
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+        }
+    }
+    
+    private boolean retirarCategoriaDaEstante(ModCategoria categoriaMod, String operacao){
+        ConCategoriaDaEstante categoriaDaEstanteCon = new ConCategoriaDaEstante();
+        if(categoriaMod.getEstanteMod().getIdEstante() != categoriaMod.getEstanteAntiga().getIdEstante()){
+            return categoriaDaEstanteCon.remover(categoriaMod, operacao);
+        }else{
+            return categoriaMod.getEstanteMod().getIdEstante() != categoriaMod.getEstanteAntiga().getIdEstante();
         }
     }
 
@@ -70,10 +83,10 @@ public class ConCategoria extends ConCRUD {
         ModCategoria categoriaMod = (ModCategoria)objecto_remover;
         try{
             if(this.removerTodosRegistos(categoriaMod, operacao)){
-                super.query = "delete from tcc.categoria where idcategoria=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setInt(1,categoriaMod.getIdCategoria());
-                return !super.preparedStatement.execute();
+            super.query = "delete from tcc.categoria where idcategoria=?";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1,categoriaMod.getIdCategoria());
+            return !super.preparedStatement.execute();
             }else{
                 super.query = "delete from tcc.categoria where idcategoria=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
