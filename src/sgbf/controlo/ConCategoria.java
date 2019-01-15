@@ -104,7 +104,7 @@ public class ConCategoria extends ConCRUD {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         ModCategoria categoriaMod = (ModCategoria)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.categoria where idcategoria=? or "
+            super.query = "select * from tcc.view_categorias where idcategoria=? or "
                         + "designacao like '%"+categoriaMod.getDesignacao()+"%'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, categoriaMod.getIdCategoria());
@@ -138,8 +138,13 @@ public class ConCategoria extends ConCRUD {
         ModCategoria categoriaMod = new ModCategoria();
         categoriaMod.setIdCategoria(setResultset.getInt("idcategoria"), operacao);
         categoriaMod.setDesignacao(setResultset.getString("designacao"), operacao);
+        if(setResultset.getString("idEstante") != null){
+            categoriaMod.getEstanteMod().setIdEstante(setResultset.getInt("idEstante"), operacao);
+            categoriaMod.getEstanteMod().setDesignacao(setResultset.getString("estante"), operacao);
+        }
         categoriaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         categoriaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        
         return categoriaMod;
     }
     

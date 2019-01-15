@@ -14,6 +14,11 @@ public class ModCategoriaDaEstante {
     private ModCategoria categoriaMod;
     private ModEstante estanteMod;
 
+    public ModCategoriaDaEstante() {
+        this.categoriaMod = new ModCategoria();
+        this.estanteMod = new ModEstante();
+    }
+
     public ModCategoria getCategoriaMod() {
         return categoriaMod;
     }

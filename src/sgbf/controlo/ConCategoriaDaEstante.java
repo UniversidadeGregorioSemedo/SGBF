@@ -46,7 +46,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         ModCategoriaDaEstante categoriaDaEstanteMod = (ModCategoriaDaEstante)objecto_alterar;
         try{
             if(this.temCategoriaEEstante(categoriaDaEstanteMod)){
-                super.query = "update tcc.categoriasdaestante set Estante_idEstante=? where categoria_idcategoria=?";
+                super.query = "update tcc.categoriasdaestante set Estante_idEstante=? where categoria_idcategoria= and ";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setInt(1, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
                 super.preparedStatement.setInt(2, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
