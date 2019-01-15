@@ -65,10 +65,16 @@ public class ConCategoriaDaEstante extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModCategoria categoriaDaEstanteMod = (ModCategoria)objecto_remover;
         try{
+            System.out.println("Cat:"+categoriaDaEstanteMod.getIdCategoria());
+            System.out.println("Est:"+categoriaDaEstanteMod.getEstanteMod().getIdEstante());
             super.query = "delete from tcc.categoriasdaestante where categoria_idcategoria=? and Estante_idEstante=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, categoriaDaEstanteMod.getIdCategoria());
-            super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteAntiga().getIdEstante());
+            if(categoriaDaEstanteMod.getEstanteAntiga().getIdEstante() == 0){
+                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
+            }else{
+                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteAntiga().getIdEstante());
+            }
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());

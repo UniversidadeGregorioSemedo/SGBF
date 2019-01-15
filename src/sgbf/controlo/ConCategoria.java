@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModCategoria;
-import sgbf.modelo.ModCategoriaDaEstante;
-import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -69,29 +67,21 @@ public class ConCategoria extends ConCRUD {
         }
     }
     
-    private boolean retirarCategoriaDaEstante(ModCategoria categoriaMod, String operacao){
-        ConCategoriaDaEstante categoriaDaEstanteCon = new ConCategoriaDaEstante();
-        if(categoriaMod.getEstanteMod().getIdEstante() != categoriaMod.getEstanteAntiga().getIdEstante()){
-            return categoriaDaEstanteCon.remover(categoriaMod, operacao);
-        }else{
-            return categoriaMod.getEstanteMod().getIdEstante() != categoriaMod.getEstanteAntiga().getIdEstante();
-        }
-    }
-
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModCategoria categoriaMod = (ModCategoria)objecto_remover;
         try{
             if(this.removerTodosRegistos(categoriaMod, operacao)){
-            super.query = "delete from tcc.categoria where idcategoria=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,categoriaMod.getIdCategoria());
-            return !super.preparedStatement.execute();
+               if(this.temRegistosEmOutrasEstantes(categoriaMod, operacao)){
+                   return true;
+               }else{
+                    super.query = "delete from tcc.categoria where idcategoria=?";
+                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement.setInt(1,categoriaMod.getIdCategoria());
+                    return !super.preparedStatement.execute();
+               }
             }else{
-                super.query = "delete from tcc.categoria where idcategoria=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setInt(1,categoriaMod.getIdCategoria());
-                return !super.preparedStatement.execute();
+                throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !",Alert.AlertType.ERROR);
             }
         }catch(SQLException erro){
             throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Categoria !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
@@ -165,11 +155,17 @@ public class ConCategoria extends ConCRUD {
     }
     
     private boolean removerTodosRegistos(ModCategoria categoriModMod, String operacao) throws SQLException{
-        ModCategoriaDaEstante categoriaDaEstanteMod = new ModCategoriaDaEstante();
         ConCategoriaDaEstante categoriasDaEstanteCon = new ConCategoriaDaEstante();
-        categoriaDaEstanteMod.setCategoriaMod(categoriModMod, operacao);
-        categoriaDaEstanteMod.setEstanteMod(new ModEstante(), operacao);
-        return categoriasDaEstanteCon.remover(categoriaDaEstanteMod, operacao);
+        return categoriasDaEstanteCon.remover(categoriModMod, operacao);
+    }
+   
+    private boolean retirarCategoriaDaEstante(ModCategoria categoriaMod, String operacao){
+        ConCategoriaDaEstante categoriaDaEstanteCon = new ConCategoriaDaEstante();
+        if(categoriaMod.getEstanteMod().getIdEstante() != categoriaMod.getEstanteAntiga().getIdEstante()){
+            return categoriaDaEstanteCon.remover(categoriaMod, operacao);
+        }else{
+            return categoriaMod.getEstanteMod().getIdEstante() != categoriaMod.getEstanteAntiga().getIdEstante();
+        }
     }
     
     private boolean jaExiste(ModCategoria categoriaIntroduzida, String operacao){
@@ -180,7 +176,7 @@ public class ConCategoria extends ConCRUD {
         return false;
     }
     
-     private boolean relacionarComOutraEstante(ModCategoria categoriaIntroduzida, String operacao){
+    private boolean relacionarComOutraEstante(ModCategoria categoriaIntroduzida, String operacao){
         if((categoriaIntroduzida.getIdCategoria() !=0) && (categoriaIntroduzida.getEstanteMod().getIdEstante()!=0)){
             for(Object todosRegistos:  this.listarTodos(operacao)){
                 ModCategoria categoriaRegistado = (ModCategoria)todosRegistos;
@@ -196,6 +192,16 @@ public class ConCategoria extends ConCRUD {
                 return true;
             }
         }
+    }
+  
+     private boolean temRegistosEmOutrasEstantes(ModCategoria categoriaMod, String operacao){
+        for(Object todosRegistos: this.listarTodos(operacao)){
+            ModCategoria outrosRegistos = (ModCategoria)todosRegistos;
+            if(outrosRegistos.getEstanteMod().getIdEstante() != categoriaMod.getEstanteMod().getIdEstante()){
+                return outrosRegistos.getDesignacao().equalsIgnoreCase(categoriaMod.getDesignacao());
+            }
+        }
+        return false;
     }
 
 }
