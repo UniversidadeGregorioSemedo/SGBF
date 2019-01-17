@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -17,8 +18,8 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="562.0" prefWidth="789.0">
                <children>
-                  <Label layoutX="8.0" layoutY="6.0" text="Pesquisar utente" />
-                  <TableView layoutX="7.0" layoutY="99.0" prefHeight="450.0" prefWidth="1358.0">
+                  <Label layoutX="187.0" layoutY="8.0" text="Pesquisar utente" />
+                  <TableView layoutX="7.0" layoutY="99.0" prefHeight="450.0" prefWidth="1350.0">
                     <columns>
                       <TableColumn prefWidth="44.0" text="Id" />
                       <TableColumn prefWidth="141.0" text="Nome" />
@@ -36,9 +37,18 @@
                         <TableColumn prefWidth="97.0" text="Instituição" />
                     </columns>
                   </TableView>
-                  <Label layoutX="14.0" layoutY="49.0" text="Nome" />
-                  <TextField layoutX="114.0" layoutY="45.0" prefHeight="25.0" prefWidth="517.0" />
-                  <JFXButton layoutX="634.0" layoutY="45.0" text="Pesquisar" />
+                  <Label layoutX="193.0" layoutY="51.0" text="Nome" />
+                  <TextField layoutX="293.0" layoutY="47.0" prefHeight="25.0" prefWidth="517.0" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="813.0" layoutY="47.0" text="Pesquisar" />
+                  <JFXButton fx:id="botaoSairVerUtente" layoutX="7.0" layoutY="17.0" text="Sair" textAlignment="JUSTIFY">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Undo_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                </children>
             </AnchorPane>
         </items>

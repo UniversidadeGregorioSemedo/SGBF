@@ -5,8 +5,10 @@
  */
 package sgbf.controlo;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -15,6 +17,11 @@ import javafx.fxml.Initializable;
  * @author Marron
  */
 public class VisVerUtente implements Initializable {
+
+    @FXML
+    private JFXButton botaoPesquisar;
+    @FXML
+    private JFXButton botaoSairVerUtente;
 
     /**
      * Initializes the controller class.
