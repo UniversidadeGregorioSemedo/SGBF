@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,6 +26,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
+import sgbf.modelo.ModAcervosEscritos;
+import sgbf.modelo.ModAutor;
 import sgbf.modelo.ModEditora;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
@@ -56,7 +59,8 @@ public class VisVerEditora implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        this.tableViewEditora.setPlaceholder(new Label("Editoras não listadas"));
+        tableViewEditora.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
     }    
     
     @FXML
@@ -93,7 +97,6 @@ public class VisVerEditora implements Initializable {
     }
     
      private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
-        tableColumId.setCellValueFactory(new PropertyValueFactory<>("iEditora"));
         tableColumNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumContacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
         tableColumEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -128,4 +131,28 @@ public class VisVerEditora implements Initializable {
         this.tableViewEditora.getItems().clear();
     }
     
+    
+    private void carregarResultadosAcervos(ModEditora editoraMod){
+        tableColumTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        tableColumSubTitulo.setCellValueFactory(new PropertyValueFactory<>("sub_titulo"));
+        tableColumISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        tableColumnCodigoBarra.setCellValueFactory(new PropertyValueFactory<>("codigo_barra"));
+        tableColumnTipo.setCellValueFactory(new PropertyValueFactory<>("tipo_acervo"));
+        tableColumnFormato.setCellValueFactory(new PropertyValueFactory<>("formato"));
+        tableColumnAno.setCellValueFactory(new PropertyValueFactory<>("ano_lancamento"));
+        tableViewAcervo.setItems(this.todosRegistosParaCarregar(editoraMod));
+    }
+    
+    private ObservableList<ModAcervo> todosRegistosParaCarregar(ModEditora editoraMod) {
+        List<ModAcervo> listaDosRegistosEncontrados = new ArrayList<>();
+        ConAcervo acervoCon = new ConAcervo();
+        operacao = "Pesquisar Acervos";
+        for (Object acervoRegistado : acervoCon.listarTodos(operacao)) {
+            ModAcervo acervosEncontrado= (ModAcervo)acervoRegistado;
+            if(editoraMod.getiEditora() == acervosEncontrado.getEditoraMod().getiEditora()){
+                listaDosRegistosEncontrados.add(acervosEncontrado);
+            }
+        }
+        return FXCollections.observableArrayList(listaDosRegistosEncontrados);
+    }
 }

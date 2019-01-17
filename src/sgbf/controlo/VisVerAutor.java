@@ -149,6 +149,10 @@ public class VisVerAutor implements Initializable {
         this.tableViewAcervo.getItems().clear();
     }
 
+    private void carregarResultadosAcervos(ModAcervo acervoMod) {
+        labeDataRegisto.setText(acervoMod.getUtilControloDaData().getData_registo());
+        labeUltimaModificacao.setText(acervoMod.getUtilControloDaData().getData_modificacao());
+    }
     private void carregarResultadosAcervos(ModAutor autorMod) {
         tableColumTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         tableColumSubTitulo.setCellValueFactory(new PropertyValueFactory<>("sub_titulo"));
@@ -160,10 +164,6 @@ public class VisVerAutor implements Initializable {
         tableViewAcervo.setItems(this.todosRegistosParaCarregar(autorMod,operacao));
     }
     
-    private void carregarResultadosAcervos(ModAcervo acervoMod) {
-        labeDataRegisto.setText(acervoMod.getUtilControloDaData().getData_registo());
-        labeUltimaModificacao.setText(acervoMod.getUtilControloDaData().getData_modificacao());
-    }
     
     private ObservableList<ModAcervo> todosRegistosParaCarregar(ModAutor autorMod, String operacao) {
         List<ModAcervo> listaDosRegistosEncontrados = new ArrayList<>();
