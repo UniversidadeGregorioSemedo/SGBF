@@ -171,7 +171,7 @@ public class  ModAcervo {
     }
 
     public void setAno_lancamento(Integer ano_lancamento, String operacao) {
-        if(volume <= 0){
+        if(ano_lancamento < 0){
             throw new UtilControloExcessao("O ano de lançamento é inválido !", operacao, Alert.AlertType.WARNING);
         }else{
             this.ano_lancamento = ano_lancamento;

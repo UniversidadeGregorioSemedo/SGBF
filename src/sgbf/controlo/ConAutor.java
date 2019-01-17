@@ -139,7 +139,7 @@ public class ConAutor extends ConCRUD {
     private ModAcervosEscritos pegarRegistosDeAcervosEscritos(ResultSet setResult,String operacao) throws SQLException{
         ModAcervosEscritos acervosEscritos= new ModAcervosEscritos();
         acervosEscritos.getAcervoMod().setTitulo(setResult.getString("titulo"), operacao);
-        acervosEscritos.getAcervoMod().setSub_titulo(setResult.getString("'subtittulo'"), operacao);
+        acervosEscritos.getAcervoMod().setSub_titulo(setResult.getString("subtittulo"), operacao);
         acervosEscritos.getAcervoMod().setIsbn(setResult.getString("isbn"), operacao);
         acervosEscritos.getAcervoMod().setCodigo_barra(setResult.getString("codigo_barra"), operacao);
         acervosEscritos.getAcervoMod().setTipo_acervo(setResult.getString("tipo_acervo"), operacao);
@@ -148,6 +148,8 @@ public class ConAutor extends ConCRUD {
         acervosEscritos.getAutorMod().setIdAutor(setResult.getInt("idAutor"), operacao);
         acervosEscritos.getAutorMod().setPrimeiro_nome(setResult.getString("primeiro_nome"), operacao);
         acervosEscritos.getAutorMod().setSegundo_nome(setResult.getString("segundo_nome"), operacao);
+        acervosEscritos.getAcervoMod().getUtilControloDaData().setData_registo(setResult.getTimestamp("data_registo"), operacao);
+        acervosEscritos.getAcervoMod().getUtilControloDaData().setData_modificacao(setResult.getTimestamp("data_modificacao"), operacao);
         return acervosEscritos;
     }
     
