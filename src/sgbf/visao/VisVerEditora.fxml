@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerEditora">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneVerEditoras" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerEditora">
     <stylesheets>
         <URL value="@/sgbf/util/tabelavereditora.css" />
     </stylesheets>
@@ -18,23 +18,22 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="1293.0">
                <children>
-                  <TableView layoutX="15.0" layoutY="66.0" prefHeight="200.0" prefWidth="1201.0">
+                  <TableView fx:id="tableViewEditora" layoutX="15.0" layoutY="66.0" prefHeight="200.0" prefWidth="1201.0">
                      <columns>
-                        <TableColumn prefWidth="121.0" text="Id" />
-                        <TableColumn prefWidth="179.0" text="Nome" />
-                        <TableColumn prefWidth="164.0" text="Contacto" />
-                        <TableColumn prefWidth="211.0" text="Email" />
-                        <TableColumn prefWidth="157.0" text="Fax" />
-                        <TableColumn prefWidth="164.0" text="Endereço" />
-                        <TableColumn prefWidth="100.0" text="Data de registro" />
-                        <TableColumn prefWidth="119.0" text="Data modificação" />
+                        <TableColumn fx:id="tableColumNome" prefWidth="179.0" text="Nome" />
+                        <TableColumn fx:id="tableColumContacto" prefWidth="164.0" text="Contacto" />
+                        <TableColumn fx:id="tableColumEmail" prefWidth="211.0" text="Email" />
+                        <TableColumn fx:id="tableColumFax" prefWidth="157.0" text="Fax" />
+                        <TableColumn fx:id="tableColumEndereco" prefWidth="164.0" text="Endereço" />
+                        <TableColumn fx:id="tableColumDataDeRegisto" prefWidth="100.0" text="Data de registro" />
+                        <TableColumn fx:id="tableColumDataDeModificacao" prefWidth="119.0" text="Data modificação" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField layoutX="14.0" layoutY="24.0" prefHeight="25.0" prefWidth="517.0" />
-                  <JFXButton layoutX="548.0" layoutY="24.0" text="Pesquisar" />
+                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="24.0" prefHeight="25.0" prefWidth="517.0" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="548.0" layoutY="24.0" onAction="#pesquisarEditora" text="Pesquisar" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
