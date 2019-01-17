@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -13,15 +14,14 @@
         <URL value="@/sgbf/util/tabelavereditora.css" />
     </stylesheets>
    <children>
-      <SplitPane orientation="VERTICAL" prefHeight="574.0" prefWidth="1383.0">
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="574.0" prefWidth="1241.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="562.0" prefWidth="789.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="1293.0">
                <children>
-                  <Label layoutX="8.0" layoutY="6.0" text="Pesquisar editora" />
-                  <TableView layoutX="7.0" layoutY="99.0" prefHeight="450.0" prefWidth="1209.0">
+                  <TableView layoutX="15.0" layoutY="66.0" prefHeight="200.0" prefWidth="1201.0">
                      <columns>
-                        <TableColumn prefWidth="44.0" text="Id" />
-                        <TableColumn prefWidth="249.0" text="Nome" />
+                        <TableColumn prefWidth="121.0" text="Id" />
+                        <TableColumn prefWidth="179.0" text="Nome" />
                         <TableColumn prefWidth="164.0" text="Contacto" />
                         <TableColumn prefWidth="211.0" text="Email" />
                         <TableColumn prefWidth="157.0" text="Fax" />
@@ -29,10 +29,50 @@
                         <TableColumn prefWidth="100.0" text="Data de registro" />
                         <TableColumn prefWidth="119.0" text="Data modificação" />
                      </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
-                  <Label layoutX="14.0" layoutY="49.0" text="Nome" />
-                  <TextField layoutX="114.0" layoutY="45.0" prefHeight="25.0" prefWidth="517.0" />
-                  <JFXButton layoutX="634.0" layoutY="45.0" text="Pesquisar" />
+                  <TextField layoutX="14.0" layoutY="24.0" prefHeight="25.0" prefWidth="517.0" />
+                  <JFXButton layoutX="548.0" layoutY="24.0" text="Pesquisar" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableViewAcervo" layoutX="14.0" layoutY="48.0" prefHeight="200.0" prefWidth="910.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <columns>
+                        <TableColumn fx:id="tableColumTitulo" prefWidth="75.0" text="Título" />
+                        <TableColumn fx:id="tableColumSubTitulo" prefWidth="75.0" text="Subtitulo" />
+                        <TableColumn fx:id="tableColumISBN" prefWidth="75.0" text="ISBN" />
+                        <TableColumn fx:id="tableColumnCodigoBarra" prefWidth="75.0" text="Código de Barra" />
+                        <TableColumn fx:id="tableColumnTipo" prefWidth="75.0" text="Tipo" />
+                        <TableColumn fx:id="tableColumnFormato" prefWidth="75.0" text="Formato" />
+                        <TableColumn fx:id="tableColumnAno" prefWidth="75.0" text="Ano de Lançamento" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="14.0" layoutY="24.0" prefHeight="17.0" prefWidth="105.0" text="Todos os Acervos">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="945.0" layoutY="24.0" prefHeight="17.0" prefWidth="124.0" text="Outras Informações">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="945.0" layoutY="50.0" text="Total de Acervos:" />
+                  <Label layoutX="945.0" layoutY="90.0" text="Data de Registo:" />
+                  <Label layoutX="946.0" layoutY="131.0" text="Última modificação:" />
+                  <Label layoutX="944.0" layoutY="165.0" text="Data e hora corrente:" />
+                  <Button fx:id="botaoSair" layoutX="1086.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="124.0" text="Sair" />
+                  <Label fx:id="labeTotalAcervos" layoutX="1069.0" layoutY="50.0" prefHeight="17.0" prefWidth="124.0" text="Nenhuma informação" />
+                  <Label fx:id="labeDataRegisto" layoutX="1069.0" layoutY="90.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação" />
+                  <Label fx:id="labeUltimaModificacao" layoutX="1069.0" layoutY="131.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação" />
+                  <Label fx:id="labelHoraDataCorrente" layoutX="1069.0" layoutY="165.0" prefHeight="17.0" prefWidth="131.0" text="Indisponível" />
+                  <Button fx:id="botaoCancelar" layoutX="945.0" layoutY="225.0" mnemonicParsing="false" onAction="#limparItensDaJanela" prefHeight="25.0" prefWidth="131.0" text="Cancelar" />
                </children>
             </AnchorPane>
          </items>
