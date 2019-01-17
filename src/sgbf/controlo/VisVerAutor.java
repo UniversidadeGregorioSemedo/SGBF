@@ -6,19 +6,35 @@
 package sgbf.controlo;
 
 import com.jfoenix.controls.JFXButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import sgbf.modelo.ModAutor;
+import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilValidarDados;
 
 /**
  * FXML Controller class
@@ -40,23 +56,103 @@ public class VisVerAutor implements Initializable {
     @FXML
     private TableColumn<ModAutor, String> tableColumNome;
     @FXML
-    private TableColumn<ModAutor, String> tableColumContacto;
+    private TableColumn<ModAutor, String> tableColumContacto,tableColumEmail;
     @FXML
-    private TableColumn<ModAutor, String> tableColumEmail;
+    private TableColumn<ModAutor, String> tableColumUltimaModificacao,tableColumDataRegisto;
+    @FXML
+    private TableView<ModAutor> tableViewAcervo;
+    @FXML
+    private Label labeTotalAcervos,labeDataRegisto,labeUltimaModificacao,
+            labelHoraDataCorrente;
 
     @FXML
     private AnchorPane anchorPaneVisAutor;
     
-    /**
-     * Initializes the controller class.
-     */
+    private String operacao = null;
+    private final ModAutor autorMod = new ModAutor();
+    private final ConAutor autorCon = new ConAutor();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+         tableViewAutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     } 
+    
+    @FXML
+    private void pesquisarAutor(){
+        operacao = "Pesquisar Autor";
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        if(this.texteFiedPesquisar.getText().isEmpty()){
+           throw new UtilControloExcessao(operacao, "Introduza o código ou nome do Autor", Alert.AlertType.INFORMATION);
+        }else{
+            todosRegistosEncontrados = this.autorCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
+            if(todosRegistosEncontrados.isEmpty()){
+                this.limparItensDaJanela();
+               throw new UtilControloExcessao(operacao, "Autor não encontradao", Alert.AlertType.INFORMATION);
+            }else{
+                this.carregarResultadosNaTablea(todosRegistosEncontrados);
+            }
+        }
+    }
     
     @FXML
     private void sair(){
         this.anchorPaneVisAutor.setVisible(false);
     }
+    
+    private ModAutor pegarDadosDaPesquisa(){
+        if(UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())){
+           autorMod.setIdAutor(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
+           autorMod.setPrimeiro_nome(this.texteFiedPesquisar.getText(), operacao);
+           return autorMod;
+        }else{
+           autorMod.setPrimeiro_nome(this.texteFiedPesquisar.getText(), operacao);
+           return autorMod;
+        }
+    }
+    
+     private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
+        tableColumId.setCellValueFactory(new PropertyValueFactory<>("idAutor"));
+        tableColumNome.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
+        tableColumContacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
+        tableColumEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tableColumDataRegisto.setCellValueFactory(new Callback<CellDataFeatures<ModAutor,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAutor, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_registo());
+            }
+        });
+        tableColumUltimaModificacao.setCellValueFactory(new Callback<CellDataFeatures<ModAutor,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAutor, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_modificacao());
+            }
+        });
+        tableViewAutor.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
+    }
+    
+    private ObservableList<ModAutor> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
+        List<ModAutor> listaDosRegistosEncontrados = new ArrayList<>();
+        for(Object autorRegistado: todosRegistosEncontrados){
+            ModAutor autorMod = (ModAutor)autorRegistado;
+            listaDosRegistosEncontrados.add(autorMod);
+        } 
+        return FXCollections.observableArrayList(listaDosRegistosEncontrados);
+    }
+    
+     private void limparItensDaJanela(){
+        this.labeTotalAcervos.setText(null);
+        this.labeDataRegisto.setText(null);
+        this.labeUltimaModificacao.setText(null);
+        this.texteFiedPesquisar.setText(null);
+        this.tableViewAutor.getItems().clear();
+    }
+     
+    private void exibirDadosNosCampos(ModAutor autorMod){
+        
+        
+        
+    }
+     
+  
+    
 }

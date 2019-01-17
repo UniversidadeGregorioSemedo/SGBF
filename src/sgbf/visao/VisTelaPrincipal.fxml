@@ -165,7 +165,7 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem fx:id="menuitemVerAutores" mnemonicParsing="false" text="Todos autores">
+                  <MenuItem fx:id="menuitemVerAutores" mnemonicParsing="false" onAction="#BotaoMenuItemVerAutor" text="Todos autores">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>

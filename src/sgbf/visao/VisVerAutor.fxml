@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerAutor">
+<AnchorPane id="AnchorPane" fx:id="anchorPaneVisAutor" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerAutor">
     <stylesheets>
         <URL value="@/sgbf/util/visverautor.css" />
     </stylesheets>
@@ -22,7 +22,7 @@
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="1051.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
                      <children>
                         <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" />
-                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" prefHeight="32.0" prefWidth="39.0" text=" ">
+                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" onAction="#pesquisarAutor" prefHeight="32.0" prefWidth="39.0" text=" ">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -37,8 +37,8 @@
                               <TableColumn fx:id="tableColumNome" prefWidth="300.0" text="Nome completo" />
                               <TableColumn fx:id="tableColumContacto" prefWidth="165.0" text="Contacto" />
                               <TableColumn fx:id="tableColumEmail" prefWidth="177.0" text="Email" />
-                              <TableColumn prefWidth="143.0" text="Data de registro" />
-                              <TableColumn prefWidth="136.0" text="Ultima modificação" />
+                              <TableColumn fx:id="tableColumDataRegisto" prefWidth="143.0" text="Data de registro" />
+                              <TableColumn fx:id="tableColumUltimaModificacao" prefWidth="136.0" text="Ultima modificação" />
                            </columns>
                         </TableView>
                      </children>
@@ -47,7 +47,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="28.0" layoutY="50.0" prefHeight="200.0" prefWidth="762.0">
+                  <TableView fx:id="tableViewAcervo" layoutX="28.0" layoutY="50.0" prefHeight="200.0" prefWidth="762.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Título" />
                       <TableColumn prefWidth="75.0" text="Subtitulo" />
@@ -75,6 +75,10 @@
                   <Label layoutX="798.0" layoutY="131.0" text="Última modificação:" />
                   <Label layoutX="796.0" layoutY="165.0" text="Data e hora corrente:" />
                   <Button fx:id="botaoSair" layoutX="797.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="265.0" text="Sair" />
+                  <Label fx:id="labeTotalAcervos" layoutX="921.0" layoutY="50.0" prefHeight="17.0" prefWidth="124.0" text="Nenhuma informação" />
+                  <Label fx:id="labeDataRegisto" layoutX="921.0" layoutY="90.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação" />
+                  <Label fx:id="labeUltimaModificacao" layoutX="921.0" layoutY="131.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação" />
+                  <Label fx:id="labelHoraDataCorrente" layoutX="921.0" layoutY="165.0" prefHeight="17.0" prefWidth="131.0" text="Indisponível" />
                </children>
             </AnchorPane>
          </items>

@@ -121,8 +121,6 @@ public class ConAutor extends ConCRUD {
             return todosRegistosEncontrados;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Autor(es) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
     
@@ -138,6 +136,21 @@ public class ConAutor extends ConCRUD {
         autorMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return autorMod;
     }
+    private ModAcervosEscritos pegarRegistosDeAcervosEscritos(ResultSet setResult,String operacao) throws SQLException{
+        ModAcervosEscritos acervosEscritos= new ModAcervosEscritos();
+        acervosEscritos.getAcervoMod().setTitulo(setResult.getString("titulo"), operacao);
+        acervosEscritos.getAcervoMod().setSub_titulo(setResult.getString("'subtittulo'"), operacao);
+        acervosEscritos.getAcervoMod().setIsbn(setResult.getString("isbn"), operacao);
+        acervosEscritos.getAcervoMod().setCodigo_barra(setResult.getString("codigo_barra"), operacao);
+        acervosEscritos.getAcervoMod().setTipo_acervo(setResult.getString("tipo_acervo"), operacao);
+        acervosEscritos.getAcervoMod().setFormato(setResult.getString("formato"), operacao);
+        acervosEscritos.getAcervoMod().setAno_lancamento(setResult.getInt("ano_lancamento"), operacao);
+        acervosEscritos.getAutorMod().setIdAutor(setResult.getInt("idAutor"), operacao);
+        acervosEscritos.getAutorMod().setPrimeiro_nome(setResult.getString("primeiro_nome"), operacao);
+        acervosEscritos.getAutorMod().setSegundo_nome(setResult.getString("segundo_nome"), operacao);
+        return acervosEscritos;
+    }
+    
     
     private boolean removerTodosRegistos(ModAutor autorMod, String operacao) throws SQLException{
         ModAcervosEscritos acervosEscritosMod = new ModAcervosEscritos();
@@ -152,6 +165,24 @@ public class ConAutor extends ConCRUD {
             autorRegistado.equals(autorIntroduzido, operacao);
         }
         return false;
+    }
+    
+    public List<ModAcervosEscritos> acervosEscritos(ModAutor autorMod, String operacao){
+        List<ModAcervosEscritos> todosRegistosEncontrados = new ArrayList<>();
+        try{
+            super.query = "select * from tcc.view_acervosEscritos where idAutor=? or "
+                        + "primeiro_nome like '%"+autorMod.getPrimeiro_nome()+"%' or "
+                        + "segundo_nome like '%"+autorMod.getPrimeiro_nome()+"%'";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, autorMod.getIdAutor());
+            super.setResultset  = super.preparedStatement.executeQuery();
+            while(super.setResultset.next()){
+                todosRegistosEncontrados.add(this.pegarRegistosDeAcervosEscritos(super.setResultset, operacao));
+            }
+            return todosRegistosEncontrados;
+        }catch(SQLException erro){
+            throw new UtilControloExcessao("Erro ao "+operacao+" Autor(es) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+        } 
     }
 
 }
