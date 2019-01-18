@@ -56,7 +56,7 @@ public class VisCadastramentoFuncionario implements Initializable {
     private TableColumn<ModFuncionario, String> tableColumNomeFuncionario,
             tableColumCategoriaFuncionario,tableColumContactoFuncionario;
     @FXML
-    private AnchorPane AnchorPaneFuncionario;
+    private AnchorPane AnchorPaneUtente;
     
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
@@ -177,7 +177,7 @@ public class VisCadastramentoFuncionario implements Initializable {
     
     @FXML
     private void sair(ActionEvent event) {
-        AnchorPaneFuncionario.setVisible(false);
+        AnchorPaneUtente.setVisible(false);
     }
     
     @FXML

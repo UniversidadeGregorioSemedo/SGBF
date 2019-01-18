@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="531.0" prefWidth="1013.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerUtente">
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneVisitante" prefHeight="531.0" prefWidth="1013.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerUtente">
     <stylesheets>
         <URL value="@/sgbf/util/tabelaverutente.css" />
     </stylesheets>
@@ -21,52 +22,53 @@
                <children>
                   <Group layoutX="14.0" layoutY="-33.0">
                      <children>
-                        <Group fx:id="groupInformacoes">
+                        <Group fx:id="groupInformacoes" layoutX="-17.0" layoutY="-26.0">
                            <children>
-                              <Label layoutX="157.0" layoutY="429.0" prefHeight="17.0" prefWidth="465.0" text="Label" />
-                              <Label layoutX="754.0" layoutY="390.0" prefHeight="17.0" prefWidth="216.0" text="Label" />
+                              <Label fx:id="labelEmail" layoutX="157.0" layoutY="429.0" prefHeight="17.0" prefWidth="465.0" text="Label" />
+                              <Label fx:id="labelInstituicao" layoutX="754.0" layoutY="390.0" prefHeight="17.0" prefWidth="216.0" text="Label" />
                               <Label layoutX="24.0" layoutY="465.0" text="Endereço de imagem:" />
                               <Label layoutX="630.0" layoutY="390.0" text="Instituição:" />
                               <Label layoutX="630.0" layoutY="429.0" text="Data de Registo:" />
                               <Label layoutX="630.0" layoutY="468.0" text="Data de Modificação:" />
-                              <Label layoutX="157.0" layoutY="390.0" prefHeight="17.0" prefWidth="465.0" text="Label" />
-                              <Label layoutX="157.0" layoutY="465.0" prefHeight="17.0" prefWidth="465.0" text="Label" />
-                              <Label layoutX="754.0" layoutY="429.0" prefHeight="17.0" prefWidth="216.0" text="Label" />
+                              <Label fx:id="labelUsuario" layoutX="157.0" layoutY="390.0" prefHeight="17.0" prefWidth="465.0" text="Label" />
+                              <Label fx:id="labelEnderecoImagem" layoutX="157.0" layoutY="465.0" prefHeight="17.0" prefWidth="465.0" text="Label" />
+                              <Label fx:id="labelDataRegisto" layoutX="754.0" layoutY="429.0" prefHeight="17.0" prefWidth="216.0" text="Label" />
                               <Label layoutX="24.0" layoutY="429.0" text="Email:" />
-                              <Label layoutX="754.0" layoutY="468.0" prefHeight="17.0" prefWidth="214.0" text="Label" />
+                              <Label fx:id="labelModificacao" layoutX="754.0" layoutY="468.0" prefHeight="17.0" prefWidth="214.0" text="Label" />
+                              <Label layoutX="26.0" layoutY="390.0" text="Usuário:" />
                            </children>
                         </Group>
-                        <JFXToggleButton layoutX="7.0" layoutY="322.0" prefHeight="32.0" prefWidth="200.0" text="Mais infromações">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXToggleButton>
-                        <JFXButton fx:id="botaoPesquisar" layoutX="533.0" layoutY="60.0" text="Pesquisar" />
-                        <JFXButton fx:id="botaoSairVerUtente" layoutX="912.0" layoutY="504.0" text="Sair" textAlignment="JUSTIFY">
+                        <JFXButton fx:id="botaoPesquisar" layoutX="533.0" layoutY="60.0" onAction="#pesquisarUtente" text="Pesquisar" />
+                        <JFXButton fx:id="botaoSair" layoutX="898.0" layoutY="490.0" onAction="#sair" text="Sair" textAlignment="JUSTIFY">
                            <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="24.0" fitWidth="24.0" onDragDetected="#sair" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../icones/Undo_48px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <Label layoutX="24.0" layoutY="390.0" text="Usuário:" />
-                        <TableView layoutX="7.0" layoutY="99.0" prefHeight="216.0" prefWidth="969.0">
+                        <TableView fx:id="tableViewVisitane" layoutX="7.0" layoutY="99.0" prefHeight="216.0" prefWidth="969.0">
                           <columns>
-                            <TableColumn prefWidth="44.0" text="Id" />
-                            <TableColumn prefWidth="141.0" text="Nome" />
-                              <TableColumn prefWidth="125.0" text="Sobrenome" />
-                              <TableColumn prefWidth="60.0" text="Tipo identificação" />
-                              <TableColumn prefWidth="49.0" text="Nº identificação" />
-                              <TableColumn prefWidth="142.0" text="Contacto" />
-                              <TableColumn prefWidth="143.0" text="Email" />
-                              <TableColumn prefWidth="118.0" text="Endereço" />
-                              <TableColumn prefWidth="145.0" text="Categoria" />
+                            <TableColumn fx:id="tableColumId" prefWidth="44.0" text="Id" />
+                            <TableColumn fx:id="tableColumNome" prefWidth="141.0" text="Nome" />
+                              <TableColumn fx:id="tableColumIdTipoIdentificacao" prefWidth="60.0" text="Tipo identificação" />
+                              <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="91.0" text="Nº identificação" />
+                              <TableColumn fx:id="tableColumContacto" prefWidth="100.0" text="Contacto" />
+                              <TableColumn fx:id="tableColumEndereco" prefWidth="118.0" text="Endereço" />
+                              <TableColumn fx:id="tableColumCategoria" prefWidth="145.0" text="Categoria" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
-                        <TextField layoutX="7.0" layoutY="60.0" prefHeight="25.0" prefWidth="517.0" />
-                        <JFXButton layoutX="835.0" layoutY="508.0" text="Cancelar" />
+                        <TextField fx:id="texteFiedPesquisar" layoutX="7.0" layoutY="60.0" prefHeight="25.0" prefWidth="517.0" />
+                        <JFXButton fx:id="botaoCancelar" layoutX="806.0" layoutY="489.0" onAction="#limparItensDaJanela" prefHeight="35.0" prefWidth="76.0" text="Cancelar" />
+                        <Label layoutX="7.0" layoutY="332.0" prefHeight="17.0" prefWidth="197.0" text="Mais informações">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Group>
                </children>
