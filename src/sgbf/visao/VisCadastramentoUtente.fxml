@@ -31,9 +31,7 @@
                               <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="178.0" text="Nº Identificação" />
                               <TableColumn fx:id="tableColumCategoria" prefWidth="86.0" text="Categoria" />
                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
+                           
                         </TableView>
                         <Button fx:id="botaoPesquisar" layoutX="464.0" layoutY="33.0" mnemonicParsing="false" onAction="#pesquisarUtente">
                            <graphic>
