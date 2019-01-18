@@ -51,6 +51,9 @@ public class VisVerEditora implements Initializable {
     private TableColumn<ModAcervo, String> tableColumTitulo, tableColumSubTitulo, tableColumISBN,
             tableColumnAno, tableColumnCodigoBarra, tableColumnTipo, tableColumnFormato;
     @FXML
+    private Label labeTotalAcervos, labeDataRegisto, labeUltimaModificacao,
+            labelHoraDataCorrente;
+    @FXML
     private AnchorPane AnchorPaneVerEditoras;
     
     private String operacao = null;
@@ -60,7 +63,9 @@ public class VisVerEditora implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.tableViewEditora.setPlaceholder(new Label("Editoras não listadas"));
+        this.tableViewAcervo.setPlaceholder(new Label("Acervos não listados"));
         tableViewEditora.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
+        tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
     }    
     
     @FXML
@@ -96,7 +101,7 @@ public class VisVerEditora implements Initializable {
         }
     }
     
-     private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
+    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
         tableColumNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumContacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
         tableColumEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -124,8 +129,12 @@ public class VisVerEditora implements Initializable {
         } 
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
+    
     @FXML
     private void limparItensDaJanela(){
+        this.labeTotalAcervos.setText("Nenhuma informação");
+        this.labeDataRegisto.setText("Nenhuma informação");
+        this.labeUltimaModificacao.setText("Nenhuma informação");
         this.texteFiedPesquisar.setText(null);
         this.tableViewAcervo.getItems().clear();
         this.tableViewEditora.getItems().clear();
@@ -153,6 +162,12 @@ public class VisVerEditora implements Initializable {
                 listaDosRegistosEncontrados.add(acervosEncontrado);
             }
         }
+        labeTotalAcervos.setText(String.valueOf(listaDosRegistosEncontrados.size()));
         return FXCollections.observableArrayList(listaDosRegistosEncontrados);
+    }
+    
+    private void carregarResultadosAcervos(ModAcervo acervoMod) {
+        labeDataRegisto.setText(acervoMod.getUtilControloDaData().getData_registo());
+        labeUltimaModificacao.setText(acervoMod.getUtilControloDaData().getData_modificacao());
     }
 }
