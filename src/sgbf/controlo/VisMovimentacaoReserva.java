@@ -56,9 +56,12 @@ public class VisMovimentacaoReserva implements Initializable {
     private TableView<ModVisitante> tableVieVisitante;
     @FXML
     private TableColumn<ModVisitante, String> tableColumId, tableColumNome, tableColumIdTipoIdentificacao,
-            tableColumNmeroIdentificacao, tableColumContacto, tableColumEndereco,tableColumCategoria;
+            tableColumNmeroIdentificacao, tableColumContacto, tableColumEndereco, tableColumCategoria;
     @FXML
     private TableView<ModAcervo> tableViewAcervo;
+    @FXML
+    private TableColumn<ModAcervo, String> tableColumTitulo,tableColumSubTitulo,tableColumEdicao,tableColumISBN,
+            tableColumnCodigoBarra, tableColumnTipo, tableColumnFormato;
     @FXML
     private TableView<ModReserva> tableViewReserva;
     @FXML
@@ -88,7 +91,7 @@ public class VisMovimentacaoReserva implements Initializable {
                 this.pesquisarUtente();
             } else {
                 if (radioButtonAcervos.getText().equalsIgnoreCase(itemPesquisar.getText())) {
-
+                    this.pesquisarAcervos();
                 }
             }
         } else {
@@ -126,32 +129,32 @@ public class VisMovimentacaoReserva implements Initializable {
         this.botaoReserva.setDisable(true);
         this.botaoDevolver.setDisable(true);
     }
-    
-    private void pesquisarUtente(){
+
+    private void pesquisarUtente() {
         operacao = "Pesquisar Utente";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        if(this.textFieldPesquisar.getText().isEmpty()){
-           throw new UtilControloExcessao(operacao, "Introduza o código ou nome do Utente", Alert.AlertType.INFORMATION);
-        }else{
+        if (this.textFieldPesquisar.getText().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Introduza o código ou nome do Utente", Alert.AlertType.INFORMATION);
+        } else {
             todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisaUtente(), operacao);
-            if(todosRegistosEncontrados.isEmpty()){
+            if (todosRegistosEncontrados.isEmpty()) {
                 this.bloquearItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
-            }else{
+                throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
+            } else {
                 this.carregarResultadosNaTableaUtente(todosRegistosEncontrados);
-               this.bloquearItensDaJanela();
+                this.bloquearItensDaJanela();
             }
         }
     }
-    
-    private ModVisitante pegarDadosDaPesquisaUtente(){
-        if(UtilValidarDados.eNumero(this.textFieldPesquisar.getText())){
-           visitanteMod.setIdUtente(Integer.valueOf(this.textFieldPesquisar.getText()), operacao);
-           visitanteMod.setPrimeiro_nome(this.textFieldPesquisar.getText(), operacao);
-           return visitanteMod;
-        }else{
-           visitanteMod.setPrimeiro_nome(this.textFieldPesquisar.getText(), operacao);
-           return visitanteMod;
+
+    private ModVisitante pegarDadosDaPesquisaUtente() {
+        if (UtilValidarDados.eNumero(this.textFieldPesquisar.getText())) {
+            visitanteMod.setIdUtente(Integer.valueOf(this.textFieldPesquisar.getText()), operacao);
+            visitanteMod.setPrimeiro_nome(this.textFieldPesquisar.getText(), operacao);
+            return visitanteMod;
+        } else {
+            visitanteMod.setPrimeiro_nome(this.textFieldPesquisar.getText(), operacao);
+            return visitanteMod;
         }
     }
 
@@ -173,6 +176,51 @@ public class VisMovimentacaoReserva implements Initializable {
             listaDosRegistosEncontrados.add(visitanteMod);
         }
         return FXCollections.observableArrayList(listaDosRegistosEncontrados);
+    }
+
+    private void pesquisarAcervos() {
+        operacao = "Pesquisar Acervos";
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        if (this.textFieldPesquisar.getText().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Introduza o código ou nome do Acervo", Alert.AlertType.INFORMATION);
+        } else {
+            todosRegistosEncontrados = this.acervoCon.pesquisar(this.pegarDadosDaPesquisaAcervos(), operacao);
+            if (todosRegistosEncontrados.isEmpty()) {
+                throw new UtilControloExcessao(operacao, "Acervo não encontradao", Alert.AlertType.INFORMATION);
+            } else {
+                this.carregarResultadosNaTableAcervos(todosRegistosEncontrados);
+            }
+        }
+    }
+
+    private ModAcervo pegarDadosDaPesquisaAcervos() {
+        if (UtilValidarDados.eNumero(this.textFieldPesquisar.getText())) {
+            acervoMod.setIdAcervo(Integer.valueOf(this.textFieldPesquisar.getText()), operacao);
+            acervoMod.setTitulo(this.textFieldPesquisar.getText(), operacao);
+            return acervoMod;
+        } else {
+            acervoMod.setTitulo(this.textFieldPesquisar.getText(), operacao);
+            return acervoMod;
+        }
+    }
+
+    private void carregarResultadosNaTableAcervos(List<Object> todosRegistosEncontrados) {
+        tableColumTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        tableColumSubTitulo.setCellValueFactory(new PropertyValueFactory<>("sub_titulo"));
+        tableColumISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        tableColumnCodigoBarra.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        tableColumnTipo.setCellValueFactory(new PropertyValueFactory<>("tipo_acervo"));
+        tableColumnFormato.setCellValueFactory(new PropertyValueFactory<>("formato"));
+        tableViewAcervo.setItems(this.todosAcervosParaCarregar(todosRegistosEncontrados));
+    }
+
+    private ObservableList<ModAcervo> todosAcervosParaCarregar(List<Object> todosRegistosEncontrados) {
+        List<ModAcervo> listaDosRegistosWncontrados = new ArrayList<>();
+        for (Object acervoRegistado : todosRegistosEncontrados) {
+            ModAcervo acervoMod = (ModAcervo) acervoRegistado;
+            listaDosRegistosWncontrados.add(acervoMod);
+        }
+        return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
 
 }
