@@ -1,4 +1,3 @@
-
 package sgbf.controlo;
 
 import com.jfoenix.controls.JFXButton;
@@ -19,7 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sgbf.modelo.ModFuncionario;
+import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 
 /**
  * FXML Controller class
@@ -33,10 +34,10 @@ public class VisLogin implements Initializable {
 
     @FXML
     private JFXPasswordField loginSenha;
-    
+
     @FXML
     private Label loginMensagem;
-            
+
     @FXML
     private JFXButton loginEntrar;
 
@@ -49,25 +50,24 @@ public class VisLogin implements Initializable {
     @FXML
     private Hyperlink loginContacte;
 
-    public void clicarBotoes(MouseEvent accao){
-        Node node = (Node)accao.getSource();
-        Stage propreidadeDaJanela =  (Stage) node.getScene().getWindow();
+    public void clicarBotoes(MouseEvent accao) {
+        Node node = (Node) accao.getSource();
+        Stage propreidadeDaJanela = (Stage) node.getScene().getWindow();
         final String operacao = "Iniciar sessão";
-       
-        if(accao.getSource() == loginEntrar){
-           this.abrirTelaPrincipal(operacao,accao,propreidadeDaJanela);
-        }else{
-            if(accao.getSource() == loginCancelar){
+
+        if (accao.getSource() == loginEntrar) {
+            this.abrirTelaPrincipal(operacao, accao, propreidadeDaJanela);
+        } else {
+            if (accao.getSource() == loginCancelar) {
                 ConPrincipal.sairdoSistema(operacao, propreidadeDaJanela);
             }
         }
     }
-    
-    private void abrirTelaPrincipal(String operacao,MouseEvent accao, Stage propreidadeDaJanela){
-        try{
-            if(this.autenticar(operacao)){
-                propreidadeDaJanela.close();
 
+    private void abrirTelaPrincipal(String operacao, MouseEvent accao, Stage propreidadeDaJanela) {
+        try {
+            if (this.autenticar(operacao) != null) {
+                propreidadeDaJanela.close();
                 Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisTelaPrincipal.fxml"));
                 Scene scene = new Scene(root);
                 propreidadeDaJanela.setScene(scene);
@@ -75,25 +75,24 @@ public class VisLogin implements Initializable {
                 propreidadeDaJanela.setMaximized(true);
                 propreidadeDaJanela.setResizable(true);
                 propreidadeDaJanela.show();
-            }else{
+                UtilUsuarioLogado.setUsuarioLogado(this.autenticar(operacao));
+            } else {
                 loginMensagem.setText("Usuário ou senha incorreta");
             }
-        }catch(IOException erro){
-            throw new UtilControloExcessao(operacao, "Erro so iniciar o sistema !\nErro: "+erro, Alert.AlertType.ERROR);
+        } catch (IOException erro) {
+            throw new UtilControloExcessao(operacao, "Erro so iniciar o sistema !\nErro: " + erro, Alert.AlertType.ERROR);
         }
     }
-    
-    
-    private boolean autenticar(String operacao){
-        
+
+    private ModVisitante autenticar(String operacao) {
         ModFuncionario funcionaMod = new ModFuncionario();
         ConUsuario usuarioCon = new ConUsuario();
-        
-        funcionaMod.setUsuario(this.loginNomeUsuario.getText(),operacao);
-        funcionaMod.setSenha(this.loginSenha.getText(),operacao);
-        return usuarioCon.autenticar(funcionaMod, operacao); 
+
+        funcionaMod.setUsuario(this.loginNomeUsuario.getText(), operacao);
+        funcionaMod.setSenha(this.loginSenha.getText(), operacao);
+        return usuarioCon.autenticar(funcionaMod, operacao);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

@@ -30,6 +30,7 @@ import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModReserva;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**
@@ -47,6 +48,8 @@ public class VisMovimentacaoReserva implements Initializable {
     @FXML
     private TextField textFieldPesquisar, textFieldQuantidadeTotal,
             textFieldQuantidadeRemanescente, textFieldQuantidadeReservar, textFieldUtente;
+    @FXML
+    private Label labelOperador;
     @FXML
     private Button botaoReserva, botaoNovo, botaoDevolver, botaoTodasReservas, botaoCancelar, botaoSair;
     @FXML
@@ -68,6 +71,7 @@ public class VisMovimentacaoReserva implements Initializable {
         this.tableVieVisitante.setPlaceholder(new Label("Utentes não listados"));
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewReserva.setPlaceholder(new Label("Nenhuma reserva feita"));
+        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
         //tableAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     }
 
