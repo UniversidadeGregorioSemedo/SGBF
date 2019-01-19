@@ -19,12 +19,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModAcervo;
+import sgbf.modelo.ModReserva;
+import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
 
@@ -33,153 +37,141 @@ import sgbf.util.UtilValidarDados;
  *
  * @author Marron
  */
-public class VisMovimentacaoReserva implements Initializable {    
-    @FXML
-    private TextField TextPesquisar;
-    @FXML
-    private TableView<ModAcervo> tableAcervo;
-    @FXML
-    private TableView<String> tableReserva;
-    @FXML
+public class VisMovimentacaoReserva implements Initializable {
+
     private JFXButton botaoPesquisar;
     @FXML
-    private TextField idReserva;
+    private RadioButton radioButtonUtente, radioButtonAcervos;
     @FXML
-    private TextField textNomeUtente;
+    private ToggleGroup OpcoesDePesquisa;
     @FXML
-    private TextField TextDiasReman;
+    private TextField textFieldPesquisar, textFieldQuantidadeTotal,
+            textFieldQuantidadeRemanescente, textFieldQuantidadeReservar, textFieldUtente;
     @FXML
-    private ComboBox<String> comboReserva;
+    private Button botaoReserva, botaoNovo, botaoDevolver, botaoTodasReservas, botaoCancelar, botaoSair;
     @FXML
-    private TextField idAcervo;
+    private TableView<ModVisitante> tableVieVisitante;
     @FXML
-    private TextField TextQuant;
+    private TableView<ModAcervo> tableViewAcervo;
     @FXML
-    private TextField textTitulo;
-    @FXML
-    private Button botaoNovo;
-    @FXML
-    private Button botaoReserva;
-    @FXML
-    private Button botaoDevolver;
-    @FXML
-    private Button botaoCancelar;
-    @FXML
-    private Button botaoSair;
-    @FXML
-    private TableColumn<ModAcervo, String> titulo;
-    @FXML
-    private TableColumn<ModAcervo, String> tipo;
-    @FXML
-    private TableColumn<ModAcervo, Integer> isbn;
-    @FXML
-    private TableColumn<ModAcervo, String> ano;
+    private TableView<ModReserva> tableViewReserva;
     @FXML
     private AnchorPane anchoPaneReserva;
-    
-    
+
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       this.bloquearItensDaJanela();
-       this.tableAcervo.setPlaceholder(new Label("Acervo não listados"));
-       tableAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
-    } 
+        this.bloquearItensDaJanela();
+        this.tableVieVisitante.setPlaceholder(new Label("Utentes não listados"));
+        this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
+        this.tableViewReserva.setPlaceholder(new Label("Nenhuma reserva feita"));
+        //tableAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
+    }
+
     @FXML
-    private void cancelar(){
+    private void desbloquearItensDaJanela() {
+        //    this.TextQuant.setDisable(false);
+        //    this.TextDiasReman.setDisable(false);
+        //    this.textNomeUtente.setDisable(false);
+        this.botaoNovo.setDisable(true);
+        this.botaoReserva.setDisable(false);
+    }
+
+    @FXML
+    private void cancelar() {
         this.bloquearItensDaJanela();
         this.limparItensDaJanela();
     }
+
     @FXML
     private void sair(ActionEvent event) {
         anchoPaneReserva.setVisible(false);
     }
-    
-   @FXML
-    private void desbloquearItensDaJanela(){
-        this.TextQuant.setDisable(false);
-        this.TextDiasReman.setDisable(false);
-        this.textNomeUtente.setDisable(false);
-        this.botaoNovo.setDisable(true);
-        this.botaoReserva.setDisable(false);
-    }
-    private void bloquearItensDaJanela(){
-        this.idReserva.setDisable(true);
-        this.idAcervo.setDisable(true);
-        this.textNomeUtente.setDisable(true);
-        this.TextQuant.setDisable(true);
-        this.TextDiasReman.setDisable(true);
-        this.comboReserva.setDisable(true);
+
+    private void bloquearItensDaJanela() {
+        //  this.idReserva.setDisable(true);
+        //  this.idAcervo.setDisable(true);
+        //  this.textNomeUtente.setDisable(true);
+        //  this.TextQuant.setDisable(true);
+        //  this.TextDiasReman.setDisable(true);
+        //  this.comboReserva.setDisable(true);
         this.botaoNovo.setDisable(false);
         this.botaoReserva.setDisable(true);
-        this.botaoDevolver.setDisable(true);   
+        this.botaoDevolver.setDisable(true);
     }
-    private void limparItensDaJanela(){
-        this.idAcervo.setText(null);
+
+    private void limparItensDaJanela() {
+        /*this.idAcervo.setText(null);
         this.idReserva.setText(null);
         this.textNomeUtente.setText(null);
         this.TextQuant.setText(null);
-        this.tableAcervo.getItems().clear();
+        this.tableAcervo.getItems().clear();*/
     }
-    private void botaoPesquisarAcervo(){
-      
-        operacao = "Pesquisar Acervo";
+
+    private void botaoPesquisarAcervo() {
+
+        /*operacao = "Pesquisar Acervo";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        if(this.TextPesquisar.getText().isEmpty()){
-           throw new UtilControloExcessao(operacao, "Introduza o código ou titulo do Acervo", Alert.AlertType.INFORMATION);
-        }else{
+        if (this.TextPesquisar.getText().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Introduza o código ou titulo do Acervo", Alert.AlertType.INFORMATION);
+        } else {
             todosRegistosEncontrados = this.acervoCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
-            if(todosRegistosEncontrados.isEmpty()){
+            if (todosRegistosEncontrados.isEmpty()) {
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Acervo não encontradao", Alert.AlertType.INFORMATION);
-            }else{
+                throw new UtilControloExcessao(operacao, "Acervo não encontradao", Alert.AlertType.INFORMATION);
+            } else {
                 this.carregarResultadosNaTablea(todosRegistosEncontrados);
                 this.bloquearItensDaJanela();
             }
-        }
+        }*/
     }
-    private void exibirDadosNosCampos(ModAcervo acervoMod){
-        if(tableAcervo.getSelectionModel().getSelectedCells().size() == 1){
+
+    private void exibirDadosNosCampos(ModAcervo acervoMod) {
+        /*if (tableAcervo.getSelectionModel().getSelectedCells().size() == 1) {
             textTitulo.setText(acervoMod.getTitulo());
             botaoDevolver.setDisable(false);
             botaoReserva.setDisable(false);
             botaoNovo.setDisable(true);
             this.desbloquearItensDaJanela();
-        }else{
+        } else {
             botaoDevolver.setDisable(true);
             botaoReserva.setDisable(true);
             botaoNovo.setDisable(false);
             this.limparItensDaJanela();
-        }
+        }*/
     }
-    private ModAcervo pegarDadosDaPesquisa(){
-        if(UtilValidarDados.eNumero(this.TextPesquisar.getText())){
-           acervoMod.setIdAcervo(Integer.valueOf(this.TextPesquisar.getText()), operacao);
-           acervoMod.setTitulo(this.TextPesquisar.getText(), operacao);
-           return acervoMod;
-        }else{
-           acervoMod.setTitulo(this.TextPesquisar.getText(), operacao);
-           return acervoMod;
-        }
+
+    private ModAcervo pegarDadosDaPesquisa() {
+        /*if (UtilValidarDados.eNumero(this.TextPesquisar.getText())) {
+            acervoMod.setIdAcervo(Integer.valueOf(this.TextPesquisar.getText()), operacao);
+            acervoMod.setTitulo(this.TextPesquisar.getText(), operacao);
+            return acervoMod;
+        } else {
+            acervoMod.setTitulo(this.TextPesquisar.getText(), operacao);
+            return acervoMod;
+        }*/
+        return null;
     }
-    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
-        titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+
+    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados) {
+        /*titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         tipo.setCellValueFactory(new PropertyValueFactory<>("tipo_acervo"));
         isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         ano.setCellValueFactory(new PropertyValueFactory<>("ano_lancamento"));
-        tableAcervo.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
+        tableAcervo.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));*/
     }
-    private ObservableList<ModAcervo> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
+
+    private ObservableList<ModAcervo> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados) {
         List<ModAcervo> listaDosRegistosEncontrados = new ArrayList<>();
-        for(Object acervoRegistado: todosRegistosEncontrados){
-            ModAcervo acervoMod = (ModAcervo)acervoRegistado;
+        for (Object acervoRegistado : todosRegistosEncontrados) {
+            ModAcervo acervoMod = (ModAcervo) acervoRegistado;
             listaDosRegistosEncontrados.add(acervoMod);
-        } 
+        }
         return FXCollections.observableArrayList(listaDosRegistosEncontrados);
     }
+
 }

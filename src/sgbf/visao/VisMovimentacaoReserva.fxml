@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
@@ -9,80 +11,104 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="anchoPaneReserva" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisMovimentacaoReserva">
+<AnchorPane id="AnchorPane" fx:id="anchoPaneReserva" prefHeight="684.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisMovimentacaoReserva">
     <stylesheets>
         <URL value="@/sgbf/util/reserva.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.626099706744868" orientation="VERTICAL" prefHeight="684.0" prefWidth="827.0">
+      <SplitPane dividerPositions="0.5894428152492669" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="402.0" prefWidth="692.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
-                     <children>
-                        <Label layoutX="9.0" layoutY="6.0" text="Pesquisar por acervo" />
-                        <TextField fx:id="TextPesquisar" layoutX="9.0" layoutY="30.0" prefHeight="25.0" prefWidth="466.0" />
-                        <Label layoutX="9.0" layoutY="65.0" text="Selecione o acervo" />
-                        <Label layoutX="9.0" layoutY="234.0" text="Reserva" />
-                        <TableView fx:id="tableReserva" layoutX="9.0" layoutY="257.0" prefHeight="137.0" prefWidth="623.0">
-                           <columns>
-                              <TableColumn prefWidth="194.0" text="Nome utente" />
-                              <TableColumn prefWidth="213.0" text="Titulo acervo" />
-                              <TableColumn prefWidth="95.0" text="Data de reserva" />
-                              <TableColumn prefWidth="123.0" text="Data de vencimento" />
-                           </columns>
-                       
-                        </TableView>
-                        <JFXButton fx:id="botaoPesquisar" layoutX="475.0" layoutY="27.0" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Pesquisa.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <TableView fx:id="tableAcervo" layoutX="8.0" layoutY="91.0" prefHeight="143.0" prefWidth="504.0">
-                          <columns>
-                            <TableColumn fx:id="titulo" prefWidth="184.0" text="Titulo" />
-                            <TableColumn fx:id="tipo" prefWidth="176.0" text="Tipo" />
-                              <TableColumn fx:id="isbn" prefWidth="77.0" text="Isbn" />
-                              <TableColumn fx:id="ano" prefWidth="66.0" text="Ano" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </Pane>
+                  <TableView fx:id="tableVieVisitante" layoutX="11.0" layoutY="72.0" prefHeight="139.0" prefWidth="877.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <columns>
+                        <TableColumn fx:id="tableColumId" prefWidth="44.0" text="Id" />
+                        <TableColumn fx:id="tableColumNome" prefWidth="141.0" text="Nome" />
+                        <TableColumn fx:id="tableColumIdTipoIdentificacao" prefWidth="60.0" text="Tipo identificação" />
+                        <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="91.0" text="Nº identificação" />
+                        <TableColumn fx:id="tableColumContacto" prefWidth="100.0" text="Contacto" />
+                        <TableColumn fx:id="tableColumEndereco" prefWidth="118.0" text="Endereço" />
+                        <TableColumn fx:id="tableColumCategoria" prefWidth="145.0" text="Categoria" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="tableViewAcervo" layoutX="11.0" layoutY="244.0" prefHeight="145.0" prefWidth="693.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <columns>
+                        <TableColumn fx:id="tableColumTitulo" prefWidth="75.0" text="Título" />
+                        <TableColumn fx:id="tableColumSubTitulo" prefWidth="75.0" text="Subtitulo" />
+                        <TableColumn fx:id="tableColumISBN" prefWidth="75.0" text="ISBN" />
+                        <TableColumn fx:id="tableColumnCodigoBarra" prefWidth="75.0" text="Código de Barra" />
+                        <TableColumn fx:id="tableColumnTipo" prefWidth="75.0" text="Tipo" />
+                        <TableColumn fx:id="tableColumnFormato" prefWidth="75.0" text="Formato" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="textFieldPesquisar" layoutX="157.0" layoutY="19.0" prefHeight="25.0" prefWidth="250.0" />
+                  <RadioButton fx:id="radioButtonUtente" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" text="Utente">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="OpcoesDePesquisa" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioButtonAcervos" layoutX="86.0" layoutY="23.0" mnemonicParsing="false" text="Acervos" toggleGroup="$OpcoesDePesquisa" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="416.0" layoutY="16.0" prefHeight="25.0" prefWidth="48.0" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Pesquisa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label layoutX="714.0" layoutY="327.0" text="Q. Reservar:" />
+                  <TextField fx:id="textFieldQuantidadeReservar" layoutX="795.0" layoutY="323.0" prefHeight="25.0" prefWidth="92.0" />
+                  <TextField fx:id="textFieldQuantidadeTotal" layoutX="763.0" layoutY="244.0" prefHeight="25.0" prefWidth="122.0" />
+                  <Label layoutX="711.0" layoutY="248.0" prefHeight="17.0" prefWidth="48.0" text="Q. Total:" />
+                  <Button fx:id="botaoReserva" layoutX="710.0" layoutY="364.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Reservar" />
+                  <Label layoutX="14.0" layoutY="48.0" text="Dados do Utente">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="11.0" layoutY="221.0" text="Dados dos Acervos">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="textFieldQuantidadeRemanescente" layoutX="794.0" layoutY="283.0" prefHeight="25.0" prefWidth="91.0" />
+                  <Label layoutX="711.0" layoutY="287.0" prefHeight="17.0" prefWidth="81.0" text="Q. Reman.:" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="209.0" prefWidth="527.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
-                     <children>
-                        <Label layoutX="8.0" layoutY="6.0" text="Dados da reserva" />
-                        <Label layoutX="14.0" layoutY="41.0" text="Id" />
-                        <Label layoutX="203.0" layoutY="41.0" text="Estado" />
-                        <Label layoutX="203.0" layoutY="97.0" text="Dias remanescente" />
-                        <TextField fx:id="idReserva" layoutX="58.0" layoutY="37.0" prefHeight="25.0" prefWidth="122.0" />
-                        <TextField fx:id="TextDiasReman" layoutX="333.0" layoutY="93.0" prefHeight="25.0" prefWidth="72.0" />
-                        <ComboBox fx:id="comboReserva" layoutX="270.0" layoutY="37.0" prefHeight="25.0" prefWidth="164.0" />
-                        <TextField fx:id="textTitulo" layoutX="57.0" layoutY="93.0" prefHeight="25.0" prefWidth="122.0" />
-                        <Label layoutX="14.0" layoutY="97.0" text="Titulo" />
-                        <Label layoutX="14.0" layoutY="154.0" text="Quanlitade" />
-                        <TextField fx:id="TextQuant" layoutX="95.0" layoutY="150.0" prefHeight="25.0" prefWidth="72.0" />
-                        <Label layoutX="203.0" layoutY="154.0" text="Nome do utente" />
-                        <TextField fx:id="textNomeUtente" layoutX="333.0" layoutY="150.0" prefHeight="25.0" prefWidth="175.0" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="551.0" layoutY="119.0" prefHeight="104.0" prefWidth="261.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
-                     <children>
-                        <Button fx:id="botaoNovo" layoutX="8.0" layoutY="19.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Novo" />
-                        <Button fx:id="botaoReserva" layoutX="91.0" layoutY="19.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Reservar" />
-                        <Button fx:id="botaoDevolver" layoutX="181.0" layoutY="19.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Devolver" />
-                        <Button fx:id="botaoCancelar" layoutX="8.0" layoutY="65.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="72.0" text="Cancelar" />
-                        <Button fx:id="botaoSair" layoutX="91.0" layoutY="65.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="72.0" text="Sair" />
-                        <Button layoutX="181.0" layoutY="65.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Adicionar" />
-                     </children>
-                  </Pane>
+                  <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Devolver" />
+                  <Button fx:id="botaoCancelar" layoutX="710.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="175.0" text="Cancelar" />
+                  <Button fx:id="botaoSair" layoutX="710.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="175.0" text="Sair" />
+                  <Button fx:id="botaoNovo" layoutX="710.0" layoutY="68.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Novo" />
+                  <Label layoutX="14.0" layoutY="6.0" text="Dados da reserva">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Ver todas as Reservas" />
+                  <Label layoutX="710.0" layoutY="37.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" />
+                  <TextField fx:id="textFieldUtente" layoutX="762.0" layoutY="33.0" prefHeight="25.0" prefWidth="122.0" />
+                  <TableView fx:id="tableViewReserva" layoutX="14.0" layoutY="33.0" prefHeight="189.0" prefWidth="693.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Título" />
+                      <TableColumn prefWidth="75.0" text="Subtitulo" />
+                        <TableColumn prefWidth="75.0" text="ISBN" />
+                        <TableColumn prefWidth="99.0" text="Código de Barra" />
+                        <TableColumn text="Tipo" />
+                        <TableColumn prefWidth="75.0" text="Formato" />
+                        <TableColumn prefWidth="139.0" text="Quantidade Reservada" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Line endX="100.0" fill="#dddada85" layoutX="115.0" layoutY="242.0" smooth="false" startX="-100.0" stroke="#908d8d" />
+                  <Label layoutX="227.0" layoutY="233.0" text="Operadador:" />
+                  <Label layoutX="305.0" layoutY="233.0" prefHeight="17.0" prefWidth="402.0" text="Nenhuma informação disponível" />
                </children>
             </AnchorPane>
          </items>
