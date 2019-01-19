@@ -40,6 +40,7 @@ import sgbf.util.UtilValidarDados;
  */
 public class VisMovimentacaoReserva implements Initializable {
 
+    @FXML
     private JFXButton botaoPesquisar;
     @FXML
     private RadioButton radioButtonUtente, radioButtonAcervos;
@@ -226,10 +227,12 @@ public class VisMovimentacaoReserva implements Initializable {
         this.textFieldQuantidadeReservar.setText(null);
         this.tableViewAcervo.getItems().clear();
     }
+    
     private void bloquearItensAcervos(){
         this.textFieldQuantidadeReservar.setDisable(true);
         this.botaoReserva.setDisable(true);
     }
+    
     private void desbloquearItensAcervos(){
         this.textFieldQuantidadeReservar.setDisable(false);
         this.botaoReserva.setDisable(false);
