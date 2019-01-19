@@ -51,7 +51,7 @@ public class VisMovimentacaoReserva implements Initializable {
     @FXML
     private Label labelOperador;
     @FXML
-    private Button botaoReserva, botaoNovo, botaoDevolver, botaoTodasReservas, botaoCancelar, botaoSair;
+    private Button botaoReserva, botaoDevolver, botaoTodasReservas, botaoCancelar, botaoSair;
     @FXML
     private TableView<ModVisitante> tableVieVisitante;
     @FXML
@@ -80,7 +80,7 @@ public class VisMovimentacaoReserva implements Initializable {
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewReserva.setPlaceholder(new Label("Nenhuma reserva feita"));
         this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
-        //tableAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
+        tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirAsQuantidades(newValue));
     }
 
     @FXML
@@ -100,17 +100,11 @@ public class VisMovimentacaoReserva implements Initializable {
     }
 
     @FXML
-    private void novo() {
-        //    this.TextQuant.setDisable(false);
-        //    this.TextDiasReman.setDisable(false);
-        //    this.textNomeUtente.setDisable(false);
-        this.botaoNovo.setDisable(true);
-        this.botaoReserva.setDisable(false);
-    }
-
-    @FXML
     private void cancelar() {
         this.bloquearItensDaJanela();
+        this.limparItensAcervos();
+        this.tableVieVisitante.getItems().clear();
+        this.tableViewReserva.getItems().clear();
     }
 
     @FXML
@@ -119,14 +113,9 @@ public class VisMovimentacaoReserva implements Initializable {
     }
 
     private void bloquearItensDaJanela() {
-        //  this.idReserva.setDisable(true);
-        //  this.idAcervo.setDisable(true);
-        //  this.textNomeUtente.setDisable(true);
-        //  this.TextQuant.setDisable(true);
-        //  this.TextDiasReman.setDisable(true);
-        //  this.comboReserva.setDisable(true);
-        this.botaoNovo.setDisable(false);
-        this.botaoReserva.setDisable(true);
+        this.bloquearItensAcervos();
+        this.botaoDevolver.setDisable(true);
+        this.botaoTodasReservas.setDisable(true);
         this.botaoDevolver.setDisable(true);
     }
 
@@ -138,14 +127,14 @@ public class VisMovimentacaoReserva implements Initializable {
         } else {
             todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisaUtente(), operacao);
             if (todosRegistosEncontrados.isEmpty()) {
-                this.bloquearItensDaJanela();
+                this.tableVieVisitante.getItems().clear();
                 throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
             } else {
                 this.carregarResultadosNaTableaUtente(todosRegistosEncontrados);
-                this.bloquearItensDaJanela();
             }
         }
     }
+    
 
     private ModVisitante pegarDadosDaPesquisaUtente() {
         if (UtilValidarDados.eNumero(this.textFieldPesquisar.getText())) {
@@ -186,6 +175,8 @@ public class VisMovimentacaoReserva implements Initializable {
         } else {
             todosRegistosEncontrados = this.acervoCon.pesquisar(this.pegarDadosDaPesquisaAcervos(), operacao);
             if (todosRegistosEncontrados.isEmpty()) {
+                this.bloquearItensAcervos();
+                this.limparItensAcervos();
                 throw new UtilControloExcessao(operacao, "Acervo não encontradao", Alert.AlertType.INFORMATION);
             } else {
                 this.carregarResultadosNaTableAcervos(todosRegistosEncontrados);
@@ -222,5 +213,27 @@ public class VisMovimentacaoReserva implements Initializable {
         }
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
+    
+    private void exibirAsQuantidades(ModAcervo acervoMod){
+        this.textFieldQuantidadeTotal.setText(String.valueOf(acervoMod.getEstoqueMod().getQuantidade_total()));
+        this.textFieldQuantidadeRemanescente.setText(String.valueOf(acervoMod.getEstoqueMod().getQuantidadeRemanescente()));
+        this.desbloquearItensAcervos();
+    }
+    
+    private void limparItensAcervos(){
+        this.textFieldQuantidadeTotal.setText(null);
+        this.textFieldQuantidadeRemanescente.setText(null);
+        this.textFieldQuantidadeReservar.setText(null);
+        this.tableViewAcervo.getItems().clear();
+    }
+    private void bloquearItensAcervos(){
+        this.textFieldQuantidadeReservar.setDisable(true);
+        this.botaoReserva.setDisable(true);
+    }
+    private void desbloquearItensAcervos(){
+        this.textFieldQuantidadeReservar.setDisable(false);
+        this.botaoReserva.setDisable(false);
+    }
+    
 
 }

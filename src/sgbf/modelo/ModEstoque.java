@@ -18,6 +18,7 @@ public class ModEstoque {
     private Short quantidade_em_falta;
     private Short quantidade_acervos_emprestados;
     private Short quantidade_acervos_resercados;
+    private Short quantidade_remanescente;
     private String data_registo;
     private String data_modificacao;
 
@@ -27,6 +28,7 @@ public class ModEstoque {
         this.quantidade_em_falta = 0;
         this.quantidade_acervos_emprestados = 0;
         this.quantidade_acervos_resercados = 0;
+        this.quantidade_remanescente = 0;
         this.data_registo = String.valueOf(UtilControloDaData.dataActual());
         this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
     }
@@ -69,6 +71,11 @@ public class ModEstoque {
 
     public void setQuantidade_acervos_resercados(Short quantidade_acervos_resercados, String operacao) {
         this.quantidade_acervos_resercados = quantidade_acervos_resercados;
+    }
+    
+    public Integer getQuantidadeRemanescente(){
+        return this.quantidade_total - this.quantidade_acervos_emprestados
+             - this.quantidade_acervos_resercados-this.quantidade_remanescente;
     }
 
     public String getData_registo() {

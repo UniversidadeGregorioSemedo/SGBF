@@ -64,7 +64,7 @@
                   </JFXButton>
                   <Label layoutX="714.0" layoutY="327.0" text="Q. Reservar:" />
                   <TextField fx:id="textFieldQuantidadeReservar" layoutX="795.0" layoutY="323.0" prefHeight="25.0" prefWidth="92.0" />
-                  <TextField fx:id="textFieldQuantidadeTotal" layoutX="763.0" layoutY="244.0" prefHeight="25.0" prefWidth="122.0" />
+                  <TextField fx:id="textFieldQuantidadeTotal" disable="true" editable="false" layoutX="763.0" layoutY="244.0" prefHeight="25.0" prefWidth="122.0" />
                   <Label layoutX="711.0" layoutY="248.0" prefHeight="17.0" prefWidth="48.0" text="Q. Total:" />
                   <Button fx:id="botaoReserva" layoutX="710.0" layoutY="364.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Reservar" />
                   <Label layoutX="14.0" layoutY="48.0" text="Dados do Utente">
@@ -75,7 +75,7 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <TextField fx:id="textFieldQuantidadeRemanescente" layoutX="794.0" layoutY="283.0" prefHeight="25.0" prefWidth="91.0" />
+                  <TextField fx:id="textFieldQuantidadeRemanescente" disable="true" editable="false" layoutX="794.0" layoutY="283.0" prefHeight="25.0" prefWidth="91.0" />
                   <Label layoutX="711.0" layoutY="287.0" prefHeight="17.0" prefWidth="81.0" text="Q. Reman.:" />
                </children>
             </AnchorPane>
@@ -84,14 +84,13 @@
                   <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Devolver" />
                   <Button fx:id="botaoCancelar" layoutX="710.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="175.0" text="Cancelar" />
                   <Button fx:id="botaoSair" layoutX="710.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="175.0" text="Sair" />
-                  <Button fx:id="botaoNovo" layoutX="710.0" layoutY="68.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="175.0" text="Novo" />
                   <Label layoutX="14.0" layoutY="6.0" text="Dados da reserva">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
                   <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Ver todas as Reservas" />
-                  <Label layoutX="710.0" layoutY="37.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" />
-                  <TextField fx:id="textFieldUtente" layoutX="762.0" layoutY="33.0" prefHeight="25.0" prefWidth="122.0" />
+                  <Label layoutX="711.0" layoutY="66.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" />
+                  <TextField fx:id="textFieldUtente" disable="true" editable="false" layoutX="763.0" layoutY="62.0" prefHeight="25.0" prefWidth="122.0" />
                   <TableView fx:id="tableViewReserva" layoutX="14.0" layoutY="33.0" prefHeight="189.0" prefWidth="693.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Título" />
