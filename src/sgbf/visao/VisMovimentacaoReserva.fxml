@@ -108,7 +108,7 @@
                   <Line endX="100.0" fill="#dddada85" layoutX="115.0" layoutY="242.0" smooth="false" startX="-100.0" stroke="#908d8d" />
                   <Label layoutX="227.0" layoutY="233.0" text="Operadador:" />
                   <Label fx:id="labelOperador" layoutX="305.0" layoutY="233.0" prefHeight="17.0" prefWidth="402.0" text="Nenhuma informação disponível" />
-                  <Button fx:id="botaoReserva" layoutX="711.0" layoutY="64.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Reservar" />
+                  <Button fx:id="botaoReserva" layoutX="711.0" layoutY="64.0" mnemonicParsing="false" onAction="#reservar" prefHeight="25.0" prefWidth="175.0" text="Reservar" />
                </children>
             </AnchorPane>
          </items>

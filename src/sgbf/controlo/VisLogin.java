@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sgbf.modelo.ModFuncionario;
 import sgbf.modelo.ModVisitante;
+import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilUsuarioLogado;
 
@@ -84,7 +85,7 @@ public class VisLogin implements Initializable {
         }
     }
 
-    private ModVisitante autenticar(String operacao) {
+    private ModFuncionario autenticar(String operacao) {
         ModFuncionario funcionaMod = new ModFuncionario();
         ConUsuario usuarioCon = new ConUsuario();
 

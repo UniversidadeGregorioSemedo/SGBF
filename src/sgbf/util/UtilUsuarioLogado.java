@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sgbf.util;
 
+import sgbf.modelo.ModFuncionario;
 import sgbf.modelo.ModVisitante;
 
 /**
@@ -13,13 +10,13 @@ import sgbf.modelo.ModVisitante;
  */
 public class UtilUsuarioLogado {
     
-    private static ModVisitante usuarioLogado = null;
+    private static ModFuncionario usuarioLogado = null;
 
-    public static ModVisitante getUsuarioLogado() {
+    public static ModFuncionario getUsuarioLogado() {
         return usuarioLogado;
     }
 
-    public static void setUsuarioLogado(ModVisitante usuarioLogado) {
+    public static void setUsuarioLogado(ModFuncionario usuarioLogado) {
         UtilUsuarioLogado.usuarioLogado = usuarioLogado;
     }
 

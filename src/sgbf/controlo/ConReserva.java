@@ -9,64 +9,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModReserva;
+import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
  * @author Look
  */
 public class ConReserva extends ConCRUD {
-    
-        @Override
+
+    @Override
     public boolean registar(Object objecto_registar, String operacao) {
-        ModReserva reservaMod = (ModReserva)objecto_registar;
-        try{
-            super.query = "INSERT INTO tcc.reserva (estado, data_reserva, dias_remanescente,"
-                        + " data_vencimento, Utente_idUtente, Funcionario_idFuncionario)"
-                        + " VALUES (?, ?, ?, ?, ?, ?);";
+        ModReserva reservaMod = (ModReserva) objecto_registar;
+        try {
+            super.query = "INSERT INTO tcc.reserva (data_vencimento, Utente_idUtente, Funcionario_idFuncionario) "
+                    + "VALUES (?, ?, ?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, reservaMod.getEstado());
-            //super.preparedStatement.setString(2, reservaMod.getData_registo());
-            super.preparedStatement.setByte(3, reservaMod.getDias_remanescente());
-            //super.preparedStatement.setByte(4, reservaMod.get());
-            super.preparedStatement.setInt(5, reservaMod.getUtenteMod().getIdUtente());
-          //  super.preparedStatement.setInt(6, reservaMod.getFuncionarioMod().getIdFuncionario());
+            super.preparedStatement.setTimestamp(1, UtilControloDaData.jodaToSQLTimestamp(UtilControloDaData.dataActual()));
+            super.preparedStatement.setInt(2, reservaMod.getUtenteMod().getIdUtente());
+            super.preparedStatement.setInt(3, reservaMod.getFuncionarioMod().getIdFuncionario());
             return !super.preparedStatement.execute();
-        }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Reserva !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Reserva !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
+        } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
-        ModReserva reservaMod = (ModReserva)objecto_alterar;
-        try{
-            super.query = "update tcc.reserva estado=?, data_reserva=?, dias_remanescente=?,"
-                        + " data_vencimento=?, Utente_idUtente=?, Funcionario_idFuncionario=? where idReserva=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, reservaMod.getEstado());
-           // super.preparedStatement.setString(2, reservaMod.getData_registo());
-            super.preparedStatement.setByte(3, reservaMod.getDias_remanescente());
-            //super.preparedStatement.setByte(4, reservaMod.get());
-            super.preparedStatement.setInt(5, reservaMod.getUtenteMod().getIdUtente());
-//            super.preparedStatement.setInt(6, reservaMod.getFuncionarioMod().getIdFuncionario());
-            super.preparedStatement.setInt(7, reservaMod.getIdReserva());
-            return !super.preparedStatement.execute();
-        }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }
+        ModReserva reservaMod = (ModReserva) objecto_alterar;
+        throw new UtilControloExcessao( operacao,"Operação não disponível !",Alert.AlertType.ERROR);
     }
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-       ModEstante estanteMod = (ModEstante)objecto_remover;
+        ModEstante estanteMod = (ModEstante) objecto_remover;
         /*try{
             super.query = "delete from tcc.Estante where idEstante=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -120,8 +101,8 @@ public class ConReserva extends ConCRUD {
         }*/
         return todosRegistosEncontrados;
     }
-    
-    private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
+
+    private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
         ModEstante estanteMod = new ModEstante();
         estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
         estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
@@ -134,5 +115,4 @@ public class ConReserva extends ConCRUD {
         return estanteMod;
     }
 
-    
 }

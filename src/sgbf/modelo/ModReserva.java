@@ -8,8 +8,10 @@ package sgbf.modelo;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
+import org.joda.time.LocalDate;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 
 /**
  *
@@ -17,21 +19,23 @@ import sgbf.util.UtilControloExcessao;
  */
 public class ModReserva {
     
-    private String estado;
     private Integer idReserva;
+    private String estado;
+    private LocalDate data_vencimento;
     private Byte dias_remanescente;
     private ModVisitante utenteMod;
-    private ModVisitante funcionarioMod;
+    private ModFuncionario funcionarioMod;
     private List<ModItemSolicitado> itensRegistados;
     private UtilControloDaData utilControloDaData;
   
 
     public ModReserva() {
         this.estado = null;
+        this.data_vencimento = null;
         this.idReserva = 0;
         this.dias_remanescente = 0;
         this.utenteMod = null;
-        this.funcionarioMod = null;
+        this.funcionarioMod = UtilUsuarioLogado.getUsuarioLogado();
         this.itensRegistados = new ArrayList<>();
         this.utilControloDaData = new UtilControloDaData();
     }
@@ -52,6 +56,14 @@ public class ModReserva {
         this.estado = estado;
     }
 
+    public LocalDate getData_vencimento() {
+        return data_vencimento;
+    }
+
+    public void setData_vencimento(LocalDate data_vencimento, String operacao) {
+        this.data_vencimento = data_vencimento;
+    }
+    
     public Byte getDias_remanescente() {
         return dias_remanescente;
     }
@@ -72,11 +84,11 @@ public class ModReserva {
         }
     }
 
-    public ModVisitante getFuncionarioMod() {
+    public ModFuncionario getFuncionarioMod() {
         return funcionarioMod;
     }
 
-    public void setFuncionarioMod(ModVisitante funcionarioMod, String operacao) {
+    public void setFuncionarioMod(ModFuncionario funcionarioMod, String operacao) {
         if(funcionarioMod == null){
             throw new UtilControloExcessao(operacao, "Funcionário não identificado", Alert.AlertType.ERROR);
         }else{

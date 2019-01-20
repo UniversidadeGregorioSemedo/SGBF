@@ -80,6 +80,7 @@ public class VisMovimentacaoReserva implements Initializable {
     private final ConAcervo acervoCon = new ConAcervo();
     private final ConUtente utenteCon = new ConUtente();
     private final ConEstoque estoqueCon = new ConEstoque();
+    private final ConReserva reservaCon = new ConReserva();
     private final ModReserva reservaMod = new ModReserva();
     private final ModVisitante visitanteMod = new ModVisitante();
 
@@ -124,6 +125,16 @@ public class VisMovimentacaoReserva implements Initializable {
             }
         } catch (NumberFormatException erro) {
             throw new UtilControloExcessao(operacao, "Introduza uma Quantidade válida", Alert.AlertType.WARNING);
+        }
+    }
+    
+    @FXML
+    private void reservar(){
+        operacao = "Reversar acervos";
+        reservaMod.setFuncionarioMod(UtilUsuarioLogado.getUsuarioLogado(), operacao);
+        reservaMod.setUtenteMod(tableVieVisitante.getSelectionModel().getSelectedItem(), operacao);
+        if(reservaCon.registar(reservaMod, operacao)){
+            System.out.println("Registo efectuado com sucesso");
         }
     }
 

@@ -1,20 +1,21 @@
-
 package sgbf.util;
 
 import java.sql.Timestamp;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+
 /**
  * @author Johni Branda
  */
 
 public class UtilControloDaData {
-    
+
     private Timestamp data_registo;
     private Timestamp data_modificacao;
-    
-    public UtilControloDaData(){
+
+    public UtilControloDaData() {
         this.data_registo = null;
         this.data_modificacao = null;
     }
@@ -34,50 +35,54 @@ public class UtilControloDaData {
     public void setData_modificacao(Timestamp data_modificacao, String operacao) {
         this.data_modificacao = data_modificacao;
     }
-    
-    public static LocalDate dataActual(){
-        LocalDate dataActual = new LocalDate();
+
+    public static LocalDateTime dataActual() {
+        LocalDateTime dataActual = new LocalDateTime();
         return dataActual;
     }
-  
-    public  Integer anoDaDataIntroduzida(DateTime data_introduzida, String operacao){
-        if(UtilControloDaData.dataFoiIntroduzida(data_introduzida)){
+
+    public static Timestamp jodaToSQLTimestamp(LocalDateTime localDateTime) {
+        return new Timestamp(localDateTime.toDateTime().getMillis());
+    }
+
+    public Integer anoDaDataIntroduzida(DateTime data_introduzida, String operacao) {
+        if (UtilControloDaData.dataFoiIntroduzida(data_introduzida)) {
             return data_introduzida.getYear();
-        }else{
+        } else {
             throw new UtilControloExcessao("Introduza a Data !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }
     }
-    
-    public  Integer mesDaDataIntroduzida(DateTime data_introduzida, String operacao){
-        if(UtilControloDaData.dataFoiIntroduzida(data_introduzida)){
-           return data_introduzida.getMonthOfYear();
-        }else{
+
+    public Integer mesDaDataIntroduzida(DateTime data_introduzida, String operacao) {
+        if (UtilControloDaData.dataFoiIntroduzida(data_introduzida)) {
+            return data_introduzida.getMonthOfYear();
+        } else {
             throw new UtilControloExcessao("Introduza a Data !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }
     }
-    
-    public  Integer diaDaDataIntroduzida(DateTime data_introduzida, String operacao){
-        if(UtilControloDaData.dataFoiIntroduzida(data_introduzida)){
+
+    public Integer diaDaDataIntroduzida(DateTime data_introduzida, String operacao) {
+        if (UtilControloDaData.dataFoiIntroduzida(data_introduzida)) {
             return data_introduzida.getDayOfMonth();
-        }else{
+        } else {
             throw new UtilControloExcessao("Introduza a Data !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }
     }
-    
-    public  Integer numeroDeDiasEntreDuasDatas(DateTime data_inicial, DateTime data_final, String operacao){
-        if(UtilControloDaData.dataFoiIntroduzida(data_inicial)){
-            if(UtilControloDaData.dataFoiIntroduzida(data_final)){
-                return Days.daysBetween(data_inicial, data_final).getDays(); 
-            }else{
+
+    public Integer numeroDeDiasEntreDuasDatas(DateTime data_inicial, DateTime data_final, String operacao) {
+        if (UtilControloDaData.dataFoiIntroduzida(data_inicial)) {
+            if (UtilControloDaData.dataFoiIntroduzida(data_final)) {
+                return Days.daysBetween(data_inicial, data_final).getDays();
+            } else {
                 throw new UtilControloExcessao("Introduza a data final !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
             }
-        }else{
+        } else {
             throw new UtilControloExcessao("Introduza a data inicial !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
         }
     }
 
-    private static boolean dataFoiIntroduzida(DateTime data_introduzida){
+    private static boolean dataFoiIntroduzida(DateTime data_introduzida) {
         return (data_introduzida != null);
     }
-    
+
 }
