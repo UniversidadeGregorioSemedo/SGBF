@@ -81,7 +81,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
                <children>
-                  <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Devolver" />
+                  <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" onAction="#devolverAcervoReservado" prefHeight="25.0" prefWidth="175.0" text="Devolver" />
                   <Button fx:id="botaoCancelar" layoutX="710.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="175.0" text="Cancelar" />
                   <Button fx:id="botaoSair" layoutX="710.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="175.0" text="Sair" />
                   <Label layoutX="14.0" layoutY="6.0" text="Dados da reserva">

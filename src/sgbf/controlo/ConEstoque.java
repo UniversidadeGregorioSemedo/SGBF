@@ -150,6 +150,18 @@ public class ConEstoque extends ConCRUD {
             throw new UtilControloExcessao("Erro ao "+operacao+" !\nErro: "+erro.getMessage(), operacao,Alert.AlertType.ERROR);
         }
     }
-            
+    
+    public boolean devolverAcervoReservadoNoEstoque(ModItemSolicitado itemSolicitadoMod, String operacao){
+        try{
+            super.query = "call pr_devolverAcervoReservadosNoEstoque(?,?)";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
+            super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
+            return !super.preparedStatement.execute();
+        }catch(SQLException erro){
+            throw new UtilControloExcessao("Erro ao "+operacao+" !\nErro: "+erro.getMessage(), operacao,Alert.AlertType.ERROR);
+        }
+    }
+    
     
 }

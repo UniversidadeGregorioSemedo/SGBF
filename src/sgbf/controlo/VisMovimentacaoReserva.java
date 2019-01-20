@@ -71,7 +71,7 @@ public class VisMovimentacaoReserva implements Initializable {
     private TableView<ModItemSolicitado> tableViewReserva;
     @FXML
     private TableColumn<ModItemSolicitado, String> textFieldTituloReserva, textFieldSubTituloReserva, textFieldISBNReserva,
-            textFieldCodigoBarraReserva,textFieldTipoReserva, textFieldFormatoReserva, textFieldquantidadeReserva;
+            textFieldCodigoBarraReserva, textFieldTipoReserva, textFieldFormatoReserva, textFieldquantidadeReserva;
     @FXML
     private AnchorPane anchoPaneReserva;
 
@@ -90,7 +90,7 @@ public class VisMovimentacaoReserva implements Initializable {
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewReserva.setPlaceholder(new Label("Nenhuma reserva feita"));
         this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
-        tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirAsQuantidades(newValue));
+        this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirAsQuantidades(newValue));
     }
 
     @FXML
@@ -111,14 +111,33 @@ public class VisMovimentacaoReserva implements Initializable {
 
     @FXML
     private void registarAcervoReservado() {
-        this.operacao = "Registar Acervos";
-        ModItemSolicitado itemSolicitado = new ModItemSolicitado();
-        itemSolicitado.setAcervoMod(this.tableViewAcervo.getSelectionModel().getSelectedItem(), operacao);
-        itemSolicitado.setQuantidade_revervada(Byte.valueOf(textFieldQuantidadeReservar.getText()), operacao);
-        if (estoqueCon.descontarAcervoReservadoNoEstoque(itemSolicitado, operacao)) {
-            reservaMod.adionarItemItensRegistados(itemSolicitado);
-            this.actualizarQuantidade(itemSolicitado.getAcervoMod(), operacao);
-            this.carregarResultadosNaTabelaReservas(reservaMod.getItensRegistados());
+        try {
+            this.operacao = "Registar Acervos";
+            ModItemSolicitado itemSolicitado = new ModItemSolicitado();
+            itemSolicitado.setAcervoMod(this.tableViewAcervo.getSelectionModel().getSelectedItem(), operacao);
+            itemSolicitado.setQuantidade_revervada(Byte.valueOf(textFieldQuantidadeReservar.getText()), operacao);
+            if (estoqueCon.descontarAcervoReservadoNoEstoque(itemSolicitado, operacao)) {
+                reservaMod.adionarItemItensRegistados(itemSolicitado);
+                this.actualizarQuantidade(itemSolicitado.getAcervoMod(), operacao);
+                this.carregarResultadosNaTabelaReservas(reservaMod.getItensRegistados());
+                this.botaoReserva.setDisable(false);
+            }
+        } catch (NumberFormatException erro) {
+            throw new UtilControloExcessao(operacao, "Introduza uma Quantidade válida", Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    private void devolverAcervoReservado() {
+        this.operacao = "Devolver Acervos";
+        ModItemSolicitado itemPorRemover = this.tableViewReserva.getSelectionModel().getSelectedItem();
+        if (itemPorRemover == null) {
+            throw new UtilControloExcessao(operacao, "Seleccione o acervo a devolver", Alert.AlertType.NONE);
+        } else {
+            if (estoqueCon.devolverAcervoReservadoNoEstoque(itemPorRemover, operacao)) {
+                this.tableViewReserva.getItems().remove(itemPorRemover);
+                this.limparItensAcervos();
+            }
         }
     }
 
@@ -132,12 +151,8 @@ public class VisMovimentacaoReserva implements Initializable {
             this.tableVieVisitante.getItems().clear();
             this.tableViewReserva.getItems().clear();
         } else {
-            if (excessaoControloUtil.temCerteza(operaco, "Tem a certeza que pretende cancelar esta operação ?")) {
-                this.bloquearItensDaJanela();
-                this.limparItensAcervos();
-                this.tableVieVisitante.getItems().clear();
-                this.tableViewReserva.getItems().clear();
-            }
+            throw new UtilControloExcessao(operaco, "Esta operação não pode ser cancelada\n"
+                    + "Devolva os acervos previamente para continuar", Alert.AlertType.ERROR);
         }
     }
 
@@ -156,10 +171,8 @@ public class VisMovimentacaoReserva implements Initializable {
 
     private void bloquearItensDaJanela() {
         this.bloquearItensAcervos();
-        this.botaoReserva.setDisable(true);
-        this.botaoDevolver.setDisable(true);
-        this.botaoTodasReservas.setDisable(true);
-        this.botaoDevolver.setDisable(true);
+        this.botaoReserva.setDisable(false);
+        this.botaoDevolver.setDisable(false);
     }
 
     private void pesquisarUtente() {
@@ -257,9 +270,11 @@ public class VisMovimentacaoReserva implements Initializable {
     }
 
     private void exibirAsQuantidades(ModAcervo acervoMod) {
-        this.textFieldQuantidadeTotal.setText(String.valueOf(acervoMod.getEstoqueMod().getQuantidade_total()));
-        this.textFieldQuantidadeRemanescente.setText(String.valueOf(acervoMod.getEstoqueMod().getQuantidadeRemanescente()));
-        this.desbloquearItensAcervos();
+        if(acervoMod != null){
+            this.textFieldQuantidadeTotal.setText(String.valueOf(acervoMod.getEstoqueMod().getQuantidade_total()));
+            this.textFieldQuantidadeRemanescente.setText(String.valueOf(acervoMod.getEstoqueMod().getQuantidadeRemanescente()));
+            this.desbloquearItensAcervos();
+        }
     }
 
     private void actualizarQuantidade(ModAcervo acervoMod, String operacao) {
@@ -271,46 +286,46 @@ public class VisMovimentacaoReserva implements Initializable {
         this.textFieldQuantidadeTotal.setText(String.valueOf(quantidadeActualizada.getEstoqueMod().getQuantidade_total()));
         this.textFieldQuantidadeRemanescente.setText(String.valueOf(quantidadeActualizada.getEstoqueMod().getQuantidadeRemanescente()));
     }
-    
+
     private void carregarResultadosNaTabelaReservas(List<ModItemSolicitado> itemSolicitadoMod) {
         ObservableList itemACarregar = FXCollections.observableList(itemSolicitadoMod);
-        textFieldTituloReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+        textFieldTituloReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemSolicitado, String> itemSolicitado) {
                 return new ReadOnlyStringWrapper(itemSolicitado.getValue().getAcervoMod().getTitulo());
             }
         });
-        textFieldSubTituloReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+        textFieldSubTituloReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemSolicitado, String> itemSolicitado) {
                 return new ReadOnlyStringWrapper(itemSolicitado.getValue().getAcervoMod().getSub_titulo());
             }
         });
-        textFieldISBNReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+        textFieldISBNReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemSolicitado, String> itemSolicitado) {
                 return new ReadOnlyStringWrapper(itemSolicitado.getValue().getAcervoMod().getIsbn());
             }
         });
-        textFieldCodigoBarraReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+        textFieldCodigoBarraReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemSolicitado, String> itemSolicitado) {
                 return new ReadOnlyStringWrapper(itemSolicitado.getValue().getAcervoMod().getCodigo_barra());
             }
         });
-        textFieldTipoReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+        textFieldTipoReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemSolicitado, String> itemSolicitado) {
                 return new ReadOnlyStringWrapper(itemSolicitado.getValue().getAcervoMod().getTipo_acervo());
             }
         });
-        textFieldFormatoReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+        textFieldFormatoReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemSolicitado, String> itemSolicitado) {
                 return new ReadOnlyStringWrapper(itemSolicitado.getValue().getAcervoMod().getFormato());
             }
         });
-        textFieldquantidadeReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+        textFieldquantidadeReserva.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemSolicitado, String> itemSolicitado) {
                 return new ReadOnlyStringWrapper(String.valueOf(itemSolicitado.getValue().getQuantidade_revervada()));
