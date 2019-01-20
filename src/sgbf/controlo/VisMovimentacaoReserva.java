@@ -127,14 +127,24 @@ public class VisMovimentacaoReserva implements Initializable {
             throw new UtilControloExcessao(operacao, "Introduza uma Quantidade válida", Alert.AlertType.WARNING);
         }
     }
-    
+
     @FXML
-    private void reservar(){
+    private void reservar() {
         operacao = "Reversar acervos";
+        ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
         reservaMod.setFuncionarioMod(UtilUsuarioLogado.getUsuarioLogado(), operacao);
         reservaMod.setUtenteMod(tableVieVisitante.getSelectionModel().getSelectedItem(), operacao);
-        if(reservaCon.registar(reservaMod, operacao)){
-            System.out.println("Registo efectuado com sucesso");
+        if (reservaCon.registar(reservaMod, operacao)) {
+            reservaMod.setIdReserva(reservaCon.utlimoCodigoRegistado(operacao), operacao);
+            if(itemSolicitadoCon.registar(reservaMod, operacao)){
+                this.bloquearItensDaJanela();
+                this.limparItensAcervos();
+                this.tableVieVisitante.getItems().clear();
+                this.tableViewReserva.getItems().clear();
+                throw new UtilControloExcessao(operacao, "reserva efectuada com sucesso", Alert.AlertType.CONFIRMATION);
+            }else{
+                throw new UtilControloExcessao(operacao, "Erro ao registar acervos", Alert.AlertType.CONFIRMATION);
+            }
         }
     }
 
@@ -169,7 +179,13 @@ public class VisMovimentacaoReserva implements Initializable {
 
     @FXML
     private void sair(ActionEvent event) {
-        anchoPaneReserva.setVisible(false);
+        final String operaco = "Reservar acervos";
+        if (this.reservaMod.getItensRegistados().size() == 0) {
+            anchoPaneReserva.setVisible(false);
+        } else {
+            throw new UtilControloExcessao(operaco, "Esta operação não pode ser executada\n"
+                    + "Devolva os acervos previamente para continuar", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -281,7 +297,7 @@ public class VisMovimentacaoReserva implements Initializable {
     }
 
     private void exibirAsQuantidades(ModAcervo acervoMod) {
-        if(acervoMod != null){
+        if (acervoMod != null) {
             this.textFieldQuantidadeTotal.setText(String.valueOf(acervoMod.getEstoqueMod().getQuantidade_total()));
             this.textFieldQuantidadeRemanescente.setText(String.valueOf(acervoMod.getEstoqueMod().getQuantidadeRemanescente()));
             this.desbloquearItensAcervos();

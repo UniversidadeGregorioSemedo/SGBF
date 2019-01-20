@@ -14,7 +14,6 @@ import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModItemSolicitado;
 import sgbf.modelo.ModReserva;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -26,14 +25,23 @@ public class ConItemSolicitado extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModReserva reservaMod = (ModReserva) objecto_registar;
         try {
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             for (ModItemSolicitado itemSolicitado : reservaMod.getItensRegistados()) {
-                super.query = "INSERT INTO tcc.itenssolicitados(Acervos_idAcervos, Reserva_idReserva, quantidade)"
-                        + " VALUES (?, ?, ?)";
-                super.preparedStatement.setInt(1, itemSolicitado.getAcervoMod().getIdAcervo());
-                super.preparedStatement.setInt(2, reservaMod.getIdReserva());
-                super.preparedStatement.setByte(3, itemSolicitado.getQuantidade_revervada());
-                super.preparedStatement.execute();
+                if (this.existeRegistoDoProduto(reservaMod, itemSolicitado, operacao)) {
+                    super.query = "update itenssolicitados set quantidade=quantidade+? where Acervos_idAcervos=? and Reserva_idReserva=?";
+                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement.setByte(1, itemSolicitado.getQuantidade_revervada());
+                    super.preparedStatement.setInt(2, itemSolicitado.getAcervoMod().getIdAcervo());
+                    super.preparedStatement.setInt(3, reservaMod.getIdReserva());
+                    super.preparedStatement.execute();
+                } else {
+                    super.query = "INSERT INTO tcc.itenssolicitados(Acervos_idAcervos, Reserva_idReserva, quantidade)"
+                            + " VALUES (?, ?, ?)";
+                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement.setInt(1, itemSolicitado.getAcervoMod().getIdAcervo());
+                    super.preparedStatement.setInt(2, reservaMod.getIdReserva());
+                    super.preparedStatement.setByte(3, itemSolicitado.getQuantidade_revervada());
+                    super.preparedStatement.execute();
+                }
             }
             return true;
         } catch (SQLException erro) {
@@ -43,104 +51,45 @@ public class ConItemSolicitado extends ConCRUD {
         }
     }
 
+    private boolean existeRegistoDoProduto(ModReserva reservaMod, ModItemSolicitado itemSolicitado, String operacao) {
+        try{
+            super.query = "select * from itenssolicitados where Acervos_idAcervos=? and Reserva_idReserva=?";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, itemSolicitado.getAcervoMod().getIdAcervo());
+            super.preparedStatement.setInt(2, reservaMod.getIdReserva());
+            super.setResultset = super.preparedStatement.executeQuery();
+            return super.setResultset.next();
+        }catch(SQLException erro){
+            throw new UtilControloExcessao(operacao, "Erro ao verificar dados Acervo" + erro.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModItemSolicitado itemSolicitadoMod = (ModItemSolicitado) objecto_alterar;
-        try {
-            super.query = "update tcc.itenssolicitados set quantidade=? where Acervos_idAcervos=? and Reserva_idReserva=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setByte(1, itemSolicitadoMod.getQuantidade_revervada());
-            //super.preparedStatement.setInt(2, itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
-            //super.preparedStatement.setInt(3, itemSolicitadoMod.getReservaMod().getIdReserva());
-            return !super.preparedStatement.execute();
-        } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Reserva !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
     }
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModItemSolicitado itemSolicitadoMod = (ModItemSolicitado) objecto_remover;
-        try {
-            if (this.temDadosRelacionados(itemSolicitadoMod, operacao)) {
-                throw new UtilControloExcessao("Esta operacão não pode ser executada\nErro: Tem devolução ! ", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-            } else {
-                super.query = "delete from tcc.itenssolicitados where Acervos_idAcervos=? and Reserva_idReserva=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                //super.preparedStatement.setInt(1,itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
-                //super.preparedStatement.setInt(2,itemSolicitadoMod.getReservaMod().getIdReserva());
-                return !super.preparedStatement.execute();
-            }
-        } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Reserva !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
     }
 
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
-        /*try{
-            super.query = "select * from tcc.Estante designacao by nome, data_modificacao asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.setResultset = super.preparedStatement.executeQuery();
-            while(super.setResultset.next()){
-                todosRegistos.add(this.pegarRegistos(super.setResultset,operacao));
-            }
-            return todosRegistos;
-        }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }*/
-        return todosRegistos;
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
     }
 
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        /*ModEstante estanteMod = (ModEstante)objecto_pesquisar;
-        try{
-            super.query = "select * from tcc.Estante where idEstante=? or "
-                        + "designacao like '%"+estanteMod.getDesignacao()+"%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
-            super.setResultset  = super.preparedStatement.executeQuery();
-            while(super.setResultset.next()){
-                todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
-            }
-            return todosRegistosEncontrados;
-        }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }*/
-        return todosRegistosEncontrados;
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
     }
 
     private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
         ModEstante estanteMod = new ModEstante();
-        /*estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
-        estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
-        estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
-        estanteMod.setLinha(setResultset.getByte("linha"), operacao);
-        estanteMod.setColuna(setResultset.getByte("coluna"), operacao);
-        estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
-        estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
-         */
-        return estanteMod;
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
     }
-
-    private boolean temDadosRelacionados(ModItemSolicitado itemSolicitadoMod, String operacao) throws SQLException {
-        super.query = "select *from devolucao where ItensSolicitados_Acervos_idAcervos=? and ItensSolicitados_Reserva_idReserva=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
-        // super.preparedStatement.setInt(1,itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
-        //super.preparedStatement.setInt(2,itemSolicitadoMod.getReservaMod().getIdReserva());
-        return super.setResultset.next();
-    }
-
 }
