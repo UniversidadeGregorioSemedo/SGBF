@@ -89,6 +89,7 @@ public class ModReserva {
     }
 
     public void adionarItemItensRegistados(ModItemSolicitado itensRegistados) {
+        System.out.println("Item: "+itensRegistados);
         this.itensRegistados.add(itensRegistados);
     }
     
