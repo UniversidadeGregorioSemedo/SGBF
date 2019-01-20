@@ -129,10 +129,21 @@ public class VisMovimentacaoReserva implements Initializable {
 
     @FXML
     private void cancelar() {
-        this.bloquearItensDaJanela();
-        this.limparItensAcervos();
-        this.tableVieVisitante.getItems().clear();
-        this.tableViewReserva.getItems().clear();
+        final String operaco  = "Reservar acervos";
+        UtilControloExcessao excessaoControloUtil = new UtilControloExcessao();
+        if(this.reservaMod.getItensRegistados().size() == 0){
+            this.bloquearItensDaJanela();
+            this.limparItensAcervos();
+            this.tableVieVisitante.getItems().clear();
+            this.tableViewReserva.getItems().clear();
+        }else{
+            if(excessaoControloUtil.temCerteza(operaco, "Tem a certeza que pretende cancelar esta operação ?")){
+                this.bloquearItensDaJanela();
+                this.limparItensAcervos();
+                this.tableVieVisitante.getItems().clear();
+                this.tableViewReserva.getItems().clear();
+            }
+        }
     }
 
     @FXML
