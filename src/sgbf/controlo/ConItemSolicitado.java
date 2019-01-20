@@ -27,8 +27,8 @@ public class ConItemSolicitado extends ConCRUD {
             super.query = "INSERT INTO tcc.itenssolicitados (Acervos_idAcervos, Reserva_idReserva, quantidade)"
                         + " VALUES (?, ?, ?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
-            super.preparedStatement.setInt(2, itemSolicitadoMod.getReservaMod().getIdReserva());
+            //super.preparedStatement.setInt(1, itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
+            //super.preparedStatement.setInt(2, itemSolicitadoMod.getReservaMod().getIdReserva());
             super.preparedStatement.setByte(3, itemSolicitadoMod.getQuantidade_revervada());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
@@ -45,8 +45,8 @@ public class ConItemSolicitado extends ConCRUD {
             super.query = "update tcc.itenssolicitados set quantidade=? where Acervos_idAcervos=? and Reserva_idReserva=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setByte(1, itemSolicitadoMod.getQuantidade_revervada());
-            super.preparedStatement.setInt(2, itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
-            super.preparedStatement.setInt(3, itemSolicitadoMod.getReservaMod().getIdReserva());
+            //super.preparedStatement.setInt(2, itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
+            //super.preparedStatement.setInt(3, itemSolicitadoMod.getReservaMod().getIdReserva());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Reserva !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
@@ -64,8 +64,8 @@ public class ConItemSolicitado extends ConCRUD {
             }else{
                 super.query = "delete from tcc.itenssolicitados where Acervos_idAcervos=? and Reserva_idReserva=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setInt(1,itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
-                super.preparedStatement.setInt(2,itemSolicitadoMod.getReservaMod().getIdReserva());
+                //super.preparedStatement.setInt(1,itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
+                //super.preparedStatement.setInt(2,itemSolicitadoMod.getReservaMod().getIdReserva());
                 return !super.preparedStatement.execute();
             }
         }catch(SQLException erro){
@@ -135,8 +135,8 @@ public class ConItemSolicitado extends ConCRUD {
     private boolean temDadosRelacionados( ModItemSolicitado itemSolicitadoMod, String operacao) throws SQLException{
         super.query = "select *from devolucao where ItensSolicitados_Acervos_idAcervos=? and ItensSolicitados_Reserva_idReserva=?";
         super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
-        super.preparedStatement.setInt(1,itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
-        super.preparedStatement.setInt(2,itemSolicitadoMod.getReservaMod().getIdReserva());
+       // super.preparedStatement.setInt(1,itemSolicitadoMod.getFisicoAcervoMod().getIdAcervo());
+        //super.preparedStatement.setInt(2,itemSolicitadoMod.getReservaMod().getIdReserva());
         return super.setResultset.next();
     }
 

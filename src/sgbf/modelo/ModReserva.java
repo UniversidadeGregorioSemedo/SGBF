@@ -5,7 +5,11 @@
  */
 package sgbf.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
+import sgbf.util.UtilControloExcessao;
 
 /**
  *
@@ -13,22 +17,23 @@ import sgbf.util.UtilControloDaData;
  */
 public class ModReserva {
     
-    private Integer idReserva;
     private String estado;
+    private Integer idReserva;
     private Byte dias_remanescente;
-    private ModUtente utenteMod;
-    private ModFuncionario funcionarioMod;
-    private String data_registo;
-    private String data_modificacao;
+    private ModVisitante utenteMod;
+    private ModVisitante funcionarioMod;
+    private List<ModItemSolicitado> itensRegistados;
+    private UtilControloDaData utilControloDaData;
+  
 
     public ModReserva() {
-        this.idReserva = 0;
         this.estado = null;
+        this.idReserva = 0;
         this.dias_remanescente = 0;
         this.utenteMod = null;
-        this.funcionarioMod = new ModFuncionario();
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.funcionarioMod = null;
+        this.itensRegistados = new ArrayList<>();
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public Integer getIdReserva() {
@@ -59,45 +64,36 @@ public class ModReserva {
         return utenteMod;
     }
 
-    public void setUtenteMod(ModUtente utenteMod, String operacao) {
-        this.utenteMod = utenteMod;
+    public void setUtenteMod(ModVisitante utenteMod, String operacao) {
+        if(utenteMod == null){
+            throw new UtilControloExcessao(operacao, "Seleccione o Utente", Alert.AlertType.ERROR);
+        }else{
+            this.utenteMod = utenteMod;
+        }
     }
 
-    public ModFuncionario getFuncionarioMod() {
+    public ModVisitante getFuncionarioMod() {
         return funcionarioMod;
     }
 
-    public void setFuncionarioMod(ModFuncionario funcionarioMod, String operacao) {
-        this.funcionarioMod = funcionarioMod;
-    }
-
-    public String getData_registo() {
-        return data_registo;
-    }
-
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
-    }
-    
-    enum Estado{
-        ACTIVO("Activo"),INACTIVO("Inactivo");
-        private String estado;
-        
-        private Estado(String estado){
-            this.estado = estado;
-        }
-        
-        private String getEstado(){
-            return this.estado;
+    public void setFuncionarioMod(ModVisitante funcionarioMod, String operacao) {
+        if(funcionarioMod == null){
+            throw new UtilControloExcessao(operacao, "Funcionário não identificado", Alert.AlertType.ERROR);
+        }else{
+            this.funcionarioMod = funcionarioMod;
         }
     }
+
+    public List<ModItemSolicitado> getItensRegistados() {
+        return itensRegistados;
+    }
+
+    public void adionarItemItensRegistados(ModItemSolicitado itensRegistados) {
+        this.itensRegistados.add(itensRegistados);
+    }
     
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
+    }
+
 }

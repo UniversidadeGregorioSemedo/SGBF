@@ -74,8 +74,7 @@ public class ModEstoque {
     }
     
     public Integer getQuantidadeRemanescente(){
-        return this.quantidade_total - this.quantidade_acervos_emprestados
-             - this.quantidade_acervos_resercados-this.quantidade_remanescente;
+        return this.quantidade_total - this.quantidade_em_falta;
     }
 
     public String getData_registo() {

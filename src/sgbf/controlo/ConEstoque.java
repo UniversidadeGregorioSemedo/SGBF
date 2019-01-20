@@ -14,6 +14,7 @@ import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModEstoque;
 import sgbf.modelo.ModItemProveniente;
+import sgbf.modelo.ModItemSolicitado;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -23,7 +24,7 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  */
 public class ConEstoque extends ConCRUD {
     
-        @Override
+    @Override
     public boolean registar(Object objecto_registar, String operacao) {
         ModEstoque estoqueMod = (ModEstoque)objecto_registar;
         try{
@@ -138,7 +139,17 @@ public class ConEstoque extends ConCRUD {
         return estanteMod;
     }
     
-   
-
+    public boolean descontarAcervoReservadoNoEstoque(ModItemSolicitado itemSolicitadoMod, String operacao){
+        try{
+            super.query = "call pr_descontarAcervoRegistadoNaReserva(?,?)";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
+            super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
+            return !super.preparedStatement.execute();
+        }catch(SQLException erro){
+            throw new UtilControloExcessao("Erro ao "+operacao+" !\nErro: "+erro.getMessage(), operacao,Alert.AlertType.ERROR);
+        }
+    }
+            
     
 }

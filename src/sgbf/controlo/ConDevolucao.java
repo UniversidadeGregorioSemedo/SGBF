@@ -31,8 +31,8 @@ public class ConDevolucao extends ConCRUD{
             super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
             super.preparedStatement.setInt(2, devolucaoMod.getQuantidade_devolvida());
             super.preparedStatement.setInt(3, devolucaoMod.getFuncionarioMod().getIdFuncionario());
-            super.preparedStatement.setInt(4, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
-            super.preparedStatement.setInt(5, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
+           // super.preparedStatement.setInt(4, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
+            //super.preparedStatement.setInt(5, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Devolução !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
@@ -51,8 +51,8 @@ public class ConDevolucao extends ConCRUD{
             super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
             super.preparedStatement.setInt(2, devolucaoMod.getQuantidade_devolvida());
             super.preparedStatement.setInt(3, devolucaoMod.getFuncionarioMod().getIdFuncionario());
-            super.preparedStatement.setInt(4, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
-            super.preparedStatement.setInt(5, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
+            //super.preparedStatement.setInt(4, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
+            //super.preparedStatement.setInt(5, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
             super.preparedStatement.setInt(5, devolucaoMod.getIdDevolucao());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
@@ -68,8 +68,8 @@ public class ConDevolucao extends ConCRUD{
         try{
             super.query = "delete from tcc.devolucao where ItensSolicitados_Acervos_idAcervos=? and ItensSolicitados_Reserva_idReserva=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
-            super.preparedStatement.setInt(2, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
+            //super.preparedStatement.setInt(1, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
+            //super.preparedStatement.setInt(2, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
            throw new UtilControloExcessao("Erro ao "+operacao+" Devolução !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());

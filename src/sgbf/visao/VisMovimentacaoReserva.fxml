@@ -63,10 +63,10 @@
                      </graphic>
                   </JFXButton>
                   <Label layoutX="714.0" layoutY="327.0" text="Q. Reservar:" />
-                  <TextField fx:id="textFieldQuantidadeReservar" layoutX="795.0" layoutY="323.0" prefHeight="25.0" prefWidth="92.0" />
+                  <TextField fx:id="textFieldQuantidadeReservar" layoutX="795.0" layoutY="323.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="92.0" />
                   <TextField fx:id="textFieldQuantidadeTotal" disable="true" editable="false" layoutX="763.0" layoutY="244.0" prefHeight="25.0" prefWidth="122.0" />
                   <Label layoutX="711.0" layoutY="248.0" prefHeight="17.0" prefWidth="48.0" text="Q. Total:" />
-                  <Button fx:id="botaoReserva" layoutX="710.0" layoutY="364.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Reservar" />
+                  <Button fx:id="botaoRegistar" layoutX="710.0" layoutY="364.0" mnemonicParsing="false" onAction="#registarAcervoReservado" prefHeight="25.0" prefWidth="175.0" text="Registar" />
                   <Label layoutX="14.0" layoutY="48.0" text="Dados do Utente">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -89,8 +89,8 @@
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
                   <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Ver todas as Reservas" />
-                  <Label layoutX="711.0" layoutY="66.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" />
-                  <TextField fx:id="textFieldUtente" disable="true" editable="false" layoutX="763.0" layoutY="62.0" prefHeight="25.0" prefWidth="122.0" />
+                  <Label layoutX="712.0" layoutY="37.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" />
+                  <TextField fx:id="textFieldUtente" disable="true" editable="false" layoutX="764.0" layoutY="33.0" prefHeight="25.0" prefWidth="122.0" />
                   <TableView fx:id="tableViewReserva" layoutX="14.0" layoutY="33.0" prefHeight="189.0" prefWidth="693.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Título" />
@@ -108,6 +108,7 @@
                   <Line endX="100.0" fill="#dddada85" layoutX="115.0" layoutY="242.0" smooth="false" startX="-100.0" stroke="#908d8d" />
                   <Label layoutX="227.0" layoutY="233.0" text="Operadador:" />
                   <Label fx:id="labelOperador" layoutX="305.0" layoutY="233.0" prefHeight="17.0" prefWidth="402.0" text="Nenhuma informação disponível" />
+                  <Button fx:id="botaoReserva" layoutX="711.0" layoutY="64.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Reservar" />
                </children>
             </AnchorPane>
          </items>

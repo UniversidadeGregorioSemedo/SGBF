@@ -5,6 +5,7 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -13,31 +14,25 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  * @author Look
  */
 public class ModItemSolicitado {
-    
+
     private ModAcervo acervoMod;
-    private ModReserva reservaMod;
     private Byte quantidade_revervada;
 
     public ModItemSolicitado() {
         this.acervoMod = new ModAcervo();
-        this.reservaMod = new ModReserva();
         this.quantidade_revervada = 0;
     }
 
-    public ModAcervo getFisicoAcervoMod() {
+    public ModAcervo getAcervoMod() {
         return acervoMod;
     }
 
-    public void setFisicoAcervoMod(ModAcervo fisicoAcervoMod, String operacao) {
-        this.acervoMod = fisicoAcervoMod;
-    }
-
-    public ModReserva getReservaMod() {
-        return reservaMod;
-    }
-
-    public void setReservaMod(ModReserva reservaMod, String operacao) {
-        this.reservaMod = reservaMod;
+    public void setAcervoMod(ModAcervo acervoMod, String operacao) {
+        if(acervoMod == null){
+            throw new UtilControloExcessao(operacao, "Seleccione o acervo que pretende registar", Alert.AlertType.WARNING);
+        }else{
+            this.acervoMod = acervoMod;
+        }
     }
 
     public Byte getQuantidade_revervada() {
@@ -45,16 +40,15 @@ public class ModItemSolicitado {
     }
 
     public void setQuantidade_revervada(Byte quantidade_revervada, String operacao) {
-        if(quantidade_revervada <= 0){
+        if (quantidade_revervada <= 0) {
             throw new UtilControloExcessao("Quantidade solicicata inválida !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }else{
-            if(quantidade_revervada > 125){
+        } else {
+            if (quantidade_revervada > 125) {
                 throw new UtilControloExcessao("A quantidade de solicitação máxima é de 125 !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+            } else {
                 this.quantidade_revervada = quantidade_revervada;
             }
         }
     }
-    
-    
+
 }

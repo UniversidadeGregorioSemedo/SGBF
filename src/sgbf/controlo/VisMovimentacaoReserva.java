@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -25,8 +24,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModAcervo;
+import sgbf.modelo.ModItemSolicitado;
 import sgbf.modelo.ModReserva;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
@@ -52,7 +53,7 @@ public class VisMovimentacaoReserva implements Initializable {
     @FXML
     private Label labelOperador;
     @FXML
-    private Button botaoReserva, botaoDevolver, botaoTodasReservas, botaoCancelar, botaoSair;
+    private Button botaoRegistar,botaoReserva, botaoDevolver, botaoTodasReservas, botaoCancelar, botaoSair;
     @FXML
     private TableView<ModVisitante> tableVieVisitante;
     @FXML
@@ -69,10 +70,15 @@ public class VisMovimentacaoReserva implements Initializable {
     private AnchorPane anchoPaneReserva;
 
     private String operacao = null;
-    private final ModVisitante visitanteMod = new ModVisitante();
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
     private final ConUtente utenteCon = new ConUtente();
+    private final ConEstoque estoqueCon = new ConEstoque();
+    private final ModReserva reservaMod = new ModReserva();
+    private final ModVisitante visitanteMod = new ModVisitante();
+    private final ModItemSolicitado itemSolicitado = new ModItemSolicitado();
+    
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -99,6 +105,27 @@ public class VisMovimentacaoReserva implements Initializable {
             throw new UtilControloExcessao("Pesquisar item", "Seleccione o item a pesquisar", Alert.AlertType.WARNING);
         }
     }
+    
+    @FXML
+    private void registarAcervoReservado(){
+        this.operacao = "Registar Acervos";
+        this.itemSolicitado.setAcervoMod(this.tableViewAcervo.getSelectionModel().getSelectedItem(), operacao);
+        this.itemSolicitado.setQuantidade_revervada(Byte.valueOf(textFieldQuantidadeReservar.getText()), operacao);
+        if(estoqueCon.descontarAcervoReservadoNoEstoque(this.itemSolicitado, operacao)){
+            this.reservaMod.adionarItemItensRegistados(this.itemSolicitado);
+            this.actualizarQuantidade(itemSolicitado.getAcervoMod(), operacao);
+        }
+    }
+    
+    private void actualizarQuantidade(ModAcervo acervoMod, String operacao){
+        ModAcervo quantidadeActualizada = new ModAcervo();
+        ConAcervo acervoCon = new ConAcervo();
+        for(Object todosRegistos: acervoCon.pesquisar(acervoMod, operacao)){
+            quantidadeActualizada = (ModAcervo)todosRegistos;
+        }
+        this.textFieldQuantidadeTotal.setText(String.valueOf(quantidadeActualizada.getEstoqueMod().getQuantidade_total()));
+        this.textFieldQuantidadeRemanescente.setText(String.valueOf(quantidadeActualizada.getEstoqueMod().getQuantidadeRemanescente()));
+    }
 
     @FXML
     private void cancelar() {
@@ -112,9 +139,19 @@ public class VisMovimentacaoReserva implements Initializable {
     private void sair(ActionEvent event) {
         anchoPaneReserva.setVisible(false);
     }
+    
+      
+    @FXML
+    public void validarDadosNumericos(KeyEvent evt){
+        String caracateresValidos = "1234567890";
+        if(!caracateresValidos.contains(evt.getCharacter()+"")){
+            evt.consume();
+        }
+    }
 
     private void bloquearItensDaJanela() {
         this.bloquearItensAcervos();
+        this.botaoReserva.setDisable(true);
         this.botaoDevolver.setDisable(true);
         this.botaoTodasReservas.setDisable(true);
         this.botaoDevolver.setDisable(true);
@@ -230,13 +267,12 @@ public class VisMovimentacaoReserva implements Initializable {
     
     private void bloquearItensAcervos(){
         this.textFieldQuantidadeReservar.setDisable(true);
-        this.botaoReserva.setDisable(true);
+        this.botaoRegistar.setDisable(true);
     }
     
     private void desbloquearItensAcervos(){
         this.textFieldQuantidadeReservar.setDisable(false);
-        this.botaoReserva.setDisable(false);
+        this.botaoRegistar.setDisable(false);
     }
     
-
 }
