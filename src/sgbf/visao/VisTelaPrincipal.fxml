@@ -196,20 +196,24 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Movimentação">
               <items>
+                  <Menu mnemonicParsing="false" text="Reserva">
+                    <items>
+                        <MenuItem fx:id="menuitemMovimentacaoReserva" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoReserva" text="Nova " />
+                      <MenuItem fx:id="menuitemMovimentacaoTodasReserva" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoTodasReserva" text="Todas as Resevas" />
+                    </items>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Health%20Book_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
                 <MenuItem fx:id="menuitemMovimentacaoEmprestimo" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoEmprestimo" text="Emprestimo">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icones/Return%20Book_48px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem fx:id="menuitemMovimentacaoReserva" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoReserva" text="Reserva">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Health%20Book_48px.png" />
                            </image>
                         </ImageView>
                      </graphic>

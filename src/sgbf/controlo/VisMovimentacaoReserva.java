@@ -123,7 +123,7 @@ public class VisMovimentacaoReserva implements Initializable {
                 this.carregarResultadosNaTabelaReservas(reservaMod.getItensRegistados());
                 this.botaoReserva.setDisable(false);
             }
-        } catch (NumberFormatException erro) {
+        } catch (NumberFormatException  | NullPointerException erro) {
             throw new UtilControloExcessao(operacao, "Introduza uma Quantidade válida", Alert.AlertType.WARNING);
         }
     }
