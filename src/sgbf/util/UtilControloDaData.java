@@ -1,15 +1,13 @@
 package sgbf.util;
 
 import java.sql.Timestamp;
+import javafx.scene.control.Alert;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
 /**
- * @author Johni Branda
+ * @author Francisco Lourenço
  */
-
 public class UtilControloDaData {
 
     private Timestamp data_registo;
@@ -36,37 +34,13 @@ public class UtilControloDaData {
         this.data_modificacao = data_modificacao;
     }
 
-    public static LocalDateTime dataActual() {
-        LocalDateTime dataActual = new LocalDateTime();
+    public DateTime dataActual() {
+        DateTime dataActual = new DateTime();
         return dataActual;
     }
 
-    public static Timestamp jodaToSQLTimestamp(LocalDateTime localDateTime) {
-        return new Timestamp(localDateTime.toDateTime().getMillis());
-    }
-
-    public Integer anoDaDataIntroduzida(DateTime data_introduzida, String operacao) {
-        if (UtilControloDaData.dataFoiIntroduzida(data_introduzida)) {
-            return data_introduzida.getYear();
-        } else {
-            throw new UtilControloExcessao("Introduza a Data !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }
-    }
-
-    public Integer mesDaDataIntroduzida(DateTime data_introduzida, String operacao) {
-        if (UtilControloDaData.dataFoiIntroduzida(data_introduzida)) {
-            return data_introduzida.getMonthOfYear();
-        } else {
-            throw new UtilControloExcessao("Introduza a Data !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }
-    }
-
-    public Integer diaDaDataIntroduzida(DateTime data_introduzida, String operacao) {
-        if (UtilControloDaData.dataFoiIntroduzida(data_introduzida)) {
-            return data_introduzida.getDayOfMonth();
-        } else {
-            throw new UtilControloExcessao("Introduza a Data !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }
+    public static Timestamp DataTimeParaTimeStamp(DateTime dateTime) {
+        return new Timestamp(dateTime.toDateTime().getMillis());
     }
 
     public Integer numeroDeDiasEntreDuasDatas(DateTime data_inicial, DateTime data_final, String operacao) {
@@ -74,10 +48,10 @@ public class UtilControloDaData {
             if (UtilControloDaData.dataFoiIntroduzida(data_final)) {
                 return Days.daysBetween(data_inicial, data_final).getDays();
             } else {
-                throw new UtilControloExcessao("Introduza a data final !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao, "Introduza a data final !", Alert.AlertType.WARNING);
             }
         } else {
-            throw new UtilControloExcessao("Introduza a data inicial !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Introduza a data inicial !", Alert.AlertType.WARNING);
         }
     }
 

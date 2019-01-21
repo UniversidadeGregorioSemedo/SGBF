@@ -21,8 +21,7 @@ public class ModItemProveniente {
     private Short quantidade_entrada;
     private Double custo_unitario;
     private Double subtotaltotal;
-    private String data_registo;
-    private String data_modificacao;
+    private UtilControloDaData utilControloDaData;
   
 
     public ModItemProveniente() {
@@ -31,9 +30,7 @@ public class ModItemProveniente {
         this.subtotaltotal = 0.0;
         this.acervoMod = new ModAcervo();
         this.provenienciaMod = new ModProveniencia();
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
-       
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     
@@ -109,20 +106,9 @@ public class ModItemProveniente {
         }
     }
 
-    public String getData_registo() {
-        return data_registo;
-    }
-
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
+      
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
 
     

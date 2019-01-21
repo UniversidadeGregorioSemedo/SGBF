@@ -5,10 +5,11 @@
  */
 package sgbf.modelo;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilUsuarioLogado;
@@ -21,19 +22,18 @@ public class ModReserva {
     
     private Integer idReserva;
     private String estado;
-    private LocalDate data_vencimento;
+    private DateTime data_vencimento;
     private Byte dias_remanescente;
     private ModVisitante utenteMod;
     private ModFuncionario funcionarioMod;
     private List<ModItemSolicitado> itensRegistados;
     private UtilControloDaData utilControloDaData;
   
-
     public ModReserva() {
         this.estado = null;
         this.data_vencimento = null;
         this.idReserva = 0;
-        this.dias_remanescente = 0;
+        this.dias_remanescente = 3;
         this.utenteMod = null;
         this.funcionarioMod = UtilUsuarioLogado.getUsuarioLogado();
         this.itensRegistados = new ArrayList<>();
@@ -56,12 +56,18 @@ public class ModReserva {
         this.estado = estado;
     }
 
-    public LocalDate getData_vencimento() {
+    public DateTime getData_vencimento() {
         return data_vencimento;
     }
 
-    public void setData_vencimento(LocalDate data_vencimento, String operacao) {
+    public void setData_vencimento(DateTime data_vencimento, String operacao) {
         this.data_vencimento = data_vencimento;
+    }
+    
+    public Timestamp getDataVencimento(Byte dias, String operacao){
+        UtilControloDaData data = new UtilControloDaData();
+        DateTime dataDeVecimento = data.dataActual().plusDays(dias);
+        return UtilControloDaData.DataTimeParaTimeStamp(dataDeVecimento);
     }
     
     public Byte getDias_remanescente() {

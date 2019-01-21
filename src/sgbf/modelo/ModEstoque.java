@@ -19,8 +19,7 @@ public class ModEstoque {
     private Short quantidade_acervos_emprestados;
     private Short quantidade_acervos_resercados;
     private Short quantidade_remanescente;
-    private String data_registo;
-    private String data_modificacao;
+    private UtilControloDaData utilControloDaData;
 
     public ModEstoque() {
         this.idEstoque = 0;
@@ -29,8 +28,7 @@ public class ModEstoque {
         this.quantidade_acervos_emprestados = 0;
         this.quantidade_acervos_resercados = 0;
         this.quantidade_remanescente = 0;
-        this.data_registo = String.valueOf(UtilControloDaData.dataActual());
-        this.data_modificacao = String.valueOf(UtilControloDaData.dataActual());
+        this.utilControloDaData = new UtilControloDaData();
     }
     
     public Integer getIdEstoque() {
@@ -77,20 +75,8 @@ public class ModEstoque {
         return this.quantidade_total - this.quantidade_em_falta;
     }
 
-    public String getData_registo() {
-        return data_registo;
-    }
-
-    public void setData_registo(String data_registo, String operacao) {
-        this.data_registo = data_registo;
-    }
-
-    public String getData_modificacao() {
-        return data_modificacao;
-    }
-
-    public void setData_modificacao(String data_modificacao, String operacao) {
-        this.data_modificacao = data_modificacao;
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
     
 }

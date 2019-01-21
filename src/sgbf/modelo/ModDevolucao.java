@@ -19,14 +19,15 @@ public class ModDevolucao {
     private String data_devolucao;
     private ModFuncionario funcionarioMod;
     private ModItemSolicitado solicitadoItemMod;
+    private UtilControloDaData utilControloDaData;
 
     public ModDevolucao() {
         this.idDevolucao = 0;
         this.tipo_devolucao = null;
         this.quantidade_devolvida = 0;
-        this.data_devolucao = String.valueOf(UtilControloDaData.dataActual());
         this.funcionarioMod = new ModFuncionario();
         this.solicitadoItemMod = new ModItemSolicitado();
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public Integer getIdDevolucao() {
@@ -77,17 +78,8 @@ public class ModDevolucao {
         this.solicitadoItemMod = solicitadoItemMod;
     }
     
-    enum TipoDevolucao{
-        EMPRESTIMO("Empréstimo"),DEVOLUCAO("Devolução");
-        private String tipo_devolucao;
-        
-        private TipoDevolucao(String tipo_devolucao){
-            this.tipo_devolucao = tipo_devolucao;
-        }
-        
-        private String getTipoDeovulcao(){
-            return this.tipo_devolucao;
-        }
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
-
+    
 }
