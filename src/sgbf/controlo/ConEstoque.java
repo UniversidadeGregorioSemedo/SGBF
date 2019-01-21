@@ -141,13 +141,32 @@ public class ConEstoque extends ConCRUD {
     
     public boolean descontarAcervoReservadoNoEstoque(ModItemSolicitado itemSolicitadoMod, String operacao){
         try{
-            super.query = "call pr_descontarAcervoRegistadoNaReserva(?,?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
-            super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
-            return !super.preparedStatement.execute();
+            if(this.temQuantidadeSuficiente(itemSolicitadoMod, operacao)){
+                super.query = "call pr_descontarAcervoRegistadoNaReserva(?,?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
+                super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
+                return !super.preparedStatement.execute();
+            }else{
+                throw new UtilControloExcessao( operacao,"Quantidade inválida",Alert.AlertType.ERROR);
+            }
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" !\nErro: "+erro.getMessage(), operacao,Alert.AlertType.ERROR);
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
+        }
+    }
+    
+    private boolean temQuantidadeSuficiente(ModItemSolicitado itemSolicitadoMod, String operacao){
+        ConAcervo acervoCon = new ConAcervo();
+        if(acervoCon.pesquisar(itemSolicitadoMod.getAcervoMod(), operacao).isEmpty()){
+            throw new UtilControloExcessao(operacao, "O Acervo Seleccionado não existe", Alert.AlertType.WARNING);
+        }else{
+            for(Object todosAcervos: acervoCon.pesquisar(itemSolicitadoMod.getAcervoMod(), operacao)){
+                ModAcervo acervoMod = (ModAcervo)todosAcervos;
+                if(acervoMod.getIdAcervo() == itemSolicitadoMod.getAcervoMod().getIdAcervo()){
+                    return Integer.valueOf(itemSolicitadoMod.getQuantidade_revervada()) < acervoMod.getEstoqueMod().getQuantidadeRemanescente();
+                }
+            }
+            return false;
         }
     }
     

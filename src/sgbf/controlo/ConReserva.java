@@ -85,36 +85,13 @@ public class ConReserva extends ConCRUD {
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModEstante estanteMod = (ModEstante) objecto_remover;
-        /*try{
-            super.query = "delete from tcc.Estante where idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1,estanteMod.getIdEstante());
-            return !super.preparedStatement.execute();
-        }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Estante !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }*/
         throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
     }
 
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
-        /*try{
-            super.query = "select * from tcc.Estante designacao by nome, data_modificacao asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.setResultset = super.preparedStatement.executeQuery();
-            while(super.setResultset.next()){
-                todosRegistos.add(this.pegarRegistos(super.setResultset,operacao));
-            }
-            return todosRegistos;
-        }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }*/
-        return todosRegistos;
+        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
     }
 
     @Override
@@ -135,12 +112,13 @@ public class ConReserva extends ConCRUD {
             throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            return todosRegistosEncontrados;
         }*/
-        return todosRegistosEncontrados;
+        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
     }
 
     private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
-        ModEstante estanteMod = new ModEstante();
+        /*ModEstante estanteMod = new ModEstante();
         estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
         estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
         estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
@@ -149,7 +127,8 @@ public class ConReserva extends ConCRUD {
         estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
         estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
-        return estanteMod;
+        return estanteMod;*/
+        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
     }
 
 }
