@@ -78,20 +78,28 @@ public class ConReserva extends ConCRUD {
             throw new UtilControloExcessao(operacao, "Erro ao Listar Código da Reserva!\nErro: " + ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
-    
-   
+
+    @Override
+    public boolean alterar(Object objecto_alterar, String operacao) {
+        ModReserva reservaMod = (ModReserva) objecto_alterar;
+        try {
+            super.query = "update tcc.reserva SET estado = ? WHERE (idReserva = ?)";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setString(1, reservaMod.getEstado());
+            super.preparedStatement.setInt(2, reservaMod.getIdReserva());
+            return !super.preparedStatement.execute();
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Reserva !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        } finally {
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+        }
+    }
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModEstante estanteMod = (ModEstante) objecto_remover;
         throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
     }
-    @Override
-    public boolean alterar(Object objecto_alterar, String operacao) {
-        ModReserva reservaMod = (ModReserva) objecto_alterar;
-        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
-    }
-
 
     @Override
     public List<Object> listarTodos(String operacao) {
@@ -102,18 +110,18 @@ public class ConReserva extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        ModVisitante visitanteMod = (ModVisitante)objecto_pesquisar;
-        try{
+        ModVisitante visitanteMod = (ModVisitante) objecto_pesquisar;
+        try {
             super.query = "select * from reserva where Utente_idUtente=? order by estado";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
-            super.setResultset  = super.preparedStatement.executeQuery();
-            while(super.setResultset.next()){
+            super.setResultset = super.preparedStatement.executeQuery();
+            while (super.setResultset.next()) {
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
             }
             return todosRegistosEncontrados;
-        }catch(SQLException erro){
-            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+"  !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "  !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

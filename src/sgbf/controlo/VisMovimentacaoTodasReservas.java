@@ -80,6 +80,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.bloquearBotoes();
         this.tableViewVisitante.setPlaceholder(new Label("Utentes não listados"));
         this.tableViewReservas.setPlaceholder(new Label("Reservadas não listadas"));
         this.tableViewItensReservados.setPlaceholder(new Label("Itens não listados"));
@@ -98,14 +99,38 @@ public class VisMovimentacaoTodasReservas implements Initializable {
             todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisaUtente(), operacao);
             if (todosRegistosEncontrados.isEmpty()) {
                 this.limparTodosItens();
+                this.bloquearBotoes();
                 throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
             } else {
+                this.bloquearBotoes();
                 this.tableViewReservas.getItems().clear();
                 this.tableViewItensReservados.getItems().clear();
                 this.carregarResultadosNaTableaUtente(todosRegistosEncontrados);
             }
         }
     }
+
+    @FXML
+    private void cancelarReserva() {
+        this.operacao = "Cancelar Reserva";
+        String mensagem = "Este operação é irreversível !\nDeseja Continuar ?";
+        UtilControloExcessao excessaoControlo = new UtilControloExcessao();
+        if(excessaoControlo.temCerteza(operacao, mensagem)){
+            ModReserva reservaPorRemover = this.tableViewReservas.getSelectionModel().getSelectedItem();
+            //Devolver todos os Acervos no Estoque
+            for (ModItemSolicitado itemPorRemover : this.tableViewItensReservados.getItems()) {
+                reservaPorRemover.adionarItemItensRegistados(itemPorRemover);
+                estoqueCon.devolverAcervoReservadoNoEstoque(itemPorRemover, operacao);
+            }
+            //Remover todos os icones solicitados
+            if (itemSolicitadoCon.remover(reservaPorRemover, operacao)) {
+                this.tableViewItensReservados.getItems().clear();
+                this.tableViewReservas.getItems().clear();
+                this.passarEstadoParaInactivo(reservaPorRemover, operacao);
+            }
+        }
+    }
+
 
     @FXML
     private void devolverAcervoReservado() {
@@ -119,9 +144,18 @@ public class VisMovimentacaoTodasReservas implements Initializable {
             if (estoqueCon.devolverAcervoReservadoNoEstoque(itemPorRemover, operacao)) {
                 if (itemSolicitadoCon.remover(reservaPorRemover, operacao)) {
                     this.tableViewItensReservados.getItems().remove(itemPorRemover);
+                    if(this.tableViewItensReservados.getItems().isEmpty()){
+                        this.passarEstadoParaInactivo(reservaPorRemover, operacao);
+                        this.tableViewReservas.getItems().clear();
+                    }
                 }
             }
         }
+    }
+   
+    private void passarEstadoParaInactivo(ModReserva reservaMod, String operacao) {
+        reservaMod.setEstado("Inactivo", operacao);
+        reservaCon.alterar(reservaMod, operacao);
     }
 
     @FXML
@@ -137,6 +171,24 @@ public class VisMovimentacaoTodasReservas implements Initializable {
     private void desabilitarItens() {
         this.botaoDevolverItem.setVisible(true);
         this.tableViewItensReservados.getItems().clear();
+    }
+
+    private void bloquearBotoes() {
+        this.botaoCancelarReserva.setDisable(true);
+        this.botaoDevolverItem.setDisable(true);
+    }
+
+    private void desbloquearBotoes() {
+        this.botaoCancelarReserva.setDisable(false);
+        this.botaoDevolverItem.setDisable(false);
+    }
+
+    private void habilitarBotoes(ModReserva reservaMod) {
+        if (reservaMod.getEstado().equalsIgnoreCase("Activo")) {
+            this.desbloquearBotoes();
+        } else {
+            this.bloquearBotoes();
+        }
     }
 
     private ModVisitante pegarDadosDaPesquisaUtente() {
@@ -204,6 +256,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
 
     private void exibirTodosItensSolicitados(ModReserva reservaMod) {
         final String operacao = "Listar todos os itens solicitados";
+        this.habilitarBotoes(reservaMod);
         textFieldTituloReserva.setCellValueFactory(new Callback<CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(CellDataFeatures<ModItemSolicitado, String> acervo) {
