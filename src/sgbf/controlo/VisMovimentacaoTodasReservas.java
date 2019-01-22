@@ -83,7 +83,8 @@ public class VisMovimentacaoTodasReservas implements Initializable {
         this.tableViewReservas.setPlaceholder(new Label("Reservadas não listadas"));
         this.tableViewItensReservados.setPlaceholder(new Label("Itens não listados"));
         this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
-        this.tableViewVisitante.getSelectionModel().selectedItemProperty().addListener((observable, odlValue, newValue) ->exibirTodasReservasDoUtente(visitanteMod));
+        this.tableViewVisitante.getSelectionModel().selectedItemProperty().addListener((observable, odlValue, newValue) ->exibirTodasReservasDoUtente(newValue));
+        this.tableViewReservas.getSelectionModel().selectedItemProperty().addListener((observalbe, oldValue, newValue) ->exibirTodosItensSolicitados(newValue));
     }
 
     @FXML
@@ -95,9 +96,11 @@ public class VisMovimentacaoTodasReservas implements Initializable {
         } else {
             todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisaUtente(), operacao);
             if (todosRegistosEncontrados.isEmpty()) {
-                this.tableViewVisitante.getItems().clear();
+                this.limparTodosItens();
                 throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
             } else {
+                this.tableViewReservas.getItems().clear();
+                this.tableViewItensReservados.getItems().clear();
                 this.carregarResultadosNaTableaUtente(todosRegistosEncontrados);
             }
         }
@@ -118,15 +121,18 @@ public class VisMovimentacaoTodasReservas implements Initializable {
 
     @FXML
     private void cancelar() {
-        this.tableViewVisitante.getItems().clear();
-       // this.tableViewReserva.getItems().clear();
+       this.limparTodosItens();
     }
 
     @FXML
     private void sair(ActionEvent event) {
         anchoPaneTodasReserva.setVisible(false);
     }
-
+    
+    private void desabilitarItens(){
+        this.botaoDevolverItem.setVisible(true);
+        this.tableViewItensReservados.getItems().clear();
+    }
 
     private ModVisitante pegarDadosDaPesquisaUtente() {
         if (UtilValidarDados.eNumero(this.textFieldPesquisar.getText())) {
@@ -161,13 +167,13 @@ public class VisMovimentacaoTodasReservas implements Initializable {
     
     private void exibirTodasReservasDoUtente(ModVisitante visitanteMod){
         final String operacao = "Listar todas as reservas";
-        System.out.println("Códgido do Utente ao seleccionar: "+visitanteMod.getIdUtente());
-        System.out.println("Nome do Utente ao seleccionar: "+visitanteMod.getNome());
+        this.desabilitarItens();
         ObservableList<ModReserva> todasReservasDoUtente = this.todasReservasParaCarregar(visitanteMod,operacao);
         if(todasReservasDoUtente.isEmpty()){
             tableViewReservas.getItems().clear();
             throw new UtilControloExcessao(operacao, "O utente seleccionado não tem registo de reservas", Alert.AlertType.WARNING);
         }else{
+            this.tableViewItensReservados.getItems().clear();
             tableColumIdReserva.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
             tableColumEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
             tableColumDataReserva.setCellValueFactory(new Callback<CellDataFeatures<ModReserva,String>, ObservableValue<String>>() {
@@ -182,14 +188,72 @@ public class VisMovimentacaoTodasReservas implements Initializable {
         }
     }
   
-    private ObservableList<ModReserva> todasReservasParaCarregar(ModVisitante visitanteMod, String operacao) {
+    private ObservableList<ModReserva> todasReservasParaCarregar(ModVisitante visitanteMo, String operacao) {
         List<ModReserva> todoRegistosEncontrados = new ArrayList<>();
-        for (Object todasReservadas : reservaCon.pesquisar(visitanteMod, operacao)) {
+        for (Object todasReservadas : reservaCon.pesquisar(visitanteMo, operacao)) {
             ModReserva reservaMod = (ModReserva) todasReservadas;
-            System.out.println("Encontou");
             todoRegistosEncontrados.add(reservaMod);
         }
         return FXCollections.observableArrayList(todoRegistosEncontrados);
+    }
+    
+    private void exibirTodosItensSolicitados(ModReserva reservaMod){
+        final String operacao = "Listar todos os itens solicitados";
+        textFieldTituloReserva.setCellValueFactory(new Callback<CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<ModItemSolicitado, String> acervo) {
+                return new ReadOnlyStringWrapper(acervo.getValue().getAcervoMod().getTitulo());
+            }
+        });
+        textFieldSubTituloReserva.setCellValueFactory(new Callback<CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<ModItemSolicitado, String> acervo) {
+                return new ReadOnlyStringWrapper(acervo.getValue().getAcervoMod().getSub_titulo());
+            }
+        });
+        textFieldISBNReserva.setCellValueFactory(new Callback<CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<ModItemSolicitado, String> acervo) {
+                return new ReadOnlyStringWrapper(acervo.getValue().getAcervoMod().getIsbn());
+            }
+        });
+        textFieldCodigoBarraReserva.setCellValueFactory(new Callback<CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<ModItemSolicitado, String> acervo) {
+                return new ReadOnlyStringWrapper(acervo.getValue().getAcervoMod().getCodigo_barra());
+            }
+        });
+        textFieldTipoReserva.setCellValueFactory(new Callback<CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<ModItemSolicitado, String> acervo) {
+                return new ReadOnlyStringWrapper(acervo.getValue().getAcervoMod().getTipo_acervo());
+            }
+        });
+        textFieldFormatoReserva.setCellValueFactory(new Callback<CellDataFeatures<ModItemSolicitado,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<ModItemSolicitado, String> acervo) {
+                return new ReadOnlyStringWrapper(acervo.getValue().getAcervoMod().getFormato());
+            }
+        });
+        textFieldquantidadeReserva.setCellValueFactory(new PropertyValueFactory<>("quantidade_revervada"));
+        tableViewItensReservados.setItems(this.todItensSocilitadosParaCarregar(reservaMod, operacao));
+    }
+  
+    private ObservableList<ModItemSolicitado> todItensSocilitadosParaCarregar(ModReserva reservaMod, String operacao) {
+        ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
+        List<ModItemSolicitado> todoRegistosEncontrados = new ArrayList<>();
+        for (Object todosItens : itemSolicitadoCon.pesquisar(reservaMod, operacao)) {
+            ModItemSolicitado todosOsItensSolicitados = (ModItemSolicitado) todosItens;
+            todoRegistosEncontrados.add(todosOsItensSolicitados);
+        }
+        return FXCollections.observableArrayList(todoRegistosEncontrados);
+    }
+    
+    private void limparTodosItens(){
+        this.textFieldPesquisar.setText(null);
+        this.tableViewVisitante.getItems().clear();
+        this.tableViewReservas.getItems().clear();
+        this.tableViewItensReservados.getItems().clear();
     }
 
 }

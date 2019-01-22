@@ -102,7 +102,7 @@ public class ConReserva extends ConCRUD {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         ModVisitante visitanteMod = (ModVisitante)objecto_pesquisar;
         try{
-            super.query = "select * from reserva where Utente_idUtente=?";
+            super.query = "select * from reserva where Utente_idUtente=? order by estado";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset  = super.preparedStatement.executeQuery();

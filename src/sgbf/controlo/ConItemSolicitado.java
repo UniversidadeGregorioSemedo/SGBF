@@ -63,6 +63,24 @@ public class ConItemSolicitado extends ConCRUD {
             throw new UtilControloExcessao(operacao, "Erro ao verificar dados Acervo" + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
+    
+    @Override
+    public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        ModReserva reservaMod = (ModReserva)objecto_pesquisar;
+        try{
+            super.query = "select * from view_itensReservados where idReserva=?";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, reservaMod.getIdReserva());
+            super.setResultset  = super.preparedStatement.executeQuery();
+            while(super.setResultset.next()){
+                todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
+            }
+            return todosRegistosEncontrados;
+        }catch(SQLException erro){
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+"  !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
+        }
+    }
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
@@ -82,14 +100,16 @@ public class ConItemSolicitado extends ConCRUD {
         throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
     }
 
-    @Override
-    public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
-        List<Object> todosRegistosEncontrados = new ArrayList<>();
-        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
-    }
 
     private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
-        ModEstante estanteMod = new ModEstante();
-        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
+        ModItemSolicitado  itemSolicitado = new ModItemSolicitado();
+        itemSolicitado.getAcervoMod().setTitulo(setResultset.getString("titulo"), operacao);
+        itemSolicitado.getAcervoMod().setSub_titulo(setResultset.getString("subtittulo"), operacao);
+        itemSolicitado.getAcervoMod().setIsbn(setResultset.getString("isbn"), operacao);
+        itemSolicitado.getAcervoMod().setCodigo_barra(setResultset.getString("codigo_barra"), operacao);
+        itemSolicitado.getAcervoMod().setTipo_acervo(setResultset.getString("tipo_acervo"), operacao);
+        itemSolicitado.getAcervoMod().setFormato(setResultset.getString("formato"), operacao);
+        itemSolicitado.setQuantidade_revervada(setResultset.getByte("quantidade"), operacao);
+        return itemSolicitado;
     }
 }
