@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
+import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModItemSolicitado;
 import sgbf.modelo.ModReserva;
@@ -83,12 +84,6 @@ public class ConItemSolicitado extends ConCRUD {
     }
 
     @Override
-    public boolean alterar(Object objecto_alterar, String operacao) {
-        ModItemSolicitado itemSolicitadoMod = (ModItemSolicitado) objecto_alterar;
-        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
-    }
-
-    @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModReserva reservaMod = (ModReserva)objecto_remover;
         try{
@@ -104,6 +99,27 @@ public class ConItemSolicitado extends ConCRUD {
             throw new UtilControloExcessao(operacao,"Erro ao "+operacao+"  !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
+    
+    private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
+        ConAcervo acervoCon = new ConAcervo();
+        ModItemSolicitado  itemSolicitado = new ModItemSolicitado();
+        itemSolicitado.getAcervoMod().setIdAcervo(setResultset.getInt("idAcervos"), operacao);
+        
+        for(Object todosAcervosRegistaddos: acervoCon.pesquisar(itemSolicitado.getAcervoMod(), operacao)){
+            ModAcervo acervoMod = (ModAcervo)todosAcervosRegistaddos;
+            itemSolicitado.setAcervoMod(acervoMod, operacao);
+        }
+        
+        itemSolicitado.setQuantidade_revervada(setResultset.getByte("quantidade"), operacao);
+        return itemSolicitado;
+    }
+    
+    @Override
+    public boolean alterar(Object objecto_alterar, String operacao) {
+        ModItemSolicitado itemSolicitadoMod = (ModItemSolicitado) objecto_alterar;
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
+    }
+
 
     @Override
     public List<Object> listarTodos(String operacao) {
@@ -112,16 +128,6 @@ public class ConItemSolicitado extends ConCRUD {
     }
 
 
-    private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
-        ModItemSolicitado  itemSolicitado = new ModItemSolicitado();
-        itemSolicitado.getAcervoMod().setIdAcervo(setResultset.getInt("idAcervos"), operacao);
-        itemSolicitado.getAcervoMod().setTitulo(setResultset.getString("titulo"), operacao);
-        itemSolicitado.getAcervoMod().setSub_titulo(setResultset.getString("subtittulo"), operacao);
-        itemSolicitado.getAcervoMod().setIsbn(setResultset.getString("isbn"), operacao);
-        itemSolicitado.getAcervoMod().setCodigo_barra(setResultset.getString("codigo_barra"), operacao);
-        itemSolicitado.getAcervoMod().setTipo_acervo(setResultset.getString("tipo_acervo"), operacao);
-        itemSolicitado.getAcervoMod().setFormato(setResultset.getString("formato"), operacao);
-        itemSolicitado.setQuantidade_revervada(setResultset.getByte("quantidade"), operacao);
-        return itemSolicitado;
-    }
+    
+    
 }

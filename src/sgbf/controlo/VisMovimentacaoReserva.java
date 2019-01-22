@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sgbf.controlo;
 
 import com.jfoenix.controls.JFXButton;
@@ -141,7 +137,7 @@ public class VisMovimentacaoReserva implements Initializable {
                 this.limparItensAcervos();
                 this.tableVieVisitante.getItems().clear();
                 this.tableViewReserva.getItems().clear();
-                throw new UtilControloExcessao(operacao, "reserva efectuada com sucesso", Alert.AlertType.CONFIRMATION);
+                throw new UtilControloExcessao(operacao, "Reserva efectuada com sucesso", Alert.AlertType.CONFIRMATION);
             }else{
                 throw new UtilControloExcessao(operacao, "Erro ao registar acervos", Alert.AlertType.CONFIRMATION);
             }

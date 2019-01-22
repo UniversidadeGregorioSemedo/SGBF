@@ -177,7 +177,7 @@ public class ConEstoque extends ConCRUD {
             super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " !\nErro: " + erro.getMessage(), operacao, Alert.AlertType.ERROR);
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
