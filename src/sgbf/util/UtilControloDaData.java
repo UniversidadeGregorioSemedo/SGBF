@@ -42,6 +42,10 @@ public class UtilControloDaData {
     public static Timestamp DataTimeParaTimeStamp(DateTime dateTime) {
         return new Timestamp(dateTime.toDateTime().getMillis());
     }
+    
+    public static DateTime TimestampParaDatatime(Timestamp timeStamp) {
+        return new DateTime(timeStamp.getTime());
+    }
 
     public Integer numeroDeDiasEntreDuasDatas(DateTime data_inicial, DateTime data_final, String operacao) {
         if (UtilControloDaData.dataFoiIntroduzida(data_inicial)) {

@@ -20,7 +20,7 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tableVieVisitante" layoutX="11.0" layoutY="72.0" prefHeight="139.0" prefWidth="877.0">
+                  <TableView fx:id="tableViewVisitante" layoutX="11.0" layoutY="72.0" prefHeight="139.0" prefWidth="877.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>

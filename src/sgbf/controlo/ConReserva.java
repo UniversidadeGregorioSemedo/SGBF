@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModEstante;
+import sgbf.modelo.ModFuncionario;
 import sgbf.modelo.ModReserva;
 import sgbf.modelo.ModUtente;
+import sgbf.modelo.ModVisitante;
+import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 
 /**
@@ -97,38 +100,33 @@ public class ConReserva extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        /*ModEstante estanteMod = (ModEstante)objecto_pesquisar;
+        ModVisitante visitanteMod = (ModVisitante)objecto_pesquisar;
         try{
-            super.query = "select * from tcc.Estante where idEstante=? or "
-                        + "designacao like '%"+estanteMod.getDesignacao()+"%'";
+            super.query = "select * from reserva where Utente_idUtente=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+            super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-            return todosRegistosEncontrados;
-        }*/
-        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+"  !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
+        }
     }
 
     private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
-        /*ModEstante estanteMod = new ModEstante();
-        estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
-        estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
-        estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
-        estanteMod.setLinha(setResultset.getByte("linha"), operacao);
-        estanteMod.setColuna(setResultset.getByte("coluna"), operacao);
-        estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
-        estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
-        return estanteMod;*/
-        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
+        ModReserva reservaMod = new ModReserva();
+        reservaMod.setFuncionarioMod(new ModFuncionario(), operacao); //Limpar o valor do Funcionário por defeito
+        reservaMod.setUtenteMod(new ModVisitante(), operacao); //Faz o funcionário deixar de ser nulo
+        reservaMod.setIdReserva(setResultset.getInt("idReserva"), operacao);
+        reservaMod.setEstado(setResultset.getString("estado"), operacao);
+        reservaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_reserva"), operacao);
+        reservaMod.setDias_remanescente(setResultset.getByte("dias_remanescente"), operacao);
+        reservaMod.setData_vencimento(UtilControloDaData.TimestampParaDatatime(setResultset.getTimestamp("data_vencimento")), operacao);
+        reservaMod.getUtenteMod().setIdUtente(setResultset.getInt("Utente_idUtente"), operacao);
+        reservaMod.getFuncionarioMod().setIdFuncionario(setResultset.getInt("Funcionario_idFuncionario"), operacao);
+        return reservaMod;
     }
 
 }

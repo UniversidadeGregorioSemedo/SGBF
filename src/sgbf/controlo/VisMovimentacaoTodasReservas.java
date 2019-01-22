@@ -20,13 +20,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
@@ -53,7 +51,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
     @FXML
     private Button   botaoCancelarReserva, botaoDevolverItem, botaoCancelar, botaoSair;
     @FXML
-    private TableView<ModVisitante> tableVieVisitante;
+    private TableView<ModVisitante> tableViewVisitante;
     @FXML
     private TableColumn<ModVisitante, String> tableColumId, tableColumNome, tableColumIdTipoIdentificacao,
             tableColumNmeroIdentificacao, tableColumContacto, tableColumEndereco, tableColumCategoria;
@@ -81,11 +79,11 @@ public class VisMovimentacaoTodasReservas implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.tableVieVisitante.setPlaceholder(new Label("Utentes não listados"));
+        this.tableViewVisitante.setPlaceholder(new Label("Utentes não listados"));
         this.tableViewReservas.setPlaceholder(new Label("Reservadas não listadas"));
         this.tableViewItensReservados.setPlaceholder(new Label("Itens não listados"));
         this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
-        //this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirAsQuantidades(newValue));
+        this.tableViewVisitante.getSelectionModel().selectedItemProperty().addListener((observable, odlValue, newValue) ->exibirTodasReservasDoUtente(visitanteMod));
     }
 
     @FXML
@@ -97,7 +95,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
         } else {
             todosRegistosEncontrados = this.utenteCon.pesquisar(this.pegarDadosDaPesquisaUtente(), operacao);
             if (todosRegistosEncontrados.isEmpty()) {
-                this.tableVieVisitante.getItems().clear();
+                this.tableViewVisitante.getItems().clear();
                 throw new UtilControloExcessao(operacao, "Utente não encontradao", Alert.AlertType.INFORMATION);
             } else {
                 this.carregarResultadosNaTableaUtente(todosRegistosEncontrados);
@@ -113,15 +111,14 @@ public class VisMovimentacaoTodasReservas implements Initializable {
             throw new UtilControloExcessao(operacao, "Seleccione o acervo a devolver", Alert.AlertType.NONE);
         } else {
             if (estoqueCon.devolverAcervoReservadoNoEstoque(itemPorRemover, operacao)) {
-                /*this.tableViewReserva.getItems().remove(itemPorRemover);
-                this.limparItensAcervos();*/
+                this.tableViewItensReservados.getItems().remove(itemPorRemover);
             }
         }
     }
 
     @FXML
     private void cancelar() {
-        this.tableVieVisitante.getItems().clear();
+        this.tableViewVisitante.getItems().clear();
        // this.tableViewReserva.getItems().clear();
     }
 
@@ -150,7 +147,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
         tableColumContacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
         tableColumEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         tableColumCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
-        tableVieVisitante.setItems(this.todosUtentesParaCarregar(todosRegistosEncontrados));
+        tableViewVisitante.setItems(this.todosUtentesParaCarregar(todosRegistosEncontrados));
     }
 
     private ObservableList<ModVisitante> todosUtentesParaCarregar(List<Object> todosRegistosEncontrados) {
@@ -160,6 +157,39 @@ public class VisMovimentacaoTodasReservas implements Initializable {
             listaDosRegistosEncontrados.add(visitanteMod);
         }
         return FXCollections.observableArrayList(listaDosRegistosEncontrados);
+    }
+    
+    private void exibirTodasReservasDoUtente(ModVisitante visitanteMod){
+        final String operacao = "Listar todas as reservas";
+        System.out.println("Códgido do Utente ao seleccionar: "+visitanteMod.getIdUtente());
+        System.out.println("Nome do Utente ao seleccionar: "+visitanteMod.getNome());
+        ObservableList<ModReserva> todasReservasDoUtente = this.todasReservasParaCarregar(visitanteMod,operacao);
+        if(todasReservasDoUtente.isEmpty()){
+            tableViewReservas.getItems().clear();
+            throw new UtilControloExcessao(operacao, "O utente seleccionado não tem registo de reservas", Alert.AlertType.WARNING);
+        }else{
+            tableColumIdReserva.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
+            tableColumEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+            tableColumDataReserva.setCellValueFactory(new Callback<CellDataFeatures<ModReserva,String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(CellDataFeatures<ModReserva, String> data) {
+                    return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_registo());
+                }
+            });
+            tableColumnDiasRemanescentes.setCellValueFactory(new PropertyValueFactory<>("dias_remanescente"));
+            tableColumnDataVencimento.setCellValueFactory(new PropertyValueFactory<>("data_vencimento"));
+            tableViewReservas.setItems(todasReservasDoUtente);
+        }
+    }
+  
+    private ObservableList<ModReserva> todasReservasParaCarregar(ModVisitante visitanteMod, String operacao) {
+        List<ModReserva> todoRegistosEncontrados = new ArrayList<>();
+        for (Object todasReservadas : reservaCon.pesquisar(visitanteMod, operacao)) {
+            ModReserva reservaMod = (ModReserva) todasReservadas;
+            System.out.println("Encontou");
+            todoRegistosEncontrados.add(reservaMod);
+        }
+        return FXCollections.observableArrayList(todoRegistosEncontrados);
     }
 
 }
