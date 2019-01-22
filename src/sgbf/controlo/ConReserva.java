@@ -104,23 +104,25 @@ public class ConReserva extends ConCRUD {
 
     private void actualizarReservas(ModReserva reservaMod, String operacao) {
         try {
-            if(reservaMod.getDias_remanescente() == 0){
+            if (reservaMod.getDias_remanescente() == 0) {
                 ConEstoque estoqueCon = new ConEstoque();
                 ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
-                //Repôr a quantidade do Stock
+                //Repôr a Quantidade do Stock
                 for (Object todoItensSolicitados : itemSolicitadoCon.pesquisar(reservaMod, operacao)) {
-                    ModItemSolicitado itemPorRemover = (ModItemSolicitado)todoItensSolicitados;
-                    reservaMod.adionarItemItensRegistados(itemPorRemover);
-                    estoqueCon.devolverAcervoReservadoNoEstoque(itemPorRemover, operacao);
+                    ModItemSolicitado itemARepor = (ModItemSolicitado) todoItensSolicitados;
+                    reservaMod.adionarItemItensRegistados(itemARepor);
+                    estoqueCon.devolverAcervoReservadoNoEstoque(itemARepor, operacao);
                 }
                 //Remover todos os icones solicitados
-                /*if (itemSolicitadoCon.remover(reservaPorRemover, operacao)) {
-                    this.tableViewItensReservados.getItems().clear();
-                    this.tableViewReservas.getItems().clear();
-                    reservaCon.passarEstadoParaInactivo(reservaPorRemover, operacao);
-                }*/
-                
-            }else{
+                if (itemSolicitadoCon.remover(reservaMod, operacao)) {
+                    super.query = "UPDATE tcc.reserva SET estado = ?, dias_remanescente = ? WHERE (idReserva = ?)";
+                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement.setString(1, reservaMod.getEstado());
+                    super.preparedStatement.setByte(2, reservaMod.getDias_remanescente());
+                    super.preparedStatement.setInt(3, reservaMod.getIdReserva());
+                    super.preparedStatement.execute();
+                }
+            } else {
                 super.query = "UPDATE tcc.reserva SET estado = ?, dias_remanescente = ? WHERE (idReserva = ?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setString(1, reservaMod.getEstado());
