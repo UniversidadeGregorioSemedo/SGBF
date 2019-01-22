@@ -113,7 +113,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
     @FXML
     private void cancelarReserva() {
         this.operacao = "Cancelar Reserva";
-        String mensagem = "Este operação é irreversível !\nDeseja Continuar ?";
+        String mensagem = "Este operação é irreversível !\nTem a certeza que deseja Continuar ?";
         UtilControloExcessao excessaoControlo = new UtilControloExcessao();
         if(excessaoControlo.temCerteza(operacao, mensagem)){
             ModReserva reservaPorRemover = this.tableViewReservas.getSelectionModel().getSelectedItem();
@@ -126,11 +126,10 @@ public class VisMovimentacaoTodasReservas implements Initializable {
             if (itemSolicitadoCon.remover(reservaPorRemover, operacao)) {
                 this.tableViewItensReservados.getItems().clear();
                 this.tableViewReservas.getItems().clear();
-                this.passarEstadoParaInactivo(reservaPorRemover, operacao);
+                reservaCon.passarEstadoParaInactivo(reservaPorRemover, operacao);
             }
         }
     }
-
 
     @FXML
     private void devolverAcervoReservado() {
@@ -145,7 +144,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
                 if (itemSolicitadoCon.remover(reservaPorRemover, operacao)) {
                     this.tableViewItensReservados.getItems().remove(itemPorRemover);
                     if(this.tableViewItensReservados.getItems().isEmpty()){
-                        this.passarEstadoParaInactivo(reservaPorRemover, operacao);
+                        reservaCon.passarEstadoParaInactivo(reservaPorRemover, operacao);
                         this.tableViewReservas.getItems().clear();
                     }
                 }
@@ -153,10 +152,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
         }
     }
    
-    private void passarEstadoParaInactivo(ModReserva reservaMod, String operacao) {
-        reservaMod.setEstado("Inactivo", operacao);
-        reservaCon.alterar(reservaMod, operacao);
-    }
+   
 
     @FXML
     private void cancelar() {

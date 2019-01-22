@@ -21,6 +21,9 @@ public class UtilControloDaData {
     public String getData_registo() {
         return String.valueOf(data_registo);
     }
+    public Timestamp getDataRegistoEmTimestapm() {
+        return data_registo;
+    }
 
     public void setData_registo(Timestamp data_registo, String operacao) {
         this.data_registo = data_registo;

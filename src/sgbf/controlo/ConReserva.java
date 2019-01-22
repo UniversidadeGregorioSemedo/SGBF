@@ -7,11 +7,14 @@ package sgbf.controlo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
+import org.joda.time.DateTime;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModFuncionario;
+import sgbf.modelo.ModItemSolicitado;
 import sgbf.modelo.ModReserva;
 import sgbf.modelo.ModUtente;
 import sgbf.modelo.ModVisitante;
@@ -23,6 +26,10 @@ import sgbf.util.UtilControloExcessao;
  * @author Look
  */
 public class ConReserva extends ConCRUD {
+
+    public ConReserva() {
+        this.calcularDiasRemanescente();
+    }
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -95,16 +102,37 @@ public class ConReserva extends ConCRUD {
         }
     }
 
-    @Override
-    public boolean remover(Object objecto_remover, String operacao) {
-        ModEstante estanteMod = (ModEstante) objecto_remover;
-        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
-    }
-
-    @Override
-    public List<Object> listarTodos(String operacao) {
-        List<Object> todosRegistos = new ArrayList<>();
-        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
+    private void actualizarReservas(ModReserva reservaMod, String operacao) {
+        try {
+            if(reservaMod.getDias_remanescente() == 0){
+                ConEstoque estoqueCon = new ConEstoque();
+                ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
+                //Repôr a quantidade do Stock
+                for (Object todoItensSolicitados : itemSolicitadoCon.pesquisar(reservaMod, operacao)) {
+                    ModItemSolicitado itemPorRemover = (ModItemSolicitado)todoItensSolicitados;
+                    reservaMod.adionarItemItensRegistados(itemPorRemover);
+                    estoqueCon.devolverAcervoReservadoNoEstoque(itemPorRemover, operacao);
+                }
+                //Remover todos os icones solicitados
+                /*if (itemSolicitadoCon.remover(reservaPorRemover, operacao)) {
+                    this.tableViewItensReservados.getItems().clear();
+                    this.tableViewReservas.getItems().clear();
+                    reservaCon.passarEstadoParaInactivo(reservaPorRemover, operacao);
+                }*/
+                
+            }else{
+                super.query = "UPDATE tcc.reserva SET estado = ?, dias_remanescente = ? WHERE (idReserva = ?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, reservaMod.getEstado());
+                super.preparedStatement.setByte(2, reservaMod.getDias_remanescente());
+                super.preparedStatement.setInt(3, reservaMod.getIdReserva());
+                super.preparedStatement.execute();
+            }
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Reserva !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        } finally {
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+        }
     }
 
     @Override
@@ -137,6 +165,62 @@ public class ConReserva extends ConCRUD {
         reservaMod.getUtenteMod().setIdUtente(setResultset.getInt("Utente_idUtente"), operacao);
         reservaMod.getFuncionarioMod().setIdFuncionario(setResultset.getInt("Funcionario_idFuncionario"), operacao);
         return reservaMod;
+    }
+
+    public void passarEstadoParaInactivo(ModReserva reservaMod, String operacao) {
+        reservaMod.setEstado("Inactivo", operacao);
+        this.alterar(reservaMod, operacao);
+    }
+
+    private void calcularDiasRemanescente() {
+        Timestamp dataDeRegistoComoNaBD = null;
+        DateTime dataReserva = null;
+        DateTime dataVencimento = null;
+        Integer diasRemanescentes = 3;
+        String operacao = "Actualizar Reservas";
+        UtilControloDaData controloDaData = new UtilControloDaData();
+        List<Object> todasReservasActivas = this.temReservasActivas(operacao);
+        if (!todasReservasActivas.isEmpty()) {
+            for (Object todasReservasActualizar : todasReservasActivas) {
+                ModReserva reservaMod = (ModReserva) todasReservasActualizar;
+                dataDeRegistoComoNaBD = reservaMod.getUtilControloDaData().getDataRegistoEmTimestapm();
+                dataReserva = UtilControloDaData.TimestampParaDatatime(dataDeRegistoComoNaBD);
+                dataVencimento = reservaMod.getData_vencimento();
+                diasRemanescentes = controloDaData.numeroDeDiasEntreDuasDatas(dataReserva, dataVencimento, operacao);
+                reservaMod.setDias_remanescente(Byte.valueOf(String.valueOf(diasRemanescentes)), operacao);
+                if (diasRemanescentes == 0) {
+                    reservaMod.setEstado("Inactivo", operacao);
+                }
+                this.actualizarReservas(reservaMod, operacao);
+            }
+        }
+    }
+
+    private List<Object> temReservasActivas(String operacao) {
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        try {
+            super.query = "select * from reserva where estado='Inactivo'";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.setResultset = super.preparedStatement.executeQuery();
+            while (super.setResultset.next()) {
+                todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
+            }
+            return todosRegistosEncontrados;
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "  !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    @Override
+    public boolean remover(Object objecto_remover, String operacao) {
+        ModEstante estanteMod = (ModEstante) objecto_remover;
+        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
+    }
+
+    @Override
+    public List<Object> listarTodos(String operacao) {
+        List<Object> todosRegistos = new ArrayList<>();
+        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
     }
 
 }
