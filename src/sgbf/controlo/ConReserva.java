@@ -78,18 +78,20 @@ public class ConReserva extends ConCRUD {
             throw new UtilControloExcessao(operacao, "Erro ao Listar Código da Reserva!\nErro: " + ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
-
-    @Override
-    public boolean alterar(Object objecto_alterar, String operacao) {
-        ModReserva reservaMod = (ModReserva) objecto_alterar;
-        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
-    }
+    
+   
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModEstante estanteMod = (ModEstante) objecto_remover;
         throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
     }
+    @Override
+    public boolean alterar(Object objecto_alterar, String operacao) {
+        ModReserva reservaMod = (ModReserva) objecto_alterar;
+        throw new UtilControloExcessao(operacao, "Operação não disponível !", Alert.AlertType.ERROR);
+    }
+
 
     @Override
     public List<Object> listarTodos(String operacao) {

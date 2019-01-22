@@ -90,8 +90,19 @@ public class ConItemSolicitado extends ConCRUD {
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
-        ModItemSolicitado itemSolicitadoMod = (ModItemSolicitado) objecto_remover;
-        throw new UtilControloExcessao(operacao, "Operação indisponível no momento ", Alert.AlertType.ERROR);
+        ModReserva reservaMod = (ModReserva)objecto_remover;
+        try{
+            for(ModItemSolicitado itemSolicitado: reservaMod.getItensRegistados()){
+                super.query = "delete from itenssolicitados where Acervos_idAcervos=? and Reserva_idReserva=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1, itemSolicitado.getAcervoMod().getIdAcervo());
+                super.preparedStatement.setInt(2, reservaMod.getIdReserva());
+                super.preparedStatement.execute();
+            }
+            return true;
+        }catch(SQLException erro){
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+"  !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @Override
@@ -103,6 +114,7 @@ public class ConItemSolicitado extends ConCRUD {
 
     private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
         ModItemSolicitado  itemSolicitado = new ModItemSolicitado();
+        itemSolicitado.getAcervoMod().setIdAcervo(setResultset.getInt("idAcervos"), operacao);
         itemSolicitado.getAcervoMod().setTitulo(setResultset.getString("titulo"), operacao);
         itemSolicitado.getAcervoMod().setSub_titulo(setResultset.getString("subtittulo"), operacao);
         itemSolicitado.getAcervoMod().setIsbn(setResultset.getString("isbn"), operacao);
