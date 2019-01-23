@@ -220,7 +220,7 @@
                               </ImageView>
                            </graphic>
                         </MenuItem>
-                      <MenuItem fx:id="menuitemMovimentacaoTodosEmprestimo" mnemonicParsing="false" text="Todos os Emprestimos" />
+                      <MenuItem fx:id="menuitemMovimentacaoTodosEmprestimo" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoTodosEmprestimos" text="Todos os Emprestimos" />
                     </items>
                   </Menu>
                   <MenuItem fx:id="menuitemMovimentacaoDevolucao" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoDevolucao" text="Devolução">

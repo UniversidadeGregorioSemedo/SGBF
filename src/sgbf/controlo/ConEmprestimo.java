@@ -50,7 +50,7 @@ public class ConEmprestimo extends ConCRUD {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         ModVisitante visitanteMod = (ModVisitante) objecto_pesquisar;
         try {
-            super.query = "select * from view_emprestimosDoUtente where idUtente=?";
+            super.query = "select * from view_emprestimosDoUtente where idUtente=? order by estado";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset = super.preparedStatement.executeQuery();

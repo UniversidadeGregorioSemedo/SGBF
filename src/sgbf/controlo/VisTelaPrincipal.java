@@ -160,6 +160,11 @@ public class VisTelaPrincipal implements Initializable {
         anchorPane.getChildren().setAll(x);         
     }
     @FXML
+    public void BotaoMenuItemMovimentacaoTodosEmprestimos() throws IOException{
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisMovimentacaoTodosEmprestimos.fxml"));
+        anchorPane.getChildren().setAll(x);         
+    }
+    @FXML
     public void BotaoMenuItemMovimentacaoReserva() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisMovimentacaoReserva.fxml"));
         anchorPane.getChildren().setAll(x);         
