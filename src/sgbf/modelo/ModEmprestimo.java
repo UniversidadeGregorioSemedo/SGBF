@@ -5,6 +5,12 @@
  */
 package sgbf.modelo;
 
+import java.sql.Timestamp;
+import javafx.scene.control.Alert;
+import org.joda.time.DateTime;
+import sgbf.util.UtilControloDaData;
+import sgbf.util.UtilControloExcessao;
+
 /**
  *
  * @author Look
@@ -16,19 +22,21 @@ public class ModEmprestimo {
     private String estado;
     private Double multa;
     private Integer dias_atrazo;
-    private String data_emprestimo;
-    private String data_vencimento;
+    private DateTime data_vencimento;
+    private final Byte diasEmprestimo = 3; 
     private ModFuncionario funcionarioMod;
+    private UtilControloDaData utilControloDaData;
+    
 
     public ModEmprestimo() {
         this.idEmprestimo = 0;
-        this.reservaMod = new ModReserva();
         this.estado = null;
         this.multa = 0.0;
         this.dias_atrazo = 0;
-        this.funcionarioMod = new ModFuncionario();
-        this.data_emprestimo = null;
         this.data_vencimento = null;
+        this.reservaMod = new ModReserva();
+        this.funcionarioMod = new ModFuncionario();
+        this.utilControloDaData = new UtilControloDaData();
     }
 
     public Integer getIdEmprestimo() {
@@ -44,7 +52,11 @@ public class ModEmprestimo {
     }
 
     public void setReservaMod(ModReserva reservaMod, String operacao) {
-        this.reservaMod = reservaMod;
+        if(reservaMod == null){
+            throw new UtilControloExcessao(operacao, "Erro ao verificar reserva", Alert.AlertType.WARNING);
+        }else{
+            this.reservaMod = reservaMod;
+        }
     }
 
     public String getEstado() {
@@ -71,32 +83,38 @@ public class ModEmprestimo {
         this.dias_atrazo = dias_atrazo;
     }
 
-    public String getData_emprestimo() {
-        return data_emprestimo;
-    }
-
-    public void setData_emprestimo(String data_emprestimo, String operacao) {
-        this.data_emprestimo = data_emprestimo;
-    }
-
-    public String getData_vencimento() {
+    public DateTime getData_vencimento() {
         return data_vencimento;
     }
 
-    public void setData_vencimento(String data_vencimento, String operacao) {
+    public void setData_vencimento(DateTime data_vencimento, String operacao) {
         this.data_vencimento = data_vencimento;
+    }
+    
+    public Timestamp getDataVencimento(Byte dias, String operacao){
+        UtilControloDaData data = new UtilControloDaData();
+        DateTime dataDeVecimento = data.dataActual().plusDays(dias);
+        return UtilControloDaData.DataTimeParaTimeStamp(dataDeVecimento);
+    }
+
+    public Byte getDiasEmprestimo() {
+        return diasEmprestimo;
+    }
+    
+    public UtilControloDaData getUtilControloDaData() {
+        return utilControloDaData;
     }
 
     public ModFuncionario getFuncionarioMod() {
         return funcionarioMod;
     }
 
-    public void setFuncionarioMod(ModFuncionario funcionarioMod) {
-        this.funcionarioMod = funcionarioMod;
+    public void setFuncionarioMod(ModFuncionario funcionarioMod, String operacao) {
+        if(funcionarioMod == null){
+            throw new UtilControloExcessao(operacao, "Funcionário não identificado", Alert.AlertType.ERROR);
+        }else{
+            this.funcionarioMod = funcionarioMod;
+        }
     }
 
-    
-    
-    
-    
 }

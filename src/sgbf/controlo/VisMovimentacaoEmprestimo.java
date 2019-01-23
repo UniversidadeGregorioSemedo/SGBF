@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
+import sgbf.modelo.ModEmprestimo;
 import sgbf.modelo.ModItemSolicitado;
 import sgbf.modelo.ModReserva;
 import sgbf.modelo.ModVisitante;
@@ -72,6 +73,8 @@ public class VisMovimentacaoEmprestimo implements Initializable {
     private final ConReserva reservaCon = new ConReserva();
     private final ModReserva reservaMod = new ModReserva();
     private final ModVisitante visitanteMod = new ModVisitante();
+    private final ModEmprestimo emprestimoMod = new ModEmprestimo();
+    private final ConEmprestimo emprestimoCon = new ConEmprestimo();
     private final ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
 
     @Override
@@ -109,7 +112,16 @@ public class VisMovimentacaoEmprestimo implements Initializable {
     @FXML
     private void emprestar(){
         this.operacao = "Fazer emprestimo";
-        
+        ModReserva reservaASerEmprestada = this.tableViewReservas.getSelectionModel().getSelectedItem();
+        emprestimoMod.setReservaMod(reservaASerEmprestada, operacao);
+        emprestimoMod.setFuncionarioMod(UtilUsuarioLogado.getUsuarioLogado(),operacao);
+        if(emprestimoCon.registar(emprestimoMod, operacao)){
+            reservaCon.passarEstadoParaInactivo(reservaASerEmprestada, operacao);
+            this.bloquearBotoes();
+            this.tableViewReservas.getItems().clear();
+            this.tableViewItensReservados.getItems().clear();
+            throw new UtilControloExcessao(operacao, "Emprestimo feito com sucesso", Alert.AlertType.INFORMATION);
+        }
     }
 
     @FXML
