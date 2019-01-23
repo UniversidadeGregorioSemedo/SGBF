@@ -68,6 +68,8 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuItem menuitemMovimentacaoEmprestimo;
     @FXML
+    private MenuItem menuitemMovimentacaoTodosEmprestimo;
+    @FXML
     private MenuItem menuitemMovimentacaoReserva;
     @FXML
     private MenuItem menuitemMovimentacaoTodasReserva;

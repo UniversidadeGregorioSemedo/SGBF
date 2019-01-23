@@ -209,15 +209,20 @@
                         </ImageView>
                      </graphic>
                   </Menu>
-                <MenuItem fx:id="menuitemMovimentacaoEmprestimo" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoEmprestimo" text="Emprestimo">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Return%20Book_48px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MenuItem>
+                  <Menu mnemonicParsing="false" text="Emprestimo">
+                    <items>
+                      <MenuItem fx:id="menuitemMovimentacaoEmprestimo" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoEmprestimo" text="Novo">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Return%20Book_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                      <MenuItem fx:id="menuitemMovimentacaoTodosEmprestimo" mnemonicParsing="false" text="Todos os Emprestimos" />
+                    </items>
+                  </Menu>
                   <MenuItem fx:id="menuitemMovimentacaoDevolucao" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoDevolucao" text="Devolução">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
