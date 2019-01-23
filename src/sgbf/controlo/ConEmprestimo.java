@@ -7,11 +7,14 @@ package sgbf.controlo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
+import org.joda.time.DateTime;
 import sgbf.modelo.ModEmprestimo;
 import sgbf.modelo.ModEstante;
+import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -21,6 +24,10 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  */
 public class ConEmprestimo extends ConCRUD {
 
+    public ConEmprestimo() {
+        this.actualizarDiasDeAtrazo();
+    }
+    
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
         ModEmprestimo emprestimoteMod = (ModEmprestimo) objecto_registar;
@@ -38,20 +45,13 @@ public class ConEmprestimo extends ConCRUD {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
-
-    @Override
-    public boolean alterar(Object objecto_alterar, String operacao) {
-        ModEmprestimo emprestimoteMod = (ModEmprestimo) objecto_alterar;
+    
+    private boolean actualizarEmprestimo(ModEmprestimo emprestimoteMod, String operacao) {
         try {
-            super.query = "update tcc.emprestimo set estado=?, dias_atraso=?, multa=?,"
-                    + " Funcionario_idFuncionario=?, Reserva_idReserva=? where idEmprestimo=?";
+            super.query = "update emprestimo set dias_atraso=? where idEmprestimo=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, emprestimoteMod.getEstado());
-            super.preparedStatement.setInt(2, emprestimoteMod.getDias_atrazo());
-            super.preparedStatement.setDouble(3, emprestimoteMod.getMulta());
-            super.preparedStatement.setInt(4, emprestimoteMod.getFuncionarioMod().getIdFuncionario());
-            super.preparedStatement.setInt(5, emprestimoteMod.getReservaMod().getIdReserva());
-            super.preparedStatement.setInt(6, emprestimoteMod.getIdEmprestimo());
+            super.preparedStatement.setInt(1, emprestimoteMod.getDias_atrazo());
+            super.preparedStatement.setInt(2, emprestimoteMod.getIdEmprestimo());
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
             throw new UtilControloExcessao("Erro ao " + operacao + " Empréstimo !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
@@ -59,20 +59,53 @@ public class ConEmprestimo extends ConCRUD {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
+    
+    private void actualizarDiasDeAtrazo(){
+        Integer diasDeAtraso = 0;
+        DateTime dataActual = null;
+        DateTime dataVencimento = null;
+        final String operacao = "Actualizar Emprestimos";
+        UtilControloDaData controloDaData = new UtilControloDaData();
+        List<Object> todosEmprestimosActivas = this.temEmpresasActivas(operacao);
+        if (!todosEmprestimosActivas.isEmpty()) {
+            for (Object todEmprestimosActualizar : todosEmprestimosActivas) {
+                ModEmprestimo emprestimoMod = (ModEmprestimo) todEmprestimosActualizar;
+                dataVencimento = emprestimoMod.getData_vencimento();
+                dataActual = controloDaData.dataActual();
+                diasDeAtraso = controloDaData.numeroDeDiasEntreDuasDatas(dataVencimento, dataActual, operacao);
+                emprestimoMod.setDias_atrazo(diasDeAtraso, operacao);
+                this.actualizarEmprestimo(emprestimoMod, operacao);
+            }
+        }
+    }
 
+    
+    private List<Object> temEmpresasActivas(String operacao) {
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        try {
+            super.query = "select * from emprestimo where estado='Activo'";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.setResultset = super.preparedStatement.executeQuery();
+            while (super.setResultset.next()) {
+                todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
+            }
+            return todosRegistosEncontrados;
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "  !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+    
+
+    @Override
+    public boolean alterar(Object objecto_alterar, String operacao) {
+        ModEmprestimo emprestimoteMod = (ModEmprestimo) objecto_alterar;
+        throw new UtilControloExcessao( operacao, "Operação indisponível no momento",Alert.AlertType.WARNING);
+    }
+    
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModEmprestimo emprestimoteMod = (ModEmprestimo) objecto_remover;
-        try {
-            super.query = "delete from tcc.Emprestimo where idEmprestimo=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, emprestimoteMod.getIdEmprestimo());
-            return !super.preparedStatement.execute();
-        } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Empréstimo !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }
+        throw new UtilControloExcessao( operacao, "Operação indisponível no momento",Alert.AlertType.WARNING);
     }
 
     @Override
@@ -117,18 +150,17 @@ public class ConEmprestimo extends ConCRUD {
         return todosRegistosEncontrados;
     }
 
-    private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
-        ModEstante estanteMod = new ModEstante();
-        /*estanteMod.setIdEstante(setResultset.getInt("idEstante"), operacao);
-        estanteMod.setDesignacao(setResultset.getString("designacao"), operacao);
-        estanteMod.setDescricao(setResultset.getString("descricacao"), operacao);
-        estanteMod.setLinha(setResultset.getByte("linha"), operacao);
-        estanteMod.setColuna(setResultset.getByte("coluna"), operacao);
-        estanteMod.getAreaMod().setIdArea(setResultset.getInt("Area_idArea"), operacao);
-        estanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        estanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
-         */
-        return estanteMod;
+    private Object pegarRegistos(ResultSet setResult, String operacao) throws SQLException {
+        ModEmprestimo emprestimoMod = new ModEmprestimo();
+        emprestimoMod.setIdEmprestimo(setResult.getInt("idEmprestimo"), operacao);
+        emprestimoMod.setEstado(setResult.getString("estado"), operacao);
+        emprestimoMod.setDias_atrazo(setResult.getInt("dias_atraso"), operacao);
+        emprestimoMod.setMulta(setResult.getDouble("multa"), operacao);
+        emprestimoMod.getUtilControloDaData().setData_registo(setResult.getTimestamp("data_emprestimo"), operacao);
+        emprestimoMod.setData_vencimento(UtilControloDaData.TimestampParaDatatime(setResult.getTimestamp("data_vencimento")), operacao);
+        emprestimoMod.getFuncionarioMod().setIdFuncionario(setResult.getInt("Funcionario_idFuncionario"), operacao);
+        emprestimoMod.getReservaMod().setIdReserva(setResult.getInt("Reserva_idReserva"), operacao);
+        return emprestimoMod;
     }
 
 }
