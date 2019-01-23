@@ -176,7 +176,7 @@ public class ConReserva extends ConCRUD {
 
     private void calcularDiasRemanescente() {
         Timestamp dataDeRegistoComoNaBD = null;
-        DateTime dataReserva = null;
+        DateTime dataActual = null;
         DateTime dataVencimento = null;
         Integer diasRemanescentes = 3;
         String operacao = "Actualizar Reservas";
@@ -186,9 +186,9 @@ public class ConReserva extends ConCRUD {
             for (Object todasReservasActualizar : todasReservasActivas) {
                 ModReserva reservaMod = (ModReserva) todasReservasActualizar;
                 dataDeRegistoComoNaBD = reservaMod.getUtilControloDaData().getDataRegistoEmTimestapm();
-                dataReserva = UtilControloDaData.TimestampParaDatatime(dataDeRegistoComoNaBD);
+                dataActual = controloDaData.dataActual();
                 dataVencimento = reservaMod.getData_vencimento();
-                diasRemanescentes = controloDaData.numeroDeDiasEntreDuasDatas(dataReserva, dataVencimento, operacao);
+                diasRemanescentes = controloDaData.numeroDeDiasEntreDuasDatas(dataActual, dataVencimento, operacao);
                 reservaMod.setDias_remanescente(Byte.valueOf(String.valueOf(diasRemanescentes)), operacao);
                 if (diasRemanescentes == 0) {
                     reservaMod.setEstado("Inactivo", operacao);
@@ -201,7 +201,7 @@ public class ConReserva extends ConCRUD {
     private List<Object> temReservasActivas(String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         try {
-            super.query = "select * from reserva where estado='Inactivo'";
+            super.query = "select * from reserva where estado='Activo'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
