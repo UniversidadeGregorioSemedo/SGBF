@@ -153,7 +153,36 @@ public class ConEstoque extends ConCRUD {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
-
+    
+    public boolean devolverAcervoReservadoNoEstoque(ModItemSolicitado itemSolicitadoMod, String operacao) {
+        try {
+            super.query = "call pr_devolverAcervoReservadosNoEstoque(?,?)";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
+            super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
+            return !super.preparedStatement.execute();
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+    
+    public boolean actualizarEstoqueDeEmprestimo(List<ModItemSolicitado> todosItensSolicitado, String operacao) {
+        try {
+            for(ModItemSolicitado itemSolicitadoMod: todosItensSolicitado){
+                super.query = "call pr_emprestarAcervos(?,?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                System.out.println("Código Estoque: "+itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
+                System.out.println("Quantidade: "+itemSolicitadoMod.getQuantidade_revervada());
+                super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
+                super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
+                super.preparedStatement.execute();
+            }
+            return true;
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+    
     private boolean temQuantidadeSuficiente(ModItemSolicitado itemSolicitadoMod, String operacao) {
         ConAcervo acervoCon = new ConAcervo();
         if (acervoCon.pesquisar(itemSolicitadoMod.getAcervoMod(), operacao).isEmpty()) {
@@ -168,17 +197,5 @@ public class ConEstoque extends ConCRUD {
             return false;
         }
     }
-
-    public boolean devolverAcervoReservadoNoEstoque(ModItemSolicitado itemSolicitadoMod, String operacao) {
-        try {
-            super.query = "call pr_devolverAcervoReservadosNoEstoque(?,?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
-            super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
-            return !super.preparedStatement.execute();
-        } catch (SQLException erro) {
-            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
-        }
-    }
-
+    
 }

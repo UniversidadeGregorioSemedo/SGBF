@@ -12,6 +12,8 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import org.joda.time.DateTime;
 import sgbf.modelo.ModEmprestimo;
+import sgbf.modelo.ModItemSolicitado;
+import sgbf.modelo.ModReserva;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
@@ -31,13 +33,17 @@ public class ConEmprestimo extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModEmprestimo emprestimoteMod = (ModEmprestimo) objecto_registar;
         try {
-            super.query = "INSERT INTO tcc.emprestimo (data_vencimento, Funcionario_idFuncionario, Reserva_idReserva)"
-                    + " VALUES (?, ?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setTimestamp(1, emprestimoteMod.getDataVencimento(emprestimoteMod.getDiasEmprestimo(), operacao));
-            super.preparedStatement.setInt(2, emprestimoteMod.getFuncionarioMod().getIdFuncionario());
-            super.preparedStatement.setInt(3, emprestimoteMod.getReservaMod().getIdReserva());
-            return !super.preparedStatement.execute();
+            if (this.actualizarEstoqueDoAcervo(emprestimoteMod.getReservaMod(), operacao)) {
+                super.query = "INSERT INTO tcc.emprestimo (data_vencimento, Funcionario_idFuncionario, Reserva_idReserva)"
+                        + " VALUES (?, ?, ?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setTimestamp(1, emprestimoteMod.getDataVencimento(emprestimoteMod.getDiasEmprestimo(), operacao));
+                super.preparedStatement.setInt(2, emprestimoteMod.getFuncionarioMod().getIdFuncionario());
+                super.preparedStatement.setInt(3, emprestimoteMod.getReservaMod().getIdReserva());
+                return !super.preparedStatement.execute();
+            } else {
+                throw new UtilControloExcessao(operacao, "Erro ao actualizar Estoque do acervo", Alert.AlertType.ERROR);
+            }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " \nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
@@ -139,6 +145,16 @@ public class ConEmprestimo extends ConCRUD {
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
+    }
+
+    private boolean actualizarEstoqueDoAcervo(ModReserva reservaMod, String operacao) {
+        ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
+        ConEstoque estoqueCon = new ConEstoque();
+        for (Object todosRegisto : itemSolicitadoCon.pesquisar(reservaMod, operacao)) {
+            ModItemSolicitado itensEncontrados = (ModItemSolicitado) todosRegisto;
+            reservaMod.adionarItemItensRegistados(itensEncontrados);
+        }
+        return estoqueCon.actualizarEstoqueDeEmprestimo(reservaMod.getItensRegistados(), operacao);
     }
 
     @Override
