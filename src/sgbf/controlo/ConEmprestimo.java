@@ -52,6 +52,20 @@ public class ConEmprestimo extends ConCRUD {
     }
 
     @Override
+    public boolean alterar(Object objecto_alterar, String operacao) {
+        ModEmprestimo emprestimoteMod = (ModEmprestimo) objecto_alterar;
+        try {
+            super.query = "update emprestimo set estado=? where idEmprestimo=?";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setString(1, emprestimoteMod.getEstado());
+            super.preparedStatement.setInt(2, emprestimoteMod.getIdEmprestimo());
+            return !super.preparedStatement.execute();
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao("Erro ao " + operacao + " Empréstimo !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+        }
+    }
+    
+    @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         ModVisitante visitanteMod = (ModVisitante) objecto_pesquisar;
@@ -156,12 +170,13 @@ public class ConEmprestimo extends ConCRUD {
         }
         return estoqueCon.actualizarEstoqueDeEmprestimo(reservaMod.getItensRegistados(), operacao);
     }
-
-    @Override
-    public boolean alterar(Object objecto_alterar, String operacao) {
-        ModEmprestimo emprestimoteMod = (ModEmprestimo) objecto_alterar;
-        throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.WARNING);
+    
+    public void passarEstadoParaInactivo(ModEmprestimo emprestimoteMod, String operacao) {
+        emprestimoteMod.setEstado("Inactivo", operacao);
+        this.alterar(emprestimoteMod, operacao);
     }
+
+    
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {

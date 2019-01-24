@@ -119,7 +119,8 @@ public class VisMovimentacaoDevolucao implements Initializable {
             this.botaoDevolver.setDisable(true);
             this.botaoDevolverItem.setDisable(true);
             this.tableViewItensReservados.getItems().clear();
-            throw new UtilControloExcessao(operacao, "Itens devolvidos !", Alert.AlertType.CONFIRMATION);
+            emprestimoCon.passarEstadoParaInactivo(devolucaoMod.getEmprestimoMod(), operacao);
+            throw new UtilControloExcessao(operacao, "Itens devolvidos", Alert.AlertType.CONFIRMATION);
         }
     }
 
@@ -258,10 +259,15 @@ public class VisMovimentacaoDevolucao implements Initializable {
         }
         return FXCollections.observableArrayList(todoRegistosEncontrados);
     }
+    
+    
 
     private void limparTodosItens() {
+        this.botaoDevolver.setDisable(true);
+        this.botaoDevolverItem.setDisable(true);
         this.textFieldPesquisar.setText(null);
         this.tableViewVisitante.getItems().clear();
+        this.tableViewEmprestimos.getItems().clear();
         this.tableViewItensReservados.getItems().clear();
     }
 
