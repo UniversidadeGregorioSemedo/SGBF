@@ -75,10 +75,13 @@ public class VisMovimentacaoDevolucao implements Initializable {
     private final ModVisitante visitanteMod = new ModVisitante();
     private final ModDevolucao devolucaoMod = new ModDevolucao();
     private final ConDevolucao devolucaoCon = new ConDevolucao();
+    private final ConEstoque estoqueCon = new ConEstoque();
     private final ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.botaoDevolver.setDisable(true);
+        this.botaoDevolverItem.setDisable(true);
         this.tableViewVisitante.setPlaceholder(new Label("Utentes não listados"));
         this.tableViewEmprestimos.setPlaceholder(new Label("Emprestimos não listadas"));
         this.tableViewItensReservados.setPlaceholder(new Label("Itens não listados"));
@@ -115,20 +118,21 @@ public class VisMovimentacaoDevolucao implements Initializable {
         devolucaoMod.setTipo_devolucao("Emprestimo", operacao);
         devolucaoMod.getEmprestimoMod().setReservaMod(reservaADevolver, operacao);
         devolucaoMod.getEmprestimoMod().setFuncionarioMod(UtilUsuarioLogado.getUsuarioLogado(), operacao);
-        if (devolucaoCon.registar(devolucaoMod, operacao)) {
-            this.botaoDevolver.setDisable(true);
-            this.botaoDevolverItem.setDisable(true);
-            this.tableViewItensReservados.getItems().clear();
-            emprestimoCon.passarEstadoParaInactivo(devolucaoMod.getEmprestimoMod(), operacao);
-            throw new UtilControloExcessao(operacao, "Itens devolvidos", Alert.AlertType.CONFIRMATION);
+        if (estoqueCon.devolverAcervoEmprestadoNoEstoque(devolucaoMod.getEmprestimoMod(), operacao)) {
+            if (devolucaoCon.registar(devolucaoMod, operacao)) {
+                this.botaoDevolver.setDisable(true);
+                this.botaoDevolverItem.setDisable(true);
+                this.tableViewEmprestimos.getItems().clear();
+                this.tableViewItensReservados.getItems().clear();
+                emprestimoCon.passarEstadoParaInactivo(devolucaoMod.getEmprestimoMod(), operacao);
+                throw new UtilControloExcessao(operacao, "Itens devolvidos", Alert.AlertType.CONFIRMATION);
+            }
         }
     }
 
-    private ModReserva pegarOsItensSolicitados(ModEmprestimo emprestimoMod, String operacao) {
-        for (ModItemSolicitado todosItensSolicitados : this.tableViewItensReservados.getItems()) {
-            emprestimoMod.getReservaMod().adionarItemItensRegistados(todosItensSolicitados);
-        }
-        return emprestimoMod.getReservaMod();
+    @FXML
+    private void devolverItem() {
+
     }
 
     @FXML
@@ -139,10 +143,6 @@ public class VisMovimentacaoDevolucao implements Initializable {
     @FXML
     private void sair(ActionEvent event) {
         anchoPaneTodosEmprestimo.setVisible(false);
-    }
-
-    private void desabilitarItens() {
-        this.tableViewItensReservados.getItems().clear();
     }
 
     private ModVisitante pegarDadosDaPesquisaUtente() {
@@ -211,6 +211,7 @@ public class VisMovimentacaoDevolucao implements Initializable {
 
     private void exibirTodosItensSolicitados(ModEmprestimo empestimoMod) {
         final String operacao = "Listar todos os itens solicitados";
+        this.habilitarBotoes(empestimoMod);
         textFieldTituloReserva.setCellValueFactory(new Callback<CellDataFeatures<ModItemSolicitado, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(CellDataFeatures<ModItemSolicitado, String> acervo) {
@@ -259,8 +260,13 @@ public class VisMovimentacaoDevolucao implements Initializable {
         }
         return FXCollections.observableArrayList(todoRegistosEncontrados);
     }
-    
-    
+
+    private ModReserva pegarOsItensSolicitados(ModEmprestimo emprestimoMod, String operacao) {
+        for (ModItemSolicitado todosItensSolicitados : this.tableViewItensReservados.getItems()) {
+            emprestimoMod.getReservaMod().adionarItemItensRegistados(todosItensSolicitados);
+        }
+        return emprestimoMod.getReservaMod();
+    }
 
     private void limparTodosItens() {
         this.botaoDevolver.setDisable(true);
@@ -269,6 +275,16 @@ public class VisMovimentacaoDevolucao implements Initializable {
         this.tableViewVisitante.getItems().clear();
         this.tableViewEmprestimos.getItems().clear();
         this.tableViewItensReservados.getItems().clear();
+    }
+
+    private void habilitarBotoes(ModEmprestimo empestimoMod) {
+        if (empestimoMod.getEstado().equalsIgnoreCase("Activo")) {
+            this.botaoDevolver.setDisable(false);
+            this.botaoDevolverItem.setDisable(false);
+        } else {
+            this.botaoDevolver.setDisable(true);
+            this.botaoDevolverItem.setDisable(true);
+        }
     }
 
 }

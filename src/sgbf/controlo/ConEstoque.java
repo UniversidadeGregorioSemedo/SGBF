@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModAcervo;
+import sgbf.modelo.ModEmprestimo;
 import sgbf.modelo.ModEstoque;
 import sgbf.modelo.ModItemProveniente;
 import sgbf.modelo.ModItemSolicitado;
+import sgbf.modelo.ModReserva;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -85,6 +87,20 @@ public class ConEstoque extends ConCRUD {
             super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
             super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
             return !super.preparedStatement.execute();
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+    public boolean devolverAcervoEmprestadoNoEstoque(ModEmprestimo emprestimoMod, String operacao) {
+        try {
+            for(ModItemSolicitado itemSolicitadoMod: emprestimoMod.getReservaMod().getItensRegistados()){
+                super.query = "call pr_devolverAcervosEmprestadosNoEstoque(?,?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
+                super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
+                super.preparedStatement.execute();
+            }
+            return true;
         } catch (SQLException erro) {
             throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
