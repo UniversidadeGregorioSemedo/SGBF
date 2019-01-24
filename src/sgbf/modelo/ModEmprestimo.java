@@ -27,7 +27,6 @@ public class ModEmprestimo {
     private ModFuncionario funcionarioMod;
     private UtilControloDaData utilControloDaData;
     
-
     public ModEmprestimo() {
         this.idEmprestimo = 0;
         this.estado = null;

@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import sgbf.modelo.ModDevolucao;
 import sgbf.modelo.ModEmprestimo;
 import sgbf.modelo.ModItemSolicitado;
 import sgbf.modelo.ModReserva;
@@ -49,7 +50,7 @@ public class VisMovimentacaoDevolucao implements Initializable {
     @FXML
     private Label labelOperador;
     @FXML
-    private Button botaoDevolver,botaoDevolverItem,botaoCancelar, botaoSair;
+    private Button botaoDevolver, botaoDevolverItem, botaoCancelar, botaoSair;
     @FXML
     private TableView<ModVisitante> tableViewVisitante;
     @FXML
@@ -59,7 +60,7 @@ public class VisMovimentacaoDevolucao implements Initializable {
     private TableView<ModEmprestimo> tableViewEmprestimos;
     @FXML
     private TableColumn<ModEmprestimo, String> tableColumIdEmprestimo, tableColumEstado, tableColumDiasAtraso,
-            tableColumMulta, tableColumDataEmprestimo,tableColumnDataVencimento;
+            tableColumMulta, tableColumDataEmprestimo, tableColumnDataVencimento;
     @FXML
     private TableView<ModItemSolicitado> tableViewItensReservados;
     @FXML
@@ -72,6 +73,8 @@ public class VisMovimentacaoDevolucao implements Initializable {
     private final ConUtente utenteCon = new ConUtente();
     private final ConEmprestimo emprestimoCon = new ConEmprestimo();
     private final ModVisitante visitanteMod = new ModVisitante();
+    private final ModDevolucao devolucaoMod = new ModDevolucao();
+    private final ConDevolucao devolucaoCon = new ConDevolucao();
     private final ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
 
     @Override
@@ -101,6 +104,30 @@ public class VisMovimentacaoDevolucao implements Initializable {
                 this.carregarResultadosNaTableaUtente(todosRegistosEncontrados);
             }
         }
+    }
+
+    @FXML
+    private void devolver() {
+        operacao = "Devolver todos acervos";
+        ModReserva reservaADevolver = null;
+        devolucaoMod.setEmprestimoMod(this.tableViewEmprestimos.getSelectionModel().getSelectedItem(), operacao);
+        reservaADevolver = this.pegarOsItensSolicitados(devolucaoMod.getEmprestimoMod(), operacao);
+        devolucaoMod.setTipo_devolucao("Emprestimo", operacao);
+        devolucaoMod.getEmprestimoMod().setReservaMod(reservaADevolver, operacao);
+        devolucaoMod.getEmprestimoMod().setFuncionarioMod(UtilUsuarioLogado.getUsuarioLogado(), operacao);
+        if (devolucaoCon.registar(devolucaoMod, operacao)) {
+            this.botaoDevolver.setDisable(true);
+            this.botaoDevolverItem.setDisable(true);
+            this.tableViewItensReservados.getItems().clear();
+            throw new UtilControloExcessao(operacao, "Itens devolvidos !", Alert.AlertType.CONFIRMATION);
+        }
+    }
+
+    private ModReserva pegarOsItensSolicitados(ModEmprestimo emprestimoMod, String operacao) {
+        for (ModItemSolicitado todosItensSolicitados : this.tableViewItensReservados.getItems()) {
+            emprestimoMod.getReservaMod().adionarItemItensRegistados(todosItensSolicitados);
+        }
+        return emprestimoMod.getReservaMod();
     }
 
     @FXML
@@ -175,12 +202,11 @@ public class VisMovimentacaoDevolucao implements Initializable {
     private ObservableList<ModEmprestimo> todasReservasParaCarregar(ModVisitante visitanteMo, String operacao) {
         List<ModEmprestimo> todoRegistosEncontrados = new ArrayList<>();
         for (Object todosEmprestimos : emprestimoCon.pesquisar(visitanteMo, operacao)) {
-            ModEmprestimo reservaMod = (ModEmprestimo) todosEmprestimos;
-            todoRegistosEncontrados.add(reservaMod);
+            ModEmprestimo emprestimoMod = (ModEmprestimo) todosEmprestimos;
+            todoRegistosEncontrados.add(emprestimoMod);
         }
         return FXCollections.observableArrayList(todoRegistosEncontrados);
     }
-
 
     private void exibirTodosItensSolicitados(ModEmprestimo empestimoMod) {
         final String operacao = "Listar todos os itens solicitados";

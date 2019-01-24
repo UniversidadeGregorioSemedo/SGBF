@@ -5,7 +5,9 @@
  */
 package sgbf.modelo;
 
+import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
+import sgbf.util.UtilControloExcessao;
 
 /**
  *
@@ -16,17 +18,14 @@ public class ModDevolucao {
     private Integer idDevolucao;
     private String tipo_devolucao;
     private Integer quantidade_devolvida;
-    private String data_devolucao;
-    private ModFuncionario funcionarioMod;
-    private ModItemSolicitado solicitadoItemMod;
+    private ModEmprestimo emprestimoMod;
     private UtilControloDaData utilControloDaData;
 
     public ModDevolucao() {
         this.idDevolucao = 0;
         this.tipo_devolucao = null;
         this.quantidade_devolvida = 0;
-        this.funcionarioMod = new ModFuncionario();
-        this.solicitadoItemMod = new ModItemSolicitado();
+        this.emprestimoMod = new ModEmprestimo();
         this.utilControloDaData = new UtilControloDaData();
     }
 
@@ -54,28 +53,16 @@ public class ModDevolucao {
         this.quantidade_devolvida = quantidade_devolvida;
     }
 
-    public String getData_devolucao() {
-        return data_devolucao;
+    public ModEmprestimo getEmprestimoMod() {
+        return emprestimoMod;
     }
 
-    public void setData_devolucao(String data_devolucao, String operacao) {
-        this.data_devolucao = data_devolucao;
-    }
-
-    public ModFuncionario getFuncionarioMod() {
-        return funcionarioMod;
-    }
-
-    public void setFuncionarioMod(ModFuncionario funcionarioMod, String operacao) {
-        this.funcionarioMod = funcionarioMod;
-    }
-
-    public ModItemSolicitado getSolicitadoItemMod() {
-        return solicitadoItemMod;
-    }
-
-    public void setSolicitadoItemMod(ModItemSolicitado solicitadoItemMod, String operacao) {
-        this.solicitadoItemMod = solicitadoItemMod;
+    public void setEmprestimoMod(ModEmprestimo emprestimoMo, String operacao) {
+        if(emprestimoMo == null){
+            throw new UtilControloExcessao(operacao, "Seleccione o  Emprestimo", Alert.AlertType.WARNING);
+        }else{
+            this.emprestimoMod = emprestimoMo;
+        }
     }
     
     public UtilControloDaData getUtilControloDaData() {

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import sgbf.modelo.ModDevolucao;
 import sgbf.modelo.ModEstante;
+import sgbf.modelo.ModItemSolicitado;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
@@ -24,16 +25,19 @@ public class ConDevolucao extends ConCRUD{
     public boolean registar(Object objecto_registar, String operacao) {
         ModDevolucao devolucaoMod = (ModDevolucao)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.devolucao (tipo_devolucao, quantidade_devolvida, Funcionario_idFuncionario, "
-                        + "ItensSolicitados_Acervos_idAcervos, ItensSolicitados_Reserva_idReserva)"
-                        + " VALUES (?, ?, ?, ?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
-            super.preparedStatement.setInt(2, devolucaoMod.getQuantidade_devolvida());
-            super.preparedStatement.setInt(3, devolucaoMod.getFuncionarioMod().getIdFuncionario());
-           // super.preparedStatement.setInt(4, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
-            //super.preparedStatement.setInt(5, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
-            return !super.preparedStatement.execute();
+            for(ModItemSolicitado itemSolicitado: devolucaoMod.getEmprestimoMod().getReservaMod().getItensRegistados()){
+                super.query = "INSERT INTO tcc.devolucao (tipo_devolucao, quantidade_devolvida, Funcionario_idFuncionario, "
+                            + "ItensSolicitados_Acervos_idAcervos, ItensSolicitados_Reserva_idReserva)"
+                            + " VALUES (?, ?, ?, ?, ?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
+                super.preparedStatement.setInt(2, itemSolicitado.getQuantidade_revervada());
+                super.preparedStatement.setInt(3, devolucaoMod.getEmprestimoMod().getFuncionarioMod().getIdFuncionario());
+                super.preparedStatement.setInt(4, itemSolicitado.getAcervoMod().getIdAcervo());
+                super.preparedStatement.setInt(5, devolucaoMod.getEmprestimoMod().getReservaMod().getIdReserva());
+                super.preparedStatement.execute();
+            }
+            return true;
         }catch(SQLException erro){
             throw new UtilControloExcessao("Erro ao "+operacao+" Devolução !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
         }finally{
@@ -50,7 +54,7 @@ public class ConDevolucao extends ConCRUD{
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
             super.preparedStatement.setInt(2, devolucaoMod.getQuantidade_devolvida());
-            super.preparedStatement.setInt(3, devolucaoMod.getFuncionarioMod().getIdFuncionario());
+            super.preparedStatement.setInt(3, devolucaoMod.getEmprestimoMod().getFuncionarioMod().getIdFuncionario());
             //super.preparedStatement.setInt(4, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
             //super.preparedStatement.setInt(5, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
             super.preparedStatement.setInt(5, devolucaoMod.getIdDevolucao());
