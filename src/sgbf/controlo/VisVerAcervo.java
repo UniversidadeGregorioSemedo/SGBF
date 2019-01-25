@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +25,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
+import sgbf.modelo.ModArea;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
 
@@ -60,6 +64,7 @@ public class VisVerAcervo implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewAcervoLocalizacao.setPlaceholder(new Label("Nenhum acervo seleccionado"));
+        this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((obersave, oldObserv, newValue) ->exibirMaidDeatalhesDoAcervo(newValue));
     } 
     
     @FXML
@@ -71,6 +76,7 @@ public class VisVerAcervo implements Initializable {
         } else {
             todosRegistosEncontrados = this.acervoCon.localizarAcervo(this.pegarDadosDaPesquisaAcervos(), operacao);
             if (todosRegistosEncontrados.isEmpty()) {
+                this.cancelar();
                 throw new UtilControloExcessao(operacao, "Acervo não encontradao", Alert.AlertType.INFORMATION);
             } else {
                 this.carregarResultadosNaTableAcervos(todosRegistosEncontrados);
@@ -80,8 +86,11 @@ public class VisVerAcervo implements Initializable {
     
     @FXML
     private void cancelar() {
-        
+        this.textFieldPesquisar.setText(null);
+        this.tableViewAcervo.getItems().clear();
+        this.limparDadosPesquisa();
     }
+ 
 
     @FXML
     private void sair(ActionEvent event) {
@@ -120,5 +129,48 @@ public class VisVerAcervo implements Initializable {
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
     
+    private void exibirMaidDeatalhesDoAcervo(ModAcervo acervoMod){
+        labelAnoLancamento.setText(String.valueOf(acervoMod.getAno_lancamento()));
+        labelNumeroPaginas.setText(String.valueOf(acervoMod.getNumero_paginas()));
+        labelIdioma.setText(String.valueOf(acervoMod.getIdioma()));
+        labelDataRegisto.setText(acervoMod.getUtilControloDaData().getData_registo());
+        labelDataModificacao.setText(acervoMod.getUtilControloDaData().getData_modificacao());
+        this.exbirDadosNaLocalizacao(acervoMod);
+    }
+    
+    private void exbirDadosNaLocalizacao(ModAcervo acervoMod){
+        List<ModAcervo> listaDosRegistosWncontrados = new ArrayList<>();
+        ObservableList dadosCarregar = null;
+        tableColumArea.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> localizacao) {
+                return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getEstanteMod().getAreaMod().getSector());
+            }
+        });
+        tableColumEstante.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> localizacao) {
+                return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getEstanteMod().getDesignacao());
+            }
+        });
+        tableColumCategoria.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> localizacao) {
+                return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getDesignacao());
+            }
+        });
+        listaDosRegistosWncontrados.add(acervoMod);
+        dadosCarregar =  FXCollections.observableArrayList(listaDosRegistosWncontrados);
+        this.tableViewAcervoLocalizacao.setItems(dadosCarregar);
+    }
+    
+    private void limparDadosPesquisa(){
+        labelAnoLancamento.setText("Nenhuma informação disponível");
+        labelNumeroPaginas.setText("Nenhuma informação disponível");
+        labelIdioma.setText("Nenhuma informação disponível");
+        labelDataRegisto.setText("Nenhuma informação disponível");
+        labelDataModificacao.setText("Nenhuma informação disponível"); 
+        this.tableViewAcervoLocalizacao.getItems().clear();
+    }
     
 }
