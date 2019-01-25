@@ -27,7 +27,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
-import sgbf.modelo.ModArea;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
 

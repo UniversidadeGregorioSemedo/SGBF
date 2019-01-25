@@ -88,13 +88,13 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuItem menuitemSolicitacao;
    
+   
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
     
     

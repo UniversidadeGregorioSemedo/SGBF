@@ -77,6 +77,7 @@ public class VisLogin implements Initializable {
                 propreidadeDaJanela.setResizable(true);
                 propreidadeDaJanela.show();
                 UtilUsuarioLogado.setUsuarioLogado(this.autenticar(operacao));
+                ConEmprestimo emprestimoCon = new ConEmprestimo();
             } else {
                 loginMensagem.setText("Usuário ou senha incorreta");
             }

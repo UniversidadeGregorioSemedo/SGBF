@@ -7,6 +7,7 @@ package sgbf.modelo;
 
 import java.sql.Timestamp;
 import javafx.scene.control.Alert;
+import org.controlsfx.control.Notifications;
 import org.joda.time.DateTime;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
@@ -79,7 +80,14 @@ public class ModEmprestimo {
     }
 
     public void setDias_atrazo(Integer dias_atrazo, String operacao) {
-        this.dias_atrazo = dias_atrazo;
+        if(dias_atrazo >= 0){
+            Notifications.create().title(operacao)
+                         .text("Há acervos por devoler")
+                         .showWarning();
+            this.dias_atrazo = dias_atrazo;
+        }else{
+            this.dias_atrazo = dias_atrazo;
+        }
     }
 
     public DateTime getData_vencimento() {

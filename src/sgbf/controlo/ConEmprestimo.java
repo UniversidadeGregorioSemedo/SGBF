@@ -89,7 +89,7 @@ public class ConEmprestimo extends ConCRUD {
         Integer diasDeAtraso = 0;
         DateTime dataActual = null;
         DateTime dataVencimento = null;
-        final String operacao = "Actualizar Emprestimos";
+        final String operacao = "Verificar Emprestimos";
         UtilControloDaData controloDaData = new UtilControloDaData();
         List<Object> todosEmprestimosActivas = this.temEmpresasActivas(operacao);
         if (!todosEmprestimosActivas.isEmpty()) {

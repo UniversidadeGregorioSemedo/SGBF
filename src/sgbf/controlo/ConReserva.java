@@ -179,7 +179,7 @@ public class ConReserva extends ConCRUD {
         DateTime dataActual = null;
         DateTime dataVencimento = null;
         Integer diasRemanescentes = 3;
-        String operacao = "Actualizar Reservas";
+        String operacao = "Verificar Reservas";
         UtilControloDaData controloDaData = new UtilControloDaData();
         List<Object> todasReservasActivas = this.temReservasActivas(operacao);
         if (!todasReservasActivas.isEmpty()) {
