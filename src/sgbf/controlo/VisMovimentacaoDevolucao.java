@@ -50,7 +50,7 @@ public class VisMovimentacaoDevolucao implements Initializable {
     @FXML
     private Label labelOperador;
     @FXML
-    private Button botaoDevolver, botaoDevolverItem, botaoCancelar, botaoSair;
+    private Button botaoDevolver, botaoCancelar, botaoSair;
     @FXML
     private TableView<ModVisitante> tableViewVisitante;
     @FXML
@@ -81,7 +81,6 @@ public class VisMovimentacaoDevolucao implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.botaoDevolver.setDisable(true);
-        this.botaoDevolverItem.setDisable(true);
         this.tableViewVisitante.setPlaceholder(new Label("Utentes não listados"));
         this.tableViewEmprestimos.setPlaceholder(new Label("Emprestimos não listadas"));
         this.tableViewItensReservados.setPlaceholder(new Label("Itens não listados"));
@@ -121,18 +120,12 @@ public class VisMovimentacaoDevolucao implements Initializable {
         if (estoqueCon.devolverAcervoEmprestadoNoEstoque(devolucaoMod.getEmprestimoMod(), operacao)) {
             if (devolucaoCon.registar(devolucaoMod, operacao)) {
                 this.botaoDevolver.setDisable(true);
-                this.botaoDevolverItem.setDisable(true);
                 this.tableViewEmprestimos.getItems().clear();
                 this.tableViewItensReservados.getItems().clear();
                 emprestimoCon.passarEstadoParaInactivo(devolucaoMod.getEmprestimoMod(), operacao);
                 throw new UtilControloExcessao(operacao, "Itens devolvidos", Alert.AlertType.CONFIRMATION);
             }
         }
-    }
-
-    @FXML
-    private void devolverItem() {
-
     }
 
     @FXML
@@ -270,7 +263,6 @@ public class VisMovimentacaoDevolucao implements Initializable {
 
     private void limparTodosItens() {
         this.botaoDevolver.setDisable(true);
-        this.botaoDevolverItem.setDisable(true);
         this.textFieldPesquisar.setText(null);
         this.tableViewVisitante.getItems().clear();
         this.tableViewEmprestimos.getItems().clear();
@@ -280,10 +272,8 @@ public class VisMovimentacaoDevolucao implements Initializable {
     private void habilitarBotoes(ModEmprestimo empestimoMod) {
         if (empestimoMod.getEstado().equalsIgnoreCase("Activo")) {
             this.botaoDevolver.setDisable(false);
-            this.botaoDevolverItem.setDisable(false);
         } else {
             this.botaoDevolver.setDisable(true);
-            this.botaoDevolverItem.setDisable(true);
         }
     }
 

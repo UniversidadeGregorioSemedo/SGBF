@@ -84,11 +84,11 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     
     @FXML
     private void cadastrarProveniencia() {
-        operacao = "Registar Entrada";
+        operacao = "Registar Entrada de Acervo";
         itemProvenienteMod.setAcervoMod(tableViewAcervo.getSelectionModel().getSelectedItem(), operacao);
         itemProvenienteMod.setProvenienciaMod(this.comboxProveniencia.getValue(), operacao);
         itemProvenienteMod.setQuantidade_entrada(UtilValidarDados.validarQuantidade(texteFiedQuantidade.getText(), operacao), operacao);
-        itemProvenienteMod.setSubTotal(UtilValidarDados.subTotal(texteFiedSubtotal.getText(), operacao), operacao);
+        itemProvenienteMod.setCusto_unitario(UtilValidarDados.custoUnitario(texteFiedSubtotal.getText(), operacao), operacao);
         if (itemProvenienteCon.registar(itemProvenienteMod, operacao)) {
             this.bloquearItensDaJanela();
             this.limparItensDaJanela();

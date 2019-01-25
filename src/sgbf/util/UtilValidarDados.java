@@ -34,15 +34,15 @@ public class UtilValidarDados {
         }
     }
     
-    public static Double subTotal(String subtotal, String operacao){
-        try{
+    public static Double custoUnitario(String subtotal, String operacao){
+        if(subtotal == null){
+            return 0.0;
+        }else{
             if(subtotal.isEmpty()){
                 return 0.0;
             }else{
                 return Double.valueOf(subtotal);
             }
-        }catch(NumberFormatException erro){
-            throw new UtilControloExcessao(operacao, "O subtotal introduzido não é válido\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 }

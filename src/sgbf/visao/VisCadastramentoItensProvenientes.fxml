@@ -16,46 +16,46 @@
         <URL value="@/sgbf/util/visitensprovenientes.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.5083179297597042" layoutY="-7.0" orientation="VERTICAL" prefHeight="577.0" prefWidth="713.0">
+      <SplitPane dividerPositions="0.5083179297597042" orientation="VERTICAL" prefHeight="570.0" prefWidth="713.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="711.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="255.0" prefWidth="686.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
-                     <children>
-                        <Label layoutX="26.0" layoutY="6.0" text="Dados acervo">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <TextField fx:id="texteFiedPesquisarAcervo" layoutX="16.0" layoutY="33.0" prefHeight="25.0" prefWidth="223.0" />
-                        <TableView fx:id="tableViewAcervo" layoutX="14.0" layoutY="67.0" prefHeight="172.0" prefWidth="658.0">
-                          <columns>
-                            <TableColumn fx:id="tableColumId" prefWidth="115.0" text="Id" />
-                            <TableColumn fx:id="tableColumTitulo" prefWidth="105.0" text="Titulo" />
-                              <TableColumn fx:id="tableColumFormato" prefWidth="64.0" text="Formato" />
-                              <TableColumn fx:id="tableColumEdicao" prefWidth="84.0" text="Edição" />
-                              <TableColumn fx:id="tableColumISBN" prefWidth="75.0" text="ISBN" />
-                              <TableColumn fx:id="tableColumAno" minWidth="0.0" prefWidth="61.0" text="Ano" />
-                              <TableColumn fx:id="tableColumQuantidade" prefWidth="259.0" text="Quantidade" />
-                          </columns>
-                           
+                  <Label layoutX="14.0" layoutY="34.0" text="Dados acervo">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="texteFiedPesquisarAcervo" layoutX="14.0" layoutY="64.0" prefHeight="25.0" prefWidth="223.0" />
+                  <TableView fx:id="tableViewAcervo" layoutX="14.0" layoutY="103.0" prefHeight="172.0" prefWidth="687.0">
+                    <columns>
+                      <TableColumn fx:id="tableColumId" prefWidth="115.0" text="Id" />
+                      <TableColumn fx:id="tableColumTitulo" prefWidth="105.0" text="Titulo" />
+                        <TableColumn fx:id="tableColumFormato" prefWidth="64.0" text="Formato" />
+                        <TableColumn fx:id="tableColumEdicao" prefWidth="84.0" text="Edição" />
+                        <TableColumn fx:id="tableColumISBN" prefWidth="75.0" text="ISBN" />
+                        <TableColumn fx:id="tableColumAno" minWidth="0.0" prefWidth="61.0" text="Ano" />
+                        <TableColumn fx:id="tableColumQuantidade" prefWidth="259.0" text="Quantidade" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     
                         </TableView>
-                        <JFXButton fx:id="botaoPesquisarAcervo" layoutX="239.0" layoutY="30.0" onAction="#pesquisarAcervos" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Pesquisa.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                     </children>
-                  </Pane>
+                  <JFXButton fx:id="botaoPesquisarAcervo" layoutX="250.0" layoutY="61.0" onAction="#pesquisarAcervos" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Pesquisa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <TextField fx:id="texteFiedPesquisarEntrada" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="223.0" />
-                  <JFXButton fx:id="botaoPesquisarEntrada" layoutX="237.0" layoutY="11.0" onAction="#pesquisarProveniencia" text=" ">
+                  <JFXButton fx:id="botaoPesquisarEntrada" layoutX="246.0" layoutY="11.0" onAction="#pesquisarProveniencia" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -76,9 +76,9 @@
                      </columnResizePolicy>
                   </TableView>
                   <Label layoutX="447.0" layoutY="88.0" text="Quantidade de entrada" />
-                  <Label layoutX="452.0" layoutY="128.0" text="Subtotal" />
+                  <Label layoutX="452.0" layoutY="128.0" text="Custo Unitário" />
                   <TextField fx:id="texteFiedQuantidade" layoutX="582.0" layoutY="84.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="123.0" />
-                  <TextField fx:id="texteFiedSubtotal" layoutX="510.0" layoutY="124.0" prefHeight="25.0" prefWidth="198.0" />
+                  <TextField fx:id="texteFiedSubtotal" layoutX="535.0" layoutY="124.0" prefHeight="25.0" prefWidth="173.0" />
                   <Button fx:id="botaoSair" layoutX="634.0" layoutY="241.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="68.0" text="Sair" />
                   <Button fx:id="botaoCancelar" layoutX="543.0" layoutY="241.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="68.0" text="Cancelar" />
                   <Button fx:id="botaoAlterar" layoutX="634.0" layoutY="203.0" mnemonicParsing="false" onAction="#alterarProveniencia" prefHeight="25.0" prefWidth="68.0" text="Alterar" />

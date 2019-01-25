@@ -51,7 +51,20 @@ public class ModItemProveniente {
     }
 
     public void setCusto_unitario(Double custo_unitario, String operacao) {
-        this.custo_unitario = custo_unitario;
+        if(this.provenienciaMod.getTipo() == null){
+            throw new UtilControloExcessao(operacao, "Introduza o tipo de proveniência", Alert.AlertType.WARNING);
+        }else{
+            if(this.provenienciaMod.getTipo().equalsIgnoreCase("Compra")){
+                if(custo_unitario <= 0){
+                    throw new UtilControloExcessao(operacao, "Introduza um custo válido", Alert.AlertType.WARNING);
+                }else{
+                    this.custo_unitario = custo_unitario;
+                }
+            }else{
+                this.custo_unitario = custo_unitario;
+            }
+        }
+        
     }
 
     public Double getSubTotal() {
@@ -59,19 +72,7 @@ public class ModItemProveniente {
     }
 
     public void setSubTotal(Double subtotaltotal, String operacao) {
-        if(this.provenienciaMod.getTipo() == null){
-            throw new UtilControloExcessao(operacao, "Introduza o tipo de proveniência", Alert.AlertType.WARNING);
-        }else{
-            if(this.provenienciaMod.getTipo().equalsIgnoreCase("Compra")){
-                if(subtotaltotal <= 0){
-                    throw new UtilControloExcessao(operacao, "Introduza o subTotal", Alert.AlertType.WARNING);
-                }else{
-                    this.subtotaltotal = subtotaltotal;
-                }
-            }else{
-                this.subtotaltotal = subtotaltotal;
-            }
-        }
+        this.subtotaltotal = subtotaltotal;
     }
 
     public ModAcervo getAcervoMod() {

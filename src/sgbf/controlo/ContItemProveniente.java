@@ -24,16 +24,15 @@ public class ContItemProveniente extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModItemProveniente itemProvenienteMod = (ModItemProveniente)objecto_registar;
         try{
-            super.query = "INSERT INTO tcc.itensprovenientes (Estoque_idEstoque, Proveniencia_idProveniencia, quantidade_entrada, subtotal)"
-                        + " VALUES (?, ?, ?, ?);";
+            super.query = "call pr_registarItensEntradas(?, ?, ?, ?)";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
             super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
             super.preparedStatement.setInt(3, itemProvenienteMod.getQuantidade_entrada());
-            super.preparedStatement.setDouble(4, itemProvenienteMod.getSubTotal());
+            super.preparedStatement.setDouble(4, itemProvenienteMod.getCusto_unitario());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Entradas !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao "+operacao+" Entradas \nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -114,9 +113,9 @@ public class ContItemProveniente extends ConCRUD {
         itemProvenienteMod.getAcervoMod().setIdAcervo(setResultset.getInt("idAcervos"), operacao);
         itemProvenienteMod.getAcervoMod().setTitulo(setResultset.getString("titulo"), operacao);
         itemProvenienteMod.setQuantidade_entrada(setResultset.getShort("quantidade_entrada"), operacao);
-        itemProvenienteMod.setCusto_unitario(setResultset.getDouble("custo_unitario"), operacao);
         itemProvenienteMod.getProvenienciaMod().setIdProveniencia(setResultset.getInt("idProveniencia"), operacao);
         itemProvenienteMod.getProvenienciaMod().setTipo(setResultset.getString("tipo"), operacao);
+        itemProvenienteMod.setCusto_unitario(setResultset.getDouble("custo_unitario"), operacao);
         itemProvenienteMod.setSubTotal(setResultset.getDouble("subtotal"), operacao);
         return itemProvenienteMod;
     }
