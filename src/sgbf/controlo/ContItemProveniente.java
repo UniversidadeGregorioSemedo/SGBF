@@ -73,20 +73,7 @@ public class ContItemProveniente extends ConCRUD {
     @Override
     public List<Object> listarTodos(String operacao) {
         List<Object> todosRegistos = new ArrayList<>();
-        /*try{
-            super.query = "select * from tcc.Estante designacao by nome, data_modificacao asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.setResultset = super.preparedStatement.executeQuery();
-            while(super.setResultset.next()){
-                todosRegistos.add(this.pegarRegistos(super.setResultset,operacao));
-            }
-            return todosRegistos;
-        }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estante(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
-        }*/
-        return todosRegistos;
+       throw new UtilControloExcessao( operacao, "Operação não disponível", Alert.AlertType.ERROR);
     }
 
     @Override
@@ -120,5 +107,4 @@ public class ContItemProveniente extends ConCRUD {
         return itemProvenienteMod;
     }
 
-    
 }

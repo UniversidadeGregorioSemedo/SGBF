@@ -155,6 +155,22 @@ public class ConAcervo extends ConCRUD {
             throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
+    public List<ModAcervo> localizarAcervo(ModAcervo acervoMod, String operacao) {
+        List<ModAcervo> todosRegistosEncontrados = new ArrayList<>();
+        try{
+            super.query = "select * from tcc.view_localizarAcervo where idAcervos=? or "
+                        + "titulo like '%"+acervoMod.getTitulo()+"%'";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
+            super.setResultset  = super.preparedStatement.executeQuery();
+            while(super.setResultset.next()){
+                todosRegistosEncontrados.add(this.pegarRegistosLocalizados(super.setResultset, operacao));
+            }
+            return todosRegistosEncontrados;
+        }catch(SQLException erro){
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
+        }
+    }
     
     private Object pegarRegistos(ResultSet setResultset,String operacao) throws SQLException{
         ModAcervo acervoMod = new ModAcervo();
@@ -183,6 +199,30 @@ public class ConAcervo extends ConCRUD {
         acervoMod.getEstoqueMod().setQuantidade_acervos_resercados(setResultset.getShort("quantidade_acervos_reservados"), operacao);
         acervoMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         acervoMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        return acervoMod;
+    }
+    
+    private ModAcervo pegarRegistosLocalizados(ResultSet setResultset,String operacao)  throws SQLException{
+        ModAcervo acervoMod = new ModAcervo();
+        acervoMod.setIdAcervo(setResultset.getInt("idAcervos"), operacao);
+        acervoMod.setTitulo(setResultset.getString("titulo"), operacao);
+        acervoMod.setSub_titulo(setResultset.getString("subtittulo"), operacao);
+        acervoMod.setTipo_acervo(setResultset.getString("tipo_acervo"), operacao);
+        acervoMod.setEdicao(setResultset.getByte("edicao"), operacao);
+        acervoMod.setVolume(setResultset.getByte("volume"), operacao);
+        acervoMod.setCodigo_barra(setResultset.getString("codigo_barra"), operacao);
+        acervoMod.setIsbn(setResultset.getString("isbn"), operacao);
+        acervoMod.setFormato(setResultset.getString("formato"), operacao);
+        acervoMod.setAno_lancamento(setResultset.getInt("ano_lancamento"), operacao);
+        acervoMod.setNumero_paginas(setResultset.getShort("numero_paginas"), operacao);
+        acervoMod.setIdioma(setResultset.getString("idioma"), operacao);
+        acervoMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
+        acervoMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        acervoMod.getCategoriaMod().setDesignacao(setResultset.getString("categoria"), operacao);
+        if(setResultset.getString("idEstante") != null){
+            acervoMod.getCategoriaMod().getEstanteMod().setDesignacao(setResultset.getString("estante"), operacao);
+            acervoMod.getCategoriaMod().getEstanteMod().getAreaMod().setSector(setResultset.getString("sector"), operacao);
+        }
         return acervoMod;
     }
     
