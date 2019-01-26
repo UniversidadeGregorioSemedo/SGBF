@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -61,6 +62,7 @@ public class VisVerArea implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.bloquearItensDaJanela();
         this.tableViewArea.setPlaceholder(new Label("Areas não listadas"));
+        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, sector ou use *( _ ) para listar todos registos "));
         tableViewArea.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     }
 

@@ -22,12 +22,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
-import sgbf.modelo.ModAcervosEscritos;
-import sgbf.modelo.ModAutor;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
 
@@ -66,6 +65,7 @@ public class VisVerEstoque implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         tableViewAcervo.setPlaceholder(new Label("Acervos não listados"));
         tableViewEstoque.setPlaceholder(new Label("Estoque não listado"));
+        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         tableViewEstoque.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
     }
     

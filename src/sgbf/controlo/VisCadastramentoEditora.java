@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModEditora;
@@ -34,113 +35,113 @@ import sgbf.util.UtilValidarDados;
  */
 public class VisCadastramentoEditora implements Initializable {
 
-    
     @FXML
     private JFXButton botaoPesquisar;
     @FXML
-    private Button   botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoSair;
+    private Button botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoSair;
     @FXML
-    private TextField texteFiedPesquisar,texteFiedNome, texteFiedContacto, texteFiedEmail;
+    private TextField texteFiedPesquisar, texteFiedNome, texteFiedContacto, texteFiedEmail;
     @FXML
     private TextField texteFiedFax, texteFiedEndereco;
     @FXML
-    private TableView<ModEditora> tableViewEditora; 
+    private TableView<ModEditora> tableViewEditora;
     @FXML
-    private TableColumn<ModEditora, String> tableColumNome,tableColumContacto,tableColumEmail,tableColumEndereco;
+    private TableColumn<ModEditora, String> tableColumNome, tableColumContacto, tableColumEmail, tableColumEndereco;
     @FXML
     private AnchorPane AnchorPaneUtente;
-    
+
     private String operacao = null;
     private final ModEditora editoraMod = new ModEditora();
     private final ConEditora editoraCon = new ConEditora();
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       this.bloquearItensDaJanela();
-       this.tableViewEditora.setPlaceholder(new Label("Editoras não listadas"));
-       tableViewEditora.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
+        this.bloquearItensDaJanela();
+        this.tableViewEditora.setPlaceholder(new Label("Editoras não listadas"));
+        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome da editora ou use *( _ ) para listar todos registos "));
+        tableViewEditora.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     }
 
     @FXML
-    private void cadastrarEditora(){
+    private void cadastrarEditora() {
         operacao = "Registar Editora";
         editoraMod.setNome(texteFiedNome.getText(), operacao);
         editoraMod.setContacto(texteFiedContacto.getText(), operacao);
         editoraMod.setEmail(texteFiedEmail.getText(), operacao);
         editoraMod.setFax(texteFiedFax.getText(), operacao);
-        editoraMod.setEndereco(texteFiedEndereco.getText(),operacao);
-        if(editoraCon.registar(editoraMod, operacao)){
-           this.bloquearItensDaJanela();
-           this.limparItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Editora Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+        editoraMod.setEndereco(texteFiedEndereco.getText(), operacao);
+        if (editoraCon.registar(editoraMod, operacao)) {
+            this.bloquearItensDaJanela();
+            this.limparItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Editora Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
-    
-    
+
     @FXML
-    private void alterarEditora(){
+    private void alterarEditora() {
         operacao = "Editar Editora";
         editoraMod.setiEditora(this.tableViewEditora.getSelectionModel().getSelectedItem().getiEditora(), operacao);
         editoraMod.setNome(texteFiedNome.getText(), operacao);
         editoraMod.setContacto(texteFiedContacto.getText(), operacao);
         editoraMod.setEmail(texteFiedEmail.getText(), operacao);
         editoraMod.setFax(texteFiedFax.getText(), operacao);
-        editoraMod.setEndereco(texteFiedEndereco.getText(),operacao);
-        if(editoraCon.alterar(editoraMod, operacao)){
-           this.bloquearItensDaJanela();
-           this.limparItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Editora Editada com sucesso", Alert.AlertType.CONFIRMATION);
+        editoraMod.setEndereco(texteFiedEndereco.getText(), operacao);
+        if (editoraCon.alterar(editoraMod, operacao)) {
+            this.bloquearItensDaJanela();
+            this.limparItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Editora Editada com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
-    
+
     @FXML
-    private void removerEditora(){
+    private void removerEditora() {
         operacao = "Remover Editora";
         ModEditora editoraARemover = this.tableViewEditora.getSelectionModel().getSelectedItem();
-        if(editoraCon.remover(editoraARemover, operacao)){
-           this.tableViewEditora.getItems().remove(editoraARemover);
-           this.bloquearItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Editora removida com sucesso", Alert.AlertType.CONFIRMATION);
+        if (editoraCon.remover(editoraARemover, operacao)) {
+            this.tableViewEditora.getItems().remove(editoraARemover);
+            this.bloquearItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Editora removida com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
-    
+
     @FXML
-    private void pesquisarUtente(){
+    private void pesquisarUtente() {
         operacao = "Pesquisar Editora";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        if(this.texteFiedPesquisar.getText().isEmpty()){
-           throw new UtilControloExcessao(operacao, "Introduza o código ou nome da Editora", Alert.AlertType.INFORMATION);
-        }else{
+        if (this.texteFiedPesquisar.getText().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Introduza o código ou nome da Editora", Alert.AlertType.INFORMATION);
+        } else {
             todosRegistosEncontrados = this.editoraCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
-            if(todosRegistosEncontrados.isEmpty()){
+            if (todosRegistosEncontrados.isEmpty()) {
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Editora não encontrada", Alert.AlertType.INFORMATION);
-            }else{
+                throw new UtilControloExcessao(operacao, "Editora não encontrada", Alert.AlertType.INFORMATION);
+            } else {
                 this.carregarResultadosNaTablea(todosRegistosEncontrados);
                 this.bloquearItensDaJanela();
             }
         }
     }
-    
+
     @FXML
-    private void novo(){
+    private void novo() {
         this.desbloquearItensDaJanela();
         this.limparItensDaJanela();
     }
+
     @FXML
-    private void cancelar(){
+    private void cancelar() {
         this.bloquearItensDaJanela();
         this.limparItensDaJanela();
     }
-    
+
     @FXML
     private void sair(ActionEvent event) {
         AnchorPaneUtente.setVisible(false);
     }
-   
+
     @FXML
-    private void desbloquearItensDaJanela(){
+    private void desbloquearItensDaJanela() {
         this.texteFiedNome.setDisable(false);
         this.texteFiedContacto.setDisable(false);
         this.texteFiedEmail.setDisable(false);
@@ -149,8 +150,8 @@ public class VisCadastramentoEditora implements Initializable {
         this.botaoNovo.setDisable(true);
         this.botaoCadastrar.setDisable(false);
     }
-    
-    private void bloquearItensDaJanela(){
+
+    private void bloquearItensDaJanela() {
         this.texteFiedNome.setDisable(true);
         this.texteFiedContacto.setDisable(true);
         this.texteFiedEmail.setDisable(true);
@@ -161,9 +162,9 @@ public class VisCadastramentoEditora implements Initializable {
         this.botaoAlterar.setDisable(true);
         this.botaoRemover.setDisable(true);
     }
-    
-    private void limparItensDaJanela(){
-        
+
+    private void limparItensDaJanela() {
+
         this.texteFiedNome.setText(null);
         this.texteFiedContacto.setText(null);
         this.texteFiedEmail.setText(null);
@@ -172,11 +173,9 @@ public class VisCadastramentoEditora implements Initializable {
         this.texteFiedPesquisar.setText(null);
         this.tableViewEditora.getItems().clear();
     }
-   
 
-    
-    private void exibirDadosNosCampos(ModEditora editoraMod){
-        if(tableViewEditora.getSelectionModel().getSelectedCells().size() == 1){
+    private void exibirDadosNosCampos(ModEditora editoraMod) {
+        if (tableViewEditora.getSelectionModel().getSelectedCells().size() == 1) {
             texteFiedNome.setText(editoraMod.getNome());
             texteFiedContacto.setText(editoraMod.getContacto());
             texteFiedEmail.setText(editoraMod.getEmail());
@@ -187,40 +186,40 @@ public class VisCadastramentoEditora implements Initializable {
             this.desbloquearItensDaJanela();
             botaoNovo.setDisable(true);
             botaoCadastrar.setDisable(true);
-        }else{
+        } else {
             botaoAlterar.setDisable(true);
             botaoRemover.setDisable(true);
             botaoNovo.setDisable(false);
             this.limparItensDaJanela();
         }
     }
-    
-    private ModEditora pegarDadosDaPesquisa(){
-       if(UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())){
-           editoraMod.setiEditora(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
-           editoraMod.setNome(this.texteFiedPesquisar.getText(), operacao);
-           return editoraMod;
-        }else{
-           editoraMod.setNome(this.texteFiedPesquisar.getText(), operacao);
-           return editoraMod;
+
+    private ModEditora pegarDadosDaPesquisa() {
+        if (UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())) {
+            editoraMod.setiEditora(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
+            editoraMod.setNome(this.texteFiedPesquisar.getText(), operacao);
+            return editoraMod;
+        } else {
+            editoraMod.setNome(this.texteFiedPesquisar.getText(), operacao);
+            return editoraMod;
         }
     }
-    
-    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
+
+    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados) {
         tableColumNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tableColumContacto.setCellValueFactory(new PropertyValueFactory<>("contacto"));
         tableColumEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         tableColumEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         tableViewEditora.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
     }
-    
-    private ObservableList<ModEditora> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
+
+    private ObservableList<ModEditora> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados) {
         List<ModEditora> listaDosRegistosWncontrados = new ArrayList<>();
-        for(Object utenteRegistado: todosRegistosEncontrados){
-            ModEditora editoraMod = (ModEditora)utenteRegistado;
+        for (Object utenteRegistado : todosRegistosEncontrados) {
+            ModEditora editoraMod = (ModEditora) utenteRegistado;
             listaDosRegistosWncontrados.add(editoraMod);
-        } 
+        }
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
-   
+
 }

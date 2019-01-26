@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModVisitante;
@@ -60,6 +61,7 @@ public class VisVerUtente implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.tableViewVisitane.setPlaceholder(new Label("Utentes não listados"));
+        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
         this.tableViewVisitane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultados(newValue));
     }
 

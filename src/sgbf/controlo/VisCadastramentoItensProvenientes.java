@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -42,8 +43,8 @@ import sgbf.util.UtilValidarDados;
  */
 public class VisCadastramentoItensProvenientes implements Initializable {
 
-     @FXML
-    private JFXButton botaoPesquisarAcervo,botaoPesquisarEntrada;
+    @FXML
+    private JFXButton botaoPesquisarAcervo, botaoPesquisarEntrada;
     @FXML
     private Button botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoSair;
     @FXML
@@ -54,34 +55,36 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     @FXML
     private TableView<ModItemProveniente> tableViewItemProveniente;
     @FXML
-    private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente,tableColumQuantidadeEntrada,
-            tableColumCustoUnitario,tableColumSubTotal;
+    private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente, tableColumQuantidadeEntrada,
+            tableColumCustoUnitario, tableColumSubTotal;
     @FXML
     private TableView<ModAcervo> tableViewAcervo;
     @FXML
-    private TableColumn<ModAcervo, Integer> tableColumId,tableColumEdicao, tableColumAno;
+    private TableColumn<ModAcervo, Integer> tableColumId, tableColumEdicao, tableColumAno;
     @FXML
     private TableColumn<ModAcervo, String> tableColumQuantidade;
     @FXML
-    private TableColumn<ModAcervo, String> tableColumTitulo,tableColumFormato,tableColumISBN;
+    private TableColumn<ModAcervo, String> tableColumTitulo, tableColumFormato, tableColumISBN;
     @FXML
     private AnchorPane AnchorPaneItemProveniente;
-    
+
     private String operacao = null;
     private final ModItemProveniente itemProvenienteMod = new ModItemProveniente();
     private final ModAcervo acervoMod = new ModAcervo();
     private final ContItemProveniente itemProvenienteCon = new ContItemProveniente();
     private final ConAcervo acervoCon = new ConAcervo();
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.bloquearItensDaJanela();
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listadas"));
         this.tableViewItemProveniente.setPlaceholder(new Label("Entradas não listadas"));
+        this.texteFiedPesquisarAcervo.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
+        this.texteFiedPesquisarEntrada.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCamposAcervo(newValue));
         //tableViewItemProveniente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosProveniencias(newValue));
-    }    
-    
+    }
+
     @FXML
     private void cadastrarProveniencia() {
         operacao = "Registar Entrada de Acervo";
@@ -137,20 +140,20 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             }
         }
     }
-    
+
     @FXML
     private void pesquisarAcervos() {
         operacao = "Pesquisar Acervos";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        if(this.texteFiedPesquisarAcervo.getText().isEmpty()){
-           throw new UtilControloExcessao(operacao, "Introduza o código ou título do acervos", Alert.AlertType.INFORMATION);
-        }else{
+        if (this.texteFiedPesquisarAcervo.getText().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Introduza o código ou título do acervos", Alert.AlertType.INFORMATION);
+        } else {
             todosRegistosEncontrados = this.acervoCon.pesquisar(this.pegarDadosDaPesquisaAcervo(), operacao);
-            if(todosRegistosEncontrados.isEmpty()){
+            if (todosRegistosEncontrados.isEmpty()) {
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Acervo não encontrada", Alert.AlertType.INFORMATION);
-            }else{
+                throw new UtilControloExcessao(operacao, "Acervo não encontrada", Alert.AlertType.INFORMATION);
+            } else {
                 this.carregarResultadosNaTableaAcervo(todosRegistosEncontrados);
                 this.bloquearItensDaJanela();
             }
@@ -203,14 +206,14 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         this.tableViewAcervo.getItems().clear();
         this.tableViewItemProveniente.getItems().clear();
     }
-    
-    private void carregarValorNasComboxs(){
+
+    private void carregarValorNasComboxs() {
         ConProveniencia provenienciaCon = new ConProveniencia();
         List<ModProveniencia> todasProveniencias = new ArrayList<>();
-        ObservableList todasProvenienciasParaCombox = null;        
+        ObservableList todasProvenienciasParaCombox = null;
         todasProveniencias.add(new ModProveniencia());
-        for(Object todosRegistos: provenienciaCon.listarTodos(operacao)){
-            ModProveniencia provenienciaRegistada = (ModProveniencia)todosRegistos;
+        for (Object todosRegistos : provenienciaCon.listarTodos(operacao)) {
+            ModProveniencia provenienciaRegistada = (ModProveniencia) todosRegistos;
             todasProveniencias.add(provenienciaRegistada);
         }
         todasProvenienciasParaCombox = FXCollections.observableArrayList(todasProveniencias);
@@ -218,7 +221,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     }
 
     private void exibirDadosNosCamposAcervo(ModAcervo acervo) {
-       
+
         if (tableViewAcervo.getSelectionModel().getSelectedCells().size() == 1) {
             this.carregarValorNasComboxs();
             botaoAlterar.setDisable(true);
@@ -234,9 +237,9 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             this.limparItensDaJanela();
         }
     }
-    
+
     private void exibirDadosNosProveniencias(ModArea areaMod) {
-       /* if (tableViewArea.getSelectionModel().getSelectedCells().size() == 1) {
+        /* if (tableViewArea.getSelectionModel().getSelectedCells().size() == 1) {
             texteFiedSector.setText(areaMod.getSector());
             botaoAlterar.setDisable(false);
             botaoRemover.setDisable(false);
@@ -252,7 +255,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     }
 
     private ModItemProveniente pegarDadosDaPesquisaProveniencia() {
-       if (UtilValidarDados.eNumero(this.texteFiedPesquisarEntrada.getText())) {
+        if (UtilValidarDados.eNumero(this.texteFiedPesquisarEntrada.getText())) {
             itemProvenienteMod.getAcervoMod().setIdAcervo(Integer.valueOf(this.texteFiedPesquisarEntrada.getText()), operacao);
             itemProvenienteMod.getAcervoMod().setTitulo(this.texteFiedPesquisarEntrada.getText(), operacao);
             return itemProvenienteMod;
@@ -261,15 +264,15 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             return itemProvenienteMod;
         }
     }
-    
-    private ModAcervo pegarDadosDaPesquisaAcervo(){
-        if(UtilValidarDados.eNumero(this.texteFiedPesquisarAcervo.getText())){
-           acervoMod.setIdAcervo(Integer.valueOf(this.texteFiedPesquisarAcervo.getText()), operacao);
-           acervoMod.setTitulo(this.texteFiedPesquisarAcervo.getText(), operacao);
-           return acervoMod;
-        }else{
-           acervoMod.setTitulo(this.texteFiedPesquisarAcervo.getText(), operacao);
-           return acervoMod;
+
+    private ModAcervo pegarDadosDaPesquisaAcervo() {
+        if (UtilValidarDados.eNumero(this.texteFiedPesquisarAcervo.getText())) {
+            acervoMod.setIdAcervo(Integer.valueOf(this.texteFiedPesquisarAcervo.getText()), operacao);
+            acervoMod.setTitulo(this.texteFiedPesquisarAcervo.getText(), operacao);
+            return acervoMod;
+        } else {
+            acervoMod.setTitulo(this.texteFiedPesquisarAcervo.getText(), operacao);
+            return acervoMod;
         }
     }
 
@@ -280,7 +283,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         tableColumEdicao.setCellValueFactory(new PropertyValueFactory<>("edicao"));
         tableColumISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         tableColumAno.setCellValueFactory(new PropertyValueFactory<>("ano_lancamento"));
-        tableColumQuantidade.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
+        tableColumQuantidade.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> acervo) {
                 return new ReadOnlyStringWrapper(String.valueOf(acervo.getValue().getEstoqueMod().getQuantidade_total()));
@@ -288,27 +291,27 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         });
         tableViewAcervo.setItems(this.todosRegistosParaCarregarAcervo(todosRegistosEncontrados));
     }
-    
+
     private void carregarResultadosNaTableaProveniencia(List<Object> todosRegistosEncontrados) {
-        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+        tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(item.getValue().getAcervoMod().getTitulo());
             }
         });
-        tableColumQuantidadeEntrada.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+        tableColumQuantidadeEntrada.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getQuantidade_entrada()));
             }
         });
-        tableColumCustoUnitario.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+        tableColumCustoUnitario.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getCusto_unitario()));
             }
         });
-        tableColumSubTotal.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente,String>, ObservableValue<String>>() {
+        tableColumSubTotal.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getSubTotal()));
@@ -317,15 +320,15 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         tableViewItemProveniente.setItems(this.todosRegistosParaCarregarProveniencia(todosRegistosEncontrados));
     }
 
-    private ObservableList<ModAcervo> todosRegistosParaCarregarAcervo(List<Object> todosRegistosEncontrados){
+    private ObservableList<ModAcervo> todosRegistosParaCarregarAcervo(List<Object> todosRegistosEncontrados) {
         List<ModAcervo> listaDosRegistosWncontrados = new ArrayList<>();
-        for(Object acervoRegistado: todosRegistosEncontrados){
-            ModAcervo acervoMod = (ModAcervo)acervoRegistado;
+        for (Object acervoRegistado : todosRegistosEncontrados) {
+            ModAcervo acervoMod = (ModAcervo) acervoRegistado;
             listaDosRegistosWncontrados.add(acervoMod);
-        } 
+        }
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
-      
+
     private ObservableList<ModItemProveniente> todosRegistosParaCarregarProveniencia(List<Object> todosRegistosEncontrados) {
         List<ModItemProveniente> listaDosRegistosEncontrados = new ArrayList<>();
         for (Object entradasRegistadas : todosRegistosEncontrados) {
@@ -336,11 +339,11 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     }
 
     @FXML
-    public void validarDadosNumericos(KeyEvent evt){
+    public void validarDadosNumericos(KeyEvent evt) {
         String caracateresValidos = "1234567890";
-        if(!caracateresValidos.contains(evt.getCharacter()+"")){
+        if (!caracateresValidos.contains(evt.getCharacter() + "")) {
             evt.consume();
         }
     }
-    
+
 }

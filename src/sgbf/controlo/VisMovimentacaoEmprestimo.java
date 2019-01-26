@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -83,6 +84,7 @@ public class VisMovimentacaoEmprestimo implements Initializable {
         this.tableViewVisitante.setPlaceholder(new Label("Utentes não listados"));
         this.tableViewReservas.setPlaceholder(new Label("Reservadas não listadas"));
         this.tableViewItensReservados.setPlaceholder(new Label("Itens não listados"));
+        this.textFieldPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
         this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
         this.tableViewVisitante.getSelectionModel().selectedItemProperty().addListener((observable, odlValue, newValue) -> exibirTodasReservasDoUtente(newValue));
         this.tableViewReservas.getSelectionModel().selectedItemProperty().addListener((observalbe, oldValue, newValue) -> exibirTodosItensSolicitados(newValue));

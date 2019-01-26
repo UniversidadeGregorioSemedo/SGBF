@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -37,17 +38,17 @@ import sgbf.util.UtilValidarDados;
  * @author Marron
  */
 public class VisCadastramentoAcervo implements Initializable {
-    
+
     @FXML
     private JFXButton botaoPesquisar;
     @FXML
-    private Button botaoCarregar,botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoSair;
+    private Button botaoCarregar, botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoSair;
     @FXML
-    private TextField texteFiedPesquisar,texteFiedTitulo, texteFiedSubTitulo, texteFiedEdicao,
+    private TextField texteFiedPesquisar, texteFiedTitulo, texteFiedSubTitulo, texteFiedEdicao,
             texteFiedVolume, texteFiedNumPaginas, texteFieldAno, texteFiedCodigoBarra, texteFiedISBN,
             texteFiedEndereco;
     @FXML
-    private ComboBox<String> comboBoxTipo, comboBoxFormato,comboBoxIdioma;
+    private ComboBox<String> comboBoxTipo, comboBoxFormato, comboBoxIdioma;
     @FXML
     private ComboBox<ModAutor> comboBoxAutor;
     @FXML
@@ -57,32 +58,32 @@ public class VisCadastramentoAcervo implements Initializable {
     @FXML
     private ComboBox<ModCategoria> comboBoxCategoria;
     @FXML
-    private TableView<ModAcervo> tableViewAcervo; 
+    private TableView<ModAcervo> tableViewAcervo;
     @FXML
-    private TableColumn<ModAcervo, String> tableColumTitulo,tableColumSubTitulo,tableColumEdicao,tableColumISBN,
+    private TableColumn<ModAcervo, String> tableColumTitulo, tableColumSubTitulo, tableColumEdicao, tableColumISBN,
             tableColumnAno, tableColumnTipo, tableColumnFormato;
     @FXML
     private JFXTextArea textAreaSinopese;
     @FXML
     private AnchorPane AnchorPaneAcervo;
- 
+
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
     private final ConAcervosEscreitos escreitosAcervosCon = new ConAcervosEscreitos();
-   
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       this.bloquearItensDaJanela();
-       this.tableViewAcervo.setPlaceholder(new Label("Acervos não listados"));
-       tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
-    }    
-    
-    
+        this.bloquearItensDaJanela();
+        this.tableViewAcervo.setPlaceholder(new Label("Acervos não listados"));
+        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
+        this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
+    }
+
     @FXML
-    private void cadastrarAcervos(){
+    private void cadastrarAcervos() {
         operacao = "Registar Acervos";
-        try{
+        try {
             acervoMod.setIdAcervo(acervoCon.proximoCodigoASerRegistado(operacao), operacao);
             acervoMod.setTitulo(texteFiedTitulo.getText(), operacao);
             acervoMod.setSub_titulo(texteFiedSubTitulo.getText(), operacao);
@@ -100,22 +101,22 @@ public class VisCadastramentoAcervo implements Initializable {
             acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
-            if(acervoCon.registar(acervoMod, operacao)){
-                if(escreitosAcervosCon.registar(acervoMod, operacao)){
-                   this.bloquearItensDaJanela();
-                   this.limparItensDaJanela();
-                   throw new UtilControloExcessao(operacao, "Acervo Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
+            if (acervoCon.registar(acervoMod, operacao)) {
+                if (escreitosAcervosCon.registar(acervoMod, operacao)) {
+                    this.bloquearItensDaJanela();
+                    this.limparItensDaJanela();
+                    throw new UtilControloExcessao(operacao, "Acervo Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
                 }
             }
-        }catch(NumberFormatException erro){
-           throw new UtilControloExcessao(operacao, "Edição ou volume ultrapassou o limite permitdo", Alert.AlertType.WARNING);
+        } catch (NumberFormatException erro) {
+            throw new UtilControloExcessao(operacao, "Edição ou volume ultrapassou o limite permitdo", Alert.AlertType.WARNING);
         }
     }
-    
+
     @FXML
-    private void alterarAcervo(){
+    private void alterarAcervo() {
         operacao = "Editar Acervo";
-        try{
+        try {
             acervoMod.setIdAcervo(this.tableViewAcervo.getSelectionModel().getSelectedItem().getIdAcervo(), operacao);
             acervoMod.setTitulo(texteFiedTitulo.getText(), operacao);
             acervoMod.setSub_titulo(texteFiedSubTitulo.getText(), operacao);
@@ -127,83 +128,83 @@ public class VisCadastramentoAcervo implements Initializable {
             acervoMod.setCodigo_barra(texteFiedCodigoBarra.getText(), operacao);
             acervoMod.setIsbn(texteFiedISBN.getText(), operacao);
             acervoMod.setIdioma(comboBoxIdioma.getSelectionModel().getSelectedItem(), operacao);
-            acervoMod.setAno_lancamento( Integer.valueOf(texteFieldAno.getText()), operacao);
+            acervoMod.setAno_lancamento(Integer.valueOf(texteFieldAno.getText()), operacao);
             acervoMod.setSinopse(textAreaSinopese.getText(), operacao);
             acervoMod.setEndereco_acervo(texteFiedEndereco.getText(), operacao);
             acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
-            if(acervoCon.alterar(acervoMod, operacao)){
-                if(escreitosAcervosCon.alterar(acervoMod, operacao)){
-                   this.bloquearItensDaJanela();
-                   this.limparItensDaJanela();
-                   throw new UtilControloExcessao(operacao, "Acervo alterado com sucesso", Alert.AlertType.CONFIRMATION);
+            if (acervoCon.alterar(acervoMod, operacao)) {
+                if (escreitosAcervosCon.alterar(acervoMod, operacao)) {
+                    this.bloquearItensDaJanela();
+                    this.limparItensDaJanela();
+                    throw new UtilControloExcessao(operacao, "Acervo alterado com sucesso", Alert.AlertType.CONFIRMATION);
                 }
             }
-        }catch(NumberFormatException erro){
-           throw new UtilControloExcessao(operacao, "Edição ou volume ultrapassou o limite permitdo", Alert.AlertType.WARNING);
+        } catch (NumberFormatException erro) {
+            throw new UtilControloExcessao(operacao, "Edição ou volume ultrapassou o limite permitdo", Alert.AlertType.WARNING);
         }
     }
-    
+
     @FXML
-    private void removerAcervo(){
+    private void removerAcervo() {
         operacao = "Remover Acervo";
         ModAcervo acervoARemover = this.tableViewAcervo.getSelectionModel().getSelectedItem();
-        if(acervoCon.remover(acervoARemover, operacao)){
-           this.tableViewAcervo.getItems().remove(acervoARemover);
-           this.bloquearItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Acervo removido com sucesso", Alert.AlertType.CONFIRMATION);
+        if (acervoCon.remover(acervoARemover, operacao)) {
+            this.tableViewAcervo.getItems().remove(acervoARemover);
+            this.bloquearItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Acervo removido com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
-    
+
     @FXML
-    private void pesquisarAcervo(){
+    private void pesquisarAcervo() {
         operacao = "Pesquisar Acervos";
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        if(this.texteFiedPesquisar.getText().isEmpty()){
-           throw new UtilControloExcessao(operacao, "Introduza o código ou título do acervos", Alert.AlertType.INFORMATION);
-        }else{
+        if (this.texteFiedPesquisar.getText().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Introduza o código ou título do acervos", Alert.AlertType.INFORMATION);
+        } else {
             todosRegistosEncontrados = this.acervoCon.pesquisar(this.pegarDadosDaPesquisa(), operacao);
-            if(todosRegistosEncontrados.isEmpty()){
+            if (todosRegistosEncontrados.isEmpty()) {
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
-               throw new UtilControloExcessao(operacao, "Acervo não encontrada", Alert.AlertType.INFORMATION);
-            }else{
+                throw new UtilControloExcessao(operacao, "Acervo não encontrada", Alert.AlertType.INFORMATION);
+            } else {
                 this.carregarResultadosNaTablea(todosRegistosEncontrados);
                 this.bloquearItensDaJanela();
             }
         }
     }
-    
-   
+
     @FXML
-    private void carregarAcervo(){
+    private void carregarAcervo() {
         FileChooser carregarAcervo = new FileChooser();
         carregarAcervo.setTitle("Seleccione o Acervo");
         Stage propriedadeDaJanela = (Stage) AnchorPaneAcervo.getScene().getWindow();
-        String enderecoAcervo=carregarAcervo.showOpenDialog(propriedadeDaJanela).getName();
+        String enderecoAcervo = carregarAcervo.showOpenDialog(propriedadeDaJanela).getName();
         texteFiedEndereco.setText(enderecoAcervo);
     }
-    
+
     @FXML
-    private void novo(){
+    private void novo() {
         this.desbloquearItensDaJanela();
         this.limparItensDaJanela();
         this.carregarValorNasComboxs();
     }
+
     @FXML
-    private void cancelar(){
+    private void cancelar() {
         this.bloquearItensDaJanela();
         this.limparItensDaJanela();
     }
-    
+
     @FXML
     private void sair(ActionEvent event) {
         AnchorPaneAcervo.setVisible(false);
     }
-   
+
     @FXML
-    private void desbloquearItensDaJanela(){
+    private void desbloquearItensDaJanela() {
         this.texteFiedTitulo.setDisable(false);
         this.texteFiedSubTitulo.setDisable(false);
         this.comboBoxTipo.setDisable(false);
@@ -223,8 +224,8 @@ public class VisCadastramentoAcervo implements Initializable {
         this.botaoNovo.setDisable(true);
         this.botaoCadastrar.setDisable(false);
     }
-    
-    private void bloquearItensDaJanela(){
+
+    private void bloquearItensDaJanela() {
         this.texteFiedTitulo.setDisable(true);
         this.texteFiedSubTitulo.setDisable(true);
         this.comboBoxTipo.setDisable(true);
@@ -248,8 +249,8 @@ public class VisCadastramentoAcervo implements Initializable {
         this.botaoAlterar.setDisable(true);
         this.botaoRemover.setDisable(true);
     }
-    
-    private void limparItensDaJanela(){
+
+    private void limparItensDaJanela() {
         this.texteFiedTitulo.setText(null);
         this.texteFiedSubTitulo.setText(null);
         this.texteFiedEdicao.setText(null);
@@ -270,14 +271,14 @@ public class VisCadastramentoAcervo implements Initializable {
         this.comboBoxTipo.getItems().clear();
         this.tableViewAcervo.getItems().clear();
     }
-   
-    private void carregarValorNasComboxs(){
+
+    private void carregarValorNasComboxs() {
         ConEditora editoraCon = new ConEditora();
         ConEstante estanteCon = new ConEstante();
         ConAutor autorCon = new ConAutor();
         this.comboBoxTipo.getItems().addAll("Monografia", "Jornal", "Livro", "Revista", "Apostilha");
         this.comboBoxFormato.getItems().addAll("Digital", "Físico");
-        this.comboBoxIdioma.getItems().addAll("Protuguês","Inglês","Outra");
+        this.comboBoxIdioma.getItems().addAll("Protuguês", "Inglês", "Outra");
         List<ModEditora> todasEditoras = new ArrayList<>();
         List<ModEstante> todasEstante = new ArrayList<>();
         List<ModAutor> todosAutores = new ArrayList<>();
@@ -286,52 +287,51 @@ public class VisCadastramentoAcervo implements Initializable {
         ObservableList todasAutoresParaCombox = null;
         //Listar Editoras
         todasEditoras.add(new ModEditora());
-        for(Object todosRegistos: editoraCon.listarTodos(operacao)){
-            ModEditora editoraRegistada = (ModEditora)todosRegistos;
+        for (Object todosRegistos : editoraCon.listarTodos(operacao)) {
+            ModEditora editoraRegistada = (ModEditora) todosRegistos;
             todasEditoras.add(editoraRegistada);
         }
         todasEditorasParaCombox = FXCollections.observableArrayList(todasEditoras);
         this.comboBoxEditora.setItems(todasEditorasParaCombox);
         //Listar Estantes
         todasEstante.add(new ModEstante());
-        for(Object todosRegistos: estanteCon.listarTodos(operacao)){
-            ModEstante estanteMod = (ModEstante)todosRegistos;
+        for (Object todosRegistos : estanteCon.listarTodos(operacao)) {
+            ModEstante estanteMod = (ModEstante) todosRegistos;
             todasEstante.add(estanteMod);
         }
         todasEstanteParaCombox = FXCollections.observableArrayList(todasEstante);
         this.comboBoxEstante.setItems(todasEstanteParaCombox);
         //Listar as categorias
-       this.carregarCategorias();
+        this.carregarCategorias();
         //Listar Autores
         todosAutores.add(new ModAutor());
-        for(Object todosRegistos: autorCon.listarTodos(operacao)){
-            ModAutor autorRegistado = (ModAutor)todosRegistos;
+        for (Object todosRegistos : autorCon.listarTodos(operacao)) {
+            ModAutor autorRegistado = (ModAutor) todosRegistos;
             todosAutores.add(autorRegistado);
         }
         todasAutoresParaCombox = FXCollections.observableArrayList(todosAutores);
         this.comboBoxAutor.setItems(todasAutoresParaCombox);
     }
-    
-    private void carregarCategorias(){
+
+    private void carregarCategorias() {
         ConCategoria categoriaCon = new ConCategoria();
         List<ModCategoria> todasCategorias = new ArrayList<>();
         ObservableList todasCategoriasPAraCombox = null;
-        if(categoriaCon.listarTodos(operacao).isEmpty()){
+        if (categoriaCon.listarTodos(operacao).isEmpty()) {
             this.AnchorPaneAcervo.setVisible(false);
             throw new UtilControloExcessao(operacao, "Não há registo de Categorias", Alert.AlertType.WARNING);
-        }else{
-            for(Object todosRegistos: categoriaCon.listarTodos(operacao)){
-                ModCategoria categoriaMod = (ModCategoria)todosRegistos;
+        } else {
+            for (Object todosRegistos : categoriaCon.listarTodos(operacao)) {
+                ModCategoria categoriaMod = (ModCategoria) todosRegistos;
                 todasCategorias.add(categoriaMod);
             }
             todasCategoriasPAraCombox = FXCollections.observableArrayList(todasCategorias);
             this.comboBoxCategoria.setItems(todasCategoriasPAraCombox);
         }
     }
-    
-    
-    private void exibirDadosNosCampos(ModAcervo acervoMod){
-        if(tableViewAcervo.getSelectionModel().getSelectedCells().size() == 1){
+
+    private void exibirDadosNosCampos(ModAcervo acervoMod) {
+        if (tableViewAcervo.getSelectionModel().getSelectedCells().size() == 1) {
             this.carregarValorNasComboxs();
             this.texteFiedTitulo.setText(acervoMod.getTitulo());
             this.texteFiedSubTitulo.setText(acervoMod.getSub_titulo());
@@ -346,15 +346,15 @@ public class VisCadastramentoAcervo implements Initializable {
             comboBoxTipo.getSelectionModel().select(acervoMod.getTipo_acervo());
             comboBoxFormato.getSelectionModel().select(acervoMod.getFormato());
             comboBoxIdioma.getSelectionModel().select(acervoMod.getIdioma());
-            for(int i=0; i<comboBoxCategoria.getItems().size();i++){
+            for (int i = 0; i < comboBoxCategoria.getItems().size(); i++) {
                 comboBoxCategoria.getSelectionModel().select(i);
-                if(acervoMod.getCategoriaMod().getIdCategoria()== comboBoxCategoria.getSelectionModel().getSelectedItem().getIdCategoria()){
+                if (acervoMod.getCategoriaMod().getIdCategoria() == comboBoxCategoria.getSelectionModel().getSelectedItem().getIdCategoria()) {
                     break;
                 }
             }
-            for(int i=0; i<comboBoxEditora.getItems().size();i++){
+            for (int i = 0; i < comboBoxEditora.getItems().size(); i++) {
                 comboBoxEditora.getSelectionModel().select(i);
-                if(acervoMod.getEditoraMod().getiEditora()== comboBoxEditora.getSelectionModel().getSelectedItem().getiEditora()){
+                if (acervoMod.getEditoraMod().getiEditora() == comboBoxEditora.getSelectionModel().getSelectedItem().getiEditora()) {
                     break;
                 }
             }
@@ -363,26 +363,26 @@ public class VisCadastramentoAcervo implements Initializable {
             this.desbloquearItensDaJanela();
             botaoNovo.setDisable(true);
             botaoCadastrar.setDisable(true);
-        }else{
+        } else {
             botaoAlterar.setDisable(true);
             botaoRemover.setDisable(true);
             botaoNovo.setDisable(false);
             this.limparItensDaJanela();
         }
     }
-    
-    private ModAcervo pegarDadosDaPesquisa(){
-        if(UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())){
-           acervoMod.setIdAcervo(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
-           acervoMod.setTitulo(this.texteFiedPesquisar.getText(), operacao);
-           return acervoMod;
-        }else{
-           acervoMod.setTitulo(this.texteFiedPesquisar.getText(), operacao);
-           return acervoMod;
+
+    private ModAcervo pegarDadosDaPesquisa() {
+        if (UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())) {
+            acervoMod.setIdAcervo(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
+            acervoMod.setTitulo(this.texteFiedPesquisar.getText(), operacao);
+            return acervoMod;
+        } else {
+            acervoMod.setTitulo(this.texteFiedPesquisar.getText(), operacao);
+            return acervoMod;
         }
     }
-    
-    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
+
+    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados) {
         tableColumTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         tableColumSubTitulo.setCellValueFactory(new PropertyValueFactory<>("sub_titulo"));
         tableColumEdicao.setCellValueFactory(new PropertyValueFactory<>("edicao"));
@@ -392,38 +392,37 @@ public class VisCadastramentoAcervo implements Initializable {
         tableColumnFormato.setCellValueFactory(new PropertyValueFactory<>("formato"));
         tableViewAcervo.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
     }
-    
-    private ObservableList<ModAcervo> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
+
+    private ObservableList<ModAcervo> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados) {
         List<ModAcervo> listaDosRegistosWncontrados = new ArrayList<>();
-        for(Object acervoRegistado: todosRegistosEncontrados){
-            ModAcervo acervoMod = (ModAcervo)acervoRegistado;
+        for (Object acervoRegistado : todosRegistosEncontrados) {
+            ModAcervo acervoMod = (ModAcervo) acervoRegistado;
             listaDosRegistosWncontrados.add(acervoMod);
-        } 
+        }
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
-    
-    
+
     @FXML
-    public void validarDadosNumericos(KeyEvent evt){
+    public void validarDadosNumericos(KeyEvent evt) {
         String caracateresValidos = "1234567890";
-        if(!caracateresValidos.contains(evt.getCharacter()+"")){
+        if (!caracateresValidos.contains(evt.getCharacter() + "")) {
             evt.consume();
         }
     }
-    
+
     @FXML
-    public void categoriasDaEstante(){
+    public void categoriasDaEstante() {
         ModEstante estanteMod = comboBoxEstante.getSelectionModel().getSelectedItem();
         comboBoxCategoria.getItems().clear();
-        if(estanteMod!= null){
-            if(estanteMod.getIdEstante() == 0){
+        if (estanteMod != null) {
+            if (estanteMod.getIdEstante() == 0) {
                 this.carregarCategorias();
-            }else{
+            } else {
                 List<ModCategoria> todasCategorias = new ArrayList<>();
                 ConCategoriaDaEstante categoriaDaEstante = new ConCategoriaDaEstante();
                 ObservableList todasCategoriasPAraCombox = null;
-                for(Object todosRegistos: categoriaDaEstante.listarTodos(operacao)){
-                    ModCategoria categoriaMod = (ModCategoria)todosRegistos;
+                for (Object todosRegistos : categoriaDaEstante.listarTodos(operacao)) {
+                    ModCategoria categoriaMod = (ModCategoria) todosRegistos;
                     todasCategorias.add(categoriaMod);
                 }
                 todasCategoriasPAraCombox = FXCollections.observableArrayList(todasCategorias);
@@ -431,15 +430,15 @@ public class VisCadastramentoAcervo implements Initializable {
             }
         }
     }
-    
+
     @FXML
-    private void introduzirEndereco(){
-        if(this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Físico")){
+    private void introduzirEndereco() {
+        if (this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Físico")) {
             texteFiedEndereco.setText(null);
             texteFiedEndereco.setDisable(true);
             botaoCarregar.setDisable(true);
-        }else{
-            if(this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Digital")){
+        } else {
+            if (this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Digital")) {
                 texteFiedEndereco.setDisable(false);
                 texteFiedEndereco.setEditable(false);
                 botaoCarregar.setDisable(false);
@@ -447,5 +446,4 @@ public class VisCadastramentoAcervo implements Initializable {
         }
     }
 
-    
 }

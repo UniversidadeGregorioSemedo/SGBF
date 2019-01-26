@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModCategoria;
@@ -59,6 +60,7 @@ public class VisCadastramentoCategoria implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.bloquearItensDaJanela();
         this.tableViewCategoria.setPlaceholder(new Label("Categorias não listadas"));
+        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, desginação ou use *( _ ) para listar todos registos "));
         tableViewCategoria.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     }
 

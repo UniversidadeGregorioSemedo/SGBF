@@ -22,12 +22,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
-import sgbf.modelo.ModAcervosEscritos;
-import sgbf.modelo.ModAutor;
 import sgbf.modelo.ModEditora;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
@@ -64,6 +63,7 @@ public class VisVerEditora implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.tableViewEditora.setPlaceholder(new Label("Editoras não listadas"));
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listados"));
+        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome da editora ou use *( _ ) para listar todos registos "));
         tableViewEditora.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
         tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
     }    

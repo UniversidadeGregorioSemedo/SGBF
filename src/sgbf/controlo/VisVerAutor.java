@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -73,6 +74,7 @@ public class VisVerAutor implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome do autor ou use *( _ ) para listar todos registos "));
         tableViewAutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
         tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
     }

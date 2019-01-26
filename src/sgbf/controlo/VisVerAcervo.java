@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -63,6 +64,7 @@ public class VisVerAcervo implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewAcervoLocalizacao.setPlaceholder(new Label("Nenhum acervo seleccionado"));
+        this.textFieldPesquisar.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((obersave, oldObserv, newValue) ->exibirMaidDeatalhesDoAcervo(newValue));
     } 
     

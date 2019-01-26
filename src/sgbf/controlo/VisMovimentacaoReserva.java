@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -86,6 +87,7 @@ public class VisMovimentacaoReserva implements Initializable {
         this.tableVieVisitante.setPlaceholder(new Label("Utentes não listados"));
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewReserva.setPlaceholder(new Label("Nenhuma reserva feita"));
+        this.textFieldPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
         this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
         this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirAsQuantidades(newValue));
     }

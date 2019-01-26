@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModProveniencia;
@@ -63,6 +64,7 @@ public class VisCadastramentoProveniencia implements Initializable {
         this.bloquearItensDaJanela();
         this.carregarValorNasComboxs();
         this.tabelaViewProveniencia.setPlaceholder(new Label("Proveniencia não listadas"));
+        this.TextFieldPesquisarProveniencia.setTooltip(new Tooltip("Introduza o código, designação ou use *( _ ) para listar todos registos "));
         tabelaViewProveniencia.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     } 
     private void bloquearItensDaJanela(){
