@@ -36,6 +36,7 @@ public class ConPrincipal extends Application {
             throw new UtilControloExcessao(operacao,"Erro ao inciar o sistema !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
+    
 
     /**
      * @param args the command line arguments
