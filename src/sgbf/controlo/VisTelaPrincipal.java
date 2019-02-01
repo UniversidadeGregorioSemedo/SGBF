@@ -87,6 +87,7 @@ public class VisTelaPrincipal implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }    
     
