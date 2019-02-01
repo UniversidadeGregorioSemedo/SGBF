@@ -30,7 +30,7 @@ public class ConPrincipal extends Application {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Sistema de Gestão de Biblioteca");
-            primaryStage.setResizable(true);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException erro) {
             throw new UtilControloExcessao(operacao,"Erro ao inciar o sistema !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
