@@ -15,14 +15,14 @@
         <URL value="@/sgbf/util/visverautor.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.556782334384858" orientation="VERTICAL" prefHeight="636.0" prefWidth="1074.0">
+      <SplitPane dividerPositions="0.556782334384858" orientation="VERTICAL" prefHeight="636.0" prefWidth="1074.0" style="-fx-background-color: #1f4f4e;">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="1051.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="1051.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
                      <children>
-                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" />
-                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" onAction="#pesquisarAutor" prefHeight="32.0" prefWidth="39.0" text=" ">
+                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" styleClass="jfx-textfield" stylesheets="@../util/visverautor.css" />
+                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" onAction="#pesquisarAutor" prefHeight="32.0" prefWidth="39.0" stylesheets="@../util/visverautor.css" text=" ">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -61,25 +61,55 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Label layoutX="28.0" layoutY="24.0" prefHeight="17.0" prefWidth="94.0" text="Acervos Escritos">
+                  <Label layoutX="28.0" layoutY="24.0" prefHeight="17.0" prefWidth="121.0" text="Acervos Escritos" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="797.0" layoutY="24.0" prefHeight="17.0" prefWidth="124.0" text="Outras Informações">
+                  <Label layoutX="797.0" layoutY="24.0" prefHeight="17.0" prefWidth="131.0" text="Outras Informações" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="797.0" layoutY="50.0" text="Total de Acervos:" />
-                  <Label layoutX="797.0" layoutY="90.0" text="Data de Registo:" />
-                  <Label layoutX="798.0" layoutY="131.0" text="Última modificação:" />
-                  <Label layoutX="796.0" layoutY="165.0" text="Data e hora corrente:" />
-                  <Button fx:id="botaoSair" layoutX="938.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="124.0" text="Sair" />
-                  <Label fx:id="labeTotalAcervos" layoutX="921.0" layoutY="50.0" prefHeight="17.0" prefWidth="124.0" text="Nenhuma informação" />
-                  <Label fx:id="labeDataRegisto" layoutX="921.0" layoutY="90.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação" />
-                  <Label fx:id="labeUltimaModificacao" layoutX="921.0" layoutY="131.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação" />
-                  <Label fx:id="labelHoraDataCorrente" layoutX="921.0" layoutY="165.0" prefHeight="17.0" prefWidth="131.0" text="Indisponível" />
-                  <Button fx:id="botaoCancelar" layoutX="797.0" layoutY="225.0" mnemonicParsing="false" onAction="#limparItensDaJanela" prefHeight="25.0" prefWidth="131.0" text="Cancelar" />
+                  <Label layoutX="797.0" layoutY="50.0" text="Total de Acervos:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="797.0" layoutY="90.0" text="Data de Registo:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="798.0" layoutY="131.0" text="Última modificação:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="796.0" layoutY="165.0" text="Data e hora corrente:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Button fx:id="botaoSair" layoutX="938.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="124.0" styleClass="jfx-button" stylesheets="@../util/visverautor.css" text="Sair">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
+                  <Label fx:id="labeTotalAcervos" layoutX="921.0" layoutY="50.0" prefHeight="17.0" prefWidth="139.0" text="Nenhuma informação" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="labeDataRegisto" layoutX="921.0" layoutY="90.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="labeUltimaModificacao" layoutX="924.0" layoutY="131.0" prefHeight="17.0" prefWidth="147.0" text="Nenhuma informação" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="labelHoraDataCorrente" layoutX="929.0" layoutY="164.0" prefHeight="17.0" prefWidth="124.0" text="Indisponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Button fx:id="botaoCancelar" layoutX="797.0" layoutY="225.0" mnemonicParsing="false" onAction="#limparItensDaJanela" prefHeight="25.0" prefWidth="131.0" styleClass="jfx-button" stylesheets="@../util/visverautor.css" text="Cancelar">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </items>

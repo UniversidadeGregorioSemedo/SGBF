@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
@@ -14,14 +16,14 @@
         <URL value="@/sgbf/util/visautor.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.5025553662691652" orientation="VERTICAL" prefHeight="626.0" prefWidth="874.0">
+      <SplitPane dividerPositions="0.5025553662691652" orientation="VERTICAL" prefHeight="626.0" prefWidth="874.0" style="-fx-background-color: #1f4f4e;">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="283.0" prefWidth="826.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="283.0" prefWidth="826.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
                      <children>
-                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" />
-                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" onAction="#pesquisarUtente" prefHeight="32.0" prefWidth="39.0" text=" ">
+                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" styleClass="jfx-textfield" stylesheets="@../util/visautor.css" />
+                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" onAction="#pesquisarUtente" prefHeight="32.0" prefWidth="39.0" stylesheets="@../util/visautor.css" text=" ">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -38,35 +40,84 @@
                               <TableColumn fx:id="tableColumEmail" prefWidth="231.0" text="Email" />
                           </columns>
                         </TableView>
+                        <Label layoutX="14.0" layoutY="14.0" text="Use ( _ ) para ver todos autores" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="283.0" prefWidth="608.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="221.0" prefWidth="608.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
                      <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Dados do autor" />
-                        <Label layoutX="14.0" layoutY="61.0" text="Primeiro nome" />
-                        <Label layoutX="285.0" layoutY="61.0" text="Sobrenome" />
-                        <Label layoutX="14.0" layoutY="171.0" text="Contacto" />
-                        <Label layoutX="285.0" layoutY="171.0" prefHeight="17.0" prefWidth="33.0" text="Email" />
-                        <TextField fx:id="texteFiedPrimeiroNome" layoutX="115.0" layoutY="57.0" prefHeight="25.0" prefWidth="147.0" />
-                        <TextField fx:id="texteFiedSegundoNome" layoutX="364.0" layoutY="57.0" prefHeight="25.0" prefWidth="180.0" />
-                        <TextField fx:id="texteFiedContacto" layoutX="115.0" layoutY="167.0" prefHeight="25.0" prefWidth="147.0" />
-                        <TextField fx:id="texteFiedEmail" layoutX="364.0" layoutY="167.0" prefHeight="25.0" prefWidth="180.0" />
+                        <Label layoutX="7.0" layoutY="6.0" text="Dados do autor" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <Label layoutX="14.0" layoutY="61.0" text="Primeiro nome" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <Label layoutX="285.0" layoutY="61.0" text="Sobrenome" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <Label layoutX="14.0" layoutY="171.0" text="Contacto" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <Label layoutX="285.0" layoutY="171.0" prefHeight="17.0" prefWidth="54.0" text="Email" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <TextField fx:id="texteFiedPrimeiroNome" layoutX="115.0" layoutY="57.0" prefHeight="25.0" prefWidth="147.0" styleClass="jfx-textfield" stylesheets="@../util/visautor.css" />
+                        <TextField fx:id="texteFiedSegundoNome" layoutX="364.0" layoutY="57.0" prefHeight="25.0" prefWidth="180.0" styleClass="jfx-textfield" stylesheets="@../util/visautor.css" />
+                        <TextField fx:id="texteFiedContacto" layoutX="115.0" layoutY="167.0" prefHeight="25.0" prefWidth="147.0" styleClass="jfx-textfield" stylesheets="@../util/visautor.css" />
+                        <TextField fx:id="texteFiedEmail" layoutX="364.0" layoutY="167.0" prefHeight="25.0" prefWidth="180.0" styleClass="jfx-textfield" stylesheets="@../util/visautor.css" />
                      </children>
                   </Pane>
-                  <Pane layoutX="639.0" layoutY="14.0" prefHeight="283.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-width: 1.5px;">
+                  <Pane layoutX="639.0" layoutY="14.0" prefHeight="283.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
                      <children>
-                        <Button fx:id="botaoNovo" layoutX="64.0" layoutY="21.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="72.0" text="Novo" />
-                        <Button fx:id="botaoCadastrar" layoutX="65.0" layoutY="55.0" mnemonicParsing="false" onAction="#cadastrarAutor" prefHeight="25.0" prefWidth="72.0" text="Cadastrar" />
-                        <Button fx:id="botaoAlterar" layoutX="64.0" layoutY="88.0" mnemonicParsing="false" onAction="#alterarAutor" prefHeight="25.0" prefWidth="72.0" text="Alterar" />
-                        <Button fx:id="botaoRemover" layoutX="64.0" layoutY="124.0" mnemonicParsing="false" onAction="#removerAutor" prefHeight="25.0" prefWidth="72.0" text="Remover" />
-                        <Button fx:id="botaoCancelar" layoutX="64.0" layoutY="157.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="72.0" text="Cancelar" />
-                        <Button fx:id="botaoFechar" layoutX="65.0" layoutY="244.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="72.0" text="Sair" />
+                        <Button fx:id="botaoNovo" layoutX="64.0" layoutY="21.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Novo">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="botaoCadastrar" layoutX="65.0" layoutY="55.0" mnemonicParsing="false" onAction="#cadastrarAutor" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Cadastrar">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="botaoAlterar" layoutX="64.0" layoutY="88.0" mnemonicParsing="false" onAction="#alterarAutor" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Alterar">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="botaoRemover" layoutX="64.0" layoutY="124.0" mnemonicParsing="false" onAction="#removerAutor" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Remover">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="botaoCancelar" layoutX="64.0" layoutY="157.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Cancelar">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="botaoFechar" layoutX="65.0" layoutY="244.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Sair">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Button>
                      </children>
                   </Pane>
+                  <Line endX="100.0" layoutX="115.0" layoutY="268.0" startX="-100.0" stroke="WHITE" />
+                  <Label layoutX="236.0" layoutY="260.0" text="Operador:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelOperador" layoutX="326.0" layoutY="260.0" prefHeight="17.0" prefWidth="248.0" text="Nenhuma Informação" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </items>

@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModAutor;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**
@@ -48,6 +49,8 @@ public class VisCadastramentoAutor implements Initializable {
     private String operacao = null;
     private final ModAutor autorMod = new ModAutor();
     private final ConAutor autorCon = new ConAutor();
+    @FXML
+    private Label labelOperador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,6 +58,7 @@ public class VisCadastramentoAutor implements Initializable {
         this.tableViewAutor.setPlaceholder(new Label("Autores não listados"));
         this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome do autor ou use *( _ ) para listar todos registos "));
         tableViewAutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
+        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }
 
     @FXML
@@ -133,7 +137,6 @@ public class VisCadastramentoAutor implements Initializable {
         AnchorPaneAutor.setVisible(false);
     }
 
-    @FXML
     private void desbloquearItensDaJanela() {
         this.texteFiedPrimeiroNome.setDisable(false);
         this.texteFiedSegundoNome.setDisable(false);

@@ -16,11 +16,11 @@
         <URL value="@/sgbf/util/reserva.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.5894428152492669" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0">
+      <SplitPane dividerPositions="0.5894428152492669" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: #1f4f4e;">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tableVieVisitante" layoutX="11.0" layoutY="72.0" prefHeight="139.0" prefWidth="877.0">
+                  <TableView fx:id="tableVieVisitante" layoutX="11.0" layoutY="81.0" prefHeight="139.0" prefWidth="877.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
@@ -47,13 +47,19 @@
                         <TableColumn fx:id="tableColumnFormato" prefWidth="75.0" text="Formato" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="157.0" layoutY="19.0" prefHeight="25.0" prefWidth="250.0" />
-                  <RadioButton fx:id="radioButtonUtente" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" text="Utente">
+                  <TextField fx:id="textFieldPesquisar" layoutX="173.0" layoutY="28.0" prefHeight="25.0" prefWidth="250.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
+                  <RadioButton fx:id="radioButtonUtente" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" stylesheets="@../util/reserva.css" text="Utente" textFill="WHITE">
                      <toggleGroup>
                         <ToggleGroup fx:id="OpcoesDePesquisa" />
-                     </toggleGroup></RadioButton>
-                  <RadioButton fx:id="radioButtonAcervos" layoutX="86.0" layoutY="23.0" mnemonicParsing="false" text="Acervos" toggleGroup="$OpcoesDePesquisa" />
-                  <JFXButton fx:id="botaoPesquisar" layoutX="416.0" layoutY="16.0" onAction="#pesquisar" prefHeight="25.0" prefWidth="48.0" text=" ">
+                     </toggleGroup>
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></RadioButton>
+                  <RadioButton fx:id="radioButtonAcervos" layoutX="86.0" layoutY="32.0" mnemonicParsing="false" stylesheets="@../util/reserva.css" text="Acervos" textFill="WHITE" toggleGroup="$OpcoesDePesquisa">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></RadioButton>
+                  <JFXButton fx:id="botaoPesquisar" layoutX="432.0" layoutY="25.0" onAction="#pesquisar" prefHeight="25.0" prefWidth="48.0" stylesheets="@../util/reserva.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -62,35 +68,62 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <Label layoutX="714.0" layoutY="327.0" text="Q. Reservar:" />
-                  <TextField fx:id="textFieldQuantidadeReservar" layoutX="795.0" layoutY="323.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="92.0" />
-                  <TextField fx:id="textFieldQuantidadeTotal" disable="true" editable="false" layoutX="763.0" layoutY="244.0" prefHeight="25.0" prefWidth="122.0" />
-                  <Label layoutX="711.0" layoutY="248.0" prefHeight="17.0" prefWidth="48.0" text="Q. Total:" />
-                  <Button fx:id="botaoRegistar" layoutX="710.0" layoutY="364.0" mnemonicParsing="false" onAction="#registarAcervoReservado" prefHeight="25.0" prefWidth="175.0" text="Registar Acervo" />
-                  <Label layoutX="14.0" layoutY="48.0" text="Dados do Utente">
+                  <Label layoutX="714.0" layoutY="327.0" text="Q. Reservar:" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="11.0" layoutY="221.0" text="Dados dos Acervos">
+                  <TextField fx:id="textFieldQuantidadeReservar" layoutX="795.0" layoutY="323.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="92.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
+                  <TextField fx:id="textFieldQuantidadeTotal" disable="true" editable="false" layoutX="763.0" layoutY="244.0" prefHeight="25.0" prefWidth="122.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
+                  <Label layoutX="711.0" layoutY="248.0" prefHeight="17.0" prefWidth="48.0" text="Q. Total:" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <TextField fx:id="textFieldQuantidadeRemanescente" disable="true" editable="false" layoutX="794.0" layoutY="283.0" prefHeight="25.0" prefWidth="91.0" />
-                  <Label layoutX="711.0" layoutY="287.0" prefHeight="17.0" prefWidth="81.0" text="Q. Reman.:" />
+                  <Button fx:id="botaoRegistar" layoutX="710.0" layoutY="364.0" mnemonicParsing="false" onAction="#registarAcervoReservado" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Registar Acervo">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="14.0" layoutY="57.0" text="Dados do Utente" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="11.0" layoutY="221.0" text="Dados dos Acervos" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="textFieldQuantidadeRemanescente" disable="true" editable="false" layoutX="794.0" layoutY="283.0" prefHeight="25.0" prefWidth="91.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
+                  <Label layoutX="711.0" layoutY="287.0" prefHeight="17.0" prefWidth="81.0" text="Q. Reman.:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
                <children>
-                  <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" onAction="#devolverAcervoReservado" prefHeight="25.0" prefWidth="175.0" text="Devolver" />
-                  <Button fx:id="botaoCancelar" layoutX="710.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="175.0" text="Cancelar" />
-                  <Button fx:id="botaoSair" layoutX="710.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="175.0" text="Sair" />
-                  <Label layoutX="14.0" layoutY="6.0" text="Dados da reserva">
+                  <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" onAction="#devolverAcervoReservado" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Devolver">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="botaoCancelar" layoutX="710.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Cancelar">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="botaoSair" layoutX="710.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Sair">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="14.0" layoutY="6.0" text="Dados da reserva" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="Ver todas as Reservas" />
-                  <Label layoutX="712.0" layoutY="37.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" />
-                  <TextField fx:id="textFieldUtente" disable="true" editable="false" layoutX="764.0" layoutY="33.0" prefHeight="25.0" prefWidth="122.0" />
+                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Ver todas as Reservas">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="712.0" layoutY="37.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <TextField fx:id="textFieldUtente" disable="true" editable="false" layoutX="764.0" layoutY="33.0" prefHeight="25.0" prefWidth="122.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
                   <TableView fx:id="tableViewReserva" layoutX="14.0" layoutY="33.0" prefHeight="189.0" prefWidth="693.0">
                     <columns>
                       <TableColumn fx:id="textFieldTituloReserva" prefWidth="75.0" text="Título" />
@@ -106,9 +139,18 @@
                      </columnResizePolicy>
                   </TableView>
                   <Line endX="100.0" fill="#dddada85" layoutX="115.0" layoutY="242.0" smooth="false" startX="-100.0" stroke="#908d8d" />
-                  <Label layoutX="227.0" layoutY="233.0" text="Operadador:" />
-                  <Label fx:id="labelOperador" layoutX="305.0" layoutY="233.0" prefHeight="17.0" prefWidth="402.0" text="Nenhuma informação disponível" />
-                  <Button fx:id="botaoReserva" layoutX="711.0" layoutY="64.0" mnemonicParsing="false" onAction="#reservar" prefHeight="25.0" prefWidth="175.0" text="Reservar" />
+                  <Label layoutX="227.0" layoutY="233.0" text="Operadador:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="labelOperador" layoutX="305.0" layoutY="233.0" prefHeight="17.0" prefWidth="402.0" text="Nenhuma informação disponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <Button fx:id="botaoReserva" layoutX="711.0" layoutY="64.0" mnemonicParsing="false" onAction="#reservar" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Reservar">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </items>

@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**
@@ -57,6 +58,8 @@ public class VisCadastramentoUtente implements Initializable {
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
     private final ConUtente utenteCon = new ConUtente();
+    @FXML
+    private Label labelOperador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,6 +68,7 @@ public class VisCadastramentoUtente implements Initializable {
        this.tableViewUtente.setPlaceholder(new Label("Utentes não listados"));
        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
        tableViewUtente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
+       this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }
     
     
@@ -158,7 +162,6 @@ public class VisCadastramentoUtente implements Initializable {
         AnchorPaneUtente.setVisible(false);
     }
    
-    @FXML
     private void desbloquearItensDaJanela(){
         this.texteFiedPrimeiroNome.setDisable(false);
         this.texteFiedSegundoNome.setDisable(false);

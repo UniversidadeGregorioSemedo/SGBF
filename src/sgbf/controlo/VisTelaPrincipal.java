@@ -8,11 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 
 /**
  * @author Marron
@@ -22,10 +24,6 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuItem menuitemCadastroAcervo;
     @FXML
-    private MenuItem menuAcervoEscrito;
-    @FXML
-    private MenuItem menuitemCadastroArea;
-    @FXML
     private MenuItem menuitemCadastroAutor;
     @FXML
     private MenuItem menuitemCadastroCategoria;
@@ -34,15 +32,11 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuItem menuitemCadastroEstante;
     @FXML
-    private MenuItem menuitemCadastroEstoque;
-    @FXML
     private MenuItem menuitemCadastroFuncionario;
     @FXML
     private MenuItem menuitemCadastroProveniencia;
     @FXML
     private MenuItem menuitemCadastroItemProveniencia;
-    @FXML
-    private MenuItem menuitemProvenienciaAcervo;
     @FXML
     private MenuItem menuitemCadastroUtente;
     @FXML
@@ -84,9 +78,7 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuBar menuBar;
     @FXML
-    private MenuItem menuitemCategoriaEstante;
-    @FXML
-    private MenuItem menuitemSolicitacao;
+    private Label labelOperador;
    
    
 
@@ -95,6 +87,7 @@ public class VisTelaPrincipal implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }    
     
     
@@ -145,10 +138,12 @@ public class VisTelaPrincipal implements Initializable {
     }
     
  
+    @FXML
     public void BotaoMenuItemProveniencia() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastramentoProveniencia.fxml"));
         anchorPane.getChildren().setAll(x);         
     }
+    @FXML
     public void BotaoMenuItemItensProveniencia() throws IOException{
         AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastramentoItensProvenientes.fxml"));
         anchorPane.getChildren().setAll(x);         

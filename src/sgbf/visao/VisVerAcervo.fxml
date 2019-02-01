@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
@@ -14,7 +15,7 @@
         <URL value="@/sgbf/util/tabelaveracervo.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="566.0" prefWidth="910.0">
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="566.0" prefWidth="910.0" style="-fx-background-color: #1f4f4e;">
          <items>
             <AnchorPane prefHeight="283.0" prefWidth="1358.0">
                <children>
@@ -33,8 +34,15 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="18.0" layoutY="27.0" prefHeight="25.0" prefWidth="517.0" />
-                  <JFXButton fx:id="botaoPesquisar" layoutX="544.0" layoutY="27.0" onAction="#localizarAcervos" text="Pesquisar" />
+                  <TextField fx:id="textFieldPesquisar" layoutX="18.0" layoutY="27.0" prefHeight="25.0" prefWidth="517.0" styleClass="jfx-textfield" stylesheets="@../util/viewtodosacervos.css" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="541.0" layoutY="24.0" onAction="#localizarAcervos" stylesheets="@../util/viewtodosacervos.css" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Pesquisa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="562.0" prefWidth="789.0">
@@ -49,28 +57,64 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Label layoutX="27.0" layoutY="23.0" text="Localização do Acervo">
+                  <Label layoutX="27.0" layoutY="23.0" text="Localização do Acervo" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Sitka Text" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="528.0" layoutY="23.0" text="Outras informações">
+                  <Label layoutX="528.0" layoutY="23.0" text="Outras informações" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Sitka Text" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="535.0" layoutY="145.0" text="Data de Registo:" />
-                  <Label layoutX="535.0" layoutY="177.0" text="Última modificação:" />
-                  <Label layoutX="535.0" layoutY="116.0" text="Idioma:" />
-                  <Label layoutX="535.0" layoutY="85.0" text="Número de Páginas" />
-                  <Label layoutX="535.0" layoutY="50.0" text="Ano de lançamento:" />
-                  <Label fx:id="labelAnoLancamento" layoutX="658.0" layoutY="50.0" prefHeight="17.0" prefWidth="236.0" text="Nenhuma informação disponível" />
-                  <Label fx:id="labelNumeroPaginas" layoutX="658.0" layoutY="85.0" prefHeight="17.0" prefWidth="236.0" text="Nenhuma informação disponível" />
-                  <Label fx:id="labelIdioma" layoutX="658.0" layoutY="116.0" prefHeight="17.0" prefWidth="236.0" text="Nenhuma informação disponível" />
-                  <Label fx:id="labelDataRegisto" layoutX="658.0" layoutY="145.0" prefHeight="17.0" prefWidth="236.0" text="Nenhuma informação disponível" />
-                  <Label fx:id="labelDataModificacao" layoutX="658.0" layoutY="177.0" prefHeight="17.0" prefWidth="236.0" text="Nenhuma informação disponível" />
-                  <Button fx:id="botaoCancelar" layoutX="531.0" layoutY="225.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="172.0" text="Cancelar" />
-                  <Button fx:id="botaoSair" layoutX="725.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="152.0" text="Sair" />
+                  <Label layoutX="535.0" layoutY="145.0" text="Data de Registo:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="535.0" layoutY="177.0" text="Última modificação:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="535.0" layoutY="116.0" text="Idioma:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="535.0" layoutY="85.0" text="Número de Páginas" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="535.0" layoutY="50.0" text="Ano de lançamento:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="labelAnoLancamento" layoutX="673.0" layoutY="50.0" prefHeight="17.0" prefWidth="221.0" text="Nenhuma informação disponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="labelNumeroPaginas" layoutX="673.0" layoutY="85.0" prefHeight="17.0" prefWidth="221.0" text="Nenhuma informação disponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="labelIdioma" layoutX="673.0" layoutY="116.0" prefHeight="17.0" prefWidth="221.0" text="Nenhuma informação disponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="labelDataRegisto" layoutX="673.0" layoutY="145.0" prefHeight="17.0" prefWidth="221.0" text="Nenhuma informação disponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Label fx:id="labelDataModificacao" layoutX="673.0" layoutY="177.0" prefHeight="17.0" prefWidth="221.0" text="Nenhuma informação disponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+                  <Button fx:id="botaoCancelar" layoutX="531.0" layoutY="225.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="172.0" styleClass="jfx-button" stylesheets="@../util/viewtodosacervos.css" text="Cancelar">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Button>
+                  <Button fx:id="botaoSair" layoutX="725.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="152.0" styleClass="jfx-button" stylesheets="@../util/viewtodosacervos.css" text="Sair">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </items>

@@ -26,11 +26,11 @@ public class ConPrincipal extends Application {
         try {
            this.fecharPeloBotaoWindow(operacao, primaryStage);
             
-            Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
+            Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisTelaPrincipal.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Sistema de Gestão de Biblioteca");
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(true);
             primaryStage.show();
         } catch (IOException erro) {
             throw new UtilControloExcessao(operacao,"Erro ao inciar o sistema !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);

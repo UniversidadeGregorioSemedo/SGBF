@@ -28,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModFuncionario;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**
@@ -56,7 +57,6 @@ public class VisCadastramentoFuncionario implements Initializable {
     @FXML
     private TableColumn<ModFuncionario, String> tableColumNomeFuncionario,
             tableColumCategoriaFuncionario, tableColumContactoFuncionario;
-    @FXML
     private AnchorPane AnchorPaneUtente;
 
     private String operacao = null;
@@ -64,6 +64,10 @@ public class VisCadastramentoFuncionario implements Initializable {
     private final ModFuncionario funcionarioMod = new ModFuncionario();
     private final ConUtente utenteCon = new ConUtente();
     private final ConFuncionario funcionarioCon = new ConFuncionario();
+    @FXML
+    private AnchorPane AnchorPaneFuncionario;
+    @FXML
+    private Label labelOperador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,6 +80,7 @@ public class VisCadastramentoFuncionario implements Initializable {
                 (observable, oldValue, newValue) -> this.exibirDadosDoUtenteNosCampos(newValue));
         this.tableViewFuncionario.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> this.exibirDadosDoFuncionarioNosCampos(newValue));
+        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }
 
     @FXML
@@ -183,7 +188,6 @@ public class VisCadastramentoFuncionario implements Initializable {
         AnchorPaneUtente.setVisible(false);
     }
 
-    @FXML
     private void desbloquearItensDaJanela() {
         this.texteFiedcodigoFuncionario.setDisable(false);
         this.comboBoxCargo.setDisable(false);

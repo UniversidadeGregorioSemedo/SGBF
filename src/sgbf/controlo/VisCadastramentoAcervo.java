@@ -30,6 +30,7 @@ import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModEditora;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**
@@ -71,6 +72,8 @@ public class VisCadastramentoAcervo implements Initializable {
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
     private final ConAcervosEscreitos escreitosAcervosCon = new ConAcervosEscreitos();
+    @FXML
+    private Label labelOperador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,6 +81,7 @@ public class VisCadastramentoAcervo implements Initializable {
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listados"));
         this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
+        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }
 
     @FXML
@@ -134,6 +138,7 @@ public class VisCadastramentoAcervo implements Initializable {
             acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
+         
             if (acervoCon.alterar(acervoMod, operacao)) {
                 if (escreitosAcervosCon.alterar(acervoMod, operacao)) {
                     this.bloquearItensDaJanela();
@@ -203,7 +208,6 @@ public class VisCadastramentoAcervo implements Initializable {
         AnchorPaneAcervo.setVisible(false);
     }
 
-    @FXML
     private void desbloquearItensDaJanela() {
         this.texteFiedTitulo.setDisable(false);
         this.texteFiedSubTitulo.setDisable(false);
