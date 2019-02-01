@@ -37,7 +37,7 @@
                   </MenuItem>
             </items>
           </Menu>
-          <Menu fx:id="MenuCadastrar" mnemonicParsing="false" text="Cadastro">
+          <Menu mnemonicParsing="false" text="Cadastro">
             <items>
                   <Menu mnemonicParsing="false" text="Novo Cadastro">
                     <items>

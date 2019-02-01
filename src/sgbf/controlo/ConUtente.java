@@ -30,8 +30,8 @@ public class ConUtente extends ConCRUD {
             } else {
                 super.query = "INSERT INTO tcc.utente (primeiro_nome, segundo_nome, genero,"
                         + " tipo_identidicacao, numero_identidicacao, contacto, email, "
-                        + "endereco, endereco_imagem, categoria, sha1(usuario), sha1(senha))"
-                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sha1(?), sha1(?))";
+                        + "endereco, endereco_imagem, categoria, usuario, senha)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
                 super.preparedStatement.setString(2, utenteMod.getSegundo_nome());

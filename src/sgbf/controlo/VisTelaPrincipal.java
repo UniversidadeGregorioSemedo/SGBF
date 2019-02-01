@@ -9,12 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sgbf.modelo.ModUsuario;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilUsuarioLogado;
 
@@ -81,11 +79,9 @@ public class VisTelaPrincipal implements Initializable {
     private MenuBar menuBar;
     @FXML
     private Label labelOperador;
-    @FXML
-    private Menu MenuCadastrar;
+   
+   
 
-    
-    
     /**
      * Initializes the controller class.
      */
