@@ -243,19 +243,6 @@
             </Menu>
         </menus>
       </MenuBar>
-      <AnchorPane fx:id="anchorPane" prefHeight="721.0" prefWidth="701.0" style="-fx-background-color: #2a363f;">
-         <children>
-            <Label fx:id="labelOperador" layoutX="351.0" layoutY="657.0" prefHeight="17.0" prefWidth="381.0" text="Nenhuma informação disponível" textFill="WHITE">
-               <font>
-                  <Font name="Sitka Text" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="250.0" layoutY="658.0" text="Operadador:" textFill="WHITE">
-               <font>
-                  <Font name="Sitka Text Bold" size="14.0" />
-               </font>
-            </Label>
-            <Line endX="100.0" fill="#dddada85" layoutX="138.0" layoutY="666.0" smooth="false" startX="-100.0" stroke="#908d8d" />
-         </children></AnchorPane>
+      <AnchorPane fx:id="anchorPane" prefHeight="721.0" prefWidth="701.0" style="-fx-background-color: #2a363f;" />
    </children>
 </VBox>

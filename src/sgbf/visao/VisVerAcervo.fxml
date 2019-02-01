@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
@@ -19,7 +20,7 @@
          <items>
             <AnchorPane prefHeight="283.0" prefWidth="1358.0">
                <children>
-                  <TableView fx:id="tableViewAcervo" layoutX="18.0" layoutY="64.0" prefHeight="195.0" prefWidth="872.0">
+                  <TableView fx:id="tableViewAcervo" layoutX="18.0" layoutY="70.0" prefHeight="195.0" prefWidth="872.0">
                      <columns>
                         <TableColumn fx:id="tableColumId" prefWidth="44.0" text="Id" />
                         <TableColumn fx:id="tableColumTitulo" prefWidth="166.0" text="Titulo" />
@@ -34,8 +35,8 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="18.0" layoutY="27.0" prefHeight="25.0" prefWidth="517.0" styleClass="jfx-textfield" stylesheets="@../util/viewtodosacervos.css" />
-                  <JFXButton fx:id="botaoPesquisar" layoutX="541.0" layoutY="24.0" onAction="#localizarAcervos" stylesheets="@../util/viewtodosacervos.css" text=" ">
+                  <TextField fx:id="textFieldPesquisar" layoutX="18.0" layoutY="33.0" prefHeight="25.0" prefWidth="517.0" styleClass="jfx-textfield" stylesheets="@../util/viewtodosacervos.css" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="541.0" layoutY="31.0" onAction="#localizarAcervos" prefHeight="15.0" prefWidth="48.0" stylesheets="@../util/viewtodosacervos.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -43,6 +44,13 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
+                  <Line endX="100.0" layoutX="307.0" layoutY="21.0" startX="-100.0" />
+                  <Line endX="100.0" layoutX="723.0" layoutY="21.0" startX="-100.0" />
+                  <Label layoutX="432.0" layoutY="11.0" prefHeight="17.0" prefWidth="172.0" text="Listar todos emprestimos" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="562.0" prefWidth="789.0">

@@ -67,16 +67,16 @@ public class VisLogin implements Initializable {
 
     private void abrirTelaPrincipal(String operacao, MouseEvent accao, Stage propreidadeDaJanela) {
         try {
-            if (this.autenticar(operacao) != null) {
+            UtilUsuarioLogado.setUsuarioLogado(this.autenticar(operacao));
+            if (UtilUsuarioLogado.getUsuarioLogado() != null) {
                 propreidadeDaJanela.close();
                 Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisTelaPrincipal.fxml"));
                 Scene scene = new Scene(root);
                 propreidadeDaJanela.setScene(scene);
-                propreidadeDaJanela.setTitle("Sistema de Gestão de Biblioteca");
+                propreidadeDaJanela.setTitle("Sistema de Gestão de Biblioteca( " + UtilUsuarioLogado.getUsuarioLogado().getNome() + " )");
                 propreidadeDaJanela.setMaximized(true);
                 propreidadeDaJanela.setResizable(true);
                 propreidadeDaJanela.show();
-                UtilUsuarioLogado.setUsuarioLogado(this.autenticar(operacao));
                 ConEmprestimo emprestimoCon = new ConEmprestimo();
             } else {
                 loginMensagem.setText("Usuário ou senha incorreta");
