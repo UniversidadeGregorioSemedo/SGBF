@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchoPaneTodasReserva" prefHeight="684.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisMovimentacaoEmprestimo">
+    <stylesheets>
+        <URL value="@/sgbf/util/reserva.css" />
+    </stylesheets>
+   <children>
+      <SplitPane dividerPositions="0.5894428152492669" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: #1f4f4e;">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView fx:id="tableViewVisitante" layoutX="11.0" layoutY="72.0" prefHeight="139.0" prefWidth="877.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <columns>
+                        <TableColumn fx:id="tableColumId" prefWidth="44.0" text="Id" />
+                        <TableColumn fx:id="tableColumNome" prefWidth="141.0" text="Nome" />
+                        <TableColumn fx:id="tableColumIdTipoIdentificacao" prefWidth="60.0" text="Tipo identificação" />
+                        <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="91.0" text="Nº identificação" />
+                        <TableColumn fx:id="tableColumContacto" prefWidth="100.0" text="Contacto" />
+                        <TableColumn fx:id="tableColumEndereco" prefWidth="118.0" text="Endereço" />
+                        <TableColumn fx:id="tableColumCategoria" prefWidth="145.0" text="Categoria" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="tableViewReservas" layoutX="11.0" layoutY="244.0" prefHeight="145.0" prefWidth="756.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <columns>
+                        <TableColumn fx:id="tableColumIdReserva" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="tableColumEstado" prefWidth="75.0" text="Estado" />
+                        <TableColumn fx:id="tableColumDataReserva" prefWidth="75.0" text="Data da reserva" />
+                        <TableColumn fx:id="tableColumnDiasRemanescentes" prefWidth="75.0" text="Dias Remanescentes" />
+                        <TableColumn fx:id="tableColumnDataVencimento" prefWidth="75.0" text="Data de vencimento" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="textFieldPesquisar" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="250.0" styleClass="jfx-textfield" stylesheets="@../util/emprestimo.css" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="273.0" layoutY="17.0" onAction="#pesquisarUtente" prefHeight="25.0" prefWidth="48.0" stylesheets="@../util/emprestimo.css" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Pesquisa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Button fx:id="botaoCancelarReserva" layoutX="774.0" layoutY="364.0" mnemonicParsing="false" onAction="#cancelarReserva" prefHeight="25.0" prefWidth="114.0" styleClass="jfx-button" stylesheets="@../util/emprestimo.css" text="Cancelar Reserva" />
+                  <Label layoutX="14.0" layoutY="48.0" text="Dados do Utente" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font></Label>
+                  <Label layoutX="11.0" layoutY="221.0" text="Todas as Reservas" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font></Label>
+                  <Button fx:id="botaoEmprestar" layoutX="774.0" layoutY="331.0" mnemonicParsing="false" onAction="#emprestar" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/emprestimo.css" text="Emprestar" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
+               <children>
+                  <Button fx:id="botaoDevolverItem" layoutX="774.0" layoutY="126.0" mnemonicParsing="false" onAction="#devolverAcervoReservado" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/emprestimo.css" text="Devolver Item" />
+                  <Button fx:id="botaoCancelar" layoutX="774.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/emprestimo.css" text="Cancelar" />
+                  <Button fx:id="botaoSair" layoutX="774.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/emprestimo.css" text="Sair" />
+                  <Label layoutX="14.0" layoutY="6.0" text="Todos os itens reservados" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font></Label>
+                  <TableView fx:id="tableViewItensReservados" layoutX="14.0" layoutY="33.0" prefHeight="189.0" prefWidth="756.0">
+                    <columns>
+                      <TableColumn fx:id="textFieldTituloReserva" prefWidth="75.0" text="Título" />
+                      <TableColumn fx:id="textFieldSubTituloReserva" prefWidth="75.0" text="Subtitulo" />
+                        <TableColumn fx:id="textFieldISBNReserva" prefWidth="75.0" text="ISBN" />
+                        <TableColumn fx:id="textFieldCodigoBarraReserva" prefWidth="99.0" text="Código de Barra" />
+                        <TableColumn fx:id="textFieldTipoReserva" text="Tipo" />
+                        <TableColumn fx:id="textFieldFormatoReserva" prefWidth="75.0" text="Formato" />
+                        <TableColumn fx:id="textFieldquantidadeReserva" prefWidth="139.0" text="Quantidade Reservada" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Line endX="100.0" fill="#dddada85" layoutX="115.0" layoutY="242.0" smooth="false" startX="-100.0" stroke="#908d8d" />
+                  <Label layoutX="227.0" layoutY="233.0" text="Operadador:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font></Label>
+                  <Label fx:id="labelOperador" layoutX="326.0" layoutY="233.0" prefHeight="17.0" prefWidth="381.0" text="Nenhuma informação disponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

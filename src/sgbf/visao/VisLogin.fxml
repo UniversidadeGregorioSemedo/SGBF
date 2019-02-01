@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a363f;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisLogin">
+    <stylesheets>
+        <URL value="@/sgbf/util/UtilLogin.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icones/IconLogin.png" />
+         </image>
+      </ImageView>
+      <Line endX="100.0" layoutX="286.0" layoutY="184.0" rotate="90.0" startX="-100.0" stroke="#465058" />
+      <Label layoutX="223.0" layoutY="26.0" prefHeight="17.0" prefWidth="140.0" text="Iniciar Sessão">
+         <font>
+            <Font size="23.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="0.8666666666666667" endY="1.0" startX="0.13333333333333333">
+               <stops>
+                  <Stop color="#2eccfa" />
+                  <Stop color="#fbfeff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <JFXButton fx:id="loginEntrar" layoutX="300.0" layoutY="250.0" onMouseClicked="#clicarBotoes" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #2ECCFA;" text="Entrar" />
+      <JFXButton fx:id="loginCancelar" layoutX="455.0" layoutY="250.0" onMouseClicked="#clicarBotoes" prefHeight="25.0" prefWidth="131.0" style="-fx-background-color: #2ECCFA;" text="Cancelar" />
+      <Hyperlink fx:id="loginEsqueceuSenha" layoutX="308.0" layoutY="285.0" text="Esqueceu a senha ?" />
+      <Hyperlink fx:id="loginContacte" layoutX="469.0" layoutY="285.0" text="Contacte-nos" />
+      <JFXTextField fx:id="loginNomeUsuario" labelFloat="true" layoutX="350.0" layoutY="119.0" prefHeight="25.0" prefWidth="196.0" promptText="Nome do Usuário" styleClass="glyph-icon" stylesheets="@../util/UtilLogin.css" />
+      <JFXPasswordField fx:id="loginSenha" labelFloat="true" layoutX="349.0" layoutY="172.0" prefHeight="25.0" prefWidth="196.0" promptText="Senha" styleClass="glyph-icon" stylesheets="@../util/UtilLogin.css" />
+      <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="308.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icones/User%20Account_52px.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="308.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icones/Key%202_50px.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="loginMensagem" layoutX="349.0" layoutY="218.0" prefHeight="17.0" prefWidth="196.0" textFill="#eb1d1d">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

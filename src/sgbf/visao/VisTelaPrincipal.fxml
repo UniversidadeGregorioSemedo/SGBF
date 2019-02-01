@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisTelaPrincipal">
+   <children>
+      <MenuBar fx:id="menuBar">
+        <menus>
+          <Menu mnemonicParsing="false" text="Arquivo">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Copia de segurança">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Synchronize_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuItemTerminarSessao" mnemonicParsing="false" onAction="#botaoMenuItemTerminarSessao" text="Terminar Sessão" />
+                  <MenuItem fx:id="menuItemSairDoSistema" mnemonicParsing="false" onAction="#botaoMenuItemSairDoSistema" text="Sair do sistema">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Erro.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Cadastro">
+            <items>
+                  <Menu mnemonicParsing="false" text="Novo Cadastro">
+                    <items>
+                        <MenuItem fx:id="menuitemCadastroAutor" mnemonicParsing="false" onAction="#BotaoMenuItemAutor" text="Autor">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Classroom_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                      <MenuItem fx:id="menuitemCadastroAcervo" mnemonicParsing="false" onAction="#BotaoMenuItemAcervo" text="Acervo">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Ad%20Book_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="menuitemCadastroCategoria" mnemonicParsing="false" onAction="#BotaoMenuItemCategoria" text="Categoria">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Open_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="menuitemCadastroEditora" mnemonicParsing="false" onAction="#BotaoMenuItemEditora" text="Editora">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="menuitemCadastroEstante" mnemonicParsing="false" onAction="#BotaoMenuItemEstante" text="Estante">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Book%20Shelf_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="menuitemCadastroFuncionario" mnemonicParsing="false" onAction="#BotaoMenuItemFuncionario" text="Funcionario">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Add%20User%20Male_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="menuitemCadastroItemProveniencia" mnemonicParsing="false" onAction="#BotaoMenuItemItensProveniencia" text="Entrada de de Acervos" />
+                        <MenuItem fx:id="menuitemCadastroProveniencia" mnemonicParsing="false" onAction="#BotaoMenuItemProveniencia" text="Proveniencia">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem fx:id="menuitemCadastroUtente" mnemonicParsing="false" onAction="#BotaoMenuItemUtente" text="Utente">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Add%20User%20Group%20Woman%20Man_40px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                    </items>
+                  </Menu>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Ver">
+            <items>
+                  <MenuItem fx:id="menuitemVerUtentes" mnemonicParsing="false" onAction="#BotaoMenuItemVerUtente" text="Todos utentes">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Add%20User%20Group%20Woman%20Man_40px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitemVerProveniencias" mnemonicParsing="false" text="Todas proveniencias">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitemVerFuncionarios" mnemonicParsing="false" text="Todos funcionarios">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Add%20User%20Male_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitemVerEstoques" mnemonicParsing="false" onAction="#BotaoMenuItemVerEstoque" text="Todos estoques">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Sell%20Stock_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitemVerEstantes" mnemonicParsing="false" text="Todas estantes">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Book%20Shelf_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitemVerEditoras" mnemonicParsing="false" onAction="#BotaoMenuItemVerEditora" text="Todas editoras">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitemVerCategorias" mnemonicParsing="false" text="Todas categorias">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Open_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitemVerAutores" mnemonicParsing="false" onAction="#BotaoMenuItemVerAutor" text="Todos autores">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Edit%20Property_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitemVerAreas" mnemonicParsing="false" onAction="#BotaoMenuItemVerArea" text="Todas areas">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Map%20Marker_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+                  <MenuItem fx:id="menuitenmVerAcervos" mnemonicParsing="false" onAction="#BotaoMenuItemVerAcervo" text="Todos acervos">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Ad%20Book_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Movimentação">
+              <items>
+                  <Menu mnemonicParsing="false" text="Reserva">
+                    <items>
+                        <MenuItem fx:id="menuitemMovimentacaoReserva" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoReserva" text="Nova " />
+                      <MenuItem fx:id="menuitemMovimentacaoTodasReserva" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoTodasReserva" text="Todas as Resevas" />
+                    </items>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Health%20Book_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Emprestimo">
+                    <items>
+                      <MenuItem fx:id="menuitemMovimentacaoEmprestimo" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoEmprestimo" text="Novo">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Return%20Book_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                      <MenuItem fx:id="menuitemMovimentacaoTodosEmprestimo" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoTodosEmprestimos" text="Todos os Emprestimos" />
+                    </items>
+                  </Menu>
+                  <MenuItem fx:id="menuitemMovimentacaoDevolucao" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoDevolucao" text="Devolução">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Borrow%20Book_48px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ajuda">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="anchorPane" prefHeight="721.0" prefWidth="701.0" style="-fx-background-color: #2a363f;" />
+   </children>
+</VBox>

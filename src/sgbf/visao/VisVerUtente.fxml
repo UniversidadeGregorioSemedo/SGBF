@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneVisitante" prefHeight="531.0" prefWidth="1013.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerUtente">
+    <stylesheets>
+        <URL value="@/sgbf/util/tabelaverutente.css" />
+    </stylesheets>
+   <children>
+      <SplitPane layoutY="3.0" orientation="VERTICAL" prefHeight="518.0" prefWidth="1013.0" style="-fx-background-color: #1f4f4e;">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1011.0">
+               <children>
+                  <Group layoutX="14.0" layoutY="-33.0">
+                     <children>
+                        <Group fx:id="groupInformacoes" layoutX="-17.0" layoutY="-26.0">
+                           <children>
+                              <Label fx:id="labelEmail" layoutX="157.0" layoutY="429.0" prefHeight="17.0" prefWidth="465.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label fx:id="labelInstituicao" layoutX="754.0" layoutY="390.0" prefHeight="17.0" prefWidth="216.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label layoutX="24.0" layoutY="465.0" text="Endereço de imagem:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label layoutX="630.0" layoutY="390.0" text="Instituição:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label layoutX="630.0" layoutY="429.0" text="Data de Registo:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label layoutX="630.0" layoutY="468.0" text="Data de Modificação:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label fx:id="labelUsuario" layoutX="157.0" layoutY="390.0" prefHeight="17.0" prefWidth="465.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label fx:id="labelEnderecoImagem" layoutX="157.0" layoutY="465.0" prefHeight="17.0" prefWidth="465.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label fx:id="labelDataRegisto" layoutX="754.0" layoutY="429.0" prefHeight="17.0" prefWidth="216.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label layoutX="24.0" layoutY="429.0" text="Email:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label fx:id="labelModificacao" layoutX="754.0" layoutY="468.0" prefHeight="17.0" prefWidth="214.0" text="Label" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                              <Label layoutX="26.0" layoutY="390.0" text="Usuário:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Sitka Text" size="13.0" />
+                                 </font></Label>
+                           </children>
+                        </Group>
+                        <JFXButton fx:id="botaoPesquisar" layoutX="530.0" layoutY="57.0" onAction="#pesquisarUtente" stylesheets="@../util/tabelaverutente.css" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></JFXButton>
+                        <JFXButton fx:id="botaoSair" layoutX="898.0" layoutY="490.0" onAction="#sair" stylesheets="@../util/tabelaverutente.css" text="Sair" textAlignment="JUSTIFY">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" onDragDetected="#sair" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Undo_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <TableView fx:id="tableViewVisitane" layoutX="7.0" layoutY="99.0" prefHeight="216.0" prefWidth="969.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumId" prefWidth="44.0" text="Id" />
+                            <TableColumn fx:id="tableColumNome" prefWidth="141.0" text="Nome" />
+                              <TableColumn fx:id="tableColumIdTipoIdentificacao" prefWidth="60.0" text="Tipo identificação" />
+                              <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="91.0" text="Nº identificação" />
+                              <TableColumn fx:id="tableColumContacto" prefWidth="100.0" text="Contacto" />
+                              <TableColumn fx:id="tableColumEndereco" prefWidth="118.0" text="Endereço" />
+                              <TableColumn fx:id="tableColumCategoria" prefWidth="145.0" text="Categoria" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <TextField fx:id="texteFiedPesquisar" layoutX="7.0" layoutY="60.0" prefHeight="25.0" prefWidth="517.0" styleClass="jfx-textfield" stylesheets="@../util/tabelaverutente.css" />
+                        <JFXButton fx:id="botaoCancelar" layoutX="806.0" layoutY="489.0" onAction="#limparItensDaJanela" prefHeight="35.0" prefWidth="76.0" stylesheets="@../util/tabelaverutente.css" text="Cancelar">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></JFXButton>
+                        <Label layoutX="7.0" layoutY="332.0" prefHeight="17.0" prefWidth="197.0" text="Mais informações" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

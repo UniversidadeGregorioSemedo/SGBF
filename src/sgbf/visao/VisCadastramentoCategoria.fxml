@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneCategoria" prefHeight="201.0" prefWidth="544.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoCategoria">
+    <stylesheets>
+        <URL value="@/sgbf/util/viscadastrocategoria.css" />
+    </stylesheets>
+   <children>
+      <SplitPane dividerPositions="0.5158562367864693" layoutY="1.0" orientation="VERTICAL" prefHeight="475.0" prefWidth="653.0" style="-fx-background-color: #1f4f4e;">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="17.0" prefHeight="216.0" prefWidth="578.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Pesquisar categoria" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="279.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastrocategoria.css" />
+                        <TableView fx:id="tableViewCategoria" layoutX="14.0" layoutY="81.0" prefHeight="128.0" prefWidth="546.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumID" prefWidth="74.0" text="Id" />
+                            <TableColumn fx:id="tableColumDesignacao" prefWidth="471.0" text="Designação" />
+                          </columns>
+                        </TableView>
+                        <JFXButton fx:id="botaoPesquisar" layoutX="299.0" layoutY="43.0" onAction="#pesquisarCategoria" prefHeight="32.0" prefWidth="24.0" styleClass="jfx-button1" stylesheets="@../util/viscadastrocategoria.css" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="16.0" prefHeight="206.0" prefWidth="465.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Dados da categoria" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <TextField fx:id="texteFiedDesigancao" layoutX="110.0" layoutY="60.0" prefHeight="25.0" prefWidth="341.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastrocategoria.css" />
+                        <Label layoutX="23.0" layoutY="72.0" text="Designação" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="comboBoxEstante" layoutX="110.0" layoutY="106.0" prefHeight="25.0" prefWidth="341.0" promptText="Seleccione a estante" styleClass="jfx-combobox" stylesheets="@../util/viscadastrocategoria.css" />
+                        <Label layoutX="25.0" layoutY="109.0" text="Estante" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="488.0" layoutY="13.0" prefHeight="206.0" prefWidth="149.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
+                     <children>
+                        <Button fx:id="botaoCadastrar" layoutX="49.0" layoutY="39.0" mnemonicParsing="false" onAction="#cadastrarCategoria" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Cadastrar" />
+                        <Button fx:id="botaoAlterar" layoutX="49.0" layoutY="75.0" mnemonicParsing="false" onAction="#alterarCategoria" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="alterar" />
+                        <Button fx:id="botaoRemover" layoutX="49.0" layoutY="108.0" mnemonicParsing="false" onAction="#removerCategoria" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Remover" />
+                        <Button fx:id="botaoNovo" layoutX="49.0" layoutY="8.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Novo" />
+                        <Button fx:id="botaoCancelar" layoutX="49.0" layoutY="141.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Cancelar" />
+                        <Button fx:id="botaoSair" layoutX="49.0" layoutY="173.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Sair" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

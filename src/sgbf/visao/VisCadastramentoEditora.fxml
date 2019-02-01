@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="249.0" prefWidth="583.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoEditora">
+    <stylesheets>
+        <URL value="@/sgbf/util/viscadastroeditora.css" />
+    </stylesheets>
+   <children>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="548.0" prefWidth="744.0" style="-fx-background-color: #1f4f4e;">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="245.0" prefWidth="720.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Pesquisar editora" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <Label layoutX="14.0" layoutY="51.0" text="Nome" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <TextField fx:id="texteFiedPesquisar" layoutX="130.0" layoutY="47.0" prefHeight="25.0" prefWidth="361.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroeditora.css" />
+                        <TableView fx:id="tableViewEditora" layoutX="14.0" layoutY="78.0" prefHeight="158.0" prefWidth="698.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumNome" prefWidth="201.0" text="Nome" />
+                            <TableColumn fx:id="tableColumContacto" prefWidth="122.0" text="Contacto" />
+                              <TableColumn fx:id="tableColumEmail" prefWidth="207.0" text="Email" />
+                              <TableColumn fx:id="tableColumEndereco" prefWidth="167.0" text="Endereço" />
+                          </columns>
+                        </TableView>
+                        <JFXButton fx:id="botaoPesquisar" layoutX="497.0" layoutY="43.0" onAction="#pesquisarUtente" prefHeight="32.0" prefWidth="9.0" stylesheets="@../util/viscadastroeditora.css" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="245.0" prefWidth="512.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Dados da editora" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="77.0" text="Nome" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="124.0" text="Email" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="260.0" layoutY="77.0" text="Contacto" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="260.0" layoutY="124.0" text="Fax" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="180.0" text="Endereço" textFill="WHITE">
+                           <font>
+                              <Font name="Sitka Text" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="texteFiedNome" layoutX="89.0" layoutY="73.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroeditora.css" />
+                        <TextField fx:id="texteFiedEmail" layoutX="89.0" layoutY="120.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroeditora.css" />
+                        <TextField fx:id="texteFiedEndereco" layoutX="89.0" layoutY="176.0" prefHeight="25.0" prefWidth="384.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroeditora.css" />
+                        <TextField fx:id="texteFiedFax" layoutX="334.0" layoutY="124.0" prefHeight="25.0" prefWidth="139.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroeditora.css" />
+                        <TextField fx:id="texteFiedContacto" layoutX="334.0" layoutY="72.0" prefHeight="25.0" prefWidth="139.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroeditora.css" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="549.0" layoutY="13.0" prefHeight="245.0" prefWidth="179.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
+                     <children>
+                        <Button fx:id="botaoCadastrar" layoutX="55.0" layoutY="46.0" mnemonicParsing="false" onAction="#cadastrarEditora" prefHeight="25.0" prefWidth="70.0" styleClass="jfx-button" stylesheets="@../util/viscadastroeditora.css" text="Cadastro" />
+                        <Button fx:id="botaoAlterar" layoutX="55.0" layoutY="81.0" mnemonicParsing="false" onAction="#alterarEditora" prefHeight="25.0" prefWidth="70.0" styleClass="jfx-button" stylesheets="@../util/viscadastroeditora.css" text="Alterar" />
+                        <Button fx:id="botaoRemover" layoutX="55.0" layoutY="123.0" mnemonicParsing="false" onAction="#removerEditora" prefHeight="25.0" prefWidth="70.0" styleClass="jfx-button" stylesheets="@../util/viscadastroeditora.css" text="Remover" />
+                        <Button fx:id="botaoNovo" layoutX="55.0" layoutY="14.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="70.0" styleClass="jfx-button" stylesheets="@../util/viscadastroeditora.css" text="Novo" />
+                        <Button fx:id="botaoCancelar" layoutX="55.0" layoutY="158.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="70.0" styleClass="jfx-button" stylesheets="@../util/viscadastroeditora.css" text="Cancelar" />
+                        <Button fx:id="botaoSair" layoutX="55.0" layoutY="195.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="70.0" styleClass="jfx-button" stylesheets="@../util/viscadastroeditora.css" text="Sair" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

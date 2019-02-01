@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPaneVisAutor" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerAutor">
+    <stylesheets>
+        <URL value="@/sgbf/util/visverautor.css" />
+    </stylesheets>
+   <children>
+      <SplitPane dividerPositions="0.556782334384858" orientation="VERTICAL" prefHeight="636.0" prefWidth="1074.0" style="-fx-background-color: #1f4f4e;">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="1051.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: white;">
+                     <children>
+                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="444.0" styleClass="jfx-textfield" stylesheets="@../util/visverautor.css" />
+                        <JFXButton fx:id="botaoPesquisar" layoutX="466.0" layoutY="32.0" onAction="#pesquisarAutor" prefHeight="32.0" prefWidth="39.0" stylesheets="@../util/visverautor.css" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Pesquisa.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <TableView fx:id="tableViewAutor" layoutX="14.0" layoutY="67.0" prefHeight="253.0" prefWidth="1021.0">
+                           <columns>
+                              <TableColumn fx:id="tableColumId" prefWidth="99.0" text="Id" />
+                              <TableColumn fx:id="tableColumNome" prefWidth="300.0" text="Nome completo" />
+                              <TableColumn fx:id="tableColumContacto" prefWidth="165.0" text="Contacto" />
+                              <TableColumn fx:id="tableColumEmail" prefWidth="177.0" text="Email" />
+                              <TableColumn fx:id="tableColumDataRegisto" prefWidth="143.0" text="Data de registro" />
+                              <TableColumn fx:id="tableColumUltimaModificacao" prefWidth="136.0" text="Ultima modificação" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableViewAcervo" layoutX="28.0" layoutY="50.0" prefHeight="200.0" prefWidth="762.0">
+                    <columns>
+                      <TableColumn fx:id="tableColumTitulo" prefWidth="75.0" text="Título" />
+                      <TableColumn fx:id="tableColumSubTitulo" prefWidth="75.0" text="Subtitulo" />
+                        <TableColumn fx:id="tableColumISBN" prefWidth="75.0" text="ISBN" />
+                        <TableColumn fx:id="tableColumnCodigoBarra" prefWidth="75.0" text="Código de Barra" />
+                        <TableColumn fx:id="tableColumnTipo" prefWidth="75.0" text="Tipo" />
+                        <TableColumn fx:id="tableColumnFormato" prefWidth="75.0" text="Formato" />
+                        <TableColumn fx:id="tableColumnAno" prefWidth="75.0" text="Ano de Lançamento" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Label layoutX="28.0" layoutY="24.0" prefHeight="17.0" prefWidth="121.0" text="Acervos Escritos" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="797.0" layoutY="24.0" prefHeight="17.0" prefWidth="131.0" text="Outras Informações" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="797.0" layoutY="50.0" text="Total de Acervos:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="797.0" layoutY="90.0" text="Data de Registo:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="798.0" layoutY="131.0" text="Última modificação:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="796.0" layoutY="165.0" text="Data e hora corrente:" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Button fx:id="botaoSair" layoutX="938.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="124.0" styleClass="jfx-button" stylesheets="@../util/visverautor.css" text="Sair">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
+                  <Label fx:id="labeTotalAcervos" layoutX="921.0" layoutY="50.0" prefHeight="17.0" prefWidth="139.0" text="Nenhuma informação" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="labeDataRegisto" layoutX="921.0" layoutY="90.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="labeUltimaModificacao" layoutX="924.0" layoutY="131.0" prefHeight="17.0" prefWidth="147.0" text="Nenhuma informação" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="labelHoraDataCorrente" layoutX="929.0" layoutY="164.0" prefHeight="17.0" prefWidth="124.0" text="Indisponível" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Label>
+                  <Button fx:id="botaoCancelar" layoutX="797.0" layoutY="225.0" mnemonicParsing="false" onAction="#limparItensDaJanela" prefHeight="25.0" prefWidth="131.0" styleClass="jfx-button" stylesheets="@../util/visverautor.css" text="Cancelar">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font></Button>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

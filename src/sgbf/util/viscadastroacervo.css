@@ -1,0 +1,76 @@
+.jfx-button{
+    -fx-background-color: floralwhite;
+    -fx-text-fill: black;
+}
+
+.jfx-button:hover{
+    -fx-background-color: #388E3C;
+}
+
+.jfx-button1{
+    -fx-background-color: floralwhite;  
+}
+
+.jfx-button1:hover{
+    -fx-background-color: #388E3C;
+}
+
+.jfx-combobox{
+    -fx-background-color: floralwhite;
+}
+.jfx-combobox:focused{
+    -fx-border-color: #388E3C;
+}
+.jfx-combobox:hover{
+    -fx-background-color:
+        #909090,
+        #FFFFFF;
+}
+.jfx-combobox:focused:hover{
+    -fx-background-color:
+        #0093EF,
+        #FFFFFF;
+}
+
+.jfx-textfield{
+    -fx-background-color: floralwhite,floralwhite;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0, 3;
+}
+.jfx-textfield:focused{
+    -fx-border-color: #388E3C;
+}
+
+.jfx-textfield:hover{
+    -fx-background-color:
+        #909090,
+        #FFFFFF;
+}
+
+.jfx-textfield:focused:hover{
+    -fx-background-color:
+        #0093EF,
+        #FFFFFF;
+}
+
+
+.jfx-textpesq{
+    -fx-background-color: floralwhite,floralwhite;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0, 3;
+}
+.jfx-textpesq:focused{
+    -fx-border-color: #388E3C;
+}
+
+.jfx-textpesq:hover{
+    -fx-background-color:
+        #909090,
+        #FFFFFF;
+}
+
+.jfx-textpesq:focused:hover{
+    -fx-background-color:
+        #0093EF,
+        #FFFFFF;
+}
