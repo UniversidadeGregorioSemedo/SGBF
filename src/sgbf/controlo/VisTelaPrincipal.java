@@ -1,13 +1,19 @@
 package sgbf.controlo;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -72,6 +78,8 @@ public class VisTelaPrincipal implements Initializable {
     private MenuItem menuItemTerminarSessao;
     @FXML
     private MenuItem menuItemSairDoSistema;
+    @FXML
+    private MenuItem menuItemAjuda;
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -222,6 +230,20 @@ public class VisTelaPrincipal implements Initializable {
             propriedadeDaJanela.setResizable(false);
             propriedadeDaJanela.setMaximized(false);
             propriedadeDaJanela.show();
+        }
+    }
+
+    @FXML
+    public void BotaoMenuAjuda() {
+        final String operacao = "Guia de utilização";
+        Desktop configuracoesPadrao = Desktop.getDesktop();
+        String endereco = "https://drive.google.com/open?id=1axaFZvpisM4ZxnUo-9lhhixkDjy4mYxP";
+        try {
+            configuracoesPadrao.browse(new URI(endereco));
+        } catch (IOException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao verificar endereço", Alert.AlertType.NONE);
+        } catch (URISyntaxException erro) {
+            throw new UtilControloExcessao(operacao, "Enderço incorreto", Alert.AlertType.NONE);
         }
     }
 
