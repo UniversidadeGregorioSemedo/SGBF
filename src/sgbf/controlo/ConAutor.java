@@ -52,7 +52,7 @@ public class ConAutor extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados do Autor", Alert.AlertType.ERROR);
             } else {
                 super.query = "UPDATE tcc.Autor set primeiro_nome=?, segundo_nome=?, contacto=?, email=?,"
-                            + " data_modificacao = default where idAutor=?";
+                        + " data_modificacao = default where idAutor=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setString(1, autorMod.getPrimeiro_nome());
                 super.preparedStatement.setString(2, autorMod.getSegundo_nome());
