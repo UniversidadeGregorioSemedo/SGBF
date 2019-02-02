@@ -63,7 +63,7 @@ public class ConUtente extends ConCRUD {
             } else {
                 super.query = "update tcc.utente set primeiro_nome=?, segundo_nome=?, genero=?,"
                         + " tipo_identidicacao=?, numero_identidicacao=?, contacto=?, email=?, "
-                        + "endereco=?, endereco_imagem=?, categoria=?, usuario=?, senha=? where idUtente=?";
+                        + "endereco=?, endereco_imagem=?, categoria=?, usuario=?, senha=?,data_modificacao = default where idUtente=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
                 super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
@@ -160,8 +160,8 @@ public class ConUtente extends ConCRUD {
         visitanteMod.setCategoria(setResult.getString("categoria"), operacao);
         visitanteMod.setUsuario(setResult.getString("usuario"), operacao);
         visitanteMod.setSenha(setResult.getString("senha"), operacao);
-        //visitanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
-        //visitanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
+        visitanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
+        visitanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return visitanteMod;
     }
 

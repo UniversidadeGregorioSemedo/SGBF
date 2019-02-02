@@ -24,11 +24,11 @@
                      <children>
                         <Group fx:id="groupInformacoes" layoutX="-17.0" layoutY="-26.0">
                            <children>
-                              <Label fx:id="labelEmail" layoutX="157.0" layoutY="429.0" prefHeight="17.0" prefWidth="465.0" text="Label" textFill="WHITE">
+                              <Label fx:id="labelEmail" layoutX="157.0" layoutY="429.0" prefHeight="17.0" prefWidth="465.0" text="Nenhuma informação" textFill="WHITE">
                                  <font>
                                     <Font name="Sitka Text" size="13.0" />
                                  </font></Label>
-                              <Label fx:id="labelInstituicao" layoutX="754.0" layoutY="390.0" prefHeight="17.0" prefWidth="216.0" text="Label" textFill="WHITE">
+                              <Label fx:id="labelInstituicao" layoutX="767.0" layoutY="389.0" prefHeight="17.0" prefWidth="216.0" text="Nenhuma informação" textFill="WHITE">
                                  <font>
                                     <Font name="Sitka Text" size="13.0" />
                                  </font></Label>
@@ -48,15 +48,15 @@
                                  <font>
                                     <Font name="Sitka Text" size="13.0" />
                                  </font></Label>
-                              <Label fx:id="labelUsuario" layoutX="157.0" layoutY="390.0" prefHeight="17.0" prefWidth="465.0" text="Label" textFill="WHITE">
+                              <Label fx:id="labelUsuario" layoutX="157.0" layoutY="390.0" prefHeight="17.0" prefWidth="465.0" text="Nenhuma informação" textFill="WHITE">
                                  <font>
                                     <Font name="Sitka Text" size="13.0" />
                                  </font></Label>
-                              <Label fx:id="labelEnderecoImagem" layoutX="157.0" layoutY="465.0" prefHeight="17.0" prefWidth="465.0" text="Label" textFill="WHITE">
+                              <Label fx:id="labelEnderecoImagem" layoutX="157.0" layoutY="465.0" prefHeight="17.0" prefWidth="465.0" text="Nenhuma informação" textFill="WHITE">
                                  <font>
                                     <Font name="Sitka Text" size="13.0" />
                                  </font></Label>
-                              <Label fx:id="labelDataRegisto" layoutX="754.0" layoutY="429.0" prefHeight="17.0" prefWidth="216.0" text="Label" textFill="WHITE">
+                              <Label fx:id="labelDataRegisto" layoutX="767.0" layoutY="428.0" prefHeight="17.0" prefWidth="216.0" text="Nenhuma informação" textFill="WHITE">
                                  <font>
                                     <Font name="Sitka Text" size="13.0" />
                                  </font></Label>
@@ -64,7 +64,7 @@
                                  <font>
                                     <Font name="Sitka Text" size="13.0" />
                                  </font></Label>
-                              <Label fx:id="labelModificacao" layoutX="754.0" layoutY="468.0" prefHeight="17.0" prefWidth="214.0" text="Label" textFill="WHITE">
+                              <Label fx:id="labelModificacao" layoutX="767.0" layoutY="467.0" prefHeight="17.0" prefWidth="214.0" text="Nenhuma informação" textFill="WHITE">
                                  <font>
                                     <Font name="Sitka Text" size="13.0" />
                                  </font></Label>

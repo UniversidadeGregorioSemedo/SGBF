@@ -115,23 +115,25 @@ public class VisVerUtente implements Initializable {
     }
     
     private void carregarResultados(ModVisitante visitanteMod) {
-        labelUsuario.setText(visitanteMod.getUsuario()); 
-        labelEmail.setText(visitanteMod.getEmail()); 
-        labelEnderecoImagem.setText(visitanteMod.getEndereco_imagem());
-        labelInstituicao.setText("Nenhuma informação"); 
-        labelDataRegisto.setText(visitanteMod.getUtilControloDaData().getData_registo());
-        labelModificacao.setText(visitanteMod.getUtilControloDaData().getData_modificacao());
+        if(visitanteMod != null){
+            labelUsuario.setText(visitanteMod.getUsuario()); 
+            labelEmail.setText(visitanteMod.getEmail()); 
+            labelEnderecoImagem.setText(visitanteMod.getEndereco_imagem());
+            labelInstituicao.setText("Nenhuma informação"); 
+            labelDataRegisto.setText(visitanteMod.getUtilControloDaData().getData_registo());
+            labelModificacao.setText(visitanteMod.getUtilControloDaData().getData_modificacao());
+        }
     }
     
     @FXML
     private void limparItensDaJanela(){
         texteFiedPesquisar.setText(null);
-        labelUsuario.setText(null);
-        labelEmail.setText(null);
-        labelEnderecoImagem.setText(null);
-        labelInstituicao.setText(null);
-        labelDataRegisto.setText(null);
-        labelModificacao.setText(null);
+        labelUsuario.setText("Nenhuma informação");
+        labelEmail.setText("Nenhuma informação");
+        labelEnderecoImagem.setText("Nenhuma informação");
+        labelInstituicao.setText("Nenhuma informação");
+        labelDataRegisto.setText("Nenhuma informação");
+        labelModificacao.setText("Nenhuma informação");
         tableViewVisitane.getItems().clear();
     }
     
