@@ -126,15 +126,6 @@
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MenuItem>
-                  <MenuItem fx:id="menuitemVerFuncionarios" mnemonicParsing="false" text="Todos funcionarios">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Add%20User%20Male_48px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MenuItem>
                   <MenuItem fx:id="menuitemVerEstoques" mnemonicParsing="false" onAction="#BotaoMenuItemVerEstoque" text="Todos estoques">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

@@ -57,8 +57,6 @@ public class VisCadastramentoFuncionario implements Initializable {
     @FXML
     private TableColumn<ModFuncionario, String> tableColumNomeFuncionario,
             tableColumCategoriaFuncionario, tableColumContactoFuncionario;
-    private AnchorPane AnchorPaneUtente;
-
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
     private final ModFuncionario funcionarioMod = new ModFuncionario();
@@ -185,7 +183,7 @@ public class VisCadastramentoFuncionario implements Initializable {
 
     @FXML
     private void sair(ActionEvent event) {
-        AnchorPaneUtente.setVisible(false);
+        AnchorPaneFuncionario.setVisible(false);
     }
 
     private void desbloquearItensDaJanela() {
@@ -206,7 +204,7 @@ public class VisCadastramentoFuncionario implements Initializable {
     }
 
     private void carregarValorNasComboxs() {
-        this.comboBoxCargo.getItems().addAll("Administrador", "Bibliotecario", "Supervisor");
+        this.comboBoxCargo.getItems().addAll("Administrador", "Bibliotecario");
     }
 
     private void exibirMensagemNasTabelas() {
