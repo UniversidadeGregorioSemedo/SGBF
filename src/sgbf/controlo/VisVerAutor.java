@@ -74,6 +74,8 @@ public class VisVerAutor implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.tableViewAutor.setPlaceholder(new Label("Autores não listados"));
+        this.tableViewAcervo.setPlaceholder(new Label("Acervos escritos não listados"));
         this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome do autor ou use *( _ ) para listar todos registos "));
         tableViewAutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
         tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.carregarResultadosAcervos(newValue));
@@ -143,17 +145,20 @@ public class VisVerAutor implements Initializable {
 
     @FXML
     private void limparItensDaJanela() {
-        this.labeTotalAcervos.setText(null);
-        this.labeDataRegisto.setText(null);
-        this.labeUltimaModificacao.setText(null);
         this.texteFiedPesquisar.setText(null);
         this.tableViewAutor.getItems().clear();
         this.tableViewAcervo.getItems().clear();
+        this.labeDataRegisto.setText("Nenhuma informação");
+        this.labeTotalAcervos.setText("Nenhuma informação");
+        this.labeUltimaModificacao.setText("Nenhuma informação");
     }
 
     private void carregarResultadosAcervos(ModAcervo acervoMod) {
-        labeDataRegisto.setText(acervoMod.getUtilControloDaData().getData_registo());
-        labeUltimaModificacao.setText(acervoMod.getUtilControloDaData().getData_modificacao());
+        if(acervoMod != null){
+            
+            labeDataRegisto.setText(acervoMod.getUtilControloDaData().getData_registo());
+            labeUltimaModificacao.setText(acervoMod.getUtilControloDaData().getData_modificacao());
+        }
     }
     private void carregarResultadosAcervos(ModAutor autorMod) {
         tableColumTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
@@ -164,16 +169,18 @@ public class VisVerAutor implements Initializable {
         tableColumnFormato.setCellValueFactory(new PropertyValueFactory<>("formato"));
         tableColumnAno.setCellValueFactory(new PropertyValueFactory<>("ano_lancamento"));
         tableViewAcervo.setItems(this.todosRegistosParaCarregar(autorMod,operacao));
+        labeTotalAcervos.setText(String.valueOf(this.tableViewAcervo.getItems().size()));
     }
     
     
     private ObservableList<ModAcervo> todosRegistosParaCarregar(ModAutor autorMod, String operacao) {
         List<ModAcervo> listaDosRegistosEncontrados = new ArrayList<>();
         for (ModAcervosEscritos acervoRegistado : autorCon.acervosEscritos(autorMod, operacao)) {
-            ModAcervo acervosEscritos = acervoRegistado.getAcervoMod();
-            listaDosRegistosEncontrados.add(acervosEscritos);
+            if( acervoRegistado.getAcervoMod().getTitulo() != null){
+                ModAcervo acervosEscritos = acervoRegistado.getAcervoMod();
+                listaDosRegistosEncontrados.add(acervosEscritos);
+            }
         }
-        labeTotalAcervos.setText(String.valueOf(listaDosRegistosEncontrados.size()));
         return FXCollections.observableArrayList(listaDosRegistosEncontrados);
     }
     

@@ -72,10 +72,10 @@ public class  ModAcervo {
 
     public void setTitulo(String titulo, String operacao) {
         if(titulo == null){
-            throw new UtilControloExcessao("Título do Acervo não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Título do Acervo não foi definido !", Alert.AlertType.WARNING);
         }else{
             if(titulo.isEmpty()){
-                throw new UtilControloExcessao("Título do Acervo não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Título do Acervo não foi definido !", Alert.AlertType.WARNING);
             }else{
                 this.titulo = titulo;
             }

@@ -28,7 +28,7 @@ public class ModAutor {
         this.idAutor = 0;
         this.nomeCompleto = null;
         this.primeiro_nome = null;
-        this.segundo_nome = null;
+        this.segundo_nome = "";
         this.contacto = null;
         this.email = null;
         this.utilControloDaData = new UtilControloDaData();
@@ -73,14 +73,8 @@ public class ModAutor {
     }
 
     public void setSegundo_nome(String segundo_nome, String operacao) {
-        if(segundo_nome == null){
-            throw new UtilControloExcessao("Segundo nome do Autor não definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }else{
-            if(segundo_nome.isEmpty()){
-                throw new UtilControloExcessao("Segundo nome do Autor não definido  !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
-                this.segundo_nome = segundo_nome;
-            }
+        if(segundo_nome != null){
+            this.segundo_nome = segundo_nome;
         }
     }
 
