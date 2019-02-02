@@ -5,6 +5,7 @@
  */
 package sgbf.controlo;
 
+import javafx.scene.control.Alert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,9 +41,9 @@ public class ConAreaTest {
         areaMod.setSector("Sector de engenharia", operacao);
         
         if(areaCon.registar(areaMod, operacao)){
-            throw new UtilControloExcessao("Área registada com sucesso !", operacao, UtilIconesDaJOPtionPane.Confirmacao.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Área registada com sucesso !", Alert.AlertType.CONFIRMATION);
         }else{
-            throw new UtilControloExcessao("Erro ao registar Área !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao registar Área !", Alert.AlertType.ERROR);
         }
     }
 

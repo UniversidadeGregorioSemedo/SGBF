@@ -40,10 +40,10 @@ public class ModArea {
 
     public void setSector(String sector, String operacao) {
         if(sector == null){
-            throw new UtilControloExcessao("Sector não definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Sector não definido !",  Alert.AlertType.WARNING);
         }else{
             if(sector.isEmpty()){
-                throw new UtilControloExcessao("Sector não definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Sector não definido !",  Alert.AlertType.WARNING);
             }else{
                 this.sector = sector;
             }

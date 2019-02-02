@@ -50,7 +50,7 @@ public class ContItemProveniente extends ConCRUD {
             super.preparedStatement.setInt(4, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Estoque !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Erro ao "+operacao+" Estoque !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }

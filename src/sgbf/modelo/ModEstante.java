@@ -48,10 +48,10 @@ public class ModEstante {
 
     public void setDesignacao(String designacao, String operacao) {
         if (designacao == null) {
-            throw new UtilControloExcessao("Designação não definida !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Designação não definida !", Alert.AlertType.WARNING);
         } else {
             if (designacao.isEmpty()) {
-                throw new UtilControloExcessao("Designação não definida!", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao( operacao, "Designação não definida!",Alert.AlertType.WARNING);
             } else {
                 this.designacao = designacao;
             }
@@ -72,10 +72,10 @@ public class ModEstante {
 
     public void setLinha(Byte linha, String operacao) throws NumberFormatException {
         if (linha <= 0) {
-            throw new UtilControloExcessao("O número de linha é inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"O número de linha é inválido !", Alert.AlertType.WARNING);
         } else {
             if (linha > 125) {
-                throw new UtilControloExcessao("O número de linhas máximo é de 125 !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"O número de linhas máximo é de 125 !",  Alert.AlertType.WARNING);
             } else {
                 this.linha = linha;
             }
@@ -88,10 +88,10 @@ public class ModEstante {
 
     public void setColuna(Byte coluna, String operacao) throws NumberFormatException {
         if (linha <= 0) {
-            throw new UtilControloExcessao("O número de colunas é inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "O número de colunas é inválido !", Alert.AlertType.WARNING);
         } else {
             if (linha > 125) {
-                throw new UtilControloExcessao("O número de colunas máximo é de 125 !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao, "O número de colunas máximo é de 125 !", Alert.AlertType.WARNING);
             } else {
                 this.coluna = coluna;
             }

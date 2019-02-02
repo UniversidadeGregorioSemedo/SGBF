@@ -36,7 +36,7 @@ public class ConFuncionario extends ConCRUD {
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Funcionários !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Funcionários !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -57,7 +57,7 @@ public class ConFuncionario extends ConCRUD {
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Funcionários !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Funcionários !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -114,7 +114,7 @@ public class ConFuncionario extends ConCRUD {
             }
             return todosRegistosEncontrados;
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

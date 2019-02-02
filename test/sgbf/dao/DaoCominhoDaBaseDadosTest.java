@@ -6,6 +6,7 @@
 package sgbf.dao;
 
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +18,14 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  * @author Look
  */
 public class DaoCominhoDaBaseDadosTest {
-    
+
     public DaoCominhoDaBaseDadosTest() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -34,18 +35,18 @@ public class DaoCominhoDaBaseDadosTest {
         final String operacao = "Conectando ao servidor de BD...";
         DaoCominhoDaBaseDados conectarA = new DaoCominhoDaBaseDados();
         try {
-            if(conectarA.baseDeDados(operacao).isValid(0)){
-                throw new UtilControloExcessao("Conexão com o servidor establecido com sucesso !", operacao, UtilIconesDaJOPtionPane.Confirmacao.nomeDaImagem());
-            }else{
-                throw new UtilControloExcessao("Erro ao se conectar a base de dados !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            if (conectarA.baseDeDados(operacao).isValid(0)) {
+                throw new UtilControloExcessao(operacao, "Conexão com o servidor establecido com sucesso !", Alert.AlertType.CONFIRMATION);
+            } else {
+                throw new UtilControloExcessao(operacao, "Erro ao se conectar a base de dados !", Alert.AlertType.ERROR);
             }
         } catch (SQLException ex) {
-            throw new UtilControloExcessao("Erro: "+ex.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro: " + ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
     @Test
     public void testFecharTodasConexoes() {
     }
-    
+
 }

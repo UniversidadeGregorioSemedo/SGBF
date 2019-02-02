@@ -49,7 +49,7 @@ public class ConEditora extends ConCRUD {
         ModEditora editoraMod = (ModEditora) objecto_alterar;
         try {
             if (this.jaExiste(editoraMod, operacao)) {
-                throw new UtilControloExcessao("Erro ao verificar dados da Editora !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Erro ao verificar dados da Editora !", Alert.AlertType.ERROR);
             } else {
                 super.query = "UPDATE tcc.Editora set nome=?, contacto=?, email=?, fax=?, endereco=?,"
                         + "  data_modificacao = default  where idEditora=?";
@@ -63,7 +63,7 @@ public class ConEditora extends ConCRUD {
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -78,7 +78,7 @@ public class ConEditora extends ConCRUD {
             super.preparedStatement.setInt(1, editoraMod.getiEditora());
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -96,7 +96,7 @@ public class ConEditora extends ConCRUD {
             }
             return todosRegistos;
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Editora(s) !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
 

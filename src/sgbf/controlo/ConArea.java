@@ -88,7 +88,7 @@ public class ConArea extends ConCRUD {
             }
             return todosRegistos;
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Area(s) !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao, "Erro ao " + operacao + " Area(s) !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
 
@@ -107,7 +107,7 @@ public class ConArea extends ConCRUD {
             }
             return todosRegistosEncontrados;
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Editora(s) !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Editora(s) !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

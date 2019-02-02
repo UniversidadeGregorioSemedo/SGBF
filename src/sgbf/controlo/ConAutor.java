@@ -62,7 +62,7 @@ public class ConAutor extends ConCRUD {
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Autor !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Autor !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -81,7 +81,7 @@ public class ConAutor extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao remover registos vincolados ", Alert.AlertType.ERROR);
             }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Autor !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Autor !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -99,7 +99,7 @@ public class ConAutor extends ConCRUD {
             }
             return todosRegistos;
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Autor(es) !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Autor(es) !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -121,7 +121,7 @@ public class ConAutor extends ConCRUD {
             }
             return todosRegistosEncontrados;
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Autor(es) !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Autor(es) !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -186,7 +186,7 @@ public class ConAutor extends ConCRUD {
             }
             return todosRegistosEncontrados;
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Autor(es) !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao, "Erro ao " + operacao + " Autor(es) !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
 

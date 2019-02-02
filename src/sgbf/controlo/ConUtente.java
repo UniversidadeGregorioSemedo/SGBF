@@ -92,7 +92,7 @@ public class ConUtente extends ConCRUD {
         ModUtente utenteMod = (ModUtente) objecto_remover;
         try {
             if (this.temDadosRelacionados(utenteMod, operacao)) {
-                throw new UtilControloExcessao("Esta operação não pode ser executada\nO Utente selecionado tem registo ! ", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+                throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\nO Utente selecionado tem registo ! ",Alert.AlertType.ERROR);
             } else {
                 super.query = "delete from tcc.utente where idUtente=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);

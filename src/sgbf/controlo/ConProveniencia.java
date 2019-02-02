@@ -65,7 +65,7 @@ public class ConProveniencia extends ConCRUD {
         ModProveniencia provenienciaMod = (ModProveniencia)objecto_remover;
         try{
             if(this.temDadosRelacionados(provenienciaMod, operacao)){
-               throw new UtilControloExcessao("Esta operação não pode ser executada !\nErro: A proveniencia seleccionada tem dados registados !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+               throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada !\nErro: A proveniencia seleccionada tem dados registados !",Alert.AlertType.ERROR);
             }else{
                 super.query = "delete from tcc.proveniencia where idProveniencia=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -91,7 +91,7 @@ public class ConProveniencia extends ConCRUD {
             }
             return todosRegistos;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Proveniência !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao, "Erro ao "+operacao+" Proveniência !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
 
@@ -110,7 +110,7 @@ public class ConProveniencia extends ConCRUD {
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Proveniência(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Proveniência(s) !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
     

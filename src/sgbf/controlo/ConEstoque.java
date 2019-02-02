@@ -38,7 +38,7 @@ public class ConEstoque extends ConCRUD {
             super.preparedStatement.setInt(5, estoqueMod.getQuantidade_acervos_resercados());
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Estoque !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Estoque !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -60,7 +60,7 @@ public class ConEstoque extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estoque !", Alert.AlertType.ERROR);
             }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Estante !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Estoque !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

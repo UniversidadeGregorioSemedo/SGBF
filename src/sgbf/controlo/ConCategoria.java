@@ -102,7 +102,7 @@ public class ConCategoria extends ConCRUD {
             }
             return todosRegistos;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Categoria(s) !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Categoria(s) !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -121,7 +121,7 @@ public class ConCategoria extends ConCRUD {
             }
             return todosRegistosEncontrados;
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Categoria(s) !\nErro: "+erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
     
