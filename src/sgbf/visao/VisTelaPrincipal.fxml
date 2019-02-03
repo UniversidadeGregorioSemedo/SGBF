@@ -14,7 +14,7 @@
    <children>
       <MenuBar fx:id="menuBar">
         <menus>
-          <Menu mnemonicParsing="false" text="Arquivo">
+          <Menu fx:id="menuArquivo" mnemonicParsing="false" text="Arquivo">
             <items>
               <MenuItem mnemonicParsing="false" text="Copia de segurança">
                      <graphic>
@@ -37,7 +37,7 @@
                   </MenuItem>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Cadastro">
+          <Menu fx:id="menuCadastramento" mnemonicParsing="false" text="Cadastro">
             <items>
                   <Menu mnemonicParsing="false" text="Novo Cadastro">
                     <items>
@@ -119,7 +119,7 @@
                   </Menu>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Ver">
+          <Menu fx:id="menuVer" mnemonicParsing="false" text="Ver">
             <items>
                   <MenuItem fx:id="menuitemVerUtentes" mnemonicParsing="false" onAction="#BotaoMenuItemVerUtente" text="Todos utentes">
                      <graphic>
@@ -164,7 +164,7 @@
                   </MenuItem>
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Movimentação">
+            <Menu fx:id="menuMovimentacao" mnemonicParsing="false" text="Movimentação">
               <items>
                   <Menu mnemonicParsing="false" text="Reserva">
                     <items>

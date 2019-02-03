@@ -18,7 +18,9 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sgbf.modelo.ModFuncionario;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 
 /**
  * @author Marron
@@ -80,7 +82,7 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuItem menuItemAjuda;
     @FXML
-    private Menu menuAjuda;
+    private Menu menuArquivo, menuCadastramento, menuVer, menuMovimentacao, menuAjuda;
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -93,7 +95,7 @@ public class VisTelaPrincipal implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        habilitarFuncionalidadeParaFuncionario(UtilUsuarioLogado.getUsuarioLogado());
     }
 
     @FXML
@@ -252,6 +254,16 @@ public class VisTelaPrincipal implements Initializable {
     public void botaoMenuItemSairDoSistema() {
         Stage propriedadeDaJanela = (Stage) menuBar.getScene().getWindow();
         ConPrincipal.sairdoSistema(menuItemSairDoSistema.getText(), propriedadeDaJanela);
+    }
+
+    private void habilitarFuncionalidadeParaFuncionario(ModFuncionario funcionarioMod) {
+        if (funcionarioMod.getCargo().equalsIgnoreCase("Administrador")) {
+            menuCadastramento.setVisible(true);
+        } else {
+            if (funcionarioMod.getCargo().equalsIgnoreCase("Bibliotecario")) {
+                menuCadastramento.setVisible(false);
+            }
+        }
     }
 
 }
