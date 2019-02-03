@@ -10,10 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
-import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModProveniencia;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -35,8 +33,6 @@ public class ConProveniencia extends ConCRUD {
             }
         }catch(SQLException erro){
             throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Proveniencia !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
@@ -47,7 +43,7 @@ public class ConProveniencia extends ConCRUD {
             if(this.jaExiste(provenienciaMod, operacao)){
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Proveniência", Alert.AlertType.ERROR);
             }else{
-                super.query = "update tcc.proveniencia set tipo=? where idProveniencia=?";
+                super.query = "update tcc.proveniencia set tipo=?, data_modificao = default where idProveniencia=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setString(1, provenienciaMod.getTipo());
                 super.preparedStatement.setInt(2, provenienciaMod.getIdProveniencia());
@@ -55,8 +51,6 @@ public class ConProveniencia extends ConCRUD {
             }
         }catch(SQLException erro){
             throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Proveniencia !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
@@ -74,8 +68,6 @@ public class ConProveniencia extends ConCRUD {
             }
         }catch(SQLException erro){
             throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Proveniência !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
     
@@ -135,6 +127,7 @@ public class ConProveniencia extends ConCRUD {
         super.query = "select *from itensProvenientes where Proveniencia_idProveniencia=?";
         super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
         super.preparedStatement.setInt(1, provenienciaMod.getIdProveniencia());
+        super.setResultset = super.preparedStatement.executeQuery();
         return super.setResultset.next();
     }
 

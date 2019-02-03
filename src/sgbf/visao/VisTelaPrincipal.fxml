@@ -139,27 +139,9 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem fx:id="menuitemVerEstantes" mnemonicParsing="false" text="Todas estantes">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Book%20Shelf_48px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MenuItem>
                   <MenuItem fx:id="menuitemVerEditoras" mnemonicParsing="false" onAction="#BotaoMenuItemVerEditora" text="Todas editoras">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </MenuItem>
-                  <MenuItem fx:id="menuitemVerCategorias" mnemonicParsing="false" text="Todas categorias">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Open_48px.png" />
-                           </image>
-                        </ImageView>
                      </graphic>
                   </MenuItem>
                   <MenuItem fx:id="menuitemVerAutores" mnemonicParsing="false" onAction="#BotaoMenuItemVerAutor" text="Todos autores">
@@ -222,7 +204,7 @@
                   </MenuItem>
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Ajuda">
+            <Menu fx:id="menuAjuda" mnemonicParsing="false" text="Ajuda">
               <items>
                 <MenuItem fx:id="menuItemAjuda" mnemonicParsing="false" onAction="#BotaoMenuAjuda" text="Guia de utilização" />
               </items>

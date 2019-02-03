@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import sgbf.modelo.ModProveniencia;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
@@ -63,7 +66,7 @@ public class VisCadastramentoProveniencia implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.bloquearItensDaJanela();
         this.carregarValorNasComboxs();
-        this.tabelaViewProveniencia.setPlaceholder(new Label("Proveniencia não listadas"));
+        this.tabelaViewProveniencia.setPlaceholder(new Label("Proveniencias não listadas"));
         this.TextFieldPesquisarProveniencia.setTooltip(new Tooltip("Introduza o código, designação ou use *( _ ) para listar todos registos "));
         tabelaViewProveniencia.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
     } 
@@ -189,8 +192,18 @@ public class VisCadastramentoProveniencia implements Initializable {
     private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
         tabelaColunaId.setCellValueFactory(new PropertyValueFactory<>("idProveniencia"));
         tabelaColunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        tabelaColunaRegistro.setCellValueFactory(new PropertyValueFactory<>("data_registo"));
-        tabelaColunaModificacao.setCellValueFactory(new PropertyValueFactory<>("data_modificao"));
+        tabelaColunaRegistro.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModProveniencia,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModProveniencia, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_registo());
+            }
+        });
+        tabelaColunaModificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModProveniencia,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModProveniencia, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_modificacao());
+            }
+        });
         tabelaViewProveniencia.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
     }
     

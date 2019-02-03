@@ -6,8 +6,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
@@ -81,6 +80,8 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuItem menuItemAjuda;
     @FXML
+    private Menu menuAjuda;
+    @FXML
     private AnchorPane anchorPane;
     @FXML
     private MenuBar menuBar;
@@ -127,7 +128,7 @@ public class VisTelaPrincipal implements Initializable {
 
     @FXML
     public void BotaoMenuItemVerArea() throws IOException {
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisVerArea.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastramentoArea.fxml"));
         anchorPane.getChildren().setAll(x);
     }
 
