@@ -28,9 +28,9 @@ public class ModItemSolicitado {
     }
 
     public void setAcervoMod(ModAcervo acervoMod, String operacao) {
-        if(acervoMod == null){
+        if (acervoMod == null) {
             throw new UtilControloExcessao(operacao, "Seleccione o acervo que pretende registar", Alert.AlertType.WARNING);
-        }else{
+        } else {
             this.acervoMod = acervoMod;
         }
     }
@@ -41,10 +41,10 @@ public class ModItemSolicitado {
 
     public void setQuantidade_revervada(Byte quantidade_revervada, String operacao) {
         if (quantidade_revervada <= 0) {
-            throw new UtilControloExcessao("Quantidade solicicata inválida !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(operacao, "Quantidade solicicata inválida !", Alert.AlertType.ERROR);
         } else {
             if (quantidade_revervada > 125) {
-                throw new UtilControloExcessao("A quantidade de solicitação máxima é de 125 !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao, "A quantidade de solicitação máxima é de 125 !", Alert.AlertType.WARNING);
             } else {
                 this.quantidade_revervada = quantidade_revervada;
             }

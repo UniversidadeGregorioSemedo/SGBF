@@ -1,6 +1,9 @@
 package sgbf.controlo;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -8,12 +11,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sgbf.modelo.ModFuncionario;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilUsuarioLogado;
 
 /**
  * @author Marron
@@ -73,6 +80,10 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     private MenuItem menuItemSairDoSistema;
     @FXML
+    private MenuItem menuItemAjuda;
+    @FXML
+    private Menu menuArquivo, menuCadastramento, menuVer, menuMovimentacao, menuAjuda;
+    @FXML
     private AnchorPane anchorPane;
     @FXML
     private MenuBar menuBar;
@@ -84,7 +95,7 @@ public class VisTelaPrincipal implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        habilitarFuncionalidadeParaFuncionario(UtilUsuarioLogado.getUsuarioLogado());
     }
 
     @FXML
@@ -119,7 +130,7 @@ public class VisTelaPrincipal implements Initializable {
 
     @FXML
     public void BotaoMenuItemVerArea() throws IOException {
-        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisVerArea.fxml"));
+        AnchorPane x = (AnchorPane) FXMLLoader.load(getClass().getResource("/sgbf/visao/VisCadastramentoArea.fxml"));
         anchorPane.getChildren().setAll(x);
     }
 
@@ -226,9 +237,33 @@ public class VisTelaPrincipal implements Initializable {
     }
 
     @FXML
+    public void BotaoMenuAjuda() {
+        final String operacao = "Guia de utilização";
+        Desktop configuracoesPadrao = Desktop.getDesktop();
+        String endereco = "https://drive.google.com/open?id=1axaFZvpisM4ZxnUo-9lhhixkDjy4mYxP";
+        try {
+            configuracoesPadrao.browse(new URI(endereco));
+        } catch (IOException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao verificar endereço", Alert.AlertType.NONE);
+        } catch (URISyntaxException erro) {
+            throw new UtilControloExcessao(operacao, "Enderço incorreto", Alert.AlertType.NONE);
+        }
+    }
+
+    @FXML
     public void botaoMenuItemSairDoSistema() {
         Stage propriedadeDaJanela = (Stage) menuBar.getScene().getWindow();
         ConPrincipal.sairdoSistema(menuItemSairDoSistema.getText(), propriedadeDaJanela);
+    }
+
+    private void habilitarFuncionalidadeParaFuncionario(ModFuncionario funcionarioMod) {
+        if (funcionarioMod.getCargo().equalsIgnoreCase("Administrador")) {
+            menuCadastramento.setVisible(true);
+        } else {
+            if (funcionarioMod.getCargo().equalsIgnoreCase("Bibliotecario")) {
+                menuCadastramento.setVisible(false);
+            }
+        }
     }
 
 }

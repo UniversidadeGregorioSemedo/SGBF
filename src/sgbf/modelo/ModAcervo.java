@@ -14,7 +14,8 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  *
  * @author Look
  */
-public class  ModAcervo {
+public class ModAcervo {
+
     private Integer idAcervo;
     private String titulo;
     private String sub_titulo;
@@ -35,8 +36,7 @@ public class  ModAcervo {
     private ModCategoria categoriaMod;
     private UtilControloDaData utilControloDaData;
 
-    
-    public ModAcervo(){
+    public ModAcervo() {
         this.idAcervo = 0;
         this.titulo = null;
         this.sub_titulo = null;
@@ -71,12 +71,12 @@ public class  ModAcervo {
     }
 
     public void setTitulo(String titulo, String operacao) {
-        if(titulo == null){
-            throw new UtilControloExcessao("Título do Acervo não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }else{
-            if(titulo.isEmpty()){
-                throw new UtilControloExcessao("Título do Acervo não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+        if (titulo == null) {
+            throw new UtilControloExcessao(operacao, "Título do Acervo não foi definido !", Alert.AlertType.WARNING);
+        } else {
+            if (titulo.isEmpty()) {
+                throw new UtilControloExcessao(operacao, "Título do Acervo não foi definido !", Alert.AlertType.WARNING);
+            } else {
                 this.titulo = titulo;
             }
         }
@@ -95,12 +95,12 @@ public class  ModAcervo {
     }
 
     public void setTipo_acervo(String tipo_acervo, String operacao) {
-        if(tipo_acervo == null){
-            throw new UtilControloExcessao("Tipo de Acervo não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }else{
-            if(tipo_acervo.isEmpty()){
-                throw new UtilControloExcessao("Tipo de Acervo não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+        if (tipo_acervo == null) {
+            throw new UtilControloExcessao(operacao, "Tipo de Acervo não foi definido !", Alert.AlertType.WARNING);
+        } else {
+            if (tipo_acervo.isEmpty()) {
+                throw new UtilControloExcessao(operacao, "Tipo de Acervo não foi definido !", Alert.AlertType.WARNING);
+            } else {
                 this.tipo_acervo = tipo_acervo;
             }
         }
@@ -111,12 +111,12 @@ public class  ModAcervo {
     }
 
     public void setFormato(String formato, String operacao) {
-        if(formato == null){
-            throw new UtilControloExcessao("Tipo de Formato não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }else{
-            if(formato.isEmpty()){
-                throw new UtilControloExcessao("Tipo de Formato não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+        if (formato == null) {
+            throw new UtilControloExcessao(operacao, "Tipo de Formato não foi definido !", Alert.AlertType.WARNING);
+        } else {
+            if (formato.isEmpty()) {
+                throw new UtilControloExcessao(operacao, "Tipo de Formato não foi definido !", Alert.AlertType.WARNING);
+            } else {
                 this.formato = formato;
             }
         }
@@ -127,12 +127,12 @@ public class  ModAcervo {
     }
 
     public void setEdicao(Byte edicao, String operacao) {
-        if(edicao <= 0){
-            throw new UtilControloExcessao("Numero da Edição inválida !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }else{
-            if(edicao > 125){
-                throw new UtilControloExcessao("O Numero da Edição máximo é de 125 !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+        if (edicao <= 0) {
+            throw new UtilControloExcessao(operacao, "Numero da Edição inválida !", Alert.AlertType.WARNING);
+        } else {
+            if (edicao > 125) {
+                throw new UtilControloExcessao(operacao, "O Numero da Edição máximo é de 125 !", Alert.AlertType.WARNING);
+            } else {
                 this.edicao = edicao;
             }
         }
@@ -143,12 +143,12 @@ public class  ModAcervo {
     }
 
     public void setVolume(Byte volume, String operacao) {
-        if(volume <= 0){
-            throw new UtilControloExcessao("Numero do Volume inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }else{
-            if(volume > 125){
-                throw new UtilControloExcessao("O Numero do Volume máximo é de 125 !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+        if (volume <= 0) {
+            throw new UtilControloExcessao(operacao, "Numero do Volume inválido !", Alert.AlertType.ERROR);
+        } else {
+            if (volume > 125) {
+                throw new UtilControloExcessao(operacao, "O Numero do Volume máximo é de 125 !", Alert.AlertType.WARNING);
+            } else {
                 this.volume = volume;
             }
         }
@@ -159,9 +159,9 @@ public class  ModAcervo {
     }
 
     public void setNumero_paginas(Short numero_paginas, String operacao) {
-        if(volume <= 0){
-            throw new UtilControloExcessao("Numero de Páginas inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }else{
+        if (volume <= 0) {
+            throw new UtilControloExcessao(operacao, "Numero de Páginas inválido !", Alert.AlertType.ERROR);
+        } else {
             this.numero_paginas = numero_paginas;
         }
     }
@@ -171,9 +171,9 @@ public class  ModAcervo {
     }
 
     public void setAno_lancamento(Integer ano_lancamento, String operacao) {
-        if(ano_lancamento < 0){
+        if (ano_lancamento < 0) {
             throw new UtilControloExcessao("O ano de lançamento é inválido !", operacao, Alert.AlertType.WARNING);
-        }else{
+        } else {
             this.ano_lancamento = ano_lancamento;
         }
     }
@@ -183,18 +183,17 @@ public class  ModAcervo {
     }
 
     public void setIdioma(String idioma, String operacao) {
-        if(idioma == null){
-            throw new UtilControloExcessao("O idioma não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }else{
-            if(idioma.isEmpty()){
-                throw new UtilControloExcessao("O idioma não foi definido !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+        if (idioma == null) {
+            throw new UtilControloExcessao(operacao, "O idioma não foi definido !", Alert.AlertType.WARNING);
+        } else {
+            if (idioma.isEmpty()) {
+                throw new UtilControloExcessao(operacao, "O idioma não foi definido !", Alert.AlertType.WARNING);
+            } else {
                 this.idioma = idioma;
             }
         }
     }
-    
-    
+
     public String getCodigo_barra() {
         return codigo_barra;
     }
@@ -220,30 +219,30 @@ public class  ModAcervo {
     }
 
     public void setEditoraMod(ModEditora editoraMod, String operacao) {
-        if(editoraMod == null){
+        if (editoraMod == null) {
             editoraMod = new ModEditora();
-        }else{
+        } else {
             this.editoraMod = editoraMod;
         }
     }
 
-     public String getEndereco_acervo() {
+    public String getEndereco_acervo() {
         return endereco_acervo;
     }
 
     public void setEndereco_acervo(String endereco_acervo, String operacao) {
-        if(this.formato.equalsIgnoreCase("Digital")){
-            if(endereco_acervo == null){
-                throw new UtilControloExcessao( operacao,"Introduza o Acervo",Alert.AlertType.WARNING);
-            }else{
-                if(endereco_acervo.isEmpty()){
-                throw new UtilControloExcessao( operacao,"Introduza o Acervo",Alert.AlertType.WARNING);
-                }else{
+        if (this.formato.equalsIgnoreCase("Digital")) {
+            if (endereco_acervo == null) {
+                throw new UtilControloExcessao(operacao, "Introduza o Acervo", Alert.AlertType.WARNING);
+            } else {
+                if (endereco_acervo.isEmpty()) {
+                    throw new UtilControloExcessao(operacao, "Introduza o Acervo", Alert.AlertType.WARNING);
+                } else {
                     this.endereco_acervo = endereco_acervo;
                 }
             }
-        }else{
-            if(this.formato.equalsIgnoreCase("Físico")){
+        } else {
+            if (this.formato.equalsIgnoreCase("Físico")) {
                 this.endereco_acervo = endereco_acervo;
             }
         }
@@ -262,28 +261,27 @@ public class  ModAcervo {
     }
 
     public void setAutorMod(ModAutor autorMod, String operacao) {
-        if(autorMod == null){
+        if (autorMod == null) {
             autorMod = new ModAutor();
-        }else{
+        } else {
             this.autorMod = autorMod;
         }
     }
 
     public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
-        if(this.categoriaMod == null){
+        if (this.categoriaMod == null) {
             throw new UtilControloExcessao(operacao, "Seleccione a Categoria !", Alert.AlertType.INFORMATION);
-        }else{
+        } else {
             this.categoriaMod = categoriaMod;
         }
     }
-    
+
     public ModCategoria getCategoriaMod() {
         return categoriaMod;
     }
 
-    
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
     }
-    
+
 }

@@ -29,7 +29,7 @@ public class ConUsuario {
     public ModFuncionario autenticar(ModUtente utenteMod, String operacao) {
         try {
             this.utenteCon.query = "select * from utente where usuario=? and senha=?"
-                                 + "and (categoria='Administrador' or categoria='Funcionário')";
+                                 + "and categoria='Funcionário'";
             this.utenteCon.preparedStatement = this.utenteCon.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(utenteCon.query);
             this.utenteCon.preparedStatement.setString(1, utenteMod.getUsuario());
             this.utenteCon.preparedStatement.setString(2, utenteMod.getSenha());

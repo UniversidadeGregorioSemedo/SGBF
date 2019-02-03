@@ -35,7 +35,7 @@ public class DaoCominhoDaBaseDados {
                 }
             }
         } catch (SQLException ex) {
-            throw new UtilControloExcessao("Erro de comunicação com a Servidor de Base de Dados !", nome_da_operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao(nome_da_operacao,"Erro de comunicação com a Servidor de Base de Dados !",  Alert.AlertType.ERROR);
         }
     }
 

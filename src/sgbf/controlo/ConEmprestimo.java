@@ -61,7 +61,7 @@ public class ConEmprestimo extends ConCRUD {
             super.preparedStatement.setInt(2, emprestimoteMod.getIdEmprestimo());
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Empréstimo !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Empréstimo !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         }
     }
     
@@ -155,7 +155,7 @@ public class ConEmprestimo extends ConCRUD {
             super.preparedStatement.setInt(2, emprestimoteMod.getIdEmprestimo());
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
-            throw new UtilControloExcessao("Erro ao " + operacao + " Empréstimo !\nErro: " + erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Empréstimo !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }

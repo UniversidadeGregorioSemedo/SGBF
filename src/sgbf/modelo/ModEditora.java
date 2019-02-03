@@ -50,10 +50,10 @@ public class ModEditora {
 
     public void setNome(String nome, String operacao) {
         if(nome ==  null){
-            throw new UtilControloExcessao("Introduza o nome da Editora !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+            throw new UtilControloExcessao(operacao,"Introduza o nome da Editora !", Alert.AlertType.WARNING);
         }else{
             if(nome.isEmpty()){
-                throw new UtilControloExcessao("Introduza o nome da Editora !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
+                throw new UtilControloExcessao(operacao,"Introduza o nome da Editora !", Alert.AlertType.WARNING);
             }else{
                 this.nome = nome;
             }

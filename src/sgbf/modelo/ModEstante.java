@@ -15,6 +15,7 @@ import sgbf.util.UtilIconesDaJOPtionPane;
  * @author Look
  */
 public class ModEstante {
+
     private Integer idEstante;
     private String designacao;
     private String descricao;
@@ -22,8 +23,8 @@ public class ModEstante {
     private Byte coluna;
     private ModArea areaMod;
     private UtilControloDaData utilControloDaData;
-    
-    public ModEstante(){
+
+    public ModEstante() {
         this.idEstante = 0;
         this.designacao = null;
         this.descricao = null;
@@ -46,12 +47,12 @@ public class ModEstante {
     }
 
     public void setDesignacao(String designacao, String operacao) {
-        if(designacao == null){
-            throw new UtilControloExcessao("Designação não definida !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-        }else{
-            if(designacao.isEmpty()){
-                throw new UtilControloExcessao("Designação não definida!", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+        if (designacao == null) {
+            throw new UtilControloExcessao(operacao, "Designação não definida !", Alert.AlertType.WARNING);
+        } else {
+            if (designacao.isEmpty()) {
+                throw new UtilControloExcessao( operacao, "Designação não definida!",Alert.AlertType.WARNING);
+            } else {
                 this.designacao = designacao;
             }
         }
@@ -69,13 +70,13 @@ public class ModEstante {
         return linha;
     }
 
-    public void setLinha(Byte linha, String operacao) throws NumberFormatException{
-        if(linha <=0 ){
-            throw new UtilControloExcessao("O número de linha é inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }else{
-            if(linha >125){
-                throw new UtilControloExcessao("O número de linhas máximo é de 125 !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+    public void setLinha(Byte linha, String operacao) throws NumberFormatException {
+        if (linha <= 0) {
+            throw new UtilControloExcessao(operacao,"O número de linha é inválido !", Alert.AlertType.WARNING);
+        } else {
+            if (linha > 125) {
+                throw new UtilControloExcessao(operacao,"O número de linhas máximo é de 125 !",  Alert.AlertType.WARNING);
+            } else {
                 this.linha = linha;
             }
         }
@@ -85,22 +86,22 @@ public class ModEstante {
         return coluna;
     }
 
-    public void setColuna(Byte coluna, String operacao)throws NumberFormatException {
-        if(linha <=0 ){
-            throw new UtilControloExcessao("O número de colunas é inválido !", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }else{
-            if(linha >125){
-                throw new UtilControloExcessao("O número de colunas máximo é de 125 !", operacao, UtilIconesDaJOPtionPane.Advertencia.nomeDaImagem());
-            }else{
+    public void setColuna(Byte coluna, String operacao) throws NumberFormatException {
+        if (linha <= 0) {
+            throw new UtilControloExcessao(operacao, "O número de colunas é inválido !", Alert.AlertType.WARNING);
+        } else {
+            if (linha > 125) {
+                throw new UtilControloExcessao(operacao, "O número de colunas máximo é de 125 !", Alert.AlertType.WARNING);
+            } else {
                 this.coluna = coluna;
             }
         }
     }
 
-    public boolean equals(ModEstante estanteMod, String operacao){
-        if(this.idEstante != estanteMod.idEstante){
-            if(this.designacao.equalsIgnoreCase(estanteMod.designacao)){
-                throw new UtilControloExcessao(operacao,"Já existe uma estante com esta designação", Alert.AlertType.WARNING);
+    public boolean equals(ModEstante estanteMod, String operacao) {
+        if (this.idEstante != estanteMod.idEstante) {
+            if (this.designacao.equalsIgnoreCase(estanteMod.designacao)) {
+                throw new UtilControloExcessao(operacao, "Já existe uma estante com esta designação", Alert.AlertType.WARNING);
             }
         }
         return false;
@@ -108,16 +109,13 @@ public class ModEstante {
 
     @Override
     public String toString() {
-        return designacao ;
+        return designacao;
     }
-    
-    
-    
+
     public void setAreaMod(ModArea areaMod, String operacao) {
         this.areaMod = areaMod;
     }
-    
-    
+
     public ModArea getAreaMod() {
         return areaMod;
     }
@@ -125,5 +123,5 @@ public class ModEstante {
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
     }
- 
+
 }

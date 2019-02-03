@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModInstituicao;
 import sgbf.util.UtilControloExcessao;
@@ -30,7 +31,7 @@ public class ConInstituicao extends ConCRUD{
             super.preparedStatement.setString(2, instituicaoMod.getEnderecoMod());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -47,7 +48,7 @@ public class ConInstituicao extends ConCRUD{
             super.preparedStatement.setInt(3, instituicaoMod.getIdInstituicao());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -58,7 +59,7 @@ public class ConInstituicao extends ConCRUD{
        ModInstituicao instituicaoMod = (ModInstituicao)objecto_remover;
         try{
             if(this.temDadosRelacionados(instituicaoMod, operacao)){
-               throw new UtilControloExcessao("Esta operação não pode ser executada\nA Instituição tem registo ! ", operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+               throw new UtilControloExcessao( operacao, "Esta operação não pode ser executada\nA Instituição tem registo ! ",Alert.AlertType.WARNING);
             }else{
                 super.query = "delete from tcc.instiuicao where idInstiuicao=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
@@ -67,7 +68,7 @@ public class ConInstituicao extends ConCRUD{
             }
                     
         }catch(SQLException erro){
-           throw new UtilControloExcessao("Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(), operacao, UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }

@@ -47,8 +47,6 @@ public abstract class ModUtente {
     public void setNome(String nome, String operacao) {
         this.nome = nome;
     }
-    
-    
 
     public String getPrimeiro_nome() {
         return primeiro_nome;
@@ -121,15 +119,15 @@ public abstract class ModUtente {
 
     public void setEmail(String email, String operacao) {
         UtilEmail emailUtil = new UtilEmail();
-        if(email == null){
+        if (email == null) {
             this.email = email;
-        }else{
-            if(email.isEmpty()){
+        } else {
+            if (email.isEmpty()) {
                 this.email = email;
-            }else{
+            } else {
                 if (emailUtil.emailValido(email)) {
                     this.email = email;
-                }else{
+                } else {
                     throw new UtilControloExcessao(operacao, "Email inconsistente !", Alert.AlertType.INFORMATION);
                 }
             }
@@ -183,7 +181,7 @@ public abstract class ModUtente {
 
     public void setUsuario(String usuario, String operacao) {
         if ((usuario == null) || (usuario.isEmpty())) {
-            throw new UtilControloExcessao(operacao, "Introduza o nome do usuário !", Alert.AlertType.INFORMATION);
+            this.usuario = this.contacto;
         } else {
             this.usuario = usuario;
         }
@@ -195,7 +193,7 @@ public abstract class ModUtente {
 
     public void setSenha(String senha, String operacao) {
         if ((senha == null) || (senha.isEmpty())) {
-            throw new UtilControloExcessao(operacao, "Introduza a senha !", Alert.AlertType.INFORMATION);
+            this.senha = this.numero;
         } else {
             this.senha = senha;
         }
@@ -204,27 +202,35 @@ public abstract class ModUtente {
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
     }
-    
-    public void equals(ModUtente utenteMod, String operacao){
-        if(this.idUtente != utenteMod.idUtente){
-            if(this.tipo_identificacao.equalsIgnoreCase(utenteMod.tipo_identificacao)){
-                if(this.numero.equalsIgnoreCase(utenteMod.numero)){
+
+    public void equals(ModUtente utenteMod, String operacao) {
+        if (this.idUtente != utenteMod.idUtente) {
+            if (this.tipo_identificacao.equalsIgnoreCase(utenteMod.tipo_identificacao)) {
+                if (this.numero.equalsIgnoreCase(utenteMod.numero)) {
                     throw new UtilControloExcessao(operacao, "Já existe um Utente com esta identificação", Alert.AlertType.WARNING);
-                }else{
-                    if(this.contacto.equalsIgnoreCase(utenteMod.contacto)){
+                } else {
+                    if (this.contacto.equalsIgnoreCase(utenteMod.contacto)) {
                         throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);
-                    }else{
-                        if(this.usuario.equalsIgnoreCase(utenteMod.usuario)){
+                    } else {
+                        if (this.usuario.equalsIgnoreCase(utenteMod.usuario)) {
                             throw new UtilControloExcessao(operacao, "O usuário introduzido já existe", Alert.AlertType.WARNING);
+                        } else {
+                            if (this.contacto.equalsIgnoreCase(utenteMod.usuario)) {
+                                throw new UtilControloExcessao(operacao, "Introduza um usuário  válido ou deixe em branco", Alert.AlertType.WARNING);
+                            }
                         }
                     }
                 }
-            }else{
-                if(this.contacto.equalsIgnoreCase(utenteMod.contacto)){
+            } else {
+                if (this.contacto.equalsIgnoreCase(utenteMod.contacto)) {
                     throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);
-                }else{
-                    if(this.usuario.equalsIgnoreCase(utenteMod.usuario)){
+                } else {
+                    if (this.usuario.equalsIgnoreCase(utenteMod.usuario)) {
                         throw new UtilControloExcessao(operacao, "O usuário introduzido já existe", Alert.AlertType.WARNING);
+                    } else {
+                        if (this.contacto.equalsIgnoreCase(utenteMod.usuario)) {
+                            throw new UtilControloExcessao(operacao, "Introduza um usuário  válido ou deixe em branco", Alert.AlertType.WARNING);
+                        }
                     }
                 }
             }

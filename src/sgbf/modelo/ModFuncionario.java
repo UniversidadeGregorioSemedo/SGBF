@@ -6,7 +6,6 @@
 package sgbf.modelo;
 
 import javafx.scene.control.Alert;
-import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 
 /**
@@ -67,8 +66,6 @@ public class ModFuncionario extends ModUtente  {
     
     public boolean equals(ModFuncionario funcionarioMod, String operacao){
         if(this.idFuncionario != funcionarioMod.idFuncionario){
-            System.out.println("C 1:"+this.idFuncionario);
-            System.out.println("C 2:"+funcionarioMod.idFuncionario);
             if(this.getIdUtente() == funcionarioMod.getIdUtente()){
                 throw new UtilControloExcessao(operacao, "Já existe registo deste funcionário", Alert.AlertType.WARNING);
             }else{
