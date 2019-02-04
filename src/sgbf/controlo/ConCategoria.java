@@ -141,8 +141,8 @@ public class ConCategoria extends ConCRUD {
         categoriaMod.setIdCategoria(setResultset.getInt("idcategoria"), operacao);
         categoriaMod.setDesignacao(setResultset.getString("designacao"), operacao);
         if (setResultset.getString("idEstante") != null) {
-            categoriaMod.getEstanteMod().setIdEstante(setResultset.getInt("idEstante"), operacao);
-            categoriaMod.getEstanteMod().setDesignacao(setResultset.getString("estante"), operacao);
+            categoriaMod.getEstanteNova().setIdEstante(setResultset.getInt("idEstante"), operacao);
+            categoriaMod.getEstanteNova().setDesignacao(setResultset.getString("estante"), operacao);
         }
         categoriaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         categoriaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
@@ -151,16 +151,25 @@ public class ConCategoria extends ConCRUD {
     }
 
     private boolean removerTodosRegistos(ModCategoria categoriModMod, String operacao) throws SQLException {
-        ConCategoriaDaEstante categoriasDaEstanteCon = new ConCategoriaDaEstante();
-        return categoriasDaEstanteCon.remover(categoriModMod, operacao);
+        super.query = "select * from acervos where categoria_idcategoria=?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+        super.preparedStatement.setInt(1, categoriModMod.getIdCategoria());
+        super.setResultset = super.preparedStatement.executeQuery();
+        if (super.setResultset.next()) {
+            throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\n"
+                    + "Erro: A categoria seleccionada possui registo nos acervos", Alert.AlertType.WARNING);
+        } else {
+            ConCategoriaDaEstante categoriasDaEstanteCon = new ConCategoriaDaEstante();
+            return categoriasDaEstanteCon.remover(categoriModMod, operacao);
+        }
     }
 
     private boolean retirarCategoriaDaEstante(ModCategoria categoriaMod, String operacao) {
         ConCategoriaDaEstante categoriaDaEstanteCon = new ConCategoriaDaEstante();
-        if (categoriaMod.getEstanteMod().getIdEstante() != categoriaMod.getEstanteAntiga().getIdEstante()) {
+        if (categoriaMod.getEstanteNova().getIdEstante() != categoriaMod.getEstanteActual().getIdEstante()) {
             return categoriaDaEstanteCon.remover(categoriaMod, operacao);
         } else {
-            return categoriaMod.getEstanteMod().getIdEstante() != categoriaMod.getEstanteAntiga().getIdEstante();
+            return categoriaMod.getEstanteNova().getIdEstante() != categoriaMod.getEstanteActual().getIdEstante();
         }
     }
 
@@ -173,7 +182,7 @@ public class ConCategoria extends ConCRUD {
     }
 
     private boolean relacionarComOutraEstante(ModCategoria categoriaIntroduzida, String operacao) {
-        if ((categoriaIntroduzida.getIdCategoria() != 0) && (categoriaIntroduzida.getEstanteMod().getIdEstante() != 0)) {
+        if ((categoriaIntroduzida.getIdCategoria() != 0) && (categoriaIntroduzida.getEstanteNova().getIdEstante() != 0)) {
             for (Object todosRegistos : this.listarTodos(operacao)) {
                 ModCategoria categoriaRegistado = (ModCategoria) todosRegistos;
                 if (categoriaIntroduzida.getDesignacao().equalsIgnoreCase(categoriaRegistado.getDesignacao())) {
@@ -182,14 +191,14 @@ public class ConCategoria extends ConCRUD {
             }
             return false;
         } else {
-            return categoriaIntroduzida.getEstanteMod().getIdEstante() == 0;
+            return categoriaIntroduzida.getEstanteNova().getIdEstante() == 0;
         }
     }
 
     private boolean temRegistosEmOutrasEstantes(ModCategoria categoriaMod, String operacao) {
         for (Object todosRegistos : this.listarTodos(operacao)) {
             ModCategoria outrosRegistos = (ModCategoria) todosRegistos;
-            if (outrosRegistos.getEstanteMod().getIdEstante() != categoriaMod.getEstanteMod().getIdEstante()) {
+            if (outrosRegistos.getEstanteNova().getIdEstante() != categoriaMod.getEstanteNova().getIdEstante()) {
                 if (outrosRegistos.getDesignacao().equalsIgnoreCase(categoriaMod.getDesignacao())) {
                     return true;
                 }

@@ -220,8 +220,8 @@ public class ConAcervo extends ConCRUD {
         acervoMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         acervoMod.getCategoriaMod().setDesignacao(setResultset.getString("categoria"), operacao);
         if(setResultset.getString("idEstante") != null){
-            acervoMod.getCategoriaMod().getEstanteMod().setDesignacao(setResultset.getString("estante"), operacao);
-            acervoMod.getCategoriaMod().getEstanteMod().getAreaMod().setSector(setResultset.getString("sector"), operacao);
+            acervoMod.getCategoriaMod().getEstanteNova().setDesignacao(setResultset.getString("estante"), operacao);
+            acervoMod.getCategoriaMod().getEstanteNova().getAreaMod().setSector(setResultset.getString("sector"), operacao);
         }
         return acervoMod;
     }

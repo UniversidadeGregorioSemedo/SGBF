@@ -67,16 +67,14 @@ public class ConCategoriaDaEstante extends ConCRUD {
             super.query = "delete from tcc.categoriasdaestante where categoria_idcategoria=? and Estante_idEstante=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, categoriaDaEstanteMod.getIdCategoria());
-            if (categoriaDaEstanteMod.getEstanteAntiga().getIdEstante() == 0) {
-                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
+            if (categoriaDaEstanteMod.getEstanteActual().getIdEstante() == 0) {
+                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteNova().getIdEstante());
             } else {
-                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteAntiga().getIdEstante());
+                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteActual().getIdEstante());
             }
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estante !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
-        } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
@@ -127,9 +125,9 @@ public class ConCategoriaDaEstante extends ConCRUD {
     private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
         ModCategoria categoriaMod = new ModCategoria();
         categoriaMod.setIdCategoria(setResultset.getInt("idcategoria"), operacao);
-        categoriaMod.getEstanteMod().setIdEstante(setResultset.getInt("idEstante"), operacao);
+        categoriaMod.getEstanteNova().setIdEstante(setResultset.getInt("idEstante"), operacao);
         categoriaMod.setDesignacao(setResultset.getString("categoria"), operacao);
-        categoriaMod.getEstanteMod().setDesignacao(setResultset.getString("estante"), operacao);
+        categoriaMod.getEstanteNova().setDesignacao(setResultset.getString("estante"), operacao);
         categoriaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         categoriaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return categoriaMod;

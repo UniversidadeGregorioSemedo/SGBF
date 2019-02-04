@@ -68,11 +68,11 @@ public class VisCadastramentoCategoria implements Initializable {
     private void cadastrarCategoria() {
         operacao = "Registar Categoria";
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
-        categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
+        categoriaMod.setEstanteNova(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
         if (categoriaCon.registar(categoriaMod, operacao)) {
             categoriaMod.setIdCategoria(categoriaCon.proximoCodigoASerRegistado(operacao), operacao);
             categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
-            categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
+            categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteNova(), operacao);
             //if (categoriaDaEstanteCon.registar(categoriaDaEstanteMod, operacao)) {
             this.bloquearItensDaJanela();
             this.limparItensDaJanela();
@@ -86,10 +86,10 @@ public class VisCadastramentoCategoria implements Initializable {
         operacao = "Editar Categoria";
         categoriaMod.setIdCategoria(this.tableViewCategoria.getSelectionModel().getSelectedItem().getIdCategoria(), operacao);
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
-        categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
-        categoriaMod.setEstanteModAntiga(this.tableViewCategoria.getSelectionModel().getSelectedItem(), operacao);
+        categoriaMod.setEstanteNova(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
+        categoriaMod.setEstanteModActual(this.tableViewCategoria.getSelectionModel().getSelectedItem(), operacao);
         categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
-        categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
+        categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteNova(), operacao);
         if (categoriaCon.alterar(categoriaMod, operacao)) {
             this.bloquearItensDaJanela();
             this.limparItensDaJanela();
@@ -189,9 +189,9 @@ public class VisCadastramentoCategoria implements Initializable {
             this.carregarValorNasComboxs();
             texteFiedDesigancao.setText(String.valueOf(categoriaMod.getDesignacao()));
             for (int i = 0; i < comboBoxEstante.getItems().size(); i++) {
-                if (categoriaMod.getEstanteMod() != null) {
+                if (categoriaMod.getEstanteNova() != null) {
                     comboBoxEstante.getSelectionModel().select(i);
-                    if (categoriaMod.getEstanteMod().getIdEstante() == comboBoxEstante.getSelectionModel().getSelectedItem().getIdEstante()) {
+                    if (categoriaMod.getEstanteNova().getIdEstante() == comboBoxEstante.getSelectionModel().getSelectedItem().getIdEstante()) {
                         break;
                     }
                 }

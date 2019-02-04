@@ -145,13 +145,13 @@ public class VisVerAcervo implements Initializable {
         tableColumArea.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> localizacao) {
-                return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getEstanteMod().getAreaMod().getSector());
+                return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getEstanteNova().getAreaMod().getSector());
             }
         });
         tableColumEstante.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> localizacao) {
-                return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getEstanteMod().getDesignacao());
+                return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getEstanteNova().getDesignacao());
             }
         });
         tableColumCategoria.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {

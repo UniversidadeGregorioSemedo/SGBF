@@ -12,15 +12,15 @@ public class ModCategoria {
 
     private Integer idCategoria;
     private String designacao;
-    private ModEstante estanteMod;
-    private ModEstante estanteAntiga;
+    private ModEstante estanteNova;
+    private ModEstante estanteActual;
     private UtilControloDaData utilControloDaData;
 
     public ModCategoria() {
         this.idCategoria = 0;
         this.designacao = null;
-        this.estanteAntiga = new ModEstante();
-        this.estanteMod = new ModEstante();
+        this.estanteActual = new ModEstante();
+        this.estanteNova = new ModEstante();
         this.utilControloDaData = new UtilControloDaData();
     }
 
@@ -53,27 +53,27 @@ public class ModCategoria {
         return designacao;
     }
 
-    public ModEstante getEstanteMod() {
-        return estanteMod;
+    public ModEstante getEstanteNova() {
+        return estanteNova;
     }
 
-    public void setEstanteMod(ModEstante estanteMod, String operacao) {
+    public void setEstanteNova(ModEstante estanteMod, String operacao) {
         if (estanteMod == null) {
-            this.estanteMod = new ModEstante();
+            this.estanteNova = new ModEstante();
         } else {
-            this.estanteMod = estanteMod;
+            this.estanteNova = estanteMod;
         }
     }
 
-    public ModEstante getEstanteAntiga() {
-        return estanteAntiga;
+    public ModEstante getEstanteActual() {
+        return estanteActual;
     }
 
-    public void setEstanteModAntiga(ModCategoria categoriaMod, String operacao) {
-        if (categoriaMod.getEstanteAntiga() == null) {
-            this.estanteAntiga = new ModEstante();
+    public void setEstanteModActual(ModCategoria categoriaMod, String operacao) {
+        if (categoriaMod.getEstanteActual() == null) {
+            this.estanteActual = new ModEstante();
         } else {
-            this.estanteAntiga = categoriaMod.getEstanteMod();
+            this.estanteActual = categoriaMod.getEstanteNova();
         }
     }
 
@@ -82,12 +82,12 @@ public class ModCategoria {
     }
 
     public void equals(ModCategoria categoriaMod, String operacao) {
-        if (categoriaMod.getEstanteMod().getIdEstante() == 0) {
+        if (categoriaMod.getEstanteNova().getIdEstante() == 0) {
             if (this.designacao.equalsIgnoreCase(categoriaMod.designacao)) {
                 throw new UtilControloExcessao(operacao, "Já existe uma categoria com esta designação !", Alert.AlertType.WARNING);
             }
         } else {
-            if (this.getEstanteMod().getIdEstante() == categoriaMod.getEstanteMod().getIdEstante()) {
+            if (this.getEstanteNova().getIdEstante() == categoriaMod.getEstanteNova().getIdEstante()) {
                 if (this.designacao.equalsIgnoreCase(categoriaMod.designacao)) {
                     throw new UtilControloExcessao(operacao, "Já existe uma Categoria com esta designação nesta Estante !", Alert.AlertType.WARNING);
                 }
