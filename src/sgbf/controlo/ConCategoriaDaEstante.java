@@ -13,7 +13,6 @@ import javafx.scene.control.Alert;
 import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModCategoriaDaEstante;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -26,7 +25,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         ModCategoriaDaEstante categoriaDaEstanteMod = (ModCategoriaDaEstante) objecto_registar;
         try {
             if (this.temCategoriaEEstante(categoriaDaEstanteMod)) {
-                super.query = "INSERT INTO tcc.categoriasdaestante(categoria_idcategoria, Estante_idEstante) VALUES (?, ?)";
+                super.query = "INSERT INTO tcc.categoriasdaestante (categoria_idcategoria, Estante_idEstante) VALUES (?, ?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setInt(1, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
                 super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
@@ -65,8 +64,6 @@ public class ConCategoriaDaEstante extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModCategoria categoriaDaEstanteMod = (ModCategoria) objecto_remover;
         try {
-            System.out.println("Cat:" + categoriaDaEstanteMod.getIdCategoria());
-            System.out.println("Est:" + categoriaDaEstanteMod.getEstanteMod().getIdEstante());
             super.query = "delete from tcc.categoriasdaestante where categoria_idcategoria=? and Estante_idEstante=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, categoriaDaEstanteMod.getIdCategoria());

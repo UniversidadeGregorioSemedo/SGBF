@@ -67,17 +67,17 @@ public class VisCadastramentoCategoria implements Initializable {
     @FXML
     private void cadastrarCategoria() {
         operacao = "Registar Categoria";
-        categoriaMod.setIdCategoria(categoriaCon.proximoCodigoASerRegistado(operacao), operacao);
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
         categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
-        categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
-        categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
         if (categoriaCon.registar(categoriaMod, operacao)) {
-            if (categoriaDaEstanteCon.registar(categoriaDaEstanteMod, operacao)) {
-                this.bloquearItensDaJanela();
-                this.limparItensDaJanela();
-                throw new UtilControloExcessao(operacao, "Categoria Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
-            }
+            categoriaMod.setIdCategoria(categoriaCon.proximoCodigoASerRegistado(operacao), operacao);
+            categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
+            categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
+            //if (categoriaDaEstanteCon.registar(categoriaDaEstanteMod, operacao)) {
+            this.bloquearItensDaJanela();
+            this.limparItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Categoria Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+            // }
         }
     }
 
