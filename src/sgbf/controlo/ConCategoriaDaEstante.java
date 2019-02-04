@@ -12,6 +12,7 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModCategoriaDaEstante;
+import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
 
 /**
@@ -121,6 +122,22 @@ public class ConCategoriaDaEstante extends ConCRUD {
             return todosRegistosEncontrados;
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Categoria(s) !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    public List<Object> pesquisar(ModEstante estanteMod, String operacao) {
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        try {
+            super.query = "select * from tcc.view_CategoriaDaEstante where idEstante=?";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+            super.setResultset = super.preparedStatement.executeQuery();
+            while (super.setResultset.next()) {
+                todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
+            }
+            return todosRegistosEncontrados;
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "(s)\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

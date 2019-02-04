@@ -88,29 +88,29 @@ public class VisCadastramentoAcervo implements Initializable {
     private void cadastrarAcervos() {
         operacao = "Registar Acervos";
         try {
-            acervoMod.setIdAcervo(acervoCon.proximoCodigoASerRegistado(operacao), operacao);
             acervoMod.setTitulo(texteFiedTitulo.getText(), operacao);
             acervoMod.setSub_titulo(texteFiedSubTitulo.getText(), operacao);
             acervoMod.setTipo_acervo(comboBoxTipo.getSelectionModel().getSelectedItem(), operacao);
-            acervoMod.setFormato(comboBoxFormato.getSelectionModel().getSelectedItem(), operacao);
-            acervoMod.setEdicao(Byte.valueOf(texteFiedEdicao.getText()), operacao);
-            acervoMod.setVolume(Byte.valueOf(texteFiedVolume.getText()), operacao);
-            acervoMod.setNumero_paginas(Short.valueOf(texteFiedNumPaginas.getText()), operacao);
+            acervoMod.setEdicao(Byte.valueOf(UtilValidarDados.validarInteiro(texteFiedEdicao.getText())), operacao);
+            acervoMod.setVolume(Byte.valueOf(UtilValidarDados.validarInteiro(texteFiedVolume.getText())), operacao);
             acervoMod.setCodigo_barra(texteFiedCodigoBarra.getText(), operacao);
             acervoMod.setIsbn(texteFiedISBN.getText(), operacao);
             acervoMod.setIdioma(comboBoxIdioma.getSelectionModel().getSelectedItem(), operacao);
-            acervoMod.setAno_lancamento(Integer.valueOf(texteFieldAno.getText()), operacao);
+            acervoMod.setAno_lancamento(Integer.valueOf(UtilValidarDados.validarInteiro(texteFieldAno.getText())), operacao);
             acervoMod.setSinopse(textAreaSinopese.getText(), operacao);
-            acervoMod.setEndereco_acervo(texteFiedEndereco.getText(), operacao);
+            acervoMod.setFormato(this.validarLocalizacao(comboBoxFormato.getSelectionModel().getSelectedItem()), operacao);
             acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
+            acervoMod.setEndereco_acervo(texteFiedEndereco.getText(), operacao);
+            acervoMod.setNumero_paginas(Short.valueOf(UtilValidarDados.validarInteiro(texteFiedNumPaginas.getText())), operacao);
             acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
             if (acervoCon.registar(acervoMod, operacao)) {
-                if (escreitosAcervosCon.registar(acervoMod, operacao)) {
-                    this.bloquearItensDaJanela();
-                    this.limparItensDaJanela();
-                    throw new UtilControloExcessao(operacao, "Acervo Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
-                }
+                acervoMod.setIdAcervo(acervoCon.ultimoCodigoRegistado(operacao), operacao);
+                //if (escreitosAcervosCon.registar(acervoMod, operacao)) {
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
+                throw new UtilControloExcessao(operacao, "Acervo Cadastrado com sucesso", Alert.AlertType.CONFIRMATION);
+                //}
             }
         } catch (NumberFormatException erro) {
             throw new UtilControloExcessao(operacao, "Edição ou volume ultrapassou o limite permitdo", Alert.AlertType.WARNING);
@@ -138,7 +138,7 @@ public class VisCadastramentoAcervo implements Initializable {
             acervoMod.setCategoriaMod(comboBoxCategoria.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setEditoraMod(comboBoxEditora.getSelectionModel().getSelectedItem(), operacao);
             acervoMod.setAutorMod(comboBoxAutor.getSelectionModel().getSelectedItem(), operacao);
-         
+
             if (acervoCon.alterar(acervoMod, operacao)) {
                 if (escreitosAcervosCon.alterar(acervoMod, operacao)) {
                     this.bloquearItensDaJanela();
@@ -280,9 +280,9 @@ public class VisCadastramentoAcervo implements Initializable {
         ConEditora editoraCon = new ConEditora();
         ConEstante estanteCon = new ConEstante();
         ConAutor autorCon = new ConAutor();
-        this.comboBoxTipo.getItems().addAll("Monografia", "Jornal", "Livro", "Revista", "Apostilha");
+        this.comboBoxTipo.getItems().addAll("Jornal", "Livro", "Monografia", "Revista", "Trabalho académico");
         this.comboBoxFormato.getItems().addAll("Digital", "Físico");
-        this.comboBoxIdioma.getItems().addAll("Protuguês", "Inglês", "Outra");
+        this.comboBoxIdioma.getItems().addAll("Protuguês", "Inglês", "Outro");
         List<ModEditora> todasEditoras = new ArrayList<>();
         List<ModEstante> todasEstante = new ArrayList<>();
         List<ModAutor> todosAutores = new ArrayList<>();
@@ -425,7 +425,7 @@ public class VisCadastramentoAcervo implements Initializable {
                 List<ModCategoria> todasCategorias = new ArrayList<>();
                 ConCategoriaDaEstante categoriaDaEstante = new ConCategoriaDaEstante();
                 ObservableList todasCategoriasPAraCombox = null;
-                for (Object todosRegistos : categoriaDaEstante.listarTodos(operacao)) {
+                for (Object todosRegistos : categoriaDaEstante.pesquisar(estanteMod, operacao)) {
                     ModCategoria categoriaMod = (ModCategoria) todosRegistos;
                     todasCategorias.add(categoriaMod);
                 }
@@ -447,6 +447,22 @@ public class VisCadastramentoAcervo implements Initializable {
                 texteFiedEndereco.setEditable(false);
                 botaoCarregar.setDisable(false);
             }
+        }
+    }
+
+    private String validarLocalizacao(String formato) {
+        if (formato.equalsIgnoreCase("Físico")) {
+            if (this.comboBoxEstante.getSelectionModel().getSelectedItem() == null) {
+                throw new UtilControloExcessao(operacao, "Seleccione a estante", Alert.AlertType.WARNING);
+            } else {
+                if (this.comboBoxEstante.getSelectionModel().getSelectedItem().getIdEstante() == 0) {
+                    throw new UtilControloExcessao(operacao, "Seleccione a estante", Alert.AlertType.WARNING);
+                } else {
+                    return formato;
+                }
+            }
+        } else {
+            return formato;
         }
     }
 

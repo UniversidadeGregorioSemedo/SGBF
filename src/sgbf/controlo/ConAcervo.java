@@ -47,7 +47,7 @@ public class ConAcervo extends ConCRUD {
             }
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
-            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Acervo !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
+            throw new UtilControloExcessao( operacao,"Erro ao "+operacao+"\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -59,7 +59,7 @@ public class ConAcervo extends ConCRUD {
         try{
             super.query = "UPDATE tcc.acervos set titulo=?, subtittulo=?, tipo_acervo=?, formato=?, edicao=?, volume=?,"
                         + " numero_paginas=?, codigo_barra=?, isbn=?, idioma=?, ano_lancamento=?, sinopse=?, endereco_acervo=?,"
-                        + " categoria_idcategoria=?, Editora_idEditora=? where idAcervos=?";
+                        + " categoria_idcategoria=?, Editora_idEditora=?,data_modificacao = default where idAcervos=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setString(1, acervoMod.getTitulo());
             super.preparedStatement.setString(2, acervoMod.getSub_titulo());
@@ -226,13 +226,13 @@ public class ConAcervo extends ConCRUD {
         return acervoMod;
     }
     
-    public Integer proximoCodigoASerRegistado(String operacao) {
+    public Integer ultimoCodigoRegistado(String operacao) {
         try{
             super.query= "select max(idAcervos) from acervos";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.setResultset  = super.preparedStatement.executeQuery();
             if(super.setResultset.next()){
-                return super.setResultset.getInt("max(idAcervos)")+1;
+                return super.setResultset.getInt("max(idAcervos)");
             }else{
                 return 1;
             }
