@@ -82,14 +82,14 @@ public class ModCategoria {
     }
 
     public void equals(ModCategoria categoriaMod, String operacao) {
-        if (categoriaMod.getEstanteNova().getIdEstante() == 0) {
-            if (this.designacao.equalsIgnoreCase(categoriaMod.designacao)) {
+        if ((this.estanteNova.getIdEstante() == 0) && (categoriaMod.getEstanteNova().getIdEstante() == 0)) {
+            if ((this.idCategoria != categoriaMod.idCategoria) && (this.designacao.equalsIgnoreCase(categoriaMod.designacao))) {
                 throw new UtilControloExcessao(operacao, "Já existe uma categoria com esta designação !", Alert.AlertType.WARNING);
             }
         } else {
             if (this.getEstanteNova().getIdEstante() == categoriaMod.getEstanteNova().getIdEstante()) {
-                if (this.designacao.equalsIgnoreCase(categoriaMod.designacao)) {
-                    throw new UtilControloExcessao(operacao, "Já existe uma Categoria com esta designação nesta Estante !", Alert.AlertType.WARNING);
+                if ((this.idCategoria != categoriaMod.idCategoria) && (this.designacao.equalsIgnoreCase(categoriaMod.designacao))) {
+                    throw new UtilControloExcessao(operacao, "Já existe uma categoria com esta designação nesta estante !", Alert.AlertType.WARNING);
                 }
             }
         }
