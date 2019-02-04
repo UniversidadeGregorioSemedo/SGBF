@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +22,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
+import sgbf.modelo.ModArea;
 import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModCategoriaDaEstante;
 import sgbf.modelo.ModEstante;
@@ -44,7 +48,7 @@ public class VisCadastramentoCategoria implements Initializable {
     @FXML
     private TableView<ModCategoria> tableViewCategoria;
     @FXML
-    private TableColumn<ModCategoria, String> tableColumDesignacao;
+    private TableColumn<ModCategoria, String> tableColumDesignacao,tableColumIDataRegisto,tableColumUltimaModificacao;
     @FXML
     private TableColumn<ModCategoria, Integer> tableColumID;
     @FXML
@@ -67,12 +71,12 @@ public class VisCadastramentoCategoria implements Initializable {
     @FXML
     private void cadastrarCategoria() {
         operacao = "Registar Categoria";
-        categoriaMod.setIdCategoria(categoriaCon.proximoCodigoASerRegistado(operacao), operacao);
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
-        categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
-        categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
-        categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
+        categoriaMod.setEstanteNova(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
         if (categoriaCon.registar(categoriaMod, operacao)) {
+            categoriaMod.setIdCategoria(categoriaCon.proximoCodigoASerRegistado(operacao), operacao);
+            categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
+            categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteNova(), operacao);
             if (categoriaDaEstanteCon.registar(categoriaDaEstanteMod, operacao)) {
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
@@ -86,14 +90,14 @@ public class VisCadastramentoCategoria implements Initializable {
         operacao = "Editar Categoria";
         categoriaMod.setIdCategoria(this.tableViewCategoria.getSelectionModel().getSelectedItem().getIdCategoria(), operacao);
         categoriaMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
-        categoriaMod.setEstanteMod(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
-        categoriaMod.setEstanteModAntiga(this.tableViewCategoria.getSelectionModel().getSelectedItem(), operacao);
-        categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
-        categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteMod(), operacao);
+        categoriaMod.setEstanteNova(comboBoxEstante.getSelectionModel().getSelectedItem(), operacao);
+        categoriaMod.setEstanteModActual(this.tableViewCategoria.getSelectionModel().getSelectedItem(), operacao);
         if (categoriaCon.alterar(categoriaMod, operacao)) {
-            this.bloquearItensDaJanela();
-            this.limparItensDaJanela();
-            throw new UtilControloExcessao(operacao, "Categoria editada com sucesso", Alert.AlertType.CONFIRMATION);
+            if (categoriaDaEstanteCon.alterar(categoriaMod, operacao)) {
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
+                throw new UtilControloExcessao(operacao, "Categoria editada com sucesso", Alert.AlertType.CONFIRMATION);
+            }
         }
     }
 
@@ -189,9 +193,9 @@ public class VisCadastramentoCategoria implements Initializable {
             this.carregarValorNasComboxs();
             texteFiedDesigancao.setText(String.valueOf(categoriaMod.getDesignacao()));
             for (int i = 0; i < comboBoxEstante.getItems().size(); i++) {
-                if (categoriaMod.getEstanteMod() != null) {
+                if (categoriaMod.getEstanteNova() != null) {
                     comboBoxEstante.getSelectionModel().select(i);
-                    if (categoriaMod.getEstanteMod().getIdEstante() == comboBoxEstante.getSelectionModel().getSelectedItem().getIdEstante()) {
+                    if (categoriaMod.getEstanteNova().getIdEstante() == comboBoxEstante.getSelectionModel().getSelectedItem().getIdEstante()) {
                         break;
                     }
                 }
@@ -223,6 +227,18 @@ public class VisCadastramentoCategoria implements Initializable {
     private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados) {
         tableColumID.setCellValueFactory(new PropertyValueFactory<>("idCategoria"));
         tableColumDesignacao.setCellValueFactory(new PropertyValueFactory<>("designacao"));
+        tableColumIDataRegisto.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModCategoria,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModCategoria, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_registo());
+            }
+        });
+        tableColumUltimaModificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModCategoria,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModCategoria, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_modificacao());
+            }
+        });
         tableViewCategoria.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
     }
 

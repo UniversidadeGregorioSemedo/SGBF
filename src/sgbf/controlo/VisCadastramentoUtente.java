@@ -23,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
@@ -160,6 +161,14 @@ public class VisCadastramentoUtente implements Initializable {
     @FXML
     private void sair(ActionEvent event) {
         AnchorPaneUtente.setVisible(false);
+    }
+   
+    @FXML
+    public void eliminarEspacoEmBranco(KeyEvent evt) {
+        String caracateresValidos = " ";
+        if (caracateresValidos.contains(evt.getCharacter() + "")) {
+            evt.consume();
+        }
     }
    
     private void desbloquearItensDaJanela(){

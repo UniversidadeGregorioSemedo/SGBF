@@ -9,17 +9,18 @@ import sgbf.util.UtilControloExcessao;
  * @author Look
  */
 public class ModCategoria {
+
     private Integer idCategoria;
     private String designacao;
-    private ModEstante estanteMod;
-    private ModEstante estanteAntiga;
+    private ModEstante estanteNova;
+    private ModEstante estanteActual;
     private UtilControloDaData utilControloDaData;
-    
-    public ModCategoria(){
+
+    public ModCategoria() {
         this.idCategoria = 0;
         this.designacao = null;
-        this.estanteAntiga = new ModEstante();
-        this.estanteMod = new ModEstante();
+        this.estanteActual = new ModEstante();
+        this.estanteNova = new ModEstante();
         this.utilControloDaData = new UtilControloDaData();
     }
 
@@ -36,12 +37,12 @@ public class ModCategoria {
     }
 
     public void setDesignacao(String designacao, String operacao) {
-        if(designacao == null){
-            throw new UtilControloExcessao( operacao,"Categoria não definida !",Alert.AlertType.INFORMATION);
-        }else{
-            if(designacao.isEmpty()){
-                throw new UtilControloExcessao( operacao,"Categoria não definida !",Alert.AlertType.INFORMATION);
-            }else{
+        if (designacao == null) {
+            throw new UtilControloExcessao(operacao, "Categoria não definida !", Alert.AlertType.INFORMATION);
+        } else {
+            if (designacao.isEmpty()) {
+                throw new UtilControloExcessao(operacao, "Categoria não definida !", Alert.AlertType.INFORMATION);
+            } else {
                 this.designacao = designacao;
             }
         }
@@ -49,51 +50,49 @@ public class ModCategoria {
 
     @Override
     public String toString() {
-        return designacao ;
+        return designacao;
     }
 
-    
-    
-    public ModEstante getEstanteMod() {
-        return estanteMod;
+    public ModEstante getEstanteNova() {
+        return estanteNova;
     }
 
-    public void setEstanteMod(ModEstante estanteMod, String operacao) {
-        if(estanteMod == null){
-            this.estanteMod = new ModEstante();
-        }else{
-            this.estanteMod = estanteMod;
+    public void setEstanteNova(ModEstante estanteMod, String operacao) {
+        if (estanteMod == null) {
+            this.estanteNova = new ModEstante();
+        } else {
+            this.estanteNova = estanteMod;
         }
     }
-    
-    public ModEstante getEstanteAntiga() {
-        return estanteAntiga;
+
+    public ModEstante getEstanteActual() {
+        return estanteActual;
     }
 
-    public void setEstanteModAntiga(ModCategoria categoriaMod, String operacao) {
-        if(categoriaMod.getEstanteAntiga() == null){
-            this.estanteAntiga = new ModEstante();
-        }else{
-            this.estanteAntiga = categoriaMod.getEstanteMod();
+    public void setEstanteModActual(ModCategoria categoriaMod, String operacao) {
+        if (categoriaMod.getEstanteActual() == null) {
+            this.estanteActual = new ModEstante();
+        } else {
+            this.estanteActual = categoriaMod.getEstanteNova();
         }
     }
-    
+
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
     }
 
-    public void equals(ModCategoria categoriaMod, String operacao){
-        if(categoriaMod.getEstanteMod().getIdEstante() == 0){
-            if(this.designacao.equalsIgnoreCase(categoriaMod.designacao)){
-                throw new UtilControloExcessao( operacao,"Já existe uma categoria com esta designação !",Alert.AlertType.WARNING);
+    public void equals(ModCategoria categoriaMod, String operacao) {
+        if ((this.estanteNova.getIdEstante() == 0) && (categoriaMod.getEstanteNova().getIdEstante() == 0)) {
+            if ((this.idCategoria != categoriaMod.idCategoria) && (this.designacao.equalsIgnoreCase(categoriaMod.designacao))) {
+                throw new UtilControloExcessao(operacao, "Já existe uma categoria com esta designação !", Alert.AlertType.WARNING);
             }
-        }else{
-            if(this.getEstanteMod().getIdEstante() == categoriaMod.getEstanteMod().getIdEstante()){
-                if(this.designacao.equalsIgnoreCase(categoriaMod.designacao)){
-                    throw new UtilControloExcessao( operacao,"Já existe uma Categoria com esta designação nesta Estante !",Alert.AlertType.WARNING);
+        } else {
+            if (this.getEstanteNova().getIdEstante() == categoriaMod.getEstanteNova().getIdEstante()) {
+                if ((this.idCategoria != categoriaMod.idCategoria) && (this.designacao.equalsIgnoreCase(categoriaMod.designacao))) {
+                    throw new UtilControloExcessao(operacao, "Já existe uma categoria com esta designação nesta estante !", Alert.AlertType.WARNING);
                 }
             }
         }
     }
-    
+
 }

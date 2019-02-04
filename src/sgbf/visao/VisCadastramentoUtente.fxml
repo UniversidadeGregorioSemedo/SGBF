@@ -110,10 +110,10 @@
                         <TextField fx:id="texteFiedPrimeiroNome" layoutX="209.0" layoutY="49.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
                         <TextField fx:id="texteFiedSegundoNome" layoutX="493.0" layoutY="49.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
                         <TextField fx:id="texteFiedNumIden" layoutX="575.0" layoutY="96.0" prefHeight="25.0" prefWidth="156.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedContacto" layoutX="73.0" layoutY="147.0" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedEmail" layoutX="275.0" layoutY="147.0" prefHeight="25.0" prefWidth="209.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                        <TextField fx:id="texteFiedContacto" layoutX="73.0" layoutY="147.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                        <TextField fx:id="texteFiedEmail" layoutX="275.0" layoutY="147.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="209.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
                         <TextField fx:id="texteFiedEndereco" layoutX="569.0" layoutY="147.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedUsuario" layoutX="298.0" layoutY="199.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                        <TextField fx:id="texteFiedUsuario" layoutX="298.0" layoutY="199.0" onKeyTyped="#eliminarEspacoEmBranco" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
                         <PasswordField fx:id="texteFiedSenha" layoutX="569.0" layoutY="199.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
                         <ComboBox fx:id="comboBoxGenero" layoutX="57.0" layoutY="96.0" prefHeight="25.0" prefWidth="118.0" promptText="Gênero" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
                         <ComboBox fx:id="comboBoxTipoIndentificacao" layoutX="307.0" layoutY="96.0" prefHeight="25.0" prefWidth="138.0" promptText="Identificação" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />

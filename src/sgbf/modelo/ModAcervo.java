@@ -8,7 +8,6 @@ package sgbf.modelo;
 import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -33,6 +32,7 @@ public class ModAcervo {
     private ModEstoque estoqueMod;
     private ModEditora editoraMod;
     private ModAutor autorMod;
+    private ModAutor autorModRemover;
     private ModCategoria categoriaMod;
     private UtilControloDaData utilControloDaData;
 
@@ -54,6 +54,7 @@ public class ModAcervo {
         this.estoqueMod = new ModEstoque();
         this.editoraMod = new ModEditora();
         this.autorMod = new ModAutor();
+        this.autorModRemover = new ModAutor();
         this.categoriaMod = new ModCategoria();
         this.utilControloDaData = new UtilControloDaData();
     }
@@ -127,14 +128,10 @@ public class ModAcervo {
     }
 
     public void setEdicao(Byte edicao, String operacao) {
-        if (edicao <= 0) {
-            throw new UtilControloExcessao(operacao, "Numero da Edição inválida !", Alert.AlertType.WARNING);
+        if (edicao >= 0 && edicao <= 125) {
+            this.edicao = edicao;
         } else {
-            if (edicao > 125) {
-                throw new UtilControloExcessao(operacao, "O Numero da Edição máximo é de 125 !", Alert.AlertType.WARNING);
-            } else {
-                this.edicao = edicao;
-            }
+            throw new UtilControloExcessao(operacao, "A edição introduzida não é válida\nValores permitidos 1-125 ", Alert.AlertType.WARNING);
         }
     }
 
@@ -143,14 +140,10 @@ public class ModAcervo {
     }
 
     public void setVolume(Byte volume, String operacao) {
-        if (volume <= 0) {
-            throw new UtilControloExcessao(operacao, "Numero do Volume inválido !", Alert.AlertType.ERROR);
+        if (volume >= 0 && volume <= 125) {
+            this.volume = volume;
         } else {
-            if (volume > 125) {
-                throw new UtilControloExcessao(operacao, "O Numero do Volume máximo é de 125 !", Alert.AlertType.WARNING);
-            } else {
-                this.volume = volume;
-            }
+            throw new UtilControloExcessao(operacao, "O volume introduzido não é válida\nValores permitidos 1-125 ", Alert.AlertType.WARNING);
         }
     }
 
@@ -159,7 +152,7 @@ public class ModAcervo {
     }
 
     public void setNumero_paginas(Short numero_paginas, String operacao) {
-        if (volume <= 0) {
+        if (numero_paginas <= 0) {
             throw new UtilControloExcessao(operacao, "Numero de Páginas inválido !", Alert.AlertType.ERROR);
         } else {
             this.numero_paginas = numero_paginas;
@@ -171,10 +164,14 @@ public class ModAcervo {
     }
 
     public void setAno_lancamento(Integer ano_lancamento, String operacao) {
-        if (ano_lancamento < 0) {
-            throw new UtilControloExcessao("O ano de lançamento é inválido !", operacao, Alert.AlertType.WARNING);
-        } else {
+        if (ano_lancamento >= 1901 && ano_lancamento <= 2155) {
             this.ano_lancamento = ano_lancamento;
+        } else {
+            if (ano_lancamento == 0) {
+                this.ano_lancamento = ano_lancamento;
+            } else {
+                throw new UtilControloExcessao("O ano de lançamento é inválido !", operacao, Alert.AlertType.WARNING);
+            }
         }
     }
 
@@ -268,8 +265,16 @@ public class ModAcervo {
         }
     }
 
+    public ModAutor getAutorModRemover() {
+        return autorModRemover;
+    }
+
+    public void setAutorModRemover(ModAutor autorModRemover) {
+        this.autorModRemover = autorModRemover;
+    }
+    
     public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
-        if (this.categoriaMod == null) {
+        if (categoriaMod == null) {
             throw new UtilControloExcessao(operacao, "Seleccione a Categoria !", Alert.AlertType.INFORMATION);
         } else {
             this.categoriaMod = categoriaMod;

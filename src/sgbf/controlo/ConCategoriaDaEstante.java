@@ -12,8 +12,8 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModCategoriaDaEstante;
+import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -25,8 +25,8 @@ public class ConCategoriaDaEstante extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModCategoriaDaEstante categoriaDaEstanteMod = (ModCategoriaDaEstante) objecto_registar;
         try {
-            if (this.temCategoriaEEstante(categoriaDaEstanteMod)) {
-                super.query = "INSERT INTO tcc.categoriasdaestante(categoria_idcategoria, Estante_idEstante) VALUES (?, ?)";
+            if (this.registarCategoriaNaEstante(categoriaDaEstanteMod)) {
+                super.query = "INSERT INTO tcc.categoriasdaestante (categoria_idcategoria, Estante_idEstante) VALUES (?, ?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setInt(1, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
                 super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
@@ -36,26 +36,32 @@ public class ConCategoriaDaEstante extends ConCRUD {
             }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estante !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
-        } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
-        ModCategoriaDaEstante categoriaDaEstanteMod = (ModCategoriaDaEstante) objecto_alterar;
+        ModCategoria categoriaMod = (ModCategoria) objecto_alterar;
+        ModCategoriaDaEstante categoriaDaEstanteMod = new ModCategoriaDaEstante();
         try {
-            if (this.temCategoriaEEstante(categoriaDaEstanteMod)) {
-                super.query = "update tcc.categoriasdaestante set Estante_idEstante=? where categoria_idcategoria= and ";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-                super.preparedStatement.setInt(1, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
-                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
-                return !super.preparedStatement.execute();
+            if (categoriaMod.getEstanteNova().getIdEstante() == 0) {
+                return this.remover(categoriaMod, operacao);
             } else {
-                return this.remover(categoriaDaEstanteMod, operacao);
+                if (this.pesquisar(categoriaMod, operacao).isEmpty()) {
+                    categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
+                    categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteNova(), operacao);
+                    return this.registar(categoriaDaEstanteMod, operacao);
+                } else {
+                    super.query = "update tcc.categoriasdaestante set Estante_idEstante=? where categoria_idcategoria=? and Estante_idEstante=?";
+                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement.setInt(1, categoriaMod.getEstanteNova().getIdEstante());
+                    super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
+                    super.preparedStatement.setInt(3, categoriaMod.getEstanteActual().getIdEstante());
+                    return !super.preparedStatement.execute();
+                }
             }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estante !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -65,25 +71,21 @@ public class ConCategoriaDaEstante extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModCategoria categoriaDaEstanteMod = (ModCategoria) objecto_remover;
         try {
-            System.out.println("Cat:" + categoriaDaEstanteMod.getIdCategoria());
-            System.out.println("Est:" + categoriaDaEstanteMod.getEstanteMod().getIdEstante());
             super.query = "delete from tcc.categoriasdaestante where categoria_idcategoria=? and Estante_idEstante=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, categoriaDaEstanteMod.getIdCategoria());
-            if (categoriaDaEstanteMod.getEstanteAntiga().getIdEstante() == 0) {
-                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
+            if (categoriaDaEstanteMod.getEstanteActual().getIdEstante() == 0) {
+                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteNova().getIdEstante());
             } else {
-                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteAntiga().getIdEstante());
+                super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteActual().getIdEstante());
             }
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estante !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
-        } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
 
-    private boolean temCategoriaEEstante(ModCategoriaDaEstante categoriaDaEstanteMod) {
+    private boolean registarCategoriaNaEstante(ModCategoriaDaEstante categoriaDaEstanteMod) {
         return (categoriaDaEstanteMod.getCategoriaMod().getIdCategoria() != 0)
                 && (categoriaDaEstanteMod.getEstanteMod().getIdEstante() != 0);
     }
@@ -107,32 +109,44 @@ public class ConCategoriaDaEstante extends ConCRUD {
     @Override
     public List<Object> pesquisar(Object objecto_pesquisar, String operacao) {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
-        /*ModEstante estanteMod = (ModEstante)objecto_pesquisar;
-        try{
-            super.query = "select * from tcc.Estante where idEstante=? or "
-                        + "designacao like '%"+estanteMod.getDesignacao()+"%'";
+        ModCategoria categoriaMod = (ModCategoria) objecto_pesquisar;
+        try {
+            super.query = "select * from tcc.view_CategoriaDaEstante where idcategoria=? and idEstante=?";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
-            super.setResultset  = super.preparedStatement.executeQuery();
-            while(super.setResultset.next()){
+            super.preparedStatement.setInt(1, categoriaMod.getIdCategoria());
+            super.preparedStatement.setInt(2, categoriaMod.getEstanteActual().getIdEstante());
+            super.setResultset = super.preparedStatement.executeQuery();
+            while (super.setResultset.next()) {
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
             }
             return todosRegistosEncontrados;
-        }catch(SQLException erro){
-            throw new UtilControloExcessao("Erro ao "+operacao+" Editora(s) !\nErro: "+erro.getMessage(), operacao,UtilIconesDaJOPtionPane.Erro.nomeDaImagem());
-        }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Categoria(s) !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
-         */
-        return todosRegistosEncontrados;
+    }
+
+    public List<Object> pesquisar(ModEstante estanteMod, String operacao) {
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        try {
+            super.query = "select * from tcc.view_CategoriaDaEstante where idEstante=?";
+            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement.setInt(1, estanteMod.getIdEstante());
+            super.setResultset = super.preparedStatement.executeQuery();
+            while (super.setResultset.next()) {
+                todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
+            }
+            return todosRegistosEncontrados;
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "(s)\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
         ModCategoria categoriaMod = new ModCategoria();
         categoriaMod.setIdCategoria(setResultset.getInt("idcategoria"), operacao);
-        categoriaMod.getEstanteMod().setIdEstante(setResultset.getInt("idEstante"), operacao);
+        categoriaMod.getEstanteNova().setIdEstante(setResultset.getInt("idEstante"), operacao);
         categoriaMod.setDesignacao(setResultset.getString("categoria"), operacao);
-        categoriaMod.getEstanteMod().setDesignacao(setResultset.getString("estante"), operacao);
+        categoriaMod.getEstanteNova().setDesignacao(setResultset.getString("estante"), operacao);
         categoriaMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         categoriaMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return categoriaMod;
