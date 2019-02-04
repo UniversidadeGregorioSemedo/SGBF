@@ -32,6 +32,7 @@ public class ModAcervo {
     private ModEstoque estoqueMod;
     private ModEditora editoraMod;
     private ModAutor autorMod;
+    private ModAutor autorModRemover;
     private ModCategoria categoriaMod;
     private UtilControloDaData utilControloDaData;
 
@@ -53,6 +54,7 @@ public class ModAcervo {
         this.estoqueMod = new ModEstoque();
         this.editoraMod = new ModEditora();
         this.autorMod = new ModAutor();
+        this.autorModRemover = new ModAutor();
         this.categoriaMod = new ModCategoria();
         this.utilControloDaData = new UtilControloDaData();
     }
@@ -263,6 +265,14 @@ public class ModAcervo {
         }
     }
 
+    public ModAutor getAutorModRemover() {
+        return autorModRemover;
+    }
+
+    public void setAutorModRemover(ModAutor autorModRemover) {
+        this.autorModRemover = autorModRemover;
+    }
+    
     public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
         if (categoriaMod == null) {
             throw new UtilControloExcessao(operacao, "Seleccione a Categoria !", Alert.AlertType.INFORMATION);

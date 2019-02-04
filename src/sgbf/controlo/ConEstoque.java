@@ -14,9 +14,7 @@ import sgbf.modelo.ModEmprestimo;
 import sgbf.modelo.ModEstoque;
 import sgbf.modelo.ModItemProveniente;
 import sgbf.modelo.ModItemSolicitado;
-import sgbf.modelo.ModReserva;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
