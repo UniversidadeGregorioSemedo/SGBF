@@ -73,11 +73,11 @@ public class VisCadastramentoCategoria implements Initializable {
             categoriaMod.setIdCategoria(categoriaCon.proximoCodigoASerRegistado(operacao), operacao);
             categoriaDaEstanteMod.setCategoriaMod(categoriaMod, operacao);
             categoriaDaEstanteMod.setEstanteMod(categoriaMod.getEstanteNova(), operacao);
-            //if (categoriaDaEstanteCon.registar(categoriaDaEstanteMod, operacao)) {
-            this.bloquearItensDaJanela();
-            this.limparItensDaJanela();
-            throw new UtilControloExcessao(operacao, "Categoria Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
-            // }
+            if (categoriaDaEstanteCon.registar(categoriaDaEstanteMod, operacao)) {
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
+                throw new UtilControloExcessao(operacao, "Categoria Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+            }
         }
     }
 

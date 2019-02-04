@@ -24,7 +24,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModCategoriaDaEstante categoriaDaEstanteMod = (ModCategoriaDaEstante) objecto_registar;
         try {
-            if (this.temCategoriaEEstante(categoriaDaEstanteMod)) {
+            if (this.registarCategoriaNaEstante(categoriaDaEstanteMod)) {
                 super.query = "INSERT INTO tcc.categoriasdaestante (categoria_idcategoria, Estante_idEstante) VALUES (?, ?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setInt(1, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
@@ -44,7 +44,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModCategoriaDaEstante categoriaDaEstanteMod = (ModCategoriaDaEstante) objecto_alterar;
         try {
-            if (this.temCategoriaEEstante(categoriaDaEstanteMod)) {
+            if (this.registarCategoriaNaEstante(categoriaDaEstanteMod)) {
                 super.query = "update tcc.categoriasdaestante set Estante_idEstante=? where categoria_idcategoria= and ";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setInt(1, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
@@ -78,7 +78,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         }
     }
 
-    private boolean temCategoriaEEstante(ModCategoriaDaEstante categoriaDaEstanteMod) {
+    private boolean registarCategoriaNaEstante(ModCategoriaDaEstante categoriaDaEstanteMod) {
         return (categoriaDaEstanteMod.getCategoriaMod().getIdCategoria() != 0)
                 && (categoriaDaEstanteMod.getEstanteMod().getIdEstante() != 0);
     }
