@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
@@ -19,84 +21,93 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="12.0" layoutY="7.0" prefHeight="215.0" prefWidth="502.0" style="-fx-border-style: solid; -fx-border-color: WHITE;">
-                     <children>
-                        <Label layoutX="7.0" layoutY="6.0" text="Pesquisar area" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="14.0" layoutY="46.0" text="Nome" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <TextField fx:id="texteFiedPesquisar" layoutX="99.0" layoutY="42.0" prefHeight="25.0" prefWidth="187.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css" />
-                        <TableView fx:id="tableViewArea" layoutX="14.0" layoutY="78.0" prefHeight="123.0" prefWidth="355.0">
-                          <columns>
-                            <TableColumn fx:id="tableColumId" prefWidth="81.0" text="Id" />
-                            <TableColumn fx:id="tableColumSector" prefWidth="69.0" text="Sector" />
-                              <TableColumn fx:id="tableColumIDataRegisto" prefWidth="95.0" text="Data registro" />
-                              <TableColumn fx:id="tableColumNmeroDataModificacao" prefWidth="109.0" text="Data modificação" />
-                          </columns>
-                        </TableView>
-                        <JFXButton fx:id="botaoPesquisar" layoutX="296.0" layoutY="38.0" onAction="#pesquisarArea" prefHeight="32.0" prefWidth="36.0" stylesheets="@../util/viscadastroarea.css" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Pesquisa.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></JFXButton>
-                        <Pane layoutX="378.0" layoutY="78.0" prefHeight="123.0" prefWidth="106.0" style="-fx-border-style: solid; -fx-border-color: white;">
-                           <children>
-                              <Button fx:id="botaoRemover" layoutX="19.0" layoutY="90.0" mnemonicParsing="false" onAction="#removerArea" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Remover">
-                                 <font>
-                                    <Font name="Sitka Text" size="13.0" />
-                                 </font></Button>
-                              <Button fx:id="botaoAlterar" layoutX="19.0" layoutY="8.0" mnemonicParsing="false" onAction="#alterarArea" prefHeight="25.0" prefWidth="72.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Alterar">
-                                 <font>
-                                    <Font name="Sitka Text" size="13.0" />
-                                 </font></Button>
-                              <Button fx:id="botaoNovo" layoutX="18.0" layoutY="49.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="72.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Novo">
-                                 <font>
-                                    <Font name="Sitka Text" size="13.0" />
-                                 </font></Button>
-                           </children>
-                        </Pane>
-                     </children>
-                  </Pane>
+                  <Button fx:id="botaoRemover" layoutX="413.0" layoutY="191.0" mnemonicParsing="false" onAction="#removerArea" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Remover">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoAlterar" layoutX="413.0" layoutY="109.0" mnemonicParsing="false" onAction="#alterarArea" prefHeight="25.0" prefWidth="72.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Alterar">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoNovo" layoutX="412.0" layoutY="150.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="72.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Novo">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <JFXButton fx:id="botaoPesquisar" layoutX="214.0" layoutY="75.0" onAction="#pesquisarArea" prefHeight="25.0" prefWidth="38.0" stylesheets="@../util/viscadastroarea.css" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Pesquisa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding>
+                  </JFXButton>
+                  <TableView fx:id="tableViewArea" layoutX="21.0" layoutY="109.0" prefHeight="123.0" prefWidth="355.0">
+                     <columns>
+                        <TableColumn fx:id="tableColumId" prefWidth="81.0" text="Id" />
+                        <TableColumn fx:id="tableColumSector" prefWidth="69.0" text="Sector" />
+                        <TableColumn fx:id="tableColumIDataRegisto" prefWidth="95.0" text="Data registro" />
+                        <TableColumn fx:id="tableColumNmeroDataModificacao" prefWidth="109.0" text="Data modificação" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="texteFiedPesquisar" layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="187.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css">
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding>
+                  </TextField>
+                  <Label layoutX="21.0" layoutY="36.0" text="Pesquisar area" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="61.0" text="Use ( _ ) ver todas areas" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="200.0" layoutY="6.0" text="Cadastro de areas" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" layoutX="101.0" layoutY="23.0" startX="-100.0" stroke="WHITE" />
+                  <Line endX="100.0" layoutX="425.0" layoutY="23.0" startX="-100.0" stroke="WHITE" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="26.0" prefHeight="87.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-color: white;">
-                     <children>
-                        <Label layoutX="6.0" layoutY="6.0" text="Cadastrar area" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="14.0" layoutY="44.0" text="Sector" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <TextField fx:id="texteFiedSector" layoutX="71.0" layoutY="40.0" prefHeight="25.0" prefWidth="100.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="236.0" layoutY="16.0" prefHeight="115.0" prefWidth="100.0" style="-fx-border-style: solid; -fx-border-color: white;">
-                     <children>
-                        <Button fx:id="botaoCadastrar" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" onAction="#cadastrarArea" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Cadastrar">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Button>
-                        <Button fx:id="botaoCancelar" layoutX="12.0" layoutY="48.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="76.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Cancelar">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Button>
-                        <Button fx:id="botaoSair" layoutX="12.0" layoutY="82.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Sair">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Button>
-                     </children>
-                  </Pane>
+                  <TextField fx:id="texteFiedSector" layoutX="83.0" layoutY="61.0" prefHeight="25.0" prefWidth="100.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css" />
+                  <Label layoutX="21.0" layoutY="66.0" text="Sector" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="14.0" text="Cadastrar area" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="botaoSair" layoutX="410.0" layoutY="100.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Sair">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoCancelar" layoutX="410.0" layoutY="66.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="76.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Cancelar">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoCadastrar" layoutX="410.0" layoutY="32.0" mnemonicParsing="false" onAction="#cadastrarArea" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Cadastrar">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
         </items>
