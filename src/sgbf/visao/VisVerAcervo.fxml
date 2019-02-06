@@ -44,8 +44,8 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Line endX="100.0" layoutX="307.0" layoutY="21.0" startX="-100.0" />
-                  <Line endX="100.0" layoutX="723.0" layoutY="21.0" startX="-100.0" />
+                  <Line endX="100.0" layoutX="307.0" layoutY="21.0" startX="-100.0" stroke="WHITE" />
+                  <Line endX="100.0" layoutX="723.0" layoutY="21.0" startX="-100.0" stroke="WHITE" />
                   <Label layoutX="432.0" layoutY="11.0" prefHeight="17.0" prefWidth="172.0" text="Listar todos emprestimos" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
@@ -67,12 +67,12 @@
                   </TableView>
                   <Label layoutX="27.0" layoutY="23.0" text="Localização do Acervo" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text" size="14.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
                   <Label layoutX="528.0" layoutY="23.0" text="Outras informações" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text" size="14.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
                   <Label layoutX="535.0" layoutY="145.0" text="Data de Registo:" textFill="WHITE">

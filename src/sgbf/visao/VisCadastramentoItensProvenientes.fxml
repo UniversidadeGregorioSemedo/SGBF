@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -20,9 +21,9 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="711.0">
                <children>
-                  <Label layoutX="14.0" layoutY="34.0" text="Dados acervo" textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="46.0" text="Use o ( _ ) para ver todos acervos" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text" size="14.0" />
+                        <Font name="Sitka Text" size="12.0" />
                      </font>
                   </Label>
                   <TextField fx:id="texteFiedPesquisarAcervo" layoutX="14.0" layoutY="64.0" prefHeight="25.0" prefWidth="223.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
@@ -41,7 +42,7 @@
                      </columnResizePolicy>
                      
                         </TableView>
-                  <JFXButton fx:id="botaoPesquisarAcervo" layoutX="250.0" layoutY="61.0" onAction="#pesquisarAcervos" stylesheets="@../util/visitensprovenientes.css" text=" ">
+                  <JFXButton fx:id="botaoPesquisarAcervo" layoutX="243.0" layoutY="64.0" onAction="#pesquisarAcervos" prefHeight="25.0" prefWidth="35.0" stylesheets="@../util/visitensprovenientes.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -49,13 +50,23 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding>
                   </JFXButton>
+                  <Label layoutX="236.0" layoutY="6.0" text="Cadastro da proveniencia dos itens" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" layoutX="115.0" layoutY="15.0" startX="-100.0" stroke="WHITE" />
+                  <Line endX="100.0" layoutX="596.0" layoutY="16.0" startX="-100.0" stroke="WHITE" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TextField fx:id="texteFiedPesquisarEntrada" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="223.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
-                  <JFXButton fx:id="botaoPesquisarEntrada" layoutX="246.0" layoutY="11.0" onAction="#pesquisarProveniencia" stylesheets="@../util/visitensprovenientes.css" text=" ">
+                  <TextField fx:id="texteFiedPesquisarEntrada" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="223.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
+                  <JFXButton fx:id="botaoPesquisarEntrada" layoutX="243.0" layoutY="38.0" onAction="#pesquisarProveniencia" stylesheets="@../util/visitensprovenientes.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -63,8 +74,11 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding>
                   </JFXButton>
-                  <TableView fx:id="tableViewItemProveniente" layoutX="14.0" layoutY="49.0" prefHeight="221.0" prefWidth="417.0">
+                  <TableView fx:id="tableViewItemProveniente" layoutX="14.0" layoutY="72.0" prefHeight="194.0" prefWidth="417.0">
                     <columns>
                       <TableColumn fx:id="tableColumTituloProvaniente" prefWidth="179.0" text="Titulo" />
                       <TableColumn fx:id="tableColumQuantidadeEntrada" prefWidth="95.0" text="Quantidade" />
@@ -87,33 +101,38 @@
                   <TextField fx:id="texteFiedSubtotal" layoutX="591.0" layoutY="123.0" prefHeight="25.0" prefWidth="114.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
                   <Button fx:id="botaoSair" layoutX="628.0" layoutY="241.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="74.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Sair">
                      <font>
-                        <Font name="Sitka Text" size="12.0" />
+                        <Font name="Sitka Text" size="13.0" />
                      </font></Button>
-                  <Button fx:id="botaoCancelar" layoutX="537.0" layoutY="241.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="74.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Cancelar">
+                  <Button fx:id="botaoCancelar" layoutX="537.0" layoutY="241.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="81.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Cancelar">
                      <font>
-                        <Font name="Sitka Text" size="12.0" />
+                        <Font name="Sitka Text" size="13.0" />
                      </font></Button>
                   <Button fx:id="botaoAlterar" layoutX="628.0" layoutY="203.0" mnemonicParsing="false" onAction="#alterarProveniencia" prefHeight="25.0" prefWidth="74.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Alterar">
                      <font>
-                        <Font name="Sitka Text" size="12.0" />
+                        <Font name="Sitka Text" size="13.0" />
                      </font></Button>
-                  <Button fx:id="botaoRemover" layoutX="447.0" layoutY="241.0" mnemonicParsing="false" onAction="#removerProveniencia" prefHeight="25.0" prefWidth="68.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Remover">
+                  <Button fx:id="botaoRemover" layoutX="447.0" layoutY="241.0" mnemonicParsing="false" onAction="#removerProveniencia" prefHeight="25.0" prefWidth="74.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Remover">
                      <font>
-                        <Font name="Sitka Text" size="12.0" />
+                        <Font name="Sitka Text" size="13.0" />
                      </font></Button>
-                  <Button fx:id="botaoNovo" layoutX="447.0" layoutY="203.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="68.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Novo">
+                  <Button fx:id="botaoNovo" layoutX="447.0" layoutY="203.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="74.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Novo">
                      <font>
-                        <Font name="Sitka Text" size="12.0" />
+                        <Font name="Sitka Text" size="13.0" />
                      </font></Button>
                   <Label layoutX="447.0" layoutY="54.0" prefHeight="15.0" prefWidth="114.0" stylesheets="@../util/visitensprovenientes.css" text="Tipo Proveniencia" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font></Label>
                   <ComboBox fx:id="comboxProveniencia" layoutX="568.0" layoutY="49.0" prefHeight="25.0" prefWidth="139.0" promptText="Sel. Proveniencia" styleClass="jfx-combobox" stylesheets="@../util/visitensprovenientes.css" />
-                  <Button fx:id="botaoCadastrar" layoutX="537.0" layoutY="203.0" mnemonicParsing="false" onAction="#cadastrarProveniencia" prefHeight="25.0" prefWidth="74.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Cadastrar">
+                  <Button fx:id="botaoCadastrar" layoutX="537.0" layoutY="203.0" mnemonicParsing="false" onAction="#cadastrarProveniencia" prefHeight="25.0" prefWidth="81.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Cadastrar">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font></Button>
+                  <Label layoutX="14.0" layoutY="23.0" text="Use o ( _ ) para ver todos acervos" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
-                     </font></Button>
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </items>

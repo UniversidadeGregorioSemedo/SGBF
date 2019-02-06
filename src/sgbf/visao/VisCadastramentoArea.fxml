@@ -56,22 +56,17 @@
                         <TableColumn fx:id="tableColumNmeroDataModificacao" prefWidth="109.0" text="Data modificação" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="texteFiedPesquisar" layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="187.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css">
+                  <TextField fx:id="texteFiedPesquisar" layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="187.0" promptText="Pesquisar áreas" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css">
                      <padding>
                         <Insets right="3.0" />
                      </padding>
                   </TextField>
-                  <Label layoutX="21.0" layoutY="36.0" text="Pesquisar area" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="21.0" layoutY="61.0" text="Use ( _ ) ver todas areas" textFill="WHITE">
+                  <Label layoutX="21.0" layoutY="61.0" text="Use ( _ ) ver todas áreas" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="200.0" layoutY="6.0" text="Cadastro de areas" textFill="WHITE">
+                  <Label layoutX="200.0" layoutY="6.0" text="Cadastro de áreas" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
                      </font>
@@ -83,14 +78,14 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <TextField fx:id="texteFiedSector" layoutX="83.0" layoutY="61.0" prefHeight="25.0" prefWidth="100.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css" />
-                  <Label layoutX="21.0" layoutY="66.0" text="Sector" textFill="WHITE">
+                  <Label layoutX="21.0" layoutY="66.0" text="Sector *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="21.0" layoutY="14.0" text="Cadastrar area" textFill="WHITE">
+                  <Label layoutX="21.0" layoutY="14.0" text="Cadastrar área" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
                   <Button fx:id="botaoSair" layoutX="410.0" layoutY="100.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Sair">
@@ -98,7 +93,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoCancelar" layoutX="410.0" layoutY="66.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="76.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Cancelar">
+                  <Button fx:id="botaoCancelar" layoutX="410.0" layoutY="66.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
