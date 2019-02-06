@@ -73,9 +73,7 @@ public class VisCadastramentoAcervo implements Initializable {
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
     private final ConAcervosEscreitos escreitosAcervosCon = new ConAcervosEscreitos();
-    @FXML
-    private Label labelOperador;
-
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.carregarValoresPadraoNasComboxs();
