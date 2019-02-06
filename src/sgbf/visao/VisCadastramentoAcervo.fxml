@@ -103,7 +103,7 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="comboBoxEstante" layoutX="685.0" layoutY="148.0" onAction="#categoriasDaEstante" prefWidth="150.0" promptText="Seleccione a estante" styleClass="jfx-combobox" stylesheets="@../util/viscadastroacervo.css" />
-                  <Label layoutX="589.0" layoutY="156.0" text="Estante *" textFill="WHITE">
+                  <Label fx:id="labelEstante" layoutX="589.0" layoutY="156.0" text="Estante " textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -115,7 +115,7 @@
                   </Button>
                   <JFXTextArea fx:id="textAreaSinopese" layoutX="668.0" layoutY="208.0" prefHeight="73.0" prefWidth="367.0" />
                   <ComboBox fx:id="comboBoxAutor" layoutX="89.0" layoutY="206.0" prefHeight="25.0" prefWidth="464.0" promptText="Seleccione o autor" styleClass="jfx-combobox" stylesheets="@../util/viscadastroacervo.css" />
-                  <Label layoutX="19.0" layoutY="212.0" prefHeight="17.0" prefWidth="58.0" text="Autor *" textFill="WHITE">
+                  <Label layoutX="19.0" layoutY="212.0" prefHeight="17.0" prefWidth="58.0" text="Autor" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -174,7 +174,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="19.0" layoutY="261.0" text="Endereço acervo" textFill="WHITE">
+                  <Label fx:id="labelEndereco" layoutX="19.0" layoutY="261.0" text="Endereço acervo" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -185,7 +185,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxEditora" layoutX="918.0" layoutY="102.0" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione a editora" styleClass="jfx-combobox" stylesheets="@../util/viscadastroacervo.css" />
+                  <ComboBox fx:id="comboBoxEditora" layoutX="918.0" layoutY="94.0" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione a editora" styleClass="jfx-combobox" stylesheets="@../util/viscadastroacervo.css" />
                   <Label layoutX="590.0" layoutY="105.0" text="Idioma *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
@@ -198,7 +198,7 @@
                   </Label>
                   <TextField fx:id="texteFieldAno" layoutX="489.0" layoutY="101.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
                   <TextField fx:id="texteFiedNumPaginas" layoutX="353.0" layoutY="101.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="69.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
-                  <Label layoutX="276.0" layoutY="107.0" text="Nº Paginas" textFill="WHITE">
+                  <Label layoutX="276.0" layoutY="107.0" text="Nº Paginas*" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>

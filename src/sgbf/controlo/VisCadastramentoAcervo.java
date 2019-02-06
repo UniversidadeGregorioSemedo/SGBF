@@ -63,6 +63,8 @@ public class VisCadastramentoAcervo implements Initializable {
     private TableColumn<ModAcervo, String> tableColumTitulo, tableColumSubTitulo, tableColumEdicao, tableColumISBN,
             tableColumnAno, tableColumnTipo, tableColumnFormato;
     @FXML
+    private Label labelEstante, labelEndereco;
+    @FXML
     private JFXTextArea textAreaSinopese;
     @FXML
     private AnchorPane AnchorPaneAcervo;
@@ -450,11 +452,15 @@ public class VisCadastramentoAcervo implements Initializable {
     @FXML
     private void introduzirEndereco() {
         if (this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Físico")) {
+            labelEstante.setText("Estante *");
+            labelEndereco.setText("Endereço acervo");
             texteFiedEndereco.setText(null);
             texteFiedEndereco.setDisable(true);
             botaoCarregar.setDisable(true);
         } else {
             if (this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Digital")) {
+                labelEstante.setText("Estante");
+                labelEndereco.setText("Endereço acervo *");
                 texteFiedEndereco.setDisable(false);
                 texteFiedEndereco.setEditable(false);
                 botaoCarregar.setDisable(false);

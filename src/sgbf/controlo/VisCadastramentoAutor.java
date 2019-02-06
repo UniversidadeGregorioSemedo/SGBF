@@ -49,8 +49,6 @@ public class VisCadastramentoAutor implements Initializable {
     private String operacao = null;
     private final ModAutor autorMod = new ModAutor();
     private final ConAutor autorCon = new ConAutor();
-    @FXML
-    private Label labelOperador;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
