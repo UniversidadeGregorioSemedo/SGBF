@@ -36,7 +36,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="18.0" layoutY="33.0" prefHeight="25.0" prefWidth="517.0" styleClass="jfx-textfield" stylesheets="@../util/viewtodosacervos.css" />
+                  <TextField fx:id="textFieldPesquisar" layoutX="18.0" layoutY="33.0" prefHeight="25.0" prefWidth="517.0" promptText="Pesquisar acervos" styleClass="jfx-textfield" stylesheets="@../util/viewtodosacervos.css" />
                   <JFXButton fx:id="botaoPesquisar" layoutX="541.0" layoutY="33.0" onAction="#localizarAcervos" prefHeight="25.0" prefWidth="39.0" stylesheets="@../util/viewtodosacervos.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -53,6 +53,11 @@
                   <Label layoutX="467.0" layoutY="1.0" prefHeight="17.0" prefWidth="172.0" text="Listar todos acervos" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="18.0" layoutY="20.0" text="Use ( _  ) para ver todos acervos" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="12.0" />
                      </font>
                   </Label>
                </children>
