@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -16,11 +17,11 @@
         <URL value="@/sgbf/util/reserva.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.5894428152492669" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: #1f4f4e;">
+      <SplitPane dividerPositions="0.658357771260997" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: #1f4f4e;">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tableViewVisitante" layoutX="11.0" layoutY="72.0" prefHeight="139.0" prefWidth="877.0">
+                  <TableView fx:id="tableViewVisitante" layoutX="14.0" layoutY="120.0" prefHeight="139.0" prefWidth="877.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
@@ -34,7 +35,7 @@
                         <TableColumn fx:id="tableColumCategoria" prefWidth="145.0" text="Categoria" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="tableViewEmprestimos" layoutX="11.0" layoutY="244.0" prefHeight="145.0" prefWidth="877.0">
+                  <TableView fx:id="tableViewEmprestimos" layoutX="14.0" layoutY="292.0" prefHeight="145.0" prefWidth="877.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
@@ -47,8 +48,8 @@
                         <TableColumn fx:id="tableColumnDataVencimento" prefWidth="75.0" text="Data de vencimento" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="250.0" styleClass="jfx-textfield" stylesheets="@../util/emprestimo.css" />
-                  <JFXButton fx:id="botaoPesquisar" layoutX="273.0" layoutY="17.0" onAction="#pesquisarUtente" prefHeight="25.0" prefWidth="48.0" stylesheets="@../util/emprestimo.css" text=" ">
+                  <TextField fx:id="textFieldPesquisar" layoutX="17.0" layoutY="68.0" prefHeight="25.0" prefWidth="250.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../util/emprestimo.css" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="276.0" layoutY="68.0" onAction="#pesquisarUtente" prefHeight="25.0" prefWidth="37.0" stylesheets="@../util/emprestimo.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,15 +60,25 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding>
                   </JFXButton>
-                  <Label layoutX="14.0" layoutY="48.0" text="Dados do Utente" textFill="WHITE">
+                  <Label layoutX="17.0" layoutY="54.0" text="Use ( _  ) para ver todos utentes" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="14.0" layoutY="269.0" text="Todos os Emprestimos" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="385.0" layoutY="8.0" text="Todos emprestimos" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
-                     </font></Label>
-                  <Label layoutX="11.0" layoutY="221.0" text="Todos os Emprestimos" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="14.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
+                  <Line endX="100.0" layoutX="276.0" layoutY="15.0" startX="-100.0" stroke="WHITE" />
+                  <Line endX="100.0" layoutX="631.0" layoutY="16.0" startX="-100.0" stroke="WHITE" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
@@ -88,7 +99,7 @@
                      </cursor></Button>
                   <Label layoutX="14.0" layoutY="6.0" text="Todos os itens emprestados" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text Bold" size="14.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
                   <TableView fx:id="tableViewItensReservados" layoutX="14.0" layoutY="33.0" prefHeight="189.0" prefWidth="756.0">
                     <columns>
@@ -104,15 +115,6 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Line endX="100.0" fill="#dddada85" layoutX="115.0" layoutY="242.0" smooth="false" startX="-100.0" stroke="#908d8d" />
-                  <Label layoutX="227.0" layoutY="233.0" text="Operadador:" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="14.0" />
-                     </font></Label>
-                  <Label fx:id="labelOperador" layoutX="321.0" layoutY="233.0" prefHeight="17.0" prefWidth="386.0" text="Nenhuma informação disponível" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text" size="12.0" />
-                     </font></Label>
                </children>
             </AnchorPane>
          </items>
