@@ -88,7 +88,6 @@ public class VisMovimentacaoReserva implements Initializable {
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewReserva.setPlaceholder(new Label("Nenhuma reserva feita"));
         this.textFieldPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
-        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
         this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirAsQuantidades(newValue));
     }
 

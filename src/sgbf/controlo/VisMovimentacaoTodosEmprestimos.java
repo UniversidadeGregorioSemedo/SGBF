@@ -81,7 +81,6 @@ public class VisMovimentacaoTodosEmprestimos implements Initializable {
         this.tableViewEmprestimos.setPlaceholder(new Label("Emprestimos não listadas"));
         this.tableViewItensReservados.setPlaceholder(new Label("Itens não listados"));
         this.textFieldPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
-        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
         this.tableViewVisitante.getSelectionModel().selectedItemProperty().addListener((observable, odlValue, newValue) -> exibirTodosEmprestimosDoUtente(newValue));
         this.tableViewEmprestimos.getSelectionModel().selectedItemProperty().addListener((observalbe, oldValue, newValue) -> exibirTodosItensSolicitados(newValue));
     }
