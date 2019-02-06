@@ -58,7 +58,6 @@ public class VisCadastramentoAutor implements Initializable {
         this.tableViewAutor.setPlaceholder(new Label("Autores não listados"));
         this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome do autor ou use *( _ ) para listar todos registos "));
         tableViewAutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
-        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }
 
     @FXML

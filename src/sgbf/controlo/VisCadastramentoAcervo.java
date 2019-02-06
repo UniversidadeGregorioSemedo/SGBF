@@ -30,7 +30,6 @@ import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModEditora;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**
