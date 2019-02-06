@@ -36,7 +36,7 @@
                         <Insets right="3.0" />
                      </padding>
                   </Button>
-                  <TableView fx:id="tableViewUtente" layoutX="20.0" layoutY="96.0" prefHeight="161.0" prefWidth="739.0">
+                  <TableView fx:id="tableViewUtente" layoutX="20.0" layoutY="96.0" prefHeight="161.0" prefWidth="915.0">
                      <columns>
                         <TableColumn fx:id="tableColumId" prefWidth="75.0" text="Id" />
                         <TableColumn fx:id="tableColumNome" prefWidth="204.0" text="Nome" />
@@ -44,6 +44,9 @@
                         <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="178.0" text="Nº Identificação" />
                         <TableColumn fx:id="tableColumCategoria" prefWidth="86.0" text="Categoria" />
                      </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <TextField fx:id="texteFiedPesquisar" layoutX="21.0" layoutY="59.0" prefHeight="25.0" prefWidth="444.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
                   <Label layoutX="21.0" layoutY="42.0" text="Use ( _ ) para ver todos utentes" textFill="WHITE">
@@ -62,30 +65,30 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="664.0">
                <children>
-                  <TextField fx:id="texteFiedEnderecoImagem" layoutX="178.0" layoutY="292.0" prefHeight="25.0" prefWidth="178.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedEnderecoImagem" layoutX="178.0" layoutY="292.0" prefHeight="25.0" prefWidth="580.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
                   <Label layoutX="15.0" layoutY="296.0" text="Endereço de imagem" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxCategoria" layoutX="91.0" layoutY="228.0" prefWidth="150.0" promptText="Categoria" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
-                  <ComboBox fx:id="comboBoxTipoIndentificacao" layoutX="325.0" layoutY="125.0" prefHeight="25.0" prefWidth="138.0" promptText="Identificação" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
-                  <ComboBox fx:id="comboBoxGenero" layoutX="75.0" layoutY="125.0" prefHeight="25.0" prefWidth="118.0" promptText="Gênero" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
-                  <PasswordField fx:id="texteFiedSenha" layoutX="602.0" layoutY="228.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <TextField fx:id="texteFiedUsuario" layoutX="316.0" layoutY="228.0" onKeyTyped="#eliminarEspacoEmBranco" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <TextField fx:id="texteFiedEndereco" layoutX="602.0" layoutY="176.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <TextField fx:id="texteFiedEmail" layoutX="293.0" layoutY="176.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="209.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <TextField fx:id="texteFiedContacto" layoutX="91.0" layoutY="176.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <TextField fx:id="texteFiedNumIden" layoutX="609.0" layoutY="125.0" prefHeight="25.0" prefWidth="156.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <TextField fx:id="texteFiedSegundoNome" layoutX="520.0" layoutY="78.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <TextField fx:id="texteFiedPrimeiroNome" layoutX="227.0" layoutY="78.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <TextField fx:id="texteFiedId" layoutX="54.0" layoutY="78.0" prefHeight="25.0" prefWidth="60.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <ComboBox fx:id="comboBoxCategoria" layoutX="91.0" layoutY="228.0" prefHeight="25.0" prefWidth="163.0" promptText="Categoria" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
+                  <ComboBox fx:id="comboBoxTipoIndentificacao" layoutX="341.0" layoutY="125.0" prefHeight="25.0" prefWidth="163.0" promptText="Identificação" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
+                  <ComboBox fx:id="comboBoxGenero" layoutX="91.0" layoutY="125.0" prefHeight="25.0" prefWidth="118.0" promptText="Gênero" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
+                  <PasswordField fx:id="texteFiedSenha" layoutX="636.0" layoutY="228.0" prefHeight="25.0" prefWidth="121.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedUsuario" layoutX="351.0" layoutY="229.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="155.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedEndereco" layoutX="350.0" layoutY="176.0" prefHeight="25.0" prefWidth="155.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedEmail" layoutX="633.0" layoutY="175.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="303.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedContacto" layoutX="91.0" layoutY="176.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedNumIden" layoutX="632.0" layoutY="125.0" prefHeight="25.0" prefWidth="303.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedSegundoNome" layoutX="634.0" layoutY="78.0" prefHeight="25.0" prefWidth="303.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedPrimeiroNome" layoutX="279.0" layoutY="77.0" prefHeight="25.0" prefWidth="226.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedId" layoutX="91.0" layoutY="77.0" prefHeight="25.0" prefWidth="60.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
                   <Label layoutX="517.0" layoutY="232.0" text="Senha" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="261.0" layoutY="232.0" text="Usuário" textFill="WHITE">
+                  <Label layoutX="271.0" layoutY="234.0" text="Usuário" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -95,12 +98,12 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="520.0" layoutY="180.0" text="Endereço *" textFill="WHITE">
+                  <Label layoutX="268.0" layoutY="180.0" text="Endereço *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="247.0" layoutY="180.0" text="Email" textFill="WHITE">
+                  <Label layoutX="518.0" layoutY="181.0" text="Email" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -110,12 +113,12 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="477.0" layoutY="130.0" text="Nº Identificação *" textFill="WHITE">
+                  <Label layoutX="517.0" layoutY="130.0" text="Nº Identificação *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="201.0" layoutY="129.0" text="Tipo Identificação *" textFill="WHITE">
+                  <Label layoutX="217.0" layoutY="129.0" text="Tipo Identificação *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -125,12 +128,12 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="411.0" layoutY="82.0" text="Segundo nome *" textFill="WHITE">
+                  <Label layoutX="517.0" layoutY="82.0" text="Segundo nome *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="121.0" layoutY="82.0" text="Primeiro nome *" textFill="WHITE">
+                  <Label layoutX="166.0" layoutY="82.0" text="Primeiro nome *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -140,12 +143,12 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="23.0" text="Dados do utente" textFill="WHITE">
+                  <Label layoutX="19.0" layoutY="29.0" text="Dados do utente" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="botaoFechar" layoutX="819.0" layoutY="291.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Sair">
+                  <Button fx:id="botaoFechar" layoutX="858.0" layoutY="292.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Sair">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -153,7 +156,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoCadastrar" layoutX="820.0" layoutY="104.0" mnemonicParsing="false" onAction="#cadastrarUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Cadastrar">
+                  <Button fx:id="botaoCadastrar" layoutX="858.0" layoutY="216.0" mnemonicParsing="false" onAction="#cadastrarUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Cadastrar">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -161,7 +164,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoAlterar" layoutX="819.0" layoutY="157.0" mnemonicParsing="false" onAction="#alterarUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Alterar">
+                  <Button fx:id="botaoAlterar" layoutX="768.0" layoutY="253.0" mnemonicParsing="false" onAction="#alterarUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Alterar">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -169,7 +172,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoRemover" layoutX="821.0" layoutY="207.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Remover">
+                  <Button fx:id="botaoRemover" layoutX="858.0" layoutY="253.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Remover">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -177,7 +180,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoNovo" layoutX="820.0" layoutY="62.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Novo">
+                  <Button fx:id="botaoNovo" layoutX="768.0" layoutY="216.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Novo">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -185,7 +188,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoCancelar" layoutX="821.0" layoutY="251.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Cancelar">
+                  <Button fx:id="botaoCancelar" layoutX="768.0" layoutY="292.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Cancelar">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
