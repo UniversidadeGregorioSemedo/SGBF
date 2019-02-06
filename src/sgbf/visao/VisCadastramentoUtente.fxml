@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import com.jfoenix.controls.*?>
@@ -16,172 +17,182 @@
         <URL value="@/sgbf/util/viscadastroutente.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.4308176100628931" orientation="VERTICAL" prefHeight="638.0" prefWidth="945.0" style="-fx-background-color: #1f4f4e;" AnchorPane.rightAnchor="0.0">
+      <SplitPane dividerPositions="0.4716981132075472" orientation="VERTICAL" prefHeight="638.0" prefWidth="945.0" style="-fx-background-color: #1f4f4e;" AnchorPane.rightAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="679.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="12.0" prefHeight="242.0" prefWidth="764.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: WHITE;">
-                     <children>
-                        <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="36.0" prefHeight="25.0" prefWidth="444.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <JFXButton layoutX="652.0" layoutY="35.0" prefHeight="25.0" prefWidth="33.0" text=" " />
-                        <TableView fx:id="tableViewUtente" layoutX="13.0" layoutY="73.0" prefHeight="161.0" prefWidth="739.0">
-                          <columns>
-                            <TableColumn fx:id="tableColumId" prefWidth="75.0" text="Id" />
-                            <TableColumn fx:id="tableColumNome" prefWidth="204.0" text="Nome" />
-                              <TableColumn fx:id="tableColumIdTipoIdentificacao" prefWidth="195.0" text="T. Identificação" />
-                              <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="178.0" text="Nº Identificação" />
-                              <TableColumn fx:id="tableColumCategoria" prefWidth="86.0" text="Categoria" />
-                          </columns>
-                           
-                        </TableView>
-                        <Button fx:id="botaoPesquisar" layoutX="464.0" layoutY="33.0" mnemonicParsing="false" onAction="#pesquisarUtente" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Pesquisa.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                     </children>
-                  </Pane>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="664.0">
-               <children>
-                  <Pane layoutX="14.0" layoutY="14.0" prefHeight="289.0" prefWidth="764.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: WHITE;">
-                     <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Dados do utente" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="53.0" text="Id" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="118.0" layoutY="53.0" text="Primeiro nome" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="393.0" layoutY="53.0" text="Segundo nome" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="10.0" layoutY="100.0" text="Genero" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="196.0" layoutY="100.0" text="Tipo Identificação" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="474.0" layoutY="100.0" text="Nº Identificação" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="10.0" layoutY="151.0" text="Contacto" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="229.0" layoutY="151.0" text="Email" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="502.0" layoutY="151.0" text="Endereço" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="10.0" layoutY="203.0" text="Categoria" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="243.0" layoutY="203.0" text="Usuário" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <Label layoutX="499.0" layoutY="203.0" text="Senha" textFill="WHITE">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font></Label>
-                        <TextField fx:id="texteFiedId" layoutX="36.0" layoutY="49.0" prefHeight="25.0" prefWidth="60.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedPrimeiroNome" layoutX="209.0" layoutY="49.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedSegundoNome" layoutX="493.0" layoutY="49.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedNumIden" layoutX="575.0" layoutY="96.0" prefHeight="25.0" prefWidth="156.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedContacto" layoutX="73.0" layoutY="147.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedEmail" layoutX="275.0" layoutY="147.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="209.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedEndereco" layoutX="569.0" layoutY="147.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <TextField fx:id="texteFiedUsuario" layoutX="298.0" layoutY="199.0" onKeyTyped="#eliminarEspacoEmBranco" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <PasswordField fx:id="texteFiedSenha" layoutX="569.0" layoutY="199.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                        <ComboBox fx:id="comboBoxGenero" layoutX="57.0" layoutY="96.0" prefHeight="25.0" prefWidth="118.0" promptText="Gênero" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
-                        <ComboBox fx:id="comboBoxTipoIndentificacao" layoutX="307.0" layoutY="96.0" prefHeight="25.0" prefWidth="138.0" promptText="Identificação" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
-                        <ComboBox fx:id="comboBoxCategoria" layoutX="73.0" layoutY="199.0" prefWidth="150.0" promptText="Categoria" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
-                     </children>
-                  </Pane>
-                  <Label layoutX="23.0" layoutY="267.0" text="Endereço de imagem" textFill="WHITE">
+                  <Button fx:id="botaoPesquisar" layoutX="472.0" layoutY="59.0" mnemonicParsing="false" onAction="#pesquisarUtente" prefHeight="25.0" prefWidth="36.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Pesquisa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding>
+                  </Button>
+                  <TableView fx:id="tableViewUtente" layoutX="20.0" layoutY="96.0" prefHeight="161.0" prefWidth="739.0">
+                     <columns>
+                        <TableColumn fx:id="tableColumId" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="tableColumNome" prefWidth="204.0" text="Nome" />
+                        <TableColumn fx:id="tableColumIdTipoIdentificacao" prefWidth="195.0" text="T. Identificação" />
+                        <TableColumn fx:id="tableColumNmeroIdentificacao" prefWidth="178.0" text="Nº Identificação" />
+                        <TableColumn fx:id="tableColumCategoria" prefWidth="86.0" text="Categoria" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="texteFiedPesquisar" layoutX="21.0" layoutY="59.0" prefHeight="25.0" prefWidth="444.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <Label layoutX="21.0" layoutY="42.0" text="Use ( _ ) para ver todos utentes" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
-                     </font></Label>
-                  <TextField fx:id="texteFiedEnderecoImagem" layoutX="160.0" layoutY="263.0" prefHeight="25.0" prefWidth="178.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
-                  <Pane layoutX="784.0" layoutY="14.0" prefHeight="289.0" prefWidth="138.0" style="-fx-border-style: solid; -fx-border-width: 1.5px; -fx-border-color: WHITE;">
-                     <children>
-                        <Button fx:id="botaoCancelar" layoutX="35.0" layoutY="203.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Cancelar">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="botaoNovo" layoutX="34.0" layoutY="14.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Novo">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="botaoRemover" layoutX="35.0" layoutY="159.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Remover">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="botaoAlterar" layoutX="33.0" layoutY="109.0" mnemonicParsing="false" onAction="#alterarUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Alterar">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="botaoCadastrar" layoutX="34.0" layoutY="56.0" mnemonicParsing="false" onAction="#cadastrarUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Cadastrar">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="botaoFechar" layoutX="33.0" layoutY="243.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Sair">
-                           <font>
-                              <Font name="Sitka Text" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                     </children>
-                  </Pane>
-                  <Line endX="100.0" layoutX="115.0" layoutY="333.0" startX="-100.0" stroke="WHITE" />
-                  <Label layoutX="228.0" layoutY="324.0" text="Operador:" textFill="WHITE">
+                        <Font name="Sitka Text" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="407.0" layoutY="6.0" text="Cadastro de utente" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelOperador" layoutX="310.0" layoutY="325.0" prefHeight="17.0" prefWidth="234.0" text="Nenhuma informação" textFill="WHITE">
+                  <Line endX="100.0" layoutX="289.0" layoutY="14.0" startX="-100.0" stroke="WHITE" />
+                  <Line endX="100.0" layoutX="659.0" layoutY="15.0" startX="-100.0" stroke="WHITE" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="664.0">
+               <children>
+                  <TextField fx:id="texteFiedEnderecoImagem" layoutX="178.0" layoutY="292.0" prefHeight="25.0" prefWidth="178.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <Label layoutX="15.0" layoutY="296.0" text="Endereço de imagem" textFill="WHITE">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
+                  <ComboBox fx:id="comboBoxCategoria" layoutX="91.0" layoutY="228.0" prefWidth="150.0" promptText="Categoria" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
+                  <ComboBox fx:id="comboBoxTipoIndentificacao" layoutX="325.0" layoutY="125.0" prefHeight="25.0" prefWidth="138.0" promptText="Identificação" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
+                  <ComboBox fx:id="comboBoxGenero" layoutX="75.0" layoutY="125.0" prefHeight="25.0" prefWidth="118.0" promptText="Gênero" styleClass="jfx-combobox" stylesheets="@../util/viscadastroutente.css" />
+                  <PasswordField fx:id="texteFiedSenha" layoutX="602.0" layoutY="228.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedUsuario" layoutX="316.0" layoutY="228.0" onKeyTyped="#eliminarEspacoEmBranco" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedEndereco" layoutX="602.0" layoutY="176.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedEmail" layoutX="293.0" layoutY="176.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="209.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedContacto" layoutX="91.0" layoutY="176.0" onKeyTyped="#eliminarEspacoEmBranco" prefHeight="25.0" prefWidth="118.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedNumIden" layoutX="609.0" layoutY="125.0" prefHeight="25.0" prefWidth="156.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedSegundoNome" layoutX="520.0" layoutY="78.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedPrimeiroNome" layoutX="227.0" layoutY="78.0" prefHeight="25.0" prefWidth="163.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <TextField fx:id="texteFiedId" layoutX="54.0" layoutY="78.0" prefHeight="25.0" prefWidth="60.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroutente.css" />
+                  <Label layoutX="517.0" layoutY="232.0" text="Senha" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="261.0" layoutY="232.0" text="Usuário" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="232.0" text="Categoria *" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="520.0" layoutY="180.0" text="Endereço *" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="247.0" layoutY="180.0" text="Email" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="180.0" text="Contacto *" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="477.0" layoutY="130.0" text="Nº Identificação *" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="201.0" layoutY="129.0" text="Tipo Identificação *" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="129.0" text="Genero *" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="411.0" layoutY="82.0" text="Segundo nome *" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="121.0" layoutY="82.0" text="Primeiro nome *" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="20.0" layoutY="82.0" text="Id" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="29.0" layoutY="23.0" text="Dados do utente" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="botaoFechar" layoutX="819.0" layoutY="291.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Sair">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoCadastrar" layoutX="820.0" layoutY="104.0" mnemonicParsing="false" onAction="#cadastrarUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Cadastrar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoAlterar" layoutX="819.0" layoutY="157.0" mnemonicParsing="false" onAction="#alterarUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Alterar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoRemover" layoutX="821.0" layoutY="207.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Remover">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoNovo" layoutX="820.0" layoutY="62.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Novo">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoCancelar" layoutX="821.0" layoutY="251.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroutente.css" text="Cancelar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="Sitka Text" size="13.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
         </items>
