@@ -18,8 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sgbf.modelo.ModFuncionario;
-import sgbf.modelo.ModVisitante;
-import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilUsuarioLogado;
 
@@ -50,14 +48,20 @@ public class VisLogin implements Initializable {
 
     @FXML
     private Hyperlink loginContacte;
+    final String operacao = "Iniciar sessão";
 
-    public void clicarBotoes(MouseEvent accao) {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+    }
+
+    @FXML
+    private void clicarBotoes(MouseEvent accao) {
         Node node = (Node) accao.getSource();
         Stage propreidadeDaJanela = (Stage) node.getScene().getWindow();
-        final String operacao = "Iniciar sessão";
 
         if (accao.getSource() == loginEntrar) {
-            this.abrirTelaPrincipal(operacao, accao, propreidadeDaJanela);
+            this.abrirTelaPrincipal(operacao, propreidadeDaJanela);
         } else {
             if (accao.getSource() == loginCancelar) {
                 ConPrincipal.sairdoSistema(operacao, propreidadeDaJanela);
@@ -65,7 +69,7 @@ public class VisLogin implements Initializable {
         }
     }
 
-    private void abrirTelaPrincipal(String operacao, MouseEvent accao, Stage propreidadeDaJanela) {
+    private void abrirTelaPrincipal(String operacao, Stage propreidadeDaJanela) {
         try {
             UtilUsuarioLogado.setUsuarioLogado(this.autenticar(operacao));
             if (UtilUsuarioLogado.getUsuarioLogado() != null) {
@@ -93,11 +97,6 @@ public class VisLogin implements Initializable {
         funcionaMod.setUsuario(this.loginNomeUsuario.getText(), operacao);
         funcionaMod.setSenha(this.loginSenha.getText(), operacao);
         return usuarioCon.autenticar(funcionaMod, operacao);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
 }

@@ -89,7 +89,6 @@ public class VisVerEstoque implements Initializable {
         }
     }
     
-    
     @FXML
     private void limparItensDaJanela(){
         this.textFQTotal.setText(null); 
@@ -106,8 +105,6 @@ public class VisVerEstoque implements Initializable {
         this.paneAnchorEstoque.setVisible(false);
     }
     
-    
-   
     private ModAcervo pegarDadosDaPesquisa(){
         if(UtilValidarDados.eNumero(this.texteFiedPesquisar.getText())){
            acervoMod.setIdAcervo(Integer.valueOf(this.texteFiedPesquisar.getText()), operacao);
