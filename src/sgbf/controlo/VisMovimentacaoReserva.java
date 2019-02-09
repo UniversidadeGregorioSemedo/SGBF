@@ -131,16 +131,20 @@ public class VisMovimentacaoReserva implements Initializable {
         ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
         reservaMod.setFuncionarioMod(UtilUsuarioLogado.getUsuarioLogado(), operacao);
         reservaMod.setUtenteMod(tableVieVisitante.getSelectionModel().getSelectedItem(), operacao);
-        if (reservaCon.registar(reservaMod, operacao)) {
-            reservaMod.setIdReserva(reservaCon.utlimoCodigoRegistado(operacao), operacao);
-            if(itemSolicitadoCon.registar(reservaMod, operacao)){
-                this.bloquearItensDaJanela();
-                this.limparItensAcervos();
-                this.tableVieVisitante.getItems().clear();
-                this.tableViewReserva.getItems().clear();
-                throw new UtilControloExcessao(operacao, "Reserva efectuada com sucesso", Alert.AlertType.CONFIRMATION);
-            }else{
-                throw new UtilControloExcessao(operacao, "Erro ao registar acervos", Alert.AlertType.CONFIRMATION);
+        if(reservaMod.getItensRegistados().isEmpty()){
+            throw new UtilControloExcessao(operacao, "Seleccione os itens a reservar", Alert.AlertType.WARNING);
+        }else{
+            if (reservaCon.registar(reservaMod, operacao)) {
+                reservaMod.setIdReserva(reservaCon.utlimoCodigoRegistado(operacao), operacao);
+                if(itemSolicitadoCon.registar(reservaMod, operacao)){
+                    this.bloquearItensDaJanela();
+                    this.limparItensAcervos();
+                    this.tableVieVisitante.getItems().clear();
+                    this.tableViewReserva.getItems().clear();
+                    throw new UtilControloExcessao(operacao, "Reserva efectuada com sucesso", Alert.AlertType.CONFIRMATION);
+                }else{
+                    throw new UtilControloExcessao(operacao, "Erro ao registar acervos", Alert.AlertType.CONFIRMATION);
+                }
             }
         }
     }
