@@ -29,6 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import org.controlsfx.control.Notifications;
 import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModArea;
 import sgbf.modelo.ModItemProveniente;
@@ -76,26 +77,29 @@ public class VisCadastramentoItensProvenientes implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.alterta();
         this.bloquearItensDaJanela();
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listadas"));
         this.tableViewItemProveniente.setPlaceholder(new Label("Entradas não listadas"));
         this.texteFiedPesquisarAcervo.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         this.texteFiedPesquisarEntrada.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCamposAcervo(newValue));
-        //tableViewItemProveniente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosProveniencias(newValue));
     }
 
     @FXML
     private void cadastrarProveniencia() {
         operacao = "Registar Entrada de Acervo";
+        UtilControloExcessao controloExcessao = new UtilControloExcessao();
         itemProvenienteMod.setAcervoMod(tableViewAcervo.getSelectionModel().getSelectedItem(), operacao);
         itemProvenienteMod.setProvenienciaMod(this.comboxProveniencia.getValue(), operacao);
         itemProvenienteMod.setQuantidade_entrada(UtilValidarDados.validarQuantidade(texteFiedQuantidade.getText(), operacao), operacao);
         itemProvenienteMod.setCusto_unitario(UtilValidarDados.custoUnitario(texteFiedSubtotal.getText(), operacao), operacao);
-        if (itemProvenienteCon.registar(itemProvenienteMod, operacao)) {
-            this.bloquearItensDaJanela();
-            this.limparItensDaJanela();
-            throw new UtilControloExcessao(operacao, "Entrada Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+        if (controloExcessao.temCerteza(operacao, "Esta operação é irreversível deseja continuar ?")) {
+            if (itemProvenienteCon.registar(itemProvenienteMod, operacao)) {
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
+                throw new UtilControloExcessao(operacao, "Entrada Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+            }
         }
     }
 
@@ -344,6 +348,15 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         if (!caracateresValidos.contains(evt.getCharacter() + "")) {
             evt.consume();
         }
+    }
+
+    private void alterta() {
+        operacao = "Entrada de acervos";
+        Notifications.create().title(operacao).
+                text("A remoção e alteração de uma entrada estão\n"
+                        + "temporariamente indisponíveis").showWarning();;
+        Notifications.create().title(operacao).
+                text("A entra de acervos digitais está temporariamente\n indisponível").showWarning();
     }
 
 }
