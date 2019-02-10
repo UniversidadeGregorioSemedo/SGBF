@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import javafx.scene.control.Alert;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 public class DaoCominhoDaBaseDados {
 

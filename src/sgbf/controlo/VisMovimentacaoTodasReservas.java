@@ -86,7 +86,6 @@ public class VisMovimentacaoTodasReservas implements Initializable {
         this.tableViewReservas.setPlaceholder(new Label("Reservadas não listadas"));
         this.tableViewItensReservados.setPlaceholder(new Label("Itens não listados"));
         this.textFieldPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
-        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
         this.tableViewVisitante.getSelectionModel().selectedItemProperty().addListener((observable, odlValue, newValue) -> exibirTodasReservasDoUtente(newValue));
         this.tableViewReservas.getSelectionModel().selectedItemProperty().addListener((observalbe, oldValue, newValue) -> exibirTodosItensSolicitados(newValue));
     }

@@ -29,8 +29,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import org.controlsfx.control.Notifications;
 import sgbf.modelo.ModAcervo;
-import sgbf.modelo.ModArea;
 import sgbf.modelo.ModItemProveniente;
 import sgbf.modelo.ModProveniencia;
 import sgbf.util.UtilControloExcessao;
@@ -46,17 +46,17 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     @FXML
     private JFXButton botaoPesquisarAcervo, botaoPesquisarEntrada;
     @FXML
-    private Button botaoCadastrar, botaoAlterar, botaoRemover, botaoNovo, botaoCancelar, botaoSair;
+    private Button botaoCadastrar, botaoAlterar, botaoRemover, botaoCancelar, botaoSair;
     @FXML
     private TextField texteFiedPesquisarAcervo, texteFiedPesquisarEntrada, texteFiedQuantidade,
-            texteFiedSubtotal;
+            texteFiedCustoUnitario;
     @FXML
     private ComboBox<ModProveniencia> comboxProveniencia;
     @FXML
     private TableView<ModItemProveniente> tableViewItemProveniente;
     @FXML
     private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente, tableColumQuantidadeEntrada,
-            tableColumCustoUnitario, tableColumSubTotal;
+            tableColumCustoUnitario, tableColumSubTotal, tableColumProveniencia;
     @FXML
     private TableView<ModAcervo> tableViewAcervo;
     @FXML
@@ -67,59 +67,53 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private TableColumn<ModAcervo, String> tableColumTitulo, tableColumFormato, tableColumISBN;
     @FXML
     private AnchorPane AnchorPaneItemProveniente;
+    @FXML
+    private Label labelQuantidadeDeEntrada, labelCusto;
 
     private String operacao = null;
-    private final ModItemProveniente itemProvenienteMod = new ModItemProveniente();
     private final ModAcervo acervoMod = new ModAcervo();
-    private final ContItemProveniente itemProvenienteCon = new ContItemProveniente();
     private final ConAcervo acervoCon = new ConAcervo();
+    private final ModItemProveniente itemProvenienteMod = new ModItemProveniente();
+    private final ContItemProveniente itemProvenienteCon = new ContItemProveniente();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.alterta();
         this.bloquearItensDaJanela();
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listadas"));
         this.tableViewItemProveniente.setPlaceholder(new Label("Entradas não listadas"));
         this.texteFiedPesquisarAcervo.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         this.texteFiedPesquisarEntrada.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCamposAcervo(newValue));
-        //tableViewItemProveniente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosProveniencias(newValue));
     }
 
     @FXML
     private void cadastrarProveniencia() {
         operacao = "Registar Entrada de Acervo";
+        UtilControloExcessao controloExcessao = new UtilControloExcessao();
         itemProvenienteMod.setAcervoMod(tableViewAcervo.getSelectionModel().getSelectedItem(), operacao);
         itemProvenienteMod.setProvenienciaMod(this.comboxProveniencia.getValue(), operacao);
         itemProvenienteMod.setQuantidade_entrada(UtilValidarDados.validarQuantidade(texteFiedQuantidade.getText(), operacao), operacao);
-        itemProvenienteMod.setCusto_unitario(UtilValidarDados.custoUnitario(texteFiedSubtotal.getText(), operacao), operacao);
-        if (itemProvenienteCon.registar(itemProvenienteMod, operacao)) {
-            this.bloquearItensDaJanela();
-            this.limparItensDaJanela();
-            throw new UtilControloExcessao(operacao, "Entrada Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+        itemProvenienteMod.setCusto_unitario(UtilValidarDados.custoUnitario(texteFiedCustoUnitario.getText(), operacao), operacao);
+        if (controloExcessao.temCerteza(operacao, "Esta operação é irreversível deseja continuar ?")) {
+            if (itemProvenienteCon.registar(itemProvenienteMod, operacao)) {
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
+                throw new UtilControloExcessao(operacao, "Entrada Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+            }
         }
     }
 
     @FXML
     private void alterarProveniencia() {
-        /*operacao = "Editar Area";
-        areaMod.setIdArea(this.tableViewArea.getSelectionModel().getSelectedItem().getIdArea(), operacao);
-        areaMod.setSector(texteFiedSector.getText(), operacao);
-        if (areaCon.alterar(areaMod, operacao)) {
-            this.bloquearItensDaJanela();
-            this.limparItensDaJanela();
-            throw new UtilControloExcessao(operacao, "Area Alterada com sucesso", Alert.AlertType.CONFIRMATION);
-        }*/
+        operacao = "Editar Itens provenientes";
+        throw new UtilControloExcessao(operacao, "Operação temporariamente indisponivel !", Alert.AlertType.ERROR);
     }
 
     @FXML
     private void removerProveniencia() {
-        /*operacao = "Remover Area";
-        ModArea areaARemover = this.tableViewArea.getSelectionModel().getSelectedItem();
-        if (areaCon.remover(areaARemover, operacao)) {
-            this.tableViewArea.getItems().remove(areaARemover);
-            this.bloquearItensDaJanela();
-            throw new UtilControloExcessao(operacao, "Area removida com sucesso", Alert.AlertType.CONFIRMATION);
-        }*/
+        operacao = "Remover Itens provenientes";
+        throw new UtilControloExcessao(operacao, "Operação temporariamente indisponivel !", Alert.AlertType.ERROR);
     }
 
     @FXML
@@ -181,17 +175,46 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     @FXML
     private void desbloquearItensDaJanela() {
         this.texteFiedQuantidade.setDisable(false);
-        this.texteFiedSubtotal.setDisable(false);
         this.comboxProveniencia.setDisable(false);
-        this.botaoNovo.setDisable(true);
         this.botaoCadastrar.setDisable(false);
+    }
+
+    @FXML
+    private void habilitarCusto() {
+        ModProveniencia proveniencia = this.comboxProveniencia.getSelectionModel().getSelectedItem();
+        if (proveniencia == null) {
+            this.texteFiedCustoUnitario.setDisable(true);
+            this.texteFiedCustoUnitario.setText("0.0");
+            this.labelCusto.setText("Custo Unitário");
+        } else {
+            if (proveniencia.getTipo() == null) {
+                this.texteFiedCustoUnitario.setDisable(true);
+                this.texteFiedCustoUnitario.setText("0.0");
+                this.labelCusto.setText("Custo Unitário");
+            } else {
+                if (proveniencia.getTipo().equalsIgnoreCase("Compra")) {
+                    this.texteFiedCustoUnitario.setDisable(false);
+                    this.labelCusto.setText("Custo Unitário *");
+                    this.texteFiedCustoUnitario.setText(null);
+                } else {
+                    if (proveniencia.getTipo().equalsIgnoreCase("Doação")) {
+                        this.texteFiedCustoUnitario.setDisable(true);
+                        this.texteFiedCustoUnitario.setText("0.0");
+                        this.labelCusto.setText("Custo Unitário");
+                    } else {
+                        this.texteFiedCustoUnitario.setDisable(false);
+                        this.texteFiedCustoUnitario.setText(null);
+                        this.labelCusto.setText("Custo Unitário");
+                    }
+                }
+            }
+        }
     }
 
     private void bloquearItensDaJanela() {
         this.texteFiedQuantidade.setDisable(true);
-        this.texteFiedSubtotal.setDisable(true);
+        this.texteFiedCustoUnitario.setDisable(true);
         this.comboxProveniencia.setDisable(true);
-        this.botaoNovo.setDisable(false);
         this.botaoCadastrar.setDisable(true);
         this.botaoAlterar.setDisable(true);
         this.botaoRemover.setDisable(true);
@@ -201,10 +224,12 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         this.texteFiedPesquisarAcervo.setText(null);
         this.texteFiedPesquisarEntrada.setText(null);
         this.texteFiedQuantidade.setText(null);
-        this.texteFiedSubtotal.setText(null);
+        this.texteFiedCustoUnitario.setText(null);
         this.comboxProveniencia.getItems().clear();
         this.tableViewAcervo.getItems().clear();
         this.tableViewItemProveniente.getItems().clear();
+        this.labelCusto.setText("Custo Unitário");
+        this.labelQuantidadeDeEntrada.setText("Quantidade de entrada");
     }
 
     private void carregarValorNasComboxs() {
@@ -221,37 +246,32 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     }
 
     private void exibirDadosNosCamposAcervo(ModAcervo acervo) {
-
         if (tableViewAcervo.getSelectionModel().getSelectedCells().size() == 1) {
             this.carregarValorNasComboxs();
             botaoAlterar.setDisable(true);
             botaoRemover.setDisable(true);
             this.desbloquearItensDaJanela();
-            botaoNovo.setDisable(true);
             botaoCadastrar.setDisable(false);
+            this.habilitarQuantidade(acervo);
         } else {
             botaoCadastrar.setDisable(true);
             botaoAlterar.setDisable(true);
             botaoRemover.setDisable(true);
-            botaoNovo.setDisable(false);
             this.limparItensDaJanela();
+            this.labelQuantidadeDeEntrada.setText("Quantidade de entrada *");
         }
     }
 
-    private void exibirDadosNosProveniencias(ModArea areaMod) {
-        /* if (tableViewArea.getSelectionModel().getSelectedCells().size() == 1) {
-            texteFiedSector.setText(areaMod.getSector());
-            botaoAlterar.setDisable(false);
-            botaoRemover.setDisable(false);
-            this.desbloquearItensDaJanela();
-            botaoNovo.setDisable(true);
-            botaoCadastrar.setDisable(true);
+    private void habilitarQuantidade(ModAcervo acervo) {
+        if (acervo.getFormato().equalsIgnoreCase("Físico")) {
+            this.texteFiedQuantidade.setText(null);
+            this.texteFiedQuantidade.setDisable(false);
+            this.labelQuantidadeDeEntrada.setText("Quantidade de entrada *");
         } else {
-            botaoAlterar.setDisable(true);
-            botaoRemover.setDisable(true);
-            botaoNovo.setDisable(false);
-            this.limparItensDaJanela();
-        }*/
+            this.texteFiedQuantidade.setDisable(true);
+            this.labelQuantidadeDeEntrada.setText("Quantidade de entrada");
+            this.texteFiedQuantidade.setText(String.valueOf(acervo.getEstoqueMod().getQuantidade_total()));
+        }
     }
 
     private ModItemProveniente pegarDadosDaPesquisaProveniencia() {
@@ -317,6 +337,12 @@ public class VisCadastramentoItensProvenientes implements Initializable {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getSubTotal()));
             }
         });
+        tableColumProveniencia.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
+                return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getProvenienciaMod().getTipo()));
+            }
+        });
         tableViewItemProveniente.setItems(this.todosRegistosParaCarregarProveniencia(todosRegistosEncontrados));
     }
 
@@ -344,6 +370,15 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         if (!caracateresValidos.contains(evt.getCharacter() + "")) {
             evt.consume();
         }
+    }
+
+    private void alterta() {
+        operacao = "Entrada de acervos";
+        Notifications.create().title(operacao).
+                text("A remoção e alteração de uma entrada estão\n"
+                        + "temporariamente indisponíveis").showWarning();;
+        Notifications.create().title(operacao).
+                text("A entra de acervos digitais está temporariamente\n indisponível").showWarning();
     }
 
 }

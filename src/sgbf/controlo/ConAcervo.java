@@ -201,7 +201,7 @@ public class ConAcervo extends ConCRUD {
         if (setResultset.getString("Editora_idEditora") != null) {
             acervoMod.getEditoraMod().setiEditora(setResultset.getInt("Editora_idEditora"), operacao);
         }
-        acervoMod.getEstoqueMod().setIdEstoque(setResultset.getInt("idAcervos"), operacao);
+        acervoMod.getEstoqueMod().setIdEstoque(setResultset.getInt("idEstoque"), operacao);
         acervoMod.getEstoqueMod().setQuantidade_total(setResultset.getShort("quantidade_total"), operacao);
         acervoMod.getEstoqueMod().setQuantidade_em_falta(setResultset.getShort("quantidade_em_falta"), operacao);
         acervoMod.getEstoqueMod().setQuantidade_acervos_emprestados(setResultset.getShort("quantidade_acervos_emprestados"), operacao);

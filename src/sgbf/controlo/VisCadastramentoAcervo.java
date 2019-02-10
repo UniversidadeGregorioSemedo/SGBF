@@ -30,7 +30,6 @@ import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModEditora;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**
@@ -64,6 +63,8 @@ public class VisCadastramentoAcervo implements Initializable {
     private TableColumn<ModAcervo, String> tableColumTitulo, tableColumSubTitulo, tableColumEdicao, tableColumISBN,
             tableColumnAno, tableColumnTipo, tableColumnFormato;
     @FXML
+    private Label labelEstante, labelEndereco;
+    @FXML
     private JFXTextArea textAreaSinopese;
     @FXML
     private AnchorPane AnchorPaneAcervo;
@@ -72,9 +73,7 @@ public class VisCadastramentoAcervo implements Initializable {
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
     private final ConAcervosEscreitos escreitosAcervosCon = new ConAcervosEscreitos();
-    @FXML
-    private Label labelOperador;
-
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.carregarValoresPadraoNasComboxs();
@@ -82,7 +81,6 @@ public class VisCadastramentoAcervo implements Initializable {
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listados"));
         this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
-        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }
 
     @FXML
@@ -452,11 +450,15 @@ public class VisCadastramentoAcervo implements Initializable {
     @FXML
     private void introduzirEndereco() {
         if (this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Físico")) {
+            labelEstante.setText("Estante *");
+            labelEndereco.setText("Endereço acervo");
             texteFiedEndereco.setText(null);
             texteFiedEndereco.setDisable(true);
             botaoCarregar.setDisable(true);
         } else {
             if (this.comboBoxFormato.getSelectionModel().getSelectedItem().equalsIgnoreCase("Digital")) {
+                labelEstante.setText("Estante");
+                labelEndereco.setText("Endereço acervo *");
                 texteFiedEndereco.setDisable(false);
                 texteFiedEndereco.setEditable(false);
                 botaoCarregar.setDisable(false);

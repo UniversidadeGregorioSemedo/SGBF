@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -35,20 +36,28 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="18.0" layoutY="33.0" prefHeight="25.0" prefWidth="517.0" styleClass="jfx-textfield" stylesheets="@../util/viewtodosacervos.css" />
-                  <JFXButton fx:id="botaoPesquisar" layoutX="541.0" layoutY="31.0" onAction="#localizarAcervos" prefHeight="15.0" prefWidth="48.0" stylesheets="@../util/viewtodosacervos.css" text=" ">
+                  <TextField fx:id="textFieldPesquisar" layoutX="18.0" layoutY="33.0" prefHeight="25.0" prefWidth="517.0" promptText="Pesquisar acervos" styleClass="jfx-textfield" stylesheets="@../util/viewtodosacervos.css" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="541.0" layoutY="33.0" onAction="#localizarAcervos" prefHeight="25.0" prefWidth="39.0" stylesheets="@../util/viewtodosacervos.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icones/Pesquisa.png" />
                            </image>
                         </ImageView>
-                     </graphic></JFXButton>
-                  <Line endX="100.0" layoutX="307.0" layoutY="21.0" startX="-100.0" />
-                  <Line endX="100.0" layoutX="723.0" layoutY="21.0" startX="-100.0" />
-                  <Label layoutX="432.0" layoutY="11.0" prefHeight="17.0" prefWidth="172.0" text="Listar todos emprestimos" textFill="WHITE">
+                     </graphic>
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding></JFXButton>
+                  <Line endX="100.0" layoutX="307.0" layoutY="11.0" startX="-100.0" stroke="WHITE" />
+                  <Line endX="100.0" layoutX="723.0" layoutY="9.0" startX="-100.0" stroke="WHITE" />
+                  <Label layoutX="467.0" layoutY="1.0" prefHeight="17.0" prefWidth="172.0" text="Listar todos acervos" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="18.0" layoutY="20.0" text="Use ( _  ) para ver todos acervos" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="12.0" />
                      </font>
                   </Label>
                </children>
@@ -67,12 +76,12 @@
                   </TableView>
                   <Label layoutX="27.0" layoutY="23.0" text="Localização do Acervo" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text" size="14.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
                   <Label layoutX="528.0" layoutY="23.0" text="Outras informações" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text" size="14.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
                   <Label layoutX="535.0" layoutY="145.0" text="Data de Registo:" textFill="WHITE">

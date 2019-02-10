@@ -12,7 +12,6 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModItemProveniente;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -24,19 +23,27 @@ public class ContItemProveniente extends ConCRUD {
     public boolean registar(Object objecto_registar, String operacao) {
         ModItemProveniente itemProvenienteMod = (ModItemProveniente) objecto_registar;
         try {
-            super.query = "call pr_registarItensEntradas(?, ?, ?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
-            super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
-            super.preparedStatement.setInt(3, itemProvenienteMod.getQuantidade_entrada());
-            super.preparedStatement.setDouble(4, itemProvenienteMod.getCusto_unitario());
-            return !super.preparedStatement.execute();
+            if (this.temRegistoDital(itemProvenienteMod, operacao)) {
+                throw new UtilControloExcessao(operacao, "Erro ao registar entrada de acervo\n"
+                        + "Erro: Acervos digitais não podem ter mais de duas proveniências", Alert.AlertType.WARNING);
+            } else {
+                super.query = "call pr_registarItensEntradas(?, ?, ?, ?, ?)";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
+                super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
+                super.preparedStatement.setInt(3, itemProvenienteMod.getQuantidade_entrada());
+                super.preparedStatement.setDouble(4, itemProvenienteMod.getCusto_unitario());
+                super.preparedStatement.setString(5, itemProvenienteMod.getAcervoMod().getFormato());
+                return !super.preparedStatement.execute();
+            }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Entradas \nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
     }
+
+   
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
@@ -99,12 +106,21 @@ public class ContItemProveniente extends ConCRUD {
         ModItemProveniente itemProvenienteMod = new ModItemProveniente();
         itemProvenienteMod.getAcervoMod().setIdAcervo(setResultset.getInt("idAcervos"), operacao);
         itemProvenienteMod.getAcervoMod().setTitulo(setResultset.getString("titulo"), operacao);
+        itemProvenienteMod.getAcervoMod().setFormato(setResultset.getString("formato"), operacao);
         itemProvenienteMod.setQuantidade_entrada(setResultset.getShort("quantidade_entrada"), operacao);
         itemProvenienteMod.getProvenienciaMod().setIdProveniencia(setResultset.getInt("idProveniencia"), operacao);
         itemProvenienteMod.getProvenienciaMod().setTipo(setResultset.getString("tipo"), operacao);
         itemProvenienteMod.setCusto_unitario(setResultset.getDouble("custo_unitario"), operacao);
         itemProvenienteMod.setSubTotal(setResultset.getDouble("subtotal"), operacao);
         return itemProvenienteMod;
+    }
+    
+    private boolean temRegistoDital(ModItemProveniente itemProvenienteMod, String operacao) {
+        if (itemProvenienteMod.getAcervoMod().getFormato().equalsIgnoreCase("Digital")) {
+            return !this.pesquisar(itemProvenienteMod, operacao).isEmpty();
+        } else {
+            return itemProvenienteMod.getAcervoMod().getFormato().equalsIgnoreCase("Digital");
+        }
     }
 
 }

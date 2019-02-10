@@ -1,4 +1,3 @@
-
 package sgbf.controlo;
 
 import com.jfoenix.controls.JFXButton;
@@ -88,7 +87,6 @@ public class VisMovimentacaoReserva implements Initializable {
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewReserva.setPlaceholder(new Label("Nenhuma reserva feita"));
         this.textFieldPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
-        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
         this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirAsQuantidades(newValue));
     }
 
@@ -121,7 +119,7 @@ public class VisMovimentacaoReserva implements Initializable {
                 this.carregarResultadosNaTabelaReservas(reservaMod.getItensRegistados());
                 this.botaoReserva.setDisable(false);
             }
-        } catch (NumberFormatException  | NullPointerException erro) {
+        } catch (NumberFormatException | NullPointerException erro) {
             throw new UtilControloExcessao(operacao, "Introduza uma Quantidade válida", Alert.AlertType.WARNING);
         }
     }
@@ -132,16 +130,20 @@ public class VisMovimentacaoReserva implements Initializable {
         ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
         reservaMod.setFuncionarioMod(UtilUsuarioLogado.getUsuarioLogado(), operacao);
         reservaMod.setUtenteMod(tableVieVisitante.getSelectionModel().getSelectedItem(), operacao);
-        if (reservaCon.registar(reservaMod, operacao)) {
-            reservaMod.setIdReserva(reservaCon.utlimoCodigoRegistado(operacao), operacao);
-            if(itemSolicitadoCon.registar(reservaMod, operacao)){
-                this.bloquearItensDaJanela();
-                this.limparItensAcervos();
-                this.tableVieVisitante.getItems().clear();
-                this.tableViewReserva.getItems().clear();
-                throw new UtilControloExcessao(operacao, "Reserva efectuada com sucesso", Alert.AlertType.CONFIRMATION);
-            }else{
-                throw new UtilControloExcessao(operacao, "Erro ao registar acervos", Alert.AlertType.CONFIRMATION);
+        if (reservaMod.getItensRegistados().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Seleccione os itens a reservar", Alert.AlertType.WARNING);
+        } else {
+            if (reservaCon.registar(reservaMod, operacao)) {
+                reservaMod.setIdReserva(reservaCon.utlimoCodigoRegistado(operacao), operacao);
+                if (itemSolicitadoCon.registar(reservaMod, operacao)) {
+                    this.bloquearItensDaJanela();
+                    this.limparItensAcervos();
+                    this.tableVieVisitante.getItems().clear();
+                    this.tableViewReserva.getItems().clear();
+                    throw new UtilControloExcessao(operacao, "Reserva efectuada com sucesso", Alert.AlertType.CONFIRMATION);
+                } else {
+                    throw new UtilControloExcessao(operacao, "Erro ao registar acervos", Alert.AlertType.CONFIRMATION);
+                }
             }
         }
     }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
@@ -15,11 +17,11 @@
         <URL value="@/sgbf/util/tabelavereditora.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="574.0" prefWidth="1241.0" style="-fx-background-color: #1f4f4e;">
+      <SplitPane dividerPositions="0.5332167832167832" orientation="VERTICAL" prefHeight="574.0" prefWidth="1241.0" style="-fx-background-color: #1f4f4e;">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="1293.0">
                <children>
-                  <TableView fx:id="tableViewEditora" layoutX="15.0" layoutY="66.0" prefHeight="200.0" prefWidth="1201.0">
+                  <TableView fx:id="tableViewEditora" layoutX="15.0" layoutY="88.0" prefHeight="200.0" prefWidth="1201.0">
                      <columns>
                         <TableColumn fx:id="tableColumNome" prefWidth="179.0" text="Nome" />
                         <TableColumn fx:id="tableColumContacto" prefWidth="164.0" text="Contacto" />
@@ -33,15 +35,30 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="24.0" prefHeight="25.0" prefWidth="517.0" styleClass="jfx-textfield" stylesheets="@../util/tabelavereditora.css" />
-                  <JFXButton fx:id="botaoPesquisar" layoutX="538.0" layoutY="21.0" onAction="#pesquisarEditora" stylesheets="@../util/tabelavereditora.css" text=" ">
+                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="517.0" promptText="Pesquisar editoras" styleClass="jfx-textfield" stylesheets="@../util/tabelavereditora.css" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="536.0" layoutY="46.0" onAction="#pesquisarEditora" prefHeight="25.0" prefWidth="35.0" stylesheets="@../util/tabelavereditora.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icones/Pesquisa.png" />
                            </image>
                         </ImageView>
-                     </graphic></JFXButton>
+                     </graphic>
+                     <padding>
+                        <Insets right="3.0" />
+                     </padding></JFXButton>
+                  <Label layoutX="571.0" layoutY="6.0" text="Ver todas editoras" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="15.0" layoutY="32.0" text="Use ( _  ) para ver todas editoras" textFill="WHITE">
+                     <font>
+                        <Font name="Sitka Text" size="12.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" layoutX="443.0" layoutY="15.0" startX="-100.0" stroke="WHITE" />
+                  <Line endX="100.0" layoutX="825.0" layoutY="16.0" startX="-100.0" stroke="WHITE" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -62,7 +79,7 @@
                   </TableView>
                   <Label layoutX="14.0" layoutY="24.0" prefHeight="17.0" prefWidth="124.0" text="Todos os Acervos" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text Bold" size="14.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
                   <Label layoutX="945.0" layoutY="24.0" prefHeight="17.0" prefWidth="147.0" text="Outras Informações" textFill="WHITE">

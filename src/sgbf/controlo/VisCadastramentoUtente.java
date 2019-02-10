@@ -59,9 +59,7 @@ public class VisCadastramentoUtente implements Initializable {
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
     private final ConUtente utenteCon = new ConUtente();
-    @FXML
-    private Label labelOperador;
-
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        this.bloquearItensDaJanela();
@@ -69,7 +67,6 @@ public class VisCadastramentoUtente implements Initializable {
        this.tableViewUtente.setPlaceholder(new Label("Utentes não listados"));
        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
        tableViewUtente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
-       this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }
     
     

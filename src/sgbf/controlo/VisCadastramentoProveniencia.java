@@ -218,7 +218,7 @@ public class VisCadastramentoProveniencia implements Initializable {
 
      
     private void carregarValorNasComboxs(){
-        this.combocadproveniencia.getItems().addAll("Doação","Compra","Outro");
+        this.combocadproveniencia.getItems().addAll("Doação","Compra");
     }
     
 }

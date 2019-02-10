@@ -78,7 +78,6 @@ public class VisCadastramentoFuncionario implements Initializable {
                 (observable, oldValue, newValue) -> this.exibirDadosDoUtenteNosCampos(newValue));
         this.tableViewFuncionario.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> this.exibirDadosDoFuncionarioNosCampos(newValue));
-        this.labelOperador.setText(UtilUsuarioLogado.getUsuarioLogado().getNome());
     }
 
     @FXML
