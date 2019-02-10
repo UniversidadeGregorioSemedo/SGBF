@@ -197,9 +197,15 @@ public class VisCadastramentoItensProvenientes implements Initializable {
                     this.labelCusto.setText("Custo Unitário *");
                     this.texteFiedCustoUnitario.setText(null);
                 } else {
-                    this.texteFiedCustoUnitario.setDisable(true);
-                    this.texteFiedCustoUnitario.setText("0.0");
-                    this.labelCusto.setText("Custo Unitário");
+                    if (proveniencia.getTipo().equalsIgnoreCase("Doação")) {
+                        this.texteFiedCustoUnitario.setDisable(true);
+                        this.texteFiedCustoUnitario.setText("0.0");
+                        this.labelCusto.setText("Custo Unitário");
+                    } else {
+                        this.texteFiedCustoUnitario.setDisable(false);
+                        this.texteFiedCustoUnitario.setText(null);
+                        this.labelCusto.setText("Custo Unitário");
+                    }
                 }
             }
         }
