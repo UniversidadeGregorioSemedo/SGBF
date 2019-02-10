@@ -184,17 +184,21 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         ModProveniencia proveniencia = this.comboxProveniencia.getSelectionModel().getSelectedItem();
         if (proveniencia == null) {
             this.texteFiedCustoUnitario.setDisable(true);
+            this.texteFiedCustoUnitario.setText("0.0");
             this.labelCusto.setText("Custo Unitário");
         } else {
             if (proveniencia.getTipo() == null) {
                 this.texteFiedCustoUnitario.setDisable(true);
+                this.texteFiedCustoUnitario.setText("0.0");
                 this.labelCusto.setText("Custo Unitário");
             } else {
                 if (proveniencia.getTipo().equalsIgnoreCase("Compra")) {
                     this.texteFiedCustoUnitario.setDisable(false);
                     this.labelCusto.setText("Custo Unitário *");
+                    this.texteFiedCustoUnitario.setText(null);
                 } else {
                     this.texteFiedCustoUnitario.setDisable(true);
+                    this.texteFiedCustoUnitario.setText("0.0");
                     this.labelCusto.setText("Custo Unitário");
                 }
             }
@@ -254,11 +258,13 @@ public class VisCadastramentoItensProvenientes implements Initializable {
 
     private void habilitarQuantidade(ModAcervo acervo) {
         if (acervo.getFormato().equalsIgnoreCase("Físico")) {
+            this.texteFiedQuantidade.setText(null);
             this.texteFiedQuantidade.setDisable(false);
             this.labelQuantidadeDeEntrada.setText("Quantidade de entrada *");
         } else {
             this.texteFiedQuantidade.setDisable(true);
             this.labelQuantidadeDeEntrada.setText("Quantidade de entrada");
+            this.texteFiedQuantidade.setText(String.valueOf(acervo.getEstoqueMod().getQuantidade_total()));
         }
     }
 

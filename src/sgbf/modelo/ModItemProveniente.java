@@ -14,15 +14,13 @@ import sgbf.util.UtilControloExcessao;
  * @author Look
  */
 public class ModItemProveniente {
-    
-    
+
     private ModAcervo acervoMod;
     private ModProveniencia provenienciaMod;
     private Short quantidade_entrada;
     private Double custo_unitario;
     private Double subtotaltotal;
     private UtilControloDaData utilControloDaData;
-  
 
     public ModItemProveniente() {
         this.quantidade_entrada = 0;
@@ -33,14 +31,17 @@ public class ModItemProveniente {
         this.utilControloDaData = new UtilControloDaData();
     }
 
-    
     public Short getQuantidade_entrada() {
         return quantidade_entrada;
     }
 
     public void setQuantidade_entrada(Short quantidade_entrada, String operacao) {
-        if(quantidade_entrada <= 0){
-            throw new UtilControloExcessao(operacao, "A quantidade introduzida não é válida", Alert.AlertType.ERROR);
+        if (this.acervoMod.getFormato().equalsIgnoreCase("Físico")) {
+            if (quantidade_entrada <= 0) {
+                throw new UtilControloExcessao(operacao, "A quantidade introduzida não é válida", Alert.AlertType.ERROR);
+            } else {
+                this.quantidade_entrada = quantidade_entrada;
+            }
         }else{
             this.quantidade_entrada = quantidade_entrada;
         }
@@ -51,20 +52,20 @@ public class ModItemProveniente {
     }
 
     public void setCusto_unitario(Double custo_unitario, String operacao) {
-        if(this.provenienciaMod.getTipo() == null){
+        if (this.provenienciaMod.getTipo() == null) {
             throw new UtilControloExcessao(operacao, "Introduza o tipo de proveniência", Alert.AlertType.WARNING);
-        }else{
-            if(this.provenienciaMod.getTipo().equalsIgnoreCase("Compra")){
-                if(custo_unitario <= 0){
+        } else {
+            if (this.provenienciaMod.getTipo().equalsIgnoreCase("Compra")) {
+                if (custo_unitario <= 0) {
                     throw new UtilControloExcessao(operacao, "Introduza um custo válido", Alert.AlertType.WARNING);
-                }else{
+                } else {
                     this.custo_unitario = custo_unitario;
                 }
-            }else{
+            } else {
                 this.custo_unitario = custo_unitario;
             }
         }
-        
+
     }
 
     public Double getSubTotal() {
@@ -80,12 +81,12 @@ public class ModItemProveniente {
     }
 
     public void setAcervoMod(ModAcervo acervoMod, String operacao) {
-        if(acervoMod == null){
+        if (acervoMod == null) {
             throw new UtilControloExcessao(operacao, "Seleccione o Acervo", Alert.AlertType.WARNING);
-        }else{
-            if(acervoMod.getIdAcervo() == 0){
+        } else {
+            if (acervoMod.getIdAcervo() == 0) {
                 throw new UtilControloExcessao(operacao, "Dados do acervo inconsistente", Alert.AlertType.WARNING);
-            }else{
+            } else {
                 this.acervoMod = acervoMod;
             }
         }
@@ -96,21 +97,19 @@ public class ModItemProveniente {
     }
 
     public void setProvenienciaMod(ModProveniencia provenienciaMod, String operacao) {
-        if(provenienciaMod == null){
+        if (provenienciaMod == null) {
             throw new UtilControloExcessao(operacao, "Seleccione a Proveniência", Alert.AlertType.WARNING);
-        }else{
-            if(provenienciaMod.getIdProveniencia()== 0){
+        } else {
+            if (provenienciaMod.getIdProveniencia() == 0) {
                 throw new UtilControloExcessao(operacao, "Selccione uma proveniência válida", Alert.AlertType.WARNING);
-            }else{
+            } else {
                 this.provenienciaMod = provenienciaMod;
             }
         }
     }
 
-      
     public UtilControloDaData getUtilControloDaData() {
         return utilControloDaData;
     }
 
-    
 }
