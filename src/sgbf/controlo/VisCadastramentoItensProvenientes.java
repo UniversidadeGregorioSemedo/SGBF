@@ -56,7 +56,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private TableView<ModItemProveniente> tableViewItemProveniente;
     @FXML
     private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente, tableColumQuantidadeEntrada,
-            tableColumCustoUnitario, tableColumSubTotal;
+            tableColumCustoUnitario, tableColumSubTotal,tableColumProveniencia;
     @FXML
     private TableView<ModAcervo> tableViewAcervo;
     @FXML
@@ -262,6 +262,8 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         }
     }
 
+   
+
     private void habilitarQuantidade(ModAcervo acervo) {
         if (acervo.getFormato().equalsIgnoreCase("Físico")) {
             this.texteFiedQuantidade.setText(null);
@@ -335,6 +337,12 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getSubTotal()));
+            }
+        });
+        tableColumProveniencia.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
+                return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getProvenienciaMod().getTipo()));
             }
         });
         tableViewItemProveniente.setItems(this.todosRegistosParaCarregarProveniencia(todosRegistosEncontrados));

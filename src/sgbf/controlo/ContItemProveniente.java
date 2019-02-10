@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
-import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModItemProveniente;
 import sgbf.util.UtilControloExcessao;
 
@@ -26,7 +25,7 @@ public class ContItemProveniente extends ConCRUD {
         try {
             if (this.temRegistoDital(itemProvenienteMod, operacao)) {
                 throw new UtilControloExcessao(operacao, "Erro ao registar entrada de acervo\n"
-                        + "Erro: Este acervo não pode ter mais de duas proveniências", Alert.AlertType.WARNING);
+                        + "Erro: Acervos digitais não podem ter mais de duas proveniências", Alert.AlertType.WARNING);
             } else {
                 super.query = "call pr_registarItensEntradas(?, ?, ?, ?, ?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
