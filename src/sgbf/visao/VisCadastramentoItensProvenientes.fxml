@@ -89,16 +89,16 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Label layoutX="447.0" layoutY="88.0" text="Quantidade de entrada *" textFill="WHITE">
+                  <Label fx:id="labelQuantidadeDeEntrada" layoutX="447.0" layoutY="88.0" text="Quantidade de entrada" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font></Label>
-                  <Label layoutX="447.0" layoutY="128.0" text="Custo Unitário" textFill="WHITE">
+                  <Label fx:id="labelCusto" layoutX="447.0" layoutY="128.0" text="Custo Unitário" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font></Label>
                   <TextField fx:id="texteFiedQuantidade" layoutX="600.0" layoutY="84.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="105.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
-                  <TextField fx:id="texteFiedSubtotal" layoutX="600.0" layoutY="123.0" prefHeight="25.0" prefWidth="105.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
+                  <TextField fx:id="texteFiedCustoUnitario" layoutX="600.0" layoutY="123.0" prefHeight="25.0" prefWidth="105.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
                   <Button fx:id="botaoSair" layoutX="628.0" layoutY="241.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="74.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Sair">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
@@ -115,16 +115,12 @@
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font></Button>
-                  <Button fx:id="botaoNovo" layoutX="447.0" layoutY="203.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="74.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Novo">
-                     <font>
-                        <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
                   <Label layoutX="447.0" layoutY="54.0" prefHeight="15.0" prefWidth="132.0" stylesheets="@../util/visitensprovenientes.css" text="Tipo Proveniencia *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font></Label>
-                  <ComboBox fx:id="comboxProveniencia" layoutX="575.0" layoutY="49.0" prefHeight="25.0" prefWidth="132.0" promptText="Sel. Proveniencia" styleClass="jfx-combobox" stylesheets="@../util/visitensprovenientes.css" />
-                  <Button fx:id="botaoCadastrar" layoutX="537.0" layoutY="203.0" mnemonicParsing="false" onAction="#cadastrarProveniencia" prefHeight="25.0" prefWidth="81.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Cadastrar">
+                  <ComboBox fx:id="comboxProveniencia" layoutX="575.0" layoutY="49.0" onAction="#habilitarCusto" prefHeight="25.0" prefWidth="132.0" promptText="Sel. Proveniencia" styleClass="jfx-combobox" stylesheets="@../util/visitensprovenientes.css" />
+                  <Button fx:id="botaoCadastrar" layoutX="448.0" layoutY="203.0" mnemonicParsing="false" onAction="#cadastrarProveniencia" prefHeight="25.0" prefWidth="170.0" styleClass="jfx-button" stylesheets="@../util/visitensprovenientes.css" text="Cadastrar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font></Button>
