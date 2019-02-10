@@ -56,7 +56,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private TableView<ModItemProveniente> tableViewItemProveniente;
     @FXML
     private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente, tableColumQuantidadeEntrada,
-            tableColumCustoUnitario, tableColumSubTotal,tableColumProveniencia;
+            tableColumCustoUnitario, tableColumSubTotal, tableColumProveniencia;
     @FXML
     private TableView<ModAcervo> tableViewAcervo;
     @FXML
@@ -261,8 +261,6 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             this.labelQuantidadeDeEntrada.setText("Quantidade de entrada *");
         }
     }
-
-   
 
     private void habilitarQuantidade(ModAcervo acervo) {
         if (acervo.getFormato().equalsIgnoreCase("Físico")) {
