@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +28,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import sgbf.modelo.ModArea;
 import sgbf.modelo.ModEstante;
 import sgbf.util.UtilControloExcessao;
@@ -51,7 +54,8 @@ public class VisCadastramentoEstante implements Initializable {
     @FXML
     private TableView<ModEstante> tableViewEstante;
     @FXML
-    private TableColumn<ModEstante, String> tableColumDesignacao, tableColumDescricao, tableColumLinha, tableColumcoluna;
+    private TableColumn<ModEstante, String> tableColumDesignacao, tableColumDescricao, tableColumLinha,
+            tableColumcoluna, tableColumIDataRegisto, tableColumNmeroDataModificacao;
     @FXML
     private AnchorPane AnchorPaneEstante;
 
@@ -247,6 +251,18 @@ public class VisCadastramentoEstante implements Initializable {
         tableColumDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         tableColumLinha.setCellValueFactory(new PropertyValueFactory<>("linha"));
         tableColumcoluna.setCellValueFactory(new PropertyValueFactory<>("coluna"));
+        tableColumIDataRegisto.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModEstante,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModEstante, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_registo());
+            }
+        });
+        tableColumNmeroDataModificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModEstante,String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModEstante, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_modificacao());
+            }
+        });
         tableViewEstante.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
     }
 
