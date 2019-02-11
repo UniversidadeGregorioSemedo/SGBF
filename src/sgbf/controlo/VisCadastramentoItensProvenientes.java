@@ -106,8 +106,13 @@ public class VisCadastramentoItensProvenientes implements Initializable {
 
     @FXML
     private void alterarProveniencia() {
-        operacao = "Editar Itens provenientes";
-        throw new UtilControloExcessao(operacao, "Operação temporariamente indisponivel !", Alert.AlertType.ERROR);
+        operacao = "Alterar Entrada";
+        ModItemProveniente itemRemover = this.tableViewItemProveniente.getSelectionModel().getSelectedItem();
+        if (estoqueCon.removerEntrada(itemRemover, operacao)) {
+            this.bloquearItensDaJanela();
+            this.limparItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Entrada Alterada com sucesso", Alert.AlertType.CONFIRMATION);
+        }
     }
 
     @FXML
@@ -270,7 +275,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             this.labelQuantidadeDeEntrada.setText("Quantidade de entrada *");
         }
     }
- 
+
     private void exibirDados(ModItemProveniente itemProvenienteMod) {
         if (itemProvenienteMod != null) {
             for (int i = 0; i < this.comboxProveniencia.getItems().size(); i++) {

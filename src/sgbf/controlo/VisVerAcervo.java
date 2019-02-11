@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import sgbf.modelo.ModAcervo;
+import sgbf.modelo.ModAutor;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilValidarDados;
 
@@ -37,37 +38,36 @@ import sgbf.util.UtilValidarDados;
  * @author Marron
  */
 public class VisVerAcervo implements Initializable {
-    
+
     @FXML
     private JFXButton botaoPesquisar;
     @FXML
-    private Button  botaoCancelar, botaoSair;
+    private Button botaoCancelar, botaoSair;
     @FXML
     private TextField textFieldPesquisar;
     @FXML
-    private TableView<ModAcervo> tableViewAcervo,tableViewAcervoLocalizacao ;
+    private TableView<ModAcervo> tableViewAcervo, tableViewAcervoLocalizacao;
     @FXML
-    private TableColumn<ModAcervo, String> tableColumId,tableColumTitulo, tableColumSubTitulo, tableColumEdicao,
-            tableColumISBN,tableColumnCodigoBarra, tableColumnTipo, tableColumnFormato,tableColumVolume,
-            tableColumArea,tableColumEstante,tableColumCategoria;
+    private TableColumn<ModAcervo, String> tableColumId, tableColumTitulo, tableColumSubTitulo, tableColumEdicao,
+            tableColumISBN, tableColumnCodigoBarra, tableColumnTipo, tableColumnFormato, tableColumVolume,
+            tableColumArea, tableColumEstante, tableColumCategoria, tableColumQuantidadeDisponivel;
     @FXML
-    private Label labelAnoLancamento,labelNumeroPaginas,labelIdioma,labelDataRegisto,labelDataModificacao;
+    private Label labelAnoLancamento, labelNumeroPaginas, labelIdioma, labelDataRegisto, labelDataModificacao;
     @FXML
     private AnchorPane AnchorPaneLocalizarAcervos;
-    
+
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.tableViewAcervo.setPlaceholder(new Label("Acervo não listados"));
         this.tableViewAcervoLocalizacao.setPlaceholder(new Label("Nenhum acervo seleccionado"));
         this.textFieldPesquisar.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
-        this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((obersave, oldObserv, newValue) ->exibirMaidDeatalhesDoAcervo(newValue));
-    } 
-    
+        this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((obersave, oldObserv, newValue) -> exibirMaidDeatalhesDoAcervo(newValue));
+    }
+
     @FXML
     private void localizarAcervos() {
         operacao = "Localizar acervos";
@@ -84,20 +84,19 @@ public class VisVerAcervo implements Initializable {
             }
         }
     }
-    
+
     @FXML
     private void cancelar() {
         this.textFieldPesquisar.setText(null);
         this.tableViewAcervo.getItems().clear();
         this.limparDadosPesquisa();
     }
- 
 
     @FXML
     private void sair(ActionEvent event) {
         AnchorPaneLocalizarAcervos.setVisible(false);
     }
-    
+
     private ModAcervo pegarDadosDaPesquisaAcervos() {
         if (UtilValidarDados.eNumero(this.textFieldPesquisar.getText())) {
             acervoMod.setIdAcervo(Integer.valueOf(this.textFieldPesquisar.getText()), operacao);
@@ -108,7 +107,7 @@ public class VisVerAcervo implements Initializable {
             return acervoMod;
         }
     }
-    
+
     private void carregarResultadosNaTableAcervos(List<ModAcervo> todosRegistosEncontrados) {
         tableColumId.setCellValueFactory(new PropertyValueFactory<>("idAcervo"));
         tableColumTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
@@ -118,6 +117,12 @@ public class VisVerAcervo implements Initializable {
         tableColumnCodigoBarra.setCellValueFactory(new PropertyValueFactory<>("codigo_barra"));
         tableColumISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         tableColumnFormato.setCellValueFactory(new PropertyValueFactory<>("formato"));
+        tableColumQuantidadeDisponivel.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> estoque) {
+                return new ReadOnlyStringWrapper(String.valueOf(estoque.getValue().getEstoqueMod().getQuantidadeRemanescente()));
+            }
+        });
         tableViewAcervo.setItems(this.todosAcervosParaCarregar(todosRegistosEncontrados));
     }
 
@@ -129,8 +134,8 @@ public class VisVerAcervo implements Initializable {
         }
         return FXCollections.observableArrayList(listaDosRegistosWncontrados);
     }
-    
-    private void exibirMaidDeatalhesDoAcervo(ModAcervo acervoMod){
+
+    private void exibirMaidDeatalhesDoAcervo(ModAcervo acervoMod) {
         labelAnoLancamento.setText(String.valueOf(acervoMod.getAno_lancamento()));
         labelNumeroPaginas.setText(String.valueOf(acervoMod.getNumero_paginas()));
         labelIdioma.setText(String.valueOf(acervoMod.getIdioma()));
@@ -138,40 +143,40 @@ public class VisVerAcervo implements Initializable {
         labelDataModificacao.setText(acervoMod.getUtilControloDaData().getData_modificacao());
         this.exbirDadosNaLocalizacao(acervoMod);
     }
-    
-    private void exbirDadosNaLocalizacao(ModAcervo acervoMod){
+
+    private void exbirDadosNaLocalizacao(ModAcervo acervoMod) {
         List<ModAcervo> listaDosRegistosWncontrados = new ArrayList<>();
         ObservableList dadosCarregar = null;
-        tableColumArea.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
+        tableColumArea.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> localizacao) {
                 return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getEstanteNova().getAreaMod().getSector());
             }
         });
-        tableColumEstante.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
+        tableColumEstante.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> localizacao) {
                 return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getEstanteNova().getDesignacao());
             }
         });
-        tableColumCategoria.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo,String>, ObservableValue<String>>() {
+        tableColumCategoria.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModAcervo, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModAcervo, String> localizacao) {
                 return new ReadOnlyStringWrapper(localizacao.getValue().getCategoriaMod().getDesignacao());
             }
         });
         listaDosRegistosWncontrados.add(acervoMod);
-        dadosCarregar =  FXCollections.observableArrayList(listaDosRegistosWncontrados);
+        dadosCarregar = FXCollections.observableArrayList(listaDosRegistosWncontrados);
         this.tableViewAcervoLocalizacao.setItems(dadosCarregar);
     }
-    
-    private void limparDadosPesquisa(){
+
+    private void limparDadosPesquisa() {
         labelAnoLancamento.setText("Nenhuma informação disponível");
         labelNumeroPaginas.setText("Nenhuma informação disponível");
         labelIdioma.setText("Nenhuma informação disponível");
         labelDataRegisto.setText("Nenhuma informação disponível");
-        labelDataModificacao.setText("Nenhuma informação disponível"); 
+        labelDataModificacao.setText("Nenhuma informação disponível");
         this.tableViewAcervoLocalizacao.getItems().clear();
     }
-    
+
 }

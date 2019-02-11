@@ -167,8 +167,9 @@ public class ConAcervo extends ConCRUD {
     public List<ModAcervo> localizarAcervo(ModAcervo acervoMod, String operacao) {
         List<ModAcervo> todosRegistosEncontrados = new ArrayList<>();
         try {
-            super.query = "select * from tcc.view_localizarAcervo where idAcervos=? or "
-                    + "titulo like '%" + acervoMod.getTitulo() + "%'";
+            super.query = "select * from view_localizarAcervo "
+                    + "inner join estoque on view_localizarAcervo.idAcervos=estoque.Acervos_idAcervos "
+                    + "where idAcervos=? or titulo like '%" + acervoMod.getTitulo() + "%' and formato='Físico'";
             super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
             super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
             super.setResultset = super.preparedStatement.executeQuery();
@@ -225,6 +226,8 @@ public class ConAcervo extends ConCRUD {
         acervoMod.setAno_lancamento(setResultset.getInt("ano_lancamento"), operacao);
         acervoMod.setNumero_paginas(setResultset.getShort("numero_paginas"), operacao);
         acervoMod.setIdioma(setResultset.getString("idioma"), operacao);
+        acervoMod.getEstoqueMod().setQuantidade_total(setResultset.getShort("quantidade_total"), operacao);
+        acervoMod.getEstoqueMod().setQuantidade_em_falta(setResultset.getShort("quantidade_em_falta"), operacao);
         acervoMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         acervoMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         acervoMod.getCategoriaMod().setDesignacao(setResultset.getString("categoria"), operacao);

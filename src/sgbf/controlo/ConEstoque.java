@@ -44,6 +44,10 @@ public class ConEstoque extends ConCRUD {
         }
     }
 
+    public boolean alterarEntrada(ModItemProveniente itemProvenienteMod, String operacao) {
+        throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estoque !\nErro: ", Alert.AlertType.ERROR);
+    }
+
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModAcervo acervoMod = (ModAcervo) objecto_remover;
