@@ -73,6 +73,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
     private final ConAcervo acervoCon = new ConAcervo();
+    private final ConEstoque estoqueCon = new ConEstoque();
     private final ModItemProveniente itemProvenienteMod = new ModItemProveniente();
     private final ContItemProveniente itemProvenienteCon = new ContItemProveniente();
 
@@ -80,27 +81,26 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.alterta();
         this.bloquearItensDaJanela();
+        this.carregarValorNasComboxs();
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listadas"));
         this.tableViewItemProveniente.setPlaceholder(new Label("Entradas não listadas"));
         this.texteFiedPesquisarAcervo.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         this.texteFiedPesquisarEntrada.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCamposAcervo(newValue));
+        tableViewItemProveniente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDados(newValue));
     }
 
     @FXML
     private void cadastrarProveniencia() {
         operacao = "Registar Entrada de Acervo";
-        UtilControloExcessao controloExcessao = new UtilControloExcessao();
         itemProvenienteMod.setAcervoMod(tableViewAcervo.getSelectionModel().getSelectedItem(), operacao);
         itemProvenienteMod.setProvenienciaMod(this.comboxProveniencia.getValue(), operacao);
         itemProvenienteMod.setQuantidade_entrada(UtilValidarDados.validarQuantidade(texteFiedQuantidade.getText(), operacao), operacao);
         itemProvenienteMod.setCusto_unitario(UtilValidarDados.custoUnitario(texteFiedCustoUnitario.getText(), operacao), operacao);
-        if (controloExcessao.temCerteza(operacao, "Esta operação é irreversível deseja continuar ?")) {
-            if (itemProvenienteCon.registar(itemProvenienteMod, operacao)) {
-                this.bloquearItensDaJanela();
-                this.limparItensDaJanela();
-                throw new UtilControloExcessao(operacao, "Entrada Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
-            }
+        if (itemProvenienteCon.registar(itemProvenienteMod, operacao)) {
+            this.bloquearItensDaJanela();
+            this.limparItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Entrada Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
 
@@ -112,8 +112,17 @@ public class VisCadastramentoItensProvenientes implements Initializable {
 
     @FXML
     private void removerProveniencia() {
-        operacao = "Remover Itens provenientes";
-        throw new UtilControloExcessao(operacao, "Operação temporariamente indisponivel !", Alert.AlertType.ERROR);
+        operacao = "Remover Entrada";
+        UtilControloExcessao controloExcessao = new UtilControloExcessao();
+        ModItemProveniente itemRemover = this.tableViewItemProveniente.getSelectionModel().getSelectedItem();
+        if (controloExcessao.temCerteza(operacao, "Esta operação é irreversível deseja continuar ?")) {
+            if (estoqueCon.removerEntrada(itemRemover, operacao)) {
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
+                this.tableViewItemProveniente.getItems().remove(itemRemover);
+                throw new UtilControloExcessao(operacao, "Entrada Removida com sucesso com sucesso", Alert.AlertType.CONFIRMATION);
+            }
+        }
     }
 
     @FXML
@@ -259,6 +268,22 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             botaoRemover.setDisable(true);
             this.limparItensDaJanela();
             this.labelQuantidadeDeEntrada.setText("Quantidade de entrada *");
+        }
+    }
+ 
+    private void exibirDados(ModItemProveniente itemProvenienteMod) {
+        if (itemProvenienteMod != null) {
+            for (int i = 0; i < this.comboxProveniencia.getItems().size(); i++) {
+                this.comboxProveniencia.getSelectionModel().select(i);
+                if (itemProvenienteMod.getProvenienciaMod().getIdProveniencia() == this.comboxProveniencia.getSelectionModel().getSelectedItem().getIdProveniencia()) {
+                    break;
+                }
+            }
+            this.texteFiedQuantidade.setDisable(false);
+            this.botaoAlterar.setDisable(false);
+            this.botaoRemover.setDisable(false);
+            this.botaoCadastrar.setDisable(true);
+            this.habilitarCusto();
         }
     }
 
