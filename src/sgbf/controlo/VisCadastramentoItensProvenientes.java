@@ -55,8 +55,9 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     @FXML
     private TableView<ModItemProveniente> tableViewItemProveniente;
     @FXML
-    private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente, tableColumQuantidadeEntrada,
-            tableColumCustoUnitario, tableColumSubTotal, tableColumProveniencia;
+    private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente,
+            tableColumQuantidadeEntrada,tableColumCustoUnitario, tableColumSubTotal,
+            tableColumProveniencia,tableColumDataRegisto,tableColumUltimamodificacao;
     @FXML
     private TableView<ModAcervo> tableViewAcervo;
     @FXML
@@ -371,6 +372,18 @@ public class VisCadastramentoItensProvenientes implements Initializable {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
                 return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getProvenienciaMod().getTipo()));
+            }
+        });
+        tableColumDataRegisto.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
+                return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getUtilControloDaData().getData_registo()));
+            }
+        });
+        tableColumUltimamodificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
+                return new ReadOnlyStringWrapper(String.valueOf(item.getValue().getUtilControloDaData().getData_modificacao()));
             }
         });
         tableViewItemProveniente.setItems(this.todosRegistosParaCarregarProveniencia(todosRegistosEncontrados));
