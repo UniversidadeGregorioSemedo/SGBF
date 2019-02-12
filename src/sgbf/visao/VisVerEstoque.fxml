@@ -99,10 +99,6 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font></Label>
                   <TextField fx:id="textFQTotal" disable="true" layoutX="604.0" layoutY="36.0" prefHeight="25.0" prefWidth="148.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css" />
-                  <Button fx:id="botaoAlterar" disable="true" layoutX="543.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="210.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css" text="Alterar">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
                   <Button fx:id="botaoCancelar" layoutX="543.0" layoutY="216.0" mnemonicParsing="false" onAction="#limparItensDaJanela" prefHeight="25.0" prefWidth="106.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css" text="Cancelar">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -110,7 +106,7 @@
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font></Button>
-                  <Button layoutX="659.0" layoutY="213.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="96.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css" text="Sair">
+                  <Button layoutX="655.0" layoutY="216.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="96.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css" text="Sair">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -131,7 +127,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font></Label>
                   <TextField fx:id="textFQEmp" disable="true" layoutX="650.0" layoutY="107.0" prefHeight="25.0" prefWidth="102.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css" />
-                  <TextField fx:id="textFQRes" disable="true" layoutX="652.0" layoutY="142.0" prefHeight="25.0" prefWidth="102.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css" />
+                  <TextField fx:id="textFQRes" disable="true" layoutX="652.0" layoutY="142.0" prefHeight="25.0" prefWidth="100.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css" />
                </children>
             </AnchorPane>
         </items>

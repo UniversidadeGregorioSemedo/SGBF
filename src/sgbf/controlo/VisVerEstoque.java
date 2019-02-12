@@ -40,7 +40,7 @@ public class VisVerEstoque implements Initializable {
     @FXML
     private JFXButton botaoPesquisar;
     @FXML
-    private Button botaoAlterar, botaoSair, botaoCancelar;
+    private Button  botaoSair, botaoCancelar;
     @FXML
     private TableView<ModAcervo> tableViewAcervo, tableViewEstoque;
     @FXML
