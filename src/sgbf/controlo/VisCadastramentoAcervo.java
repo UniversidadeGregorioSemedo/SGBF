@@ -183,8 +183,9 @@ public class VisCadastramentoAcervo implements Initializable {
     private void carregarAcervo() {
         FileChooser carregarAcervo = new FileChooser();
         carregarAcervo.setTitle("Seleccione o Acervo");
+        carregarAcervo.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
         Stage propriedadeDaJanela = (Stage) AnchorPaneAcervo.getScene().getWindow();
-        String enderecoAcervo = carregarAcervo.showOpenDialog(propriedadeDaJanela).getName();
+        String enderecoAcervo = carregarAcervo.showOpenDialog(propriedadeDaJanela).getPath();
         texteFiedEndereco.setText(enderecoAcervo);
     }
 
