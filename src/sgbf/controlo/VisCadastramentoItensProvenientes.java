@@ -108,26 +108,25 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     @FXML
     private void alterarProveniencia() {
         operacao = "Alterar Entrada";
-        ModItemProveniente itemRemover = this.tableViewItemProveniente.getSelectionModel().getSelectedItem();
-        if (estoqueCon.removerEntrada(itemRemover, operacao)) {
+        ModItemProveniente entradaAlterar = this.tableViewItemProveniente.getSelectionModel().getSelectedItem();
+        entradaAlterar.setQuantidade_entrada(UtilValidarDados.validarQuantidade(texteFiedQuantidade.getText(), operacao), operacao);
+        entradaAlterar.setCusto_unitario(UtilValidarDados.custoUnitario(texteFiedCustoUnitario.getText(), operacao), operacao);
+        if (estoqueCon.alterar(entradaAlterar, operacao)) {
             this.bloquearItensDaJanela();
             this.limparItensDaJanela();
-            throw new UtilControloExcessao(operacao, "Entrada Alterada com sucesso", Alert.AlertType.CONFIRMATION);
+            throw new UtilControloExcessao(operacao, "Entrada alterada com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
 
     @FXML
     private void removerProveniencia() {
         operacao = "Remover Entrada";
-        UtilControloExcessao controloExcessao = new UtilControloExcessao();
         ModItemProveniente itemRemover = this.tableViewItemProveniente.getSelectionModel().getSelectedItem();
-        if (controloExcessao.temCerteza(operacao, "Esta operação é irreversível deseja continuar ?")) {
-            if (estoqueCon.removerEntrada(itemRemover, operacao)) {
-                this.bloquearItensDaJanela();
-                this.limparItensDaJanela();
-                this.tableViewItemProveniente.getItems().remove(itemRemover);
-                throw new UtilControloExcessao(operacao, "Entrada Removida com sucesso com sucesso", Alert.AlertType.CONFIRMATION);
-            }
+        if (estoqueCon.removerEntrada(itemRemover, operacao)) {
+            this.bloquearItensDaJanela();
+            this.limparItensDaJanela();
+            this.tableViewItemProveniente.getItems().remove(itemRemover);
+            throw new UtilControloExcessao(operacao, "Entrada Removida com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
 
