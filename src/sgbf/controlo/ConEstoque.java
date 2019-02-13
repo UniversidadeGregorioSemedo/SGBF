@@ -27,8 +27,9 @@ public class ConEstoque extends ConCRUD {
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
         ModItemProveniente itemProvenienteMod = (ModItemProveniente) objecto_alterar;
+        itemProvenienteMod = this.quantidadePodeSerAlterada(itemProvenienteMod, operacao);
         try {
-            if (this.quantidadePodeSerAlterada(itemProvenienteMod, operacao)) {
+            if (itemProvenienteMod != null) {
                 super.query = "call pr_alterarItensEntradas(?,?,?,?,?)";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
                 super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
@@ -93,7 +94,7 @@ public class ConEstoque extends ConCRUD {
         return false;
     }
 
-    private boolean quantidadePodeSerAlterada(ModItemProveniente itemProvenienteMod, String operacao) {
+    private ModItemProveniente quantidadePodeSerAlterada(ModItemProveniente itemProvenienteMod, String operacao) {
         short qantidadeTotal = itemProvenienteMod.getQuantidade_entrada();
         for (Object itensRegistados : itemProvenienteCon.pesquisar(itemProvenienteMod, operacao)) {
             ModItemProveniente itemEncontrado = (ModItemProveniente) itensRegistados;
@@ -101,7 +102,12 @@ public class ConEstoque extends ConCRUD {
                 qantidadeTotal += itemEncontrado.getQuantidade_entrada();
             }
         }
-        return itemProvenienteMod.getAcervoMod().getEstoqueMod().getQuantidade_em_falta() <= qantidadeTotal;
+        if (itemProvenienteMod.getAcervoMod().getEstoqueMod().getQuantidade_em_falta() <= qantidadeTotal) {
+            itemProvenienteMod.setQuantidade_entrada(qantidadeTotal, operacao);
+            return itemProvenienteMod;
+        } else {
+            return null;
+        }
     }
 
     public boolean descontarAcervoReservadoNoEstoque(ModItemSolicitado itemSolicitadoMod, String operacao) {

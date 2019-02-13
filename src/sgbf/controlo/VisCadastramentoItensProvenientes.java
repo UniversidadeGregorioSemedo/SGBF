@@ -56,8 +56,8 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     private TableView<ModItemProveniente> tableViewItemProveniente;
     @FXML
     private TableColumn<ModItemProveniente, String> tableColumTituloProvaniente,
-            tableColumQuantidadeEntrada,tableColumCustoUnitario, tableColumSubTotal,
-            tableColumProveniencia,tableColumDataRegisto,tableColumUltimamodificacao;
+            tableColumQuantidadeEntrada, tableColumCustoUnitario, tableColumSubTotal,
+            tableColumProveniencia, tableColumDataRegisto, tableColumUltimamodificacao;
     @FXML
     private TableView<ModAcervo> tableViewAcervo;
     @FXML
@@ -80,15 +80,14 @@ public class VisCadastramentoItensProvenientes implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.alterta();
         this.bloquearItensDaJanela();
         this.carregarValorNasComboxs();
         this.tableViewAcervo.setPlaceholder(new Label("Acervos não listadas"));
         this.tableViewItemProveniente.setPlaceholder(new Label("Entradas não listadas"));
         this.texteFiedPesquisarAcervo.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
         this.texteFiedPesquisarEntrada.setTooltip(new Tooltip("Introduza o código, título do acervo ou use *( _ ) para listar todos registos "));
-        tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCamposAcervo(newValue));
-        tableViewItemProveniente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDados(newValue));
+        this.tableViewAcervo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCamposAcervo(newValue));
+        this.tableViewItemProveniente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDados(newValue));
     }
 
     @FXML
@@ -284,8 +283,12 @@ public class VisCadastramentoItensProvenientes implements Initializable {
                     break;
                 }
             }
+            if (itemProvenienteMod.getAcervoMod().getFormato().equalsIgnoreCase("Físico")) {
+                this.botaoAlterar.setDisable(false);
+            } else {
+                this.botaoAlterar.setDisable(true);
+            }
             this.texteFiedQuantidade.setDisable(false);
-            this.botaoAlterar.setDisable(false);
             this.botaoRemover.setDisable(false);
             this.botaoCadastrar.setDisable(true);
             this.habilitarCusto();
@@ -343,6 +346,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     }
 
     private void carregarResultadosNaTableaProveniencia(List<Object> todosRegistosEncontrados) {
+        this.carregarValorNasComboxs();
         tableColumTituloProvaniente.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModItemProveniente, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModItemProveniente, String> item) {
@@ -412,15 +416,6 @@ public class VisCadastramentoItensProvenientes implements Initializable {
         if (!caracateresValidos.contains(evt.getCharacter() + "")) {
             evt.consume();
         }
-    }
-
-    private void alterta() {
-        operacao = "Entrada de acervos";
-        Notifications.create().title(operacao).
-                text("A remoção e alteração de uma entrada estão\n"
-                        + "temporariamente indisponíveis").showWarning();;
-        Notifications.create().title(operacao).
-                text("A entra de acervos digitais está temporariamente\n indisponível").showWarning();
     }
 
 }
