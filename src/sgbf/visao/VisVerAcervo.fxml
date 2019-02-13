@@ -53,7 +53,7 @@
                   <Line endX="100.0" layoutX="723.0" layoutY="9.0" startX="-100.0" stroke="WHITE" />
                   <Label layoutX="467.0" layoutY="1.0" prefHeight="17.0" prefWidth="172.0" text="Localizar Acervo" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="Sitka Text Bold" size="14.0" />
                      </font>
                   </Label>
                   <Label layoutX="18.0" layoutY="20.0" text="Use ( _  ) para ver todos acervos" textFill="WHITE">

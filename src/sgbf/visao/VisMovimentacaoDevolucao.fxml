@@ -48,7 +48,7 @@
                         <TableColumn fx:id="tableColumnDataVencimento" prefWidth="75.0" text="Data de vencimento" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="250.0" styleClass="jfx-textfield" stylesheets="@../util/devolução.css" />
+                  <TextField fx:id="textFieldPesquisar" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="250.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../util/devolução.css" />
                   <JFXButton fx:id="botaoPesquisar" layoutX="270.0" layoutY="58.0" onAction="#pesquisarUtente" prefHeight="25.0" prefWidth="37.0" stylesheets="@../util/devolução.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

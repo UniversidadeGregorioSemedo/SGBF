@@ -47,7 +47,7 @@
                         <TableColumn fx:id="tableColumnDataVencimento" prefWidth="75.0" text="Data de vencimento" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="14.0" layoutY="59.0" prefHeight="25.0" prefWidth="250.0" styleClass="jfx-textfield" stylesheets="@../util/emprestimo.css" />
+                  <TextField fx:id="textFieldPesquisar" layoutX="14.0" layoutY="59.0" prefHeight="25.0" prefWidth="250.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../util/emprestimo.css" />
                   <JFXButton fx:id="botaoPesquisar" layoutX="271.0" layoutY="59.0" onAction="#pesquisarUtente" prefHeight="25.0" prefWidth="41.0" stylesheets="@../util/emprestimo.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

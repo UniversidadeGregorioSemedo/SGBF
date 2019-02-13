@@ -49,7 +49,7 @@
                   </Label>
                   <Label layoutX="304.0" layoutY="6.0" text="cadastro de editora" textFill="WHITE">
                      <font>
-                        <Font name="Sitka Text" size="14.0" />
+                        <Font name="Sitka Text Bold" size="14.0" />
                      </font>
                   </Label>
                   <Line endX="100.0" layoutX="171.0" layoutY="15.0" startX="-100.0" stroke="WHITE" />

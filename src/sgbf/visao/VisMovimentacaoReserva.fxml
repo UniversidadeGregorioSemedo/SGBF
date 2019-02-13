@@ -48,7 +48,7 @@
                         <TableColumn fx:id="tableColumnFormato" prefWidth="75.0" text="Formato" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="176.0" layoutY="74.0" prefHeight="25.0" prefWidth="250.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
+                  <TextField fx:id="textFieldPesquisar" layoutX="176.0" layoutY="74.0" prefHeight="25.0" prefWidth="250.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
                   <RadioButton fx:id="radioButtonUtente" layoutX="17.0" layoutY="78.0" mnemonicParsing="false" stylesheets="@../util/reserva.css" text="Utente" textFill="WHITE">
                      <toggleGroup>
                         <ToggleGroup fx:id="OpcoesDePesquisa" />
@@ -101,7 +101,7 @@
                      </font></Label>
                   <Line endX="100.0" layoutX="301.0" layoutY="14.0" startX="-100.0" stroke="WHITE" />
                   <Line endX="100.0" layoutX="637.0" layoutY="14.0" startX="-100.0" stroke="WHITE" />
-                  <Label layoutX="426.0" layoutY="6.0" text="Emprestimo" textFill="WHITE">
+                  <Label layoutX="445.0" layoutY="6.0" text="Reserva" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
                      </font>
