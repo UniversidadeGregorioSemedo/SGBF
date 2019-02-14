@@ -16,15 +16,6 @@
         <menus>
           <Menu fx:id="menuArquivo" mnemonicParsing="false" text="Arquivo">
             <items>
-              <MenuItem mnemonicParsing="false" text="Copia de segurança">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Synchronize_48px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </MenuItem>
                   <MenuItem fx:id="menuItemTerminarSessao" mnemonicParsing="false" onAction="#botaoMenuItemTerminarSessao" text="Terminar Sessão" />
                   <MenuItem fx:id="menuItemSairDoSistema" mnemonicParsing="false" onAction="#botaoMenuItemSairDoSistema" text="Sair do sistema">
                      <graphic>
@@ -168,16 +159,16 @@
               <items>
                   <Menu mnemonicParsing="false" text="Reserva">
                     <items>
-                        <MenuItem fx:id="menuitemMovimentacaoReserva" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoReserva" text="Nova " />
+                        <MenuItem fx:id="menuitemMovimentacaoReserva" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoReserva" text="Nova ">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/Health%20Book_48px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
                       <MenuItem fx:id="menuitemMovimentacaoTodasReserva" mnemonicParsing="false" onAction="#BotaoMenuItemMovimentacaoTodasReserva" text="Todas as Resevas" />
                     </items>
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icones/Health%20Book_48px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Emprestimo">
                     <items>

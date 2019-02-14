@@ -86,7 +86,7 @@ public class VisCadastramentoFuncionario implements Initializable {
         if (tableViewVisitane.getSelectionModel().getSelectedCells().size() == 1) {
             funcionarioMod.setCodigoFuncionario(texteFiedcodigoFuncionario.getText(), operacao);
             funcionarioMod.setCargo(comboBoxCargo.getSelectionModel().getSelectedItem(), operacao);
-            funcionarioMod.setIdUtente(Integer.valueOf(texteFiedcodigoUtente.getText()), operacao);
+            funcionarioMod.setIdUtente(tableViewVisitane.getSelectionModel().getSelectedItem().getIdUtente(), operacao);
             if (funcionarioCon.registar(funcionarioMod, operacao)) {
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
@@ -103,7 +103,7 @@ public class VisCadastramentoFuncionario implements Initializable {
         if (tableViewFuncionario.getSelectionModel().getSelectedCells().size() == 1) {
             funcionarioMod.setCodigoFuncionario(texteFiedcodigoFuncionario.getText(), operacao);
             funcionarioMod.setCargo(comboBoxCargo.getSelectionModel().getSelectedItem(), operacao);
-            funcionarioMod.setIdUtente(Integer.valueOf(texteFiedcodigoUtente.getText()), operacao);
+            funcionarioMod.setIdUtente(tableViewVisitane.getSelectionModel().getSelectedItem().getIdUtente(), operacao);
             if (funcionarioCon.alterar(funcionarioMod, operacao)) {
                 this.bloquearItensDaJanela();
                 this.limparItensDaJanela();
@@ -243,7 +243,6 @@ public class VisCadastramentoFuncionario implements Initializable {
         this.texteFiedPesquisarFuncionario.setText(null);
         this.texteFiedcodigoFuncionario.setText(null);
         this.texteFiedcodigoUtente.setText(null);
-        // this.tableViewVisitane.getItems().clear();
         this.tableViewFuncionario.getItems().clear();
         this.comboBoxCargo.setPromptText("Cargo");
     }

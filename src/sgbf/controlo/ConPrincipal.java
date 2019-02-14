@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilCriptografia;
 
 /**
  *
@@ -21,7 +20,6 @@ public class ConPrincipal extends Application {
         final String operacao = "Fechar o programa";
         try {
             this.fecharPeloBotaoWindow(operacao, primaryStage);
-
             Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

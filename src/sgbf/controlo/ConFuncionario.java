@@ -12,6 +12,7 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModFuncionario;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilCriptografia;
 import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
@@ -127,7 +128,7 @@ public class ConFuncionario extends ConCRUD {
         funcionarioMod.setGenero(setResult.getString("genero"), operacao);
         funcionarioMod.setTipo_identificacao(setResult.getString("tipo_identidicacao"), operacao);
         funcionarioMod.setNumero(setResult.getString("numero_identidicacao"), operacao);
-        funcionarioMod.setContacto(setResult.getString("contacto"), operacao);
+        funcionarioMod.setContacto(UtilCriptografia.decrypt(setResult.getString("contacto"), operacao), operacao);
         funcionarioMod.setEndereco(setResult.getString("endereco"), operacao);
         funcionarioMod.setEmail(setResult.getString("email"), operacao);
         funcionarioMod.setEndereco_imagem(setResult.getString("endereco_imagem"), operacao);

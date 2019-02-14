@@ -45,7 +45,15 @@ public class ModFuncionario extends ModUtente  {
     }
 
     public void setCargo(String cargo, String operacao) {
-        this.cargo = cargo;
+        if(cargo == null){
+            throw new UtilControloExcessao(cargo, "Seleccione o cardo do funcionário", Alert.AlertType.NONE);
+        }else{
+            if(cargo.isEmpty()){
+                throw new UtilControloExcessao(cargo, "Seleccione o cardo do funcionário", Alert.AlertType.NONE);
+            }else{
+                this.cargo = cargo;
+            }
+        }
     }
 
     public String getCodigoFuncionario() {
