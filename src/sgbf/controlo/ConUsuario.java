@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import sgbf.modelo.ModFuncionario;
 import sgbf.modelo.ModUtente;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilCriptografia;
 
 /**
  *
@@ -31,8 +32,8 @@ public class ConUsuario {
             this.utenteCon.query = "select * from utente where usuario=? and senha=?"
                                  + "and categoria='Funcionário'";
             this.utenteCon.preparedStatement = this.utenteCon.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(utenteCon.query);
-            this.utenteCon.preparedStatement.setString(1, utenteMod.getUsuario());
-            this.utenteCon.preparedStatement.setString(2, utenteMod.getSenha());
+            this.utenteCon.preparedStatement.setString(1, UtilCriptografia.encrypt(utenteMod.getUsuario(), operacao));
+            this.utenteCon.preparedStatement.setString(2, UtilCriptografia.encrypt(utenteMod.getSenha(), operacao));
             this.utenteCon.setResultset = utenteCon.preparedStatement.executeQuery();
             return this.eUmFuncionario(utenteCon.setResultset, operacao);
         } catch (SQLException erro) {

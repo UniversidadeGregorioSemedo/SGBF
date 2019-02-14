@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.UtilCriptografia;
 
 /**
  *

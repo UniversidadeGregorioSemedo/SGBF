@@ -13,7 +13,7 @@ import javafx.scene.control.Alert;
 import sgbf.modelo.ModUtente;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
+import sgbf.util.UtilCriptografia;
 
 /**
  *
@@ -38,13 +38,13 @@ public class ConUtente extends ConCRUD {
                 super.preparedStatement.setString(3, utenteMod.getGenero());
                 super.preparedStatement.setString(4, utenteMod.getTipo_identificacao());
                 super.preparedStatement.setString(5, utenteMod.getNumero());
-                super.preparedStatement.setString(6, utenteMod.getContacto());
+                super.preparedStatement.setString(6, UtilCriptografia.encrypt(utenteMod.getContacto(), operacao));
                 super.preparedStatement.setString(7, utenteMod.getEmail());
                 super.preparedStatement.setString(8, utenteMod.getEndereco());
                 super.preparedStatement.setString(9, utenteMod.getEndereco_imagem());
                 super.preparedStatement.setString(10, utenteMod.getCategoria());
-                super.preparedStatement.setString(11, utenteMod.getUsuario());
-                super.preparedStatement.setString(12, utenteMod.getSenha());
+                super.preparedStatement.setString(11, UtilCriptografia.encrypt(utenteMod.getUsuario(), operacao));
+                super.preparedStatement.setString(12, UtilCriptografia.encrypt(utenteMod.getSenha(), operacao));
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
@@ -70,13 +70,13 @@ public class ConUtente extends ConCRUD {
                 super.preparedStatement.setString(3, utenteMod.getGenero());
                 super.preparedStatement.setString(4, utenteMod.getTipo_identificacao());
                 super.preparedStatement.setString(5, utenteMod.getNumero());
-                super.preparedStatement.setString(6, utenteMod.getContacto());
+                super.preparedStatement.setString(6, UtilCriptografia.encrypt(utenteMod.getContacto(), operacao));
                 super.preparedStatement.setString(7, utenteMod.getEmail());
                 super.preparedStatement.setString(8, utenteMod.getEndereco());
                 super.preparedStatement.setString(9, utenteMod.getEndereco_imagem());
                 super.preparedStatement.setString(10, utenteMod.getCategoria());
-                super.preparedStatement.setString(11, utenteMod.getUsuario());
-                super.preparedStatement.setString(12, utenteMod.getSenha());
+                super.preparedStatement.setString(11, UtilCriptografia.encrypt(utenteMod.getUsuario(), operacao));
+                super.preparedStatement.setString(12, UtilCriptografia.encrypt(utenteMod.getSenha(), operacao));
                 super.preparedStatement.setInt(13, utenteMod.getIdUtente());
                 return !super.preparedStatement.execute();
             }
@@ -153,13 +153,13 @@ public class ConUtente extends ConCRUD {
         visitanteMod.setGenero(setResult.getString("genero"), operacao);
         visitanteMod.setTipo_identificacao(setResult.getString("tipo_identidicacao"), operacao);
         visitanteMod.setNumero(setResult.getString("numero_identidicacao"), operacao);
-        visitanteMod.setContacto(setResult.getString("contacto"), operacao);
+        visitanteMod.setContacto(UtilCriptografia.decrypt(setResult.getString("contacto"), operacao), operacao);
         visitanteMod.setEndereco(setResult.getString("endereco"), operacao);
         visitanteMod.setEmail(setResult.getString("email"), operacao);
         visitanteMod.setEndereco_imagem(setResult.getString("endereco_imagem"), operacao);
         visitanteMod.setCategoria(setResult.getString("categoria"), operacao);
-        visitanteMod.setUsuario(setResult.getString("usuario"), operacao);
-        visitanteMod.setSenha(setResult.getString("senha"), operacao);
+        visitanteMod.setUsuario(UtilCriptografia.decrypt(setResult.getString("usuario"), operacao), operacao);
+        visitanteMod.setSenha(UtilCriptografia.decrypt(setResult.getString("senha"), operacao), operacao);
         visitanteMod.getUtilControloDaData().setData_registo(setResultset.getTimestamp("data_registo"), operacao);
         visitanteMod.getUtilControloDaData().setData_modificacao(setResultset.getTimestamp("data_modificacao"), operacao);
         return visitanteMod;

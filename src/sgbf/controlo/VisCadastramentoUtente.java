@@ -27,7 +27,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**
@@ -177,7 +176,7 @@ public class VisCadastramentoUtente implements Initializable {
         this.texteFiedUsuario.setDisable(false);
         this.texteFiedSenha.setDisable(false);
         this.texteFiedEndereco.setDisable(false);
-        this.texteFiedEnderecoImagem.setDisable(false);
+        this.texteFiedEnderecoImagem.setDisable(true);
         this.comboBoxGenero.setDisable(false);
         this.comboBoxTipoIndentificacao.setDisable(false);
         this.comboBoxCategoria.setDisable(false);
