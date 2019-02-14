@@ -68,6 +68,16 @@ public class VisLogin implements Initializable {
             }
         }
     }
+    
+    @FXML
+    private void recuperarSenha(){
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.INFORMATION);
+    }
+    
+    @FXML
+    private void contacteNos(){
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.INFORMATION);
+    }
 
     private void abrirTelaPrincipal(String operacao, Stage propreidadeDaJanela) {
         try {
