@@ -77,7 +77,7 @@ public class ModFuncionario extends ModUtente  {
             if(this.getIdUtente() == funcionarioMod.getIdUtente()){
                 throw new UtilControloExcessao(operacao, "Já existe registo deste funcionário", Alert.AlertType.WARNING);
             }else{
-                if(this.getCodigoFuncionario().equalsIgnoreCase(funcionarioMod.codigoFuncionario)){
+                if((this.getCodigoFuncionario()!= null) && (this.getCodigoFuncionario().equalsIgnoreCase(funcionarioMod.codigoFuncionario))){
                     throw new UtilControloExcessao(operacao, "Já existe um Funcionário com este código", Alert.AlertType.WARNING);
                 }else{
                     return false;

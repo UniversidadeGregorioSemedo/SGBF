@@ -70,7 +70,6 @@ public class VisCadastramentoFuncionario implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.bloquearItensDaJanela();
-        this.carregarValorNasComboxs();
         this.exibirMensagemNasTabelas();
         this.texteFiedPesquisarUtente.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
         this.texteFiedPesquisarFuncionario.setTooltip(new Tooltip("Introduza o código, nome do funcionário ou use *( _ ) para listar todos registos "));
@@ -171,6 +170,7 @@ public class VisCadastramentoFuncionario implements Initializable {
     private void novo() {
         this.desbloquearItensDaJanela();
         this.limparItensDaJanela();
+        this.carregarValorNasComboxs();
     }
 
     @FXML
@@ -213,6 +213,7 @@ public class VisCadastramentoFuncionario implements Initializable {
 
     private void exibirDadosDoUtenteNosCampos(ModVisitante visitanteMod) {
         if (tableViewVisitane.getSelectionModel().getSelectedCells().size() == 1) {
+            this.carregarValorNasComboxs();
             texteFiedcodigoUtente.setText(String.valueOf(visitanteMod.getIdUtente()));
         } else {
             texteFiedcodigoUtente.setText(null);
@@ -221,6 +222,7 @@ public class VisCadastramentoFuncionario implements Initializable {
 
     private void exibirDadosDoFuncionarioNosCampos(ModFuncionario funcionarioMod) {
         if (tableViewFuncionario.getSelectionModel().getSelectedCells().size() == 1) {
+            this.carregarValorNasComboxs();
             texteFiedcodigoFuncionario.setText(funcionarioMod.getCodigoFuncionario());
             comboBoxCargo.getSelectionModel().select(funcionarioMod.getCargo());
             texteFiedcodigoUtente.setText(String.valueOf(funcionarioMod.getIdUtente()));
@@ -244,7 +246,7 @@ public class VisCadastramentoFuncionario implements Initializable {
         this.texteFiedcodigoFuncionario.setText(null);
         this.texteFiedcodigoUtente.setText(null);
         this.tableViewFuncionario.getItems().clear();
-        this.comboBoxCargo.setPromptText("Cargo");
+        this.comboBoxCargo.getItems().clear();
     }
 
     private ModVisitante pegarDadosDaPesquisaUtente() {

@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sgbf.modelo.ModFuncionario;
@@ -52,7 +53,8 @@ public class VisLogin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        this.loginNomeUsuario.setTooltip(new Tooltip("Introduza o nome do usuário (em letras minúsculas)"));
+        this.loginSenha.setTooltip(new Tooltip("Introduza a senha do usuário"));
     }
 
     @FXML

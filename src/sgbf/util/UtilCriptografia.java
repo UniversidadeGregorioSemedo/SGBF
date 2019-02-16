@@ -1,9 +1,5 @@
 package sgbf.util;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;

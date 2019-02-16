@@ -69,7 +69,7 @@ public class ConFuncionario extends ConCRUD {
         ModFuncionario funcionarioMod = (ModFuncionario) objecto_remover;
         try {
             if (this.temDadosRelacionados(funcionarioMod, operacao)) {
-                throw new UtilControloExcessao(operacao, "Existem registo importantes deste Funcionário !", Alert.AlertType.INFORMATION);
+                throw new UtilControloExcessao(operacao, "Existem registos importantes deste Funcionário !", Alert.AlertType.INFORMATION);
             } else {
                 super.query = "delete from tcc.funcionario where Utente_idUtente=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);

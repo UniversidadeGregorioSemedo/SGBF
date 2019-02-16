@@ -228,7 +228,6 @@ public class VisCadastramentoUtente implements Initializable {
         this.comboBoxCategoria.getItems().addAll("Funcionário", "Professor", "Estudante");
     }
 
-    
     private void exibirDadosNosCampos(ModVisitante visitanteMod){
         if(tableViewUtente.getSelectionModel().getSelectedCells().size() == 1){
             this.carregarValorNasComboxs();
