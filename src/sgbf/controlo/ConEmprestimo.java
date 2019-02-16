@@ -17,7 +17,6 @@ import sgbf.modelo.ModReserva;
 import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *

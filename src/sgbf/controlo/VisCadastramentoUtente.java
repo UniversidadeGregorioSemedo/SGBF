@@ -62,7 +62,6 @@ public class VisCadastramentoUtente implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        this.bloquearItensDaJanela();
-       this.carregarValorNasComboxs();
        this.tableViewUtente.setPlaceholder(new Label("Utentes não listados"));
        this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, nome do utente ou use *( _ ) para listar todos registos "));
        tableViewUtente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
@@ -147,6 +146,7 @@ public class VisCadastramentoUtente implements Initializable {
     private void novo(){
         this.desbloquearItensDaJanela();
         this.limparItensDaJanela();
+        this.carregarValorNasComboxs();
     }
     @FXML
     private void cancelar(){
@@ -217,9 +217,9 @@ public class VisCadastramentoUtente implements Initializable {
         this.texteFiedEnderecoImagem.setText(null);
         this.texteFiedPesquisar.setText(null);
         this.tableViewUtente.getItems().clear();
-        this.comboBoxGenero.setPromptText("Gênero");
-        this.comboBoxTipoIndentificacao.setPromptText("Identificação");
-        this.comboBoxCategoria.setPromptText("Categoria");
+        this.comboBoxGenero.getItems().clear();
+        this.comboBoxTipoIndentificacao.getItems().clear();
+        this.comboBoxCategoria.getItems().clear();
     }
    
     private void carregarValorNasComboxs(){
@@ -231,6 +231,7 @@ public class VisCadastramentoUtente implements Initializable {
     
     private void exibirDadosNosCampos(ModVisitante visitanteMod){
         if(tableViewUtente.getSelectionModel().getSelectedCells().size() == 1){
+            this.carregarValorNasComboxs();
             texteFiedId.setText(String.valueOf(visitanteMod.getIdUtente()));
             texteFiedPrimeiroNome.setText(visitanteMod.getPrimeiro_nome());
             texteFiedSegundoNome.setText(visitanteMod.getSegundo_nome());

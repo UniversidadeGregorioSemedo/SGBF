@@ -205,22 +205,8 @@ public abstract class ModUtente {
 
     public void equals(ModUtente utenteMod, String operacao) {
         if (this.idUtente != utenteMod.idUtente) {
-            if (this.tipo_identificacao.equalsIgnoreCase(utenteMod.tipo_identificacao)) {
-                if (this.numero.equalsIgnoreCase(utenteMod.numero)) {
-                    throw new UtilControloExcessao(operacao, "Já existe um Utente com esta identificação", Alert.AlertType.WARNING);
-                } else {
-                    if (this.contacto.equalsIgnoreCase(utenteMod.contacto)) {
-                        throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);
-                    } else {
-                        if (this.usuario.equalsIgnoreCase(utenteMod.usuario)) {
-                            throw new UtilControloExcessao(operacao, "O usuário introduzido já existe", Alert.AlertType.WARNING);
-                        } else {
-                            if (this.contacto.equalsIgnoreCase(utenteMod.usuario)) {
-                                throw new UtilControloExcessao(operacao, "Introduza um usuário  válido ou deixe em branco", Alert.AlertType.WARNING);
-                            }
-                        }
-                    }
-                }
+            if (this.numero.equalsIgnoreCase(utenteMod.numero)) {
+                throw new UtilControloExcessao(operacao, "Já existe um Utente com este número de identificação", Alert.AlertType.WARNING);
             } else {
                 if (this.contacto.equalsIgnoreCase(utenteMod.contacto)) {
                     throw new UtilControloExcessao(operacao, "Já existe um Utente com este Contacto", Alert.AlertType.WARNING);

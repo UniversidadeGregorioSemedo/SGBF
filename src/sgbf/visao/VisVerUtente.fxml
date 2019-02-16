@@ -124,12 +124,12 @@
                         </Label>
                      </children>
                   </Group>
-                  <Label layoutX="469.0" layoutY="6.0" text="Ver todos estoques" textFill="WHITE">
+                  <Label layoutX="469.0" layoutY="6.0" text="Ver todos utentes" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="28.0" layoutY="36.0" text="Use ( _  ) para ver todos estoques" textFill="WHITE">
+                  <Label layoutX="28.0" layoutY="36.0" text="Use ( _  ) para ver todos utentes" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font>
