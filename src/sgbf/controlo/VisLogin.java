@@ -53,8 +53,9 @@ public class VisLogin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.loginNomeUsuario.setTooltip(new Tooltip("Introduza o nome do usuário (em letras minúsculas)"));
+        this.loginNomeUsuario.setTooltip(new Tooltip("Introduza o nome do usuário"));
         this.loginSenha.setTooltip(new Tooltip("Introduza a senha do usuário"));
+        this.loginMensagem.setTooltip(null);
     }
 
     @FXML
@@ -94,8 +95,10 @@ public class VisLogin implements Initializable {
                 propreidadeDaJanela.setResizable(true);
                 propreidadeDaJanela.show();
                 ConEmprestimo emprestimoCon = new ConEmprestimo();
+                this.loginMensagem.setTooltip(null);
             } else {
                 loginMensagem.setText("Usuário ou senha incorreta");
+                this.loginMensagem.setTooltip(new Tooltip("Usuário ou senha incorreta"));
             }
         } catch (IOException erro) {
             throw new UtilControloExcessao(operacao, "Erro so iniciar o sistema !\nErro: " + erro, Alert.AlertType.ERROR);

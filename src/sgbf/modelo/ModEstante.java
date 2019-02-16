@@ -72,7 +72,7 @@ public class ModEstante {
 
     public void setLinha(Byte linha, String operacao) throws NumberFormatException {
         if (linha <= 0) {
-            throw new UtilControloExcessao(operacao,"O número de linha é inválido !", Alert.AlertType.WARNING);
+            throw new UtilControloExcessao(operacao,"Introduza um número de linhas válido!", Alert.AlertType.WARNING);
         } else {
             if (linha > 125) {
                 throw new UtilControloExcessao(operacao,"O número de linhas máximo é de 125 !",  Alert.AlertType.WARNING);
@@ -87,10 +87,10 @@ public class ModEstante {
     }
 
     public void setColuna(Byte coluna, String operacao) throws NumberFormatException {
-        if (linha <= 0) {
-            throw new UtilControloExcessao(operacao, "O número de colunas é inválido !", Alert.AlertType.WARNING);
+        if (coluna <= 0) {
+            throw new UtilControloExcessao(operacao, "Introduza um número de colunas válido !", Alert.AlertType.WARNING);
         } else {
-            if (linha > 125) {
+            if (coluna > 125) {
                 throw new UtilControloExcessao(operacao, "O número de colunas máximo é de 125 !", Alert.AlertType.WARNING);
             } else {
                 this.coluna = coluna;
@@ -113,7 +113,15 @@ public class ModEstante {
     }
 
     public void setAreaMod(ModArea areaMod, String operacao) {
-        this.areaMod = areaMod;
+        if(areaMod == null){
+            throw new UtilControloExcessao(operacao, "Seleccione a estante", Alert.AlertType.WARNING);
+        }else{
+            if(areaMod.getIdArea() == 0){
+                throw new UtilControloExcessao(operacao, "Seleccione a estante", Alert.AlertType.WARNING);
+            }else{
+                this.areaMod = areaMod;
+            }
+        }
     }
 
     public ModArea getAreaMod() {

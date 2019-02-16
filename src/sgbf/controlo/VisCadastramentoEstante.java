@@ -66,7 +66,6 @@ public class VisCadastramentoEstante implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.bloquearItensDaJanela();
-        this.carregarValorNasComboxs();
         this.tableViewEstante.setPlaceholder(new Label("Estantes não listadas"));
         this.texteFiedPesquisar.setTooltip(new Tooltip("Introduza o código, designação ou use *( _ ) para listar todos registos "));
         tableViewEstante.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
@@ -77,8 +76,8 @@ public class VisCadastramentoEstante implements Initializable {
         operacao = "Registar Estante";
         try {
             estanteMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
-            estanteMod.setLinha(Byte.valueOf(texteFiedLinha.getText()), operacao);
-            estanteMod.setColuna(Byte.valueOf(texteFiedColuna.getText()), operacao);
+            estanteMod.setLinha(Byte.valueOf(UtilValidarDados.validarInteiro(texteFiedLinha.getText())), operacao);
+            estanteMod.setColuna(Byte.valueOf(UtilValidarDados.validarInteiro(texteFiedColuna.getText())), operacao);
             estanteMod.setDescricao(texteFiedDescricao.getText(), operacao);
             estanteMod.setAreaMod(comboBoxArea.getSelectionModel().getSelectedItem(), operacao);
             if (estanteCon.registar(estanteMod, operacao)) {
@@ -98,8 +97,8 @@ public class VisCadastramentoEstante implements Initializable {
         try {
             estanteMod.setIdEstante(this.tableViewEstante.getSelectionModel().getSelectedItem().getIdEstante(), operacao);
             estanteMod.setDesignacao(texteFiedDesigancao.getText(), operacao);
-            estanteMod.setLinha(Byte.valueOf(texteFiedLinha.getText()), operacao);
-            estanteMod.setColuna(Byte.valueOf(texteFiedColuna.getText()), operacao);
+            estanteMod.setLinha(Byte.valueOf(UtilValidarDados.validarInteiro(texteFiedLinha.getText())), operacao);
+            estanteMod.setColuna(Byte.valueOf(UtilValidarDados.validarInteiro(texteFiedColuna.getText())), operacao);
             estanteMod.setDescricao(texteFiedDescricao.getText(), operacao);
             estanteMod.setAreaMod(comboBoxArea.getSelectionModel().getSelectedItem(), operacao);
             if (estanteCon.alterar(estanteMod, operacao)) {
@@ -147,6 +146,7 @@ public class VisCadastramentoEstante implements Initializable {
     private void novo() {
         this.desbloquearItensDaJanela();
         this.limparItensDaJanela();
+        this.carregarValorNasComboxs();
     }
 
     @FXML
@@ -190,6 +190,7 @@ public class VisCadastramentoEstante implements Initializable {
         this.texteFiedColuna.setText(null);
         this.texteFiedPesquisar.setText(null);
         this.tableViewEstante.getItems().clear();
+        this.comboBoxArea.getItems().clear();
     }
 
     private void carregarValorNasComboxs() {
@@ -212,6 +213,7 @@ public class VisCadastramentoEstante implements Initializable {
 
     private void exibirDadosNosCampos(ModEstante estanteMod) {
         if (tableViewEstante.getSelectionModel().getSelectedCells().size() == 1) {
+            this.carregarValorNasComboxs();
             texteFiedDesigancao.setText(String.valueOf(estanteMod.getDesignacao()));
             texteFiedLinha.setText(String.valueOf(estanteMod.getLinha()));
             texteFiedDescricao.setText(estanteMod.getDescricao());
@@ -251,13 +253,13 @@ public class VisCadastramentoEstante implements Initializable {
         tableColumDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         tableColumLinha.setCellValueFactory(new PropertyValueFactory<>("linha"));
         tableColumcoluna.setCellValueFactory(new PropertyValueFactory<>("coluna"));
-        tableColumIDataRegisto.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModEstante,String>, ObservableValue<String>>() {
+        tableColumIDataRegisto.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModEstante, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModEstante, String> data) {
                 return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_registo());
             }
         });
-        tableColumNmeroDataModificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModEstante,String>, ObservableValue<String>>() {
+        tableColumNmeroDataModificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModEstante, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModEstante, String> data) {
                 return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_modificacao());
