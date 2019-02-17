@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilEmail;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -113,8 +112,10 @@ public class ModAutor {
 
     public boolean equals(ModAutor autorMod, String operacao) {
         if (this.idAutor != autorMod.idAutor) {
-            if (this.contacto.equalsIgnoreCase(autorMod.contacto)) {
-                throw new UtilControloExcessao(operacao, "Já existe um autor com este contacto !", Alert.AlertType.INFORMATION);
+            if ((this.contacto != null) && (autorMod.contacto != null)) {
+                if (this.contacto.equalsIgnoreCase(autorMod.contacto)) {
+                    throw new UtilControloExcessao(operacao, "Já existe um autor com este contacto !", Alert.AlertType.INFORMATION);
+                }
             }
         }
         return false;
