@@ -81,7 +81,15 @@ public class ModAutor {
     }
 
     public void setContacto(String contacto, String operacao) {
-        this.contacto = contacto;
+        if (contacto == null) {
+            this.contacto = null;
+        } else {
+            if (contacto.isEmpty()) {
+                this.contacto = null;
+            } else {
+                this.contacto = contacto;
+            }
+        }
     }
 
     public String getEmail() {
