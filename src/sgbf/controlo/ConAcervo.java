@@ -8,7 +8,6 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModAcervo;
 import sgbf.modelo.ModAcervosEscritos;
-import sgbf.modelo.ModItemSolicitado;
 import sgbf.util.UtilControloExcessao;
 
 /**

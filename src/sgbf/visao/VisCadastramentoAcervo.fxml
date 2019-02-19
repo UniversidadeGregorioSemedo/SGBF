@@ -35,7 +35,7 @@
                         <Insets right="3.0" />
                      </padding>
                   </JFXButton>
-                  <TableView fx:id="tableViewAcervo" layoutX="14.0" layoutY="137.0" prefHeight="188.0" prefWidth="1021.0">
+                  <TableView fx:id="tableViewAcervo" layoutX="14.0" layoutY="137.0" prefHeight="188.0" prefWidth="1150.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>

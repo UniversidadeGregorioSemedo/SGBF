@@ -224,8 +224,8 @@ public class VisCadastramentoUtente implements Initializable {
    
     private void carregarValorNasComboxs(){
         this.comboBoxGenero.getItems().addAll("Masculino","Femenino","Outro");
-        this.comboBoxTipoIndentificacao.getItems().addAll("BI","Carta de condução","Passport","Cartão Escolar");
-        this.comboBoxCategoria.getItems().addAll("Funcionário", "Professor", "Estudante");
+        this.comboBoxTipoIndentificacao.getItems().addAll("BI","Carta de condução","Cartão Escolar","Passport");
+        this.comboBoxCategoria.getItems().addAll(  "Estudante", "Funcionário","Professor", "Visitante");
     }
 
     private void exibirDadosNosCampos(ModVisitante visitanteMod){
