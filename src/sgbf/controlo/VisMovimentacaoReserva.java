@@ -199,7 +199,7 @@ public class VisMovimentacaoReserva implements Initializable {
     @FXML
     public void verTodasReservas(){
         operacao = "Ver todas as reservas";
-        throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.NONE);
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.WARNING);
     }
 
     private void bloquearItensDaJanela() {

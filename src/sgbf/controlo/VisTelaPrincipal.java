@@ -244,9 +244,9 @@ public class VisTelaPrincipal implements Initializable {
         try {
             configuracoesPadrao.browse(new URI(endereco));
         } catch (IOException erro) {
-            throw new UtilControloExcessao(operacao, "Erro ao verificar endereço", Alert.AlertType.NONE);
+            throw new UtilControloExcessao(operacao, "Erro ao verificar endereço", Alert.AlertType.WARNING);
         } catch (URISyntaxException erro) {
-            throw new UtilControloExcessao(operacao, "Enderço incorreto", Alert.AlertType.NONE);
+            throw new UtilControloExcessao(operacao, "Enderço incorreto", Alert.AlertType.WARNING);
         }
     }
 
