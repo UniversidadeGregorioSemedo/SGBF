@@ -60,6 +60,9 @@
                      <padding>
                         <Insets right="3.0" />
                      </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <Label layoutX="14.0" layoutY="86.0" text="Dados do Utente" textFill="WHITE">
                      <font>
@@ -72,7 +75,10 @@
                   <Button fx:id="botaoDevolver" layoutX="775.0" layoutY="398.0" mnemonicParsing="false" onAction="#devolver" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/devolução.css" text="Devolver">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Label layoutX="14.0" layoutY="41.0" text="Use ( _ ) para ver todos utentes" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
@@ -92,11 +98,17 @@
                   <Button fx:id="botaoCancelar" layoutX="774.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/devolução.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoSair" layoutX="774.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/devolução.css" text="Sair">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Label layoutX="14.0" layoutY="6.0" text="Todos os itens emprestados" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="13.0" />

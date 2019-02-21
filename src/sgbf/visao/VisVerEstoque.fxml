@@ -57,7 +57,7 @@
                         <Insets right="3.0" />
                      </padding>
                   </JFXButton>
-                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="54.0" prefHeight="25.0" prefWidth="319.0" styleClass="jfx-button" stylesheets="@../util/visestoque.css">
+                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="54.0" prefHeight="25.0" prefWidth="319.0" styleClass="jfx-textpesq" stylesheets="@../util/visestoque.css">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

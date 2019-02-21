@@ -85,18 +85,17 @@
                            </graphic>
                            <padding>
                               <Insets right="3.0" />
-                           </padding></JFXButton>
-                        <JFXButton fx:id="botaoSair" layoutX="898.0" layoutY="490.0" onAction="#sair" stylesheets="@../util/tabelaverutente.css" text="Sair" textAlignment="JUSTIFY">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" onDragDetected="#sair" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icones/Undo_48px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                           </padding>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
+                        <JFXButton fx:id="botaoSair" layoutX="895.0" layoutY="489.0" onAction="#sair" prefHeight="35.0" prefWidth="71.0" stylesheets="@../util/tabelaverutente.css" text="Sair" textAlignment="JUSTIFY">
                            <font>
                               <Font name="Sitka Text" size="13.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                         <TableView fx:id="tableViewVisitane" layoutX="7.0" layoutY="99.0" prefHeight="216.0" prefWidth="969.0">
                           <columns>
@@ -116,7 +115,10 @@
                         <JFXButton fx:id="botaoCancelar" layoutX="806.0" layoutY="489.0" onAction="#limparItensDaJanela" prefHeight="35.0" prefWidth="76.0" stylesheets="@../util/tabelaverutente.css" text="Cancelar">
                            <font>
                               <Font name="Sitka Text" size="13.0" />
-                           </font></JFXButton>
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
                         <Label layoutX="12.0" layoutY="330.0" prefHeight="17.0" prefWidth="197.0" text="Mais informações" textFill="WHITE">
                            <font>
                               <Font name="Sitka Text Bold" size="14.0" />

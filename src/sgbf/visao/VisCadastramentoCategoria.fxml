@@ -32,6 +32,9 @@
                      <padding>
                         <Insets right="3.0" />
                      </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <TableView fx:id="tableViewCategoria" layoutX="13.0" layoutY="113.0" prefHeight="128.0" prefWidth="628.0">
                      <columnResizePolicy>
@@ -82,31 +85,49 @@
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoCancelar" layoutX="477.0" layoutY="138.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoNovo" layoutX="477.0" layoutY="62.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Novo">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoRemover" layoutX="566.0" layoutY="101.0" mnemonicParsing="false" onAction="#removerCategoria" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Remover">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoAlterar" layoutX="477.0" layoutY="101.0" mnemonicParsing="false" onAction="#alterarCategoria" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="alterar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoCadastrar" layoutX="566.0" layoutY="62.0" mnemonicParsing="false" onAction="#cadastrarCategoria" styleClass="jfx-button" stylesheets="@../util/viscadastrocategoria.css" text="Cadastrar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </AnchorPane>
