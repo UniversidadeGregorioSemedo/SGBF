@@ -197,7 +197,14 @@
             </Menu>
             <Menu fx:id="menuAjuda" mnemonicParsing="false" text="Ajuda">
               <items>
-                <MenuItem fx:id="menuItemAjuda" mnemonicParsing="false" onAction="#BotaoMenuAjuda" text="Guia de utilização" />
+                <MenuItem fx:id="menuItemAjuda" mnemonicParsing="false" onAction="#BotaoMenuAjuda" text="Guia de utilização">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/ajuda.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
               </items>
             </Menu>
         </menus>
