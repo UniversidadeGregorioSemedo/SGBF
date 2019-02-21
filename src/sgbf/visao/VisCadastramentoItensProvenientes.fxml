@@ -26,7 +26,7 @@
                         <Font name="Sitka Text" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="texteFiedPesquisarAcervo" layoutX="14.0" layoutY="64.0" prefHeight="25.0" prefWidth="223.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
+                  <TextField fx:id="texteFiedPesquisarAcervo" layoutX="14.0" layoutY="64.0" prefHeight="25.0" prefWidth="223.0" promptText="Pesquisar acervos" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
                   <TableView fx:id="tableViewAcervo" layoutX="14.0" layoutY="103.0" prefHeight="172.0" prefWidth="937.0">
                     <columns>
                       <TableColumn fx:id="tableColumId" prefWidth="115.0" text="Id" />
@@ -65,7 +65,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TextField fx:id="texteFiedPesquisarEntrada" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="223.0" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
+                  <TextField fx:id="texteFiedPesquisarEntrada" layoutX="14.0" layoutY="37.0" prefHeight="25.0" prefWidth="223.0" promptText="Pesquisar acervos" styleClass="jfx-textfield" stylesheets="@../util/visitensprovenientes.css" />
                   <JFXButton fx:id="botaoPesquisarEntrada" layoutX="243.0" layoutY="38.0" onAction="#pesquisarProveniencia" stylesheets="@../util/visitensprovenientes.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

@@ -131,7 +131,7 @@
                      <font>
                         <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Ver todas as Reservas">
+                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" onAction="#verTodasReservas" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Ver todas as Reservas">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
                      </font></Button>
