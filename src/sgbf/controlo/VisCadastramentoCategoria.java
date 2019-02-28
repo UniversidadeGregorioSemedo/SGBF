@@ -23,7 +23,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import sgbf.modelo.ModArea;
 import sgbf.modelo.ModCategoria;
 import sgbf.modelo.ModCategoriaDaEstante;
 import sgbf.modelo.ModEstante;
@@ -170,10 +169,10 @@ public class VisCadastramentoCategoria implements Initializable {
         this.texteFiedPesquisar.setText(null);
         this.texteFiedDesigancao.setText(null);
         this.tableViewCategoria.getItems().clear();
+        this.comboBoxEstante.getItems().clear();
     }
 
     private void carregarValorNasComboxs() {
-        this.comboBoxEstante.getItems().clear();
         ConEstante estanteCon = new ConEstante();
         List<ModEstante> todasEstantes = new ArrayList<>();
         ObservableList todasEstantesParaCombox = null;

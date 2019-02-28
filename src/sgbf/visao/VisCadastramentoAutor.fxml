@@ -48,6 +48,9 @@
                      <padding>
                         <Insets right="3.0" />
                      </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <TextField fx:id="texteFiedPesquisar" layoutX="20.0" layoutY="79.0" prefHeight="25.0" prefWidth="444.0" promptText="Pesquisar autores" styleClass="jfx-textfield" stylesheets="@../util/visautor.css" />
                   <Label layoutX="367.0" layoutY="6.0" text="Cadastro de autores" textFill="WHITE">
@@ -94,31 +97,49 @@
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoCancelar" layoutX="644.0" layoutY="200.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoRemover" layoutX="743.0" layoutY="158.0" mnemonicParsing="false" onAction="#removerAutor" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Remover">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoAlterar" layoutX="644.0" layoutY="158.0" mnemonicParsing="false" onAction="#alterarAutor" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Alterar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoCadastrar" layoutX="743.0" layoutY="110.0" mnemonicParsing="false" onAction="#cadastrarAutor" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Cadastrar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoNovo" layoutX="644.0" layoutY="110.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="79.0" styleClass="jfx-button" stylesheets="@../util/visautor.css" text="Novo">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </AnchorPane>

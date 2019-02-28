@@ -38,9 +38,9 @@ import sgbf.util.UtilValidarDados;
  * @author Marron
  */
 public class VisCadastramentoProveniencia implements Initializable {
-
+    
     @FXML
-    private TextField TextFieldPesquisarProveniencia,textFieldCodigoProveniencia;
+    private TextField TextFieldPesquisarProveniencia, textFieldCodigoProveniencia;
     @FXML
     private JFXButton botaoPesquisarProveniencia;
     @FXML
@@ -48,29 +48,27 @@ public class VisCadastramentoProveniencia implements Initializable {
     @FXML
     private ComboBox<String> combocadproveniencia;
     @FXML
-    private Button botaoNovo,BotaoCadastrar,BotaoAlterar,BotaoRemover,BotaoSair,botaoCancelar;
+    private Button botaoNovo, BotaoCadastrar, BotaoAlterar, BotaoRemover, BotaoSair, botaoCancelar;
     @FXML
     private AnchorPane anchoPaneProveniencia;
     @FXML
     private TableColumn<ModProveniencia, Integer> tabelaColunaId;
     @FXML
-    private TableColumn<ModProveniencia, String> tabelaColunaTipo,tabelaColunaRegistro,tabelaColunaModificacao;
-    
+    private TableColumn<ModProveniencia, String> tabelaColunaTipo, tabelaColunaRegistro, tabelaColunaModificacao;
     
     private String operacao = null;
     private final ModProveniencia provenienciamod = new ModProveniencia();
     private final ConProveniencia provenienciacom = new ConProveniencia();
- 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.bloquearItensDaJanela();
-        this.carregarValorNasComboxs();
         this.tabelaViewProveniencia.setPlaceholder(new Label("Proveniencias não listadas"));
         this.TextFieldPesquisarProveniencia.setTooltip(new Tooltip("Introduza o código, designação ou use *( _ ) para listar todos registos "));
         tabelaViewProveniencia.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.exibirDadosNosCampos(newValue));
-    } 
-    private void bloquearItensDaJanela(){
+    }
+    
+    private void bloquearItensDaJanela() {
         //this.TextFieldPesquisarProveniencia.setDisable(false);
         this.textFieldCodigoProveniencia.setDisable(true);
         this.combocadproveniencia.setDisable(true);
@@ -78,91 +76,97 @@ public class VisCadastramentoProveniencia implements Initializable {
         this.BotaoCadastrar.setDisable(true);
         this.BotaoAlterar.setDisable(true);
         this.BotaoRemover.setDisable(true);
-}
-    private void desbloquearItensDaJanela(){
+    }
+    
+    private void desbloquearItensDaJanela() {
         this.textFieldCodigoProveniencia.setDisable(true);
         this.combocadproveniencia.setDisable(false);
         this.botaoNovo.setDisable(true);
-        this.BotaoCadastrar.setDisable(false); 
+        this.BotaoCadastrar.setDisable(false);
     }
-    private void limparItensDaJanela(){
-        this.combocadproveniencia.setPromptText("Proveniencia");
+    
+    private void limparItensDaJanela() {
         this.TextFieldPesquisarProveniencia.setText(null);
         this.textFieldCodigoProveniencia.setText(null);
         this.tabelaViewProveniencia.getItems().clear();
+        this.combocadproveniencia.getItems().clear();
     }
     
     @FXML
-    private void novo(){
+    private void novo() {
         this.desbloquearItensDaJanela();
         this.limparItensDaJanela();
+        this.carregarValorNasComboxs();
     }
+    
     @FXML
-    private void cancelar(){
+    private void cancelar() {
         this.bloquearItensDaJanela();
         this.limparItensDaJanela();
+        this.combocadproveniencia.getItems().clear();
     }
+    
     @FXML
     private void sair(ActionEvent event) {
         anchoPaneProveniencia.setVisible(false);
     }
     
     @FXML
-    private void cadastrarProveniencia(){
+    private void cadastrarProveniencia() {
         operacao = "Registar Proveniencia";
-       provenienciamod.setTipo(combocadproveniencia.getSelectionModel().getSelectedItem(), operacao);
-        if(provenienciacom.registar(provenienciamod, operacao)){
-           this.bloquearItensDaJanela();
-           this.limparItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Proveniencia Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
+        provenienciamod.setTipo(combocadproveniencia.getSelectionModel().getSelectedItem(), operacao);
+        if (provenienciacom.registar(provenienciamod, operacao)) {
+            this.bloquearItensDaJanela();
+            this.limparItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Proveniencia Cadastrada com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
     
     @FXML
-    private void alterarProveniencia(){
+    private void alterarProveniencia() {
         operacao = "Alterar Proveniencia";
         provenienciamod.setIdProveniencia(this.tabelaViewProveniencia.getSelectionModel().getSelectedItem().getIdProveniencia(), operacao);
         provenienciamod.setTipo(combocadproveniencia.getSelectionModel().getSelectedItem(), operacao);
-        if(provenienciacom.alterar(provenienciamod, operacao)){
-        this.bloquearItensDaJanela();
-        this.limparItensDaJanela();
-        throw new UtilControloExcessao(operacao, "Proveniencia Alterada com sucesso", Alert.AlertType.CONFIRMATION);
-        } 
-    }
-    
-    
-    @FXML
-    private void removerProvenienica(){
-    operacao = "Remover Area";
-        ModProveniencia provenienciaRemover = this.tabelaViewProveniencia.getSelectionModel().getSelectedItem();
-        if(provenienciacom.remover(provenienciaRemover, operacao)){
-        this.tabelaViewProveniencia.getItems().remove(provenienciaRemover);
-        this.bloquearItensDaJanela();
-        throw new UtilControloExcessao(operacao, "Proveniencia removida com sucesso", Alert.AlertType.CONFIRMATION);
-        }
-    }    
-    
-    @FXML
-    private void pesquisarProveniencia(){
-    operacao = "Pesquisar Proveniencia";
-    List<Object> todosRegistosEncontrados = new ArrayList<>();
-    if(this.TextFieldPesquisarProveniencia.getText().isEmpty()){
-       throw new UtilControloExcessao(operacao, "Introduza o código ou Tipo de Doação", Alert.AlertType.INFORMATION);
-    }else{
-        todosRegistosEncontrados = this.provenienciacom.pesquisar(this.pegarDadosDaPesquisa(), operacao);
-        if(todosRegistosEncontrados.isEmpty()){
+        if (provenienciacom.alterar(provenienciamod, operacao)) {
             this.bloquearItensDaJanela();
             this.limparItensDaJanela();
-           throw new UtilControloExcessao(operacao, "Proveniencia não encontrada", Alert.AlertType.INFORMATION);
-        }else{
-            this.carregarResultadosNaTablea(todosRegistosEncontrados);
-            this.bloquearItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Proveniencia Alterada com sucesso", Alert.AlertType.CONFIRMATION);
         }
     }
-}
- 
-    private void exibirDadosNosCampos(ModProveniencia provenienciamod){
-        if(tabelaViewProveniencia.getSelectionModel().getSelectedCells().size() == 1){
+    
+    @FXML
+    private void removerProvenienica() {
+        operacao = "Remover Area";
+        ModProveniencia provenienciaRemover = this.tabelaViewProveniencia.getSelectionModel().getSelectedItem();
+        if (provenienciacom.remover(provenienciaRemover, operacao)) {
+            this.tabelaViewProveniencia.getItems().remove(provenienciaRemover);
+            this.bloquearItensDaJanela();
+            throw new UtilControloExcessao(operacao, "Proveniencia removida com sucesso", Alert.AlertType.CONFIRMATION);
+        }
+    }
+    
+    @FXML
+    private void pesquisarProveniencia() {
+        operacao = "Pesquisar Proveniencia";
+        List<Object> todosRegistosEncontrados = new ArrayList<>();
+        if (this.TextFieldPesquisarProveniencia.getText().isEmpty()) {
+            throw new UtilControloExcessao(operacao, "Introduza o código ou Tipo de Doação", Alert.AlertType.INFORMATION);
+        } else {
+            todosRegistosEncontrados = this.provenienciacom.pesquisar(this.pegarDadosDaPesquisa(), operacao);
+            if (todosRegistosEncontrados.isEmpty()) {
+                this.bloquearItensDaJanela();
+                this.limparItensDaJanela();
+                throw new UtilControloExcessao(operacao, "Proveniencia não encontrada", Alert.AlertType.INFORMATION);
+            } else {
+                this.carregarResultadosNaTablea(todosRegistosEncontrados);
+                this.bloquearItensDaJanela();
+            }
+        }
+    }
+    
+    private void exibirDadosNosCampos(ModProveniencia provenienciamod) {
+        if (tabelaViewProveniencia.getSelectionModel().getSelectedCells().size() == 1) {
+            this.carregarValorNasComboxs();
             textFieldCodigoProveniencia.setText(String.valueOf(provenienciamod.getIdProveniencia()));
             combocadproveniencia.getSelectionModel().select(provenienciamod.getTipo());
             BotaoAlterar.setDisable(false);
@@ -170,7 +174,7 @@ public class VisCadastramentoProveniencia implements Initializable {
             this.desbloquearItensDaJanela();
             botaoNovo.setDisable(true);
             BotaoCadastrar.setDisable(true);
-        }else{
+        } else {
             BotaoAlterar.setDisable(true);
             BotaoRemover.setDisable(true);
             botaoNovo.setDisable(false);
@@ -178,27 +182,27 @@ public class VisCadastramentoProveniencia implements Initializable {
         }
     }
     
-    private ModProveniencia pegarDadosDaPesquisa(){
-        if(UtilValidarDados.eNumero(this.TextFieldPesquisarProveniencia.getText())){
-           provenienciamod.setIdProveniencia(Integer.valueOf(this.TextFieldPesquisarProveniencia.getText()),operacao);
-           provenienciamod.setTipo(this.TextFieldPesquisarProveniencia.getText(), operacao);
-           return provenienciamod;
-        }else{
-           provenienciamod.setTipo(this.TextFieldPesquisarProveniencia.getText(), operacao);
+    private ModProveniencia pegarDadosDaPesquisa() {
+        if (UtilValidarDados.eNumero(this.TextFieldPesquisarProveniencia.getText())) {
+            provenienciamod.setIdProveniencia(Integer.valueOf(this.TextFieldPesquisarProveniencia.getText()), operacao);
+            provenienciamod.setTipo(this.TextFieldPesquisarProveniencia.getText(), operacao);
             return provenienciamod;
-        }   
+        } else {
+            provenienciamod.setTipo(this.TextFieldPesquisarProveniencia.getText(), operacao);
+            return provenienciamod;
+        }
     }
     
-    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados){
+    private void carregarResultadosNaTablea(List<Object> todosRegistosEncontrados) {
         tabelaColunaId.setCellValueFactory(new PropertyValueFactory<>("idProveniencia"));
         tabelaColunaTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        tabelaColunaRegistro.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModProveniencia,String>, ObservableValue<String>>() {
+        tabelaColunaRegistro.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModProveniencia, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModProveniencia, String> data) {
                 return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_registo());
             }
         });
-        tabelaColunaModificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModProveniencia,String>, ObservableValue<String>>() {
+        tabelaColunaModificacao.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModProveniencia, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<ModProveniencia, String> data) {
                 return new ReadOnlyStringWrapper(data.getValue().getUtilControloDaData().getData_modificacao());
@@ -207,23 +211,18 @@ public class VisCadastramentoProveniencia implements Initializable {
         tabelaViewProveniencia.setItems(this.todosRegistosParaCarregar(todosRegistosEncontrados));
     }
     
-    private ObservableList<ModProveniencia> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados){
+    private ObservableList<ModProveniencia> todosRegistosParaCarregar(List<Object> todosRegistosEncontrados) {
         List<ModProveniencia> listaDosRegistosEncontrados = new ArrayList<>();
-        for(Object provenienciaRegistado: todosRegistosEncontrados){
-            ModProveniencia proveniencia = (ModProveniencia)provenienciaRegistado;
+        for (Object provenienciaRegistado : todosRegistosEncontrados) {
+            ModProveniencia proveniencia = (ModProveniencia) provenienciaRegistado;
             listaDosRegistosEncontrados.add(proveniencia);
-        } 
+        }
         return FXCollections.observableArrayList(listaDosRegistosEncontrados);
     }
-
-     
-    private void carregarValorNasComboxs(){
-        this.combocadproveniencia.getItems().addAll("Doação","Compra");
+    
+    private void carregarValorNasComboxs() {
+        this.combocadproveniencia.setPromptText("Seleccione o tipo");
+        this.combocadproveniencia.getItems().addAll("Doação", "Compra");
     }
     
 }
-    
-    
-
-
-

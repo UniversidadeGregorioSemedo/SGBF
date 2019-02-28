@@ -138,7 +138,7 @@ public class VisMovimentacaoTodasReservas implements Initializable {
         ModReserva reservaPorRemover = this.tableViewReservas.getSelectionModel().getSelectedItem();
         ModItemSolicitado itemPorRemover = this.tableViewItensReservados.getSelectionModel().getSelectedItem();
         if (itemPorRemover == null) {
-            throw new UtilControloExcessao(operacao, "Seleccione o acervo a devolver", Alert.AlertType.NONE);
+            throw new UtilControloExcessao(operacao, "Seleccione o acervo a devolver", Alert.AlertType.WARNING);
         } else {
             reservaPorRemover.adionarItemItensRegistados(itemPorRemover);
             if (estoqueCon.devolverAcervoReservadoNoEstoque(itemPorRemover, operacao)) {

@@ -119,7 +119,7 @@ public class ConEstoque extends ConCRUD {
                 super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
                 return !super.preparedStatement.execute();
             } else {
-                throw new UtilControloExcessao(operacao, "Quantidade inválida", Alert.AlertType.ERROR);
+                throw new UtilControloExcessao(operacao, "A quantidade actualmente disponível é insuficente", Alert.AlertType.ERROR);
             }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);

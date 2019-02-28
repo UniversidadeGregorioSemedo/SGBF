@@ -46,7 +46,10 @@
                      </graphic>
                      <padding>
                         <Insets right="3.0" />
-                     </padding></JFXButton>
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
                   <Label layoutX="571.0" layoutY="6.0" text="Ver todas editoras" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
@@ -106,7 +109,10 @@
                   <Button fx:id="botaoSair" layoutX="1086.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="124.0" styleClass="jfx-button" stylesheets="@../util/tabelavereditora.css" text="Sair">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Label fx:id="labeTotalAcervos" layoutX="1069.0" layoutY="50.0" prefHeight="17.0" prefWidth="139.0" text="Nenhuma informação" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
@@ -126,7 +132,10 @@
                   <Button fx:id="botaoCancelar" layoutX="945.0" layoutY="225.0" mnemonicParsing="false" onAction="#limparItensDaJanela" prefHeight="25.0" prefWidth="131.0" styleClass="jfx-button" stylesheets="@../util/tabelavereditora.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </AnchorPane>
          </items>

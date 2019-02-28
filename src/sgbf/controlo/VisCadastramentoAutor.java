@@ -21,7 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import sgbf.modelo.ModAutor;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilUsuarioLogado;
 import sgbf.util.UtilValidarDados;
 
 /**

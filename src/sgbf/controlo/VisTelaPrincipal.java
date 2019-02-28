@@ -240,13 +240,13 @@ public class VisTelaPrincipal implements Initializable {
     public void BotaoMenuAjuda() {
         final String operacao = "Guia de utilização";
         Desktop configuracoesPadrao = Desktop.getDesktop();
-        String endereco = "https://drive.google.com/open?id=1axaFZvpisM4ZxnUo-9lhhixkDjy4mYxP";
+        String endereco = "https://drive.google.com/file/d/0B0FOuZ3NycZAV0NMZUNIMS1PNmhnc1ktcmtLQWZHeXpubThZ/view";
         try {
             configuracoesPadrao.browse(new URI(endereco));
         } catch (IOException erro) {
-            throw new UtilControloExcessao(operacao, "Erro ao verificar endereço", Alert.AlertType.NONE);
+            throw new UtilControloExcessao(operacao, "Erro ao verificar endereço", Alert.AlertType.WARNING);
         } catch (URISyntaxException erro) {
-            throw new UtilControloExcessao(operacao, "Enderço incorreto", Alert.AlertType.NONE);
+            throw new UtilControloExcessao(operacao, "Enderço incorreto", Alert.AlertType.WARNING);
         }
     }
 

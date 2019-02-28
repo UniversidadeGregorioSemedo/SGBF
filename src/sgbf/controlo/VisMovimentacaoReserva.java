@@ -153,7 +153,7 @@ public class VisMovimentacaoReserva implements Initializable {
         this.operacao = "Devolver Acervos";
         ModItemSolicitado itemPorRemover = this.tableViewReserva.getSelectionModel().getSelectedItem();
         if (itemPorRemover == null) {
-            throw new UtilControloExcessao(operacao, "Seleccione o acervo a devolver", Alert.AlertType.NONE);
+            throw new UtilControloExcessao(operacao, "Seleccione o acervo a devolver", Alert.AlertType.WARNING);
         } else {
             if (estoqueCon.devolverAcervoReservadoNoEstoque(itemPorRemover, operacao)) {
                 this.tableViewReserva.getItems().remove(itemPorRemover);
@@ -194,6 +194,12 @@ public class VisMovimentacaoReserva implements Initializable {
         if (!caracateresValidos.contains(evt.getCharacter() + "")) {
             evt.consume();
         }
+    }
+    
+    @FXML
+    public void verTodasReservas(){
+        operacao = "Ver todas as reservas";
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.WARNING);
     }
 
     private void bloquearItensDaJanela() {

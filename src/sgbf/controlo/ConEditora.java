@@ -12,7 +12,6 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import sgbf.modelo.ModEditora;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -49,10 +48,10 @@ public class ConEditora extends ConCRUD {
         ModEditora editoraMod = (ModEditora) objecto_alterar;
         try {
             if (this.jaExiste(editoraMod, operacao)) {
-                throw new UtilControloExcessao(operacao,"Erro ao verificar dados da Editora !", Alert.AlertType.ERROR);
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Editora !", Alert.AlertType.ERROR);
             } else {
                 super.query = "UPDATE tcc.Editora set nome=?, contacto=?, email=?, fax=?, endereco=?,"
-                        + "  data_modificacao = default  where idEditora=?";
+                        + "  data_modificacao = default where idEditora=?";
                 super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
                 super.preparedStatement.setString(1, editoraMod.getNome());
                 super.preparedStatement.setString(2, editoraMod.getContacto());
@@ -63,7 +62,7 @@ public class ConEditora extends ConCRUD {
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -73,12 +72,16 @@ public class ConEditora extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModEditora editoraMod = (ModEditora) objecto_remover;
         try {
-            super.query = "delete from tcc.Editora where idEditora=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
-            super.preparedStatement.setInt(1, editoraMod.getiEditora());
-            return !super.preparedStatement.execute();
+            if (this.temDadosRelacionados(editoraMod, operacao)) {
+                throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Editora", Alert.AlertType.WARNING);
+            } else {
+                super.query = "delete from tcc.Editora where idEditora=?";
+                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement.setInt(1, editoraMod.getiEditora());
+                return !super.preparedStatement.execute();
+            }
         } catch (SQLException erro) {
-            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
             super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
         }
@@ -96,7 +99,7 @@ public class ConEditora extends ConCRUD {
             }
             return todosRegistos;
         } catch (SQLException erro) {
-            throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
+            throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -138,6 +141,14 @@ public class ConEditora extends ConCRUD {
             editoraRegistada.equals(editoraMod, operacao);
         }
         return false;
+    }
+
+    private boolean temDadosRelacionados(ModEditora editoraMod, String operacao) throws SQLException {
+        super.query = "select * from tcc.acervos where Editora_idEditora =?";
+        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement.setInt(1, editoraMod.getiEditora());
+        super.setResultset = super.preparedStatement.executeQuery();
+        return super.setResultset.next();
     }
 
 }

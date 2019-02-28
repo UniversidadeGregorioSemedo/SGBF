@@ -48,7 +48,10 @@
                      </graphic>
                      <padding>
                         <Insets right="3.0" />
-                     </padding></JFXButton>
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
                   <Line endX="100.0" layoutX="307.0" layoutY="11.0" startX="-100.0" stroke="WHITE" />
                   <Line endX="100.0" layoutX="723.0" layoutY="9.0" startX="-100.0" stroke="WHITE" />
                   <Label layoutX="467.0" layoutY="1.0" prefHeight="17.0" prefWidth="172.0" text="Localizar Acervo" textFill="WHITE">
@@ -128,11 +131,17 @@
                   <Button fx:id="botaoCancelar" layoutX="545.0" layoutY="228.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="172.0" styleClass="jfx-button" stylesheets="@../util/viewtodosacervos.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoSair" layoutX="756.0" layoutY="228.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="152.0" styleClass="jfx-button" stylesheets="@../util/viewtodosacervos.css" text="Sair">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </AnchorPane>
          </items>

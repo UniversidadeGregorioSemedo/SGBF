@@ -153,7 +153,7 @@ public class ModAcervo {
 
     public void setNumero_paginas(Short numero_paginas, String operacao) {
         if (numero_paginas <= 0) {
-            throw new UtilControloExcessao(operacao, "Numero de Páginas inválido !", Alert.AlertType.ERROR);
+            throw new UtilControloExcessao(operacao, "Numero de páginas é inválido !", Alert.AlertType.ERROR);
         } else {
             this.numero_paginas = numero_paginas;
         }

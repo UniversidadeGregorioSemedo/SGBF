@@ -71,6 +71,9 @@
                      <padding>
                         <Insets right="3.0" />
                      </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <Label layoutX="717.0" layoutY="373.0" text="Q. Reservar:" textFill="WHITE">
                      <font>
@@ -85,7 +88,10 @@
                   <Button fx:id="botaoRegistar" layoutX="713.0" layoutY="410.0" mnemonicParsing="false" onAction="#registarAcervoReservado" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Registar Acervo">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Label layoutX="17.0" layoutY="103.0" text="Dados do Utente" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="13.0" />
@@ -118,23 +124,35 @@
                   <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" onAction="#devolverAcervoReservado" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Devolver">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoCancelar" layoutX="710.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoSair" layoutX="710.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Sair">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Label layoutX="14.0" layoutY="6.0" text="Dados da reserva" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Ver todas as Reservas">
+                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" onAction="#verTodasReservas" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Ver todas as Reservas">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Label layoutX="712.0" layoutY="37.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
@@ -157,7 +175,10 @@
                   <Button fx:id="botaoReserva" layoutX="711.0" layoutY="64.0" mnemonicParsing="false" onAction="#reservar" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Reservar">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </AnchorPane>
          </items>

@@ -15,10 +15,6 @@ import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilCriptografia;
 
-/**
- *
- * @author Look
- */
 public class ConUtente extends ConCRUD {
 
     @Override

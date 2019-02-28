@@ -53,13 +53,18 @@
                      </graphic>
                      <padding>
                         <Insets right="3.0" />
-                     </padding></JFXButton>
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
                   <Label layoutX="522.0" layoutY="58.0" text="Cargo *" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font></Label>
                   <ComboBox fx:id="comboBoxCargo" layoutX="576.0" layoutY="54.0" prefWidth="150.0" promptText="Cargo" styleClass="jfx-combobox" stylesheets="@../util/viscadastrofuncionario.css">
-                     </ComboBox>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ComboBox>
                   <Label layoutX="522.0" layoutY="97.0" text="C. Funcionário" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
@@ -69,31 +74,49 @@
                      
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoCadastrar" layoutX="644.0" layoutY="163.0" mnemonicParsing="false" onAction="#cadastrarFuncionario" prefHeight="25.0" prefWidth="83.0" styleClass="jfx-button" stylesheets="@../util/viscadastrofuncionario.css" text="Cadastrar">
                      
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoAlterar" layoutX="523.0" layoutY="200.0" mnemonicParsing="false" onAction="#alterarFuncionario" prefHeight="25.0" prefWidth="89.0" styleClass="jfx-button" stylesheets="@../util/viscadastrofuncionario.css" text="Alterar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoRemover" layoutX="644.0" layoutY="200.0" mnemonicParsing="false" onAction="#removerUtente" prefHeight="25.0" prefWidth="83.0" styleClass="jfx-button" stylesheets="@../util/viscadastrofuncionario.css" text="Remover">
                      
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoCancelar" layoutX="523.0" layoutY="235.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="89.0" styleClass="jfx-button" stylesheets="@../util/viscadastrofuncionario.css" text="Cancelar">
                      
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Button fx:id="botaoSair" layoutX="644.0" layoutY="235.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="83.0" styleClass="jfx-button" stylesheets="@../util/viscadastrofuncionario.css" text="Sair">
                      
                      <font>
                         <Font name="Sitka Text" size="13.0" />
-                     </font></Button>
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Label layoutX="523.0" layoutY="129.0" prefHeight="17.0" prefWidth="83.0" text="C. Utente    * " textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
@@ -121,6 +144,9 @@
          <padding>
             <Insets right="3.0" />
          </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <TableView fx:id="tableViewVisitane" layoutX="24.0" layoutY="96.0" prefHeight="200.0" prefWidth="694.0">
          <columns>
