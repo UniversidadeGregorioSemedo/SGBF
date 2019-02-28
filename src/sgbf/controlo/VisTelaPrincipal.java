@@ -240,7 +240,7 @@ public class VisTelaPrincipal implements Initializable {
     public void BotaoMenuAjuda() {
         final String operacao = "Guia de utilização";
         Desktop configuracoesPadrao = Desktop.getDesktop();
-        String endereco = "file:///C:/Users/Marron/Desktop/Proj-TCC/MANUAL%20DE%20INSTRUÇÕES.pdf";
+        String endereco = "https://drive.google.com/file/d/0B0FOuZ3NycZAV0NMZUNIMS1PNmhnc1ktcmtLQWZHeXpubThZ/view";
         try {
             configuracoesPadrao.browse(new URI(endereco));
         } catch (IOException erro) {
