@@ -7,7 +7,7 @@
 }
 
 .glyph-icon{
-    -fx-text-fill: -fx-primarytext;
+    -fx-text-fill: black;
     -fx-font-size: 14px;
 }
 /*Não sei o porquê mas ao donominar o nome do css como "text-field" não aparece. Portanto deixei esse nome.*/
