@@ -209,6 +209,13 @@
             </Menu>
         </menus>
       </MenuBar>
-      <AnchorPane fx:id="anchorPane" prefHeight="721.0" prefWidth="701.0" style="-fx-background-color: #2a363f;" />
+      <AnchorPane fx:id="anchorPane" prefHeight="721.0" prefWidth="701.0" style="-fx-background-color: #2a363f; -fx-background-color: f5fffb;">
+         <children>
+            <ImageView fitHeight="397.0" fitWidth="489.0" layoutX="501.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icones/igregoriosemedo.jpg" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
    </children>
 </VBox>

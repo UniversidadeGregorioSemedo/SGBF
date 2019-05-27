@@ -13,14 +13,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a363f;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisLogin">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a363f; -fx-background-color: f5fffb;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisLogin">
     <stylesheets>
         <URL value="@/sgbf/util/UtilLogin.css" />
     </stylesheets>
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="70.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../icones/IconLogin.png" />
+            <Image url="@../icones/igregoriosemedo.jpg" />
          </image>
       </ImageView>
       <Line endX="100.0" layoutX="286.0" layoutY="184.0" rotate="90.0" startX="-100.0" stroke="#465058" />
@@ -29,10 +29,10 @@
             <Font size="23.0" />
          </font>
          <textFill>
-            <LinearGradient endX="0.8666666666666667" endY="1.0" startX="0.13333333333333333">
+            <LinearGradient endX="0.8333333333333334" endY="0.9285714285714286" startX="0.8380952380952381" startY="0.8142857142857143">
                <stops>
                   <Stop color="#2eccfa" />
-                  <Stop color="#fbfeff" offset="1.0" />
+                  <Stop color="#809197" offset="1.0" />
                </stops>
             </LinearGradient>
          </textFill>
@@ -45,8 +45,8 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></JFXButton>
-      <Hyperlink fx:id="loginEsqueceuSenha" layoutX="308.0" layoutY="285.0" onAction="#recuperarSenha" text="Esqueceu a senha ?" />
-      <Hyperlink fx:id="loginContacte" layoutX="469.0" layoutY="285.0" onAction="#contacteNos" text="Contacte-nos" />
+      <Hyperlink fx:id="loginEsqueceuSenha" layoutX="308.0" layoutY="285.0" onAction="#recuperarSenha" text="Esqueceu a senha ?" textFill="#140000" />
+      <Hyperlink fx:id="loginContacte" layoutX="469.0" layoutY="285.0" onAction="#contacteNos" text="Contacte-nos" textFill="#0a0000" />
       <JFXTextField fx:id="loginNomeUsuario" labelFloat="true" layoutX="350.0" layoutY="119.0" prefHeight="25.0" prefWidth="196.0" promptText="Nome do Usuário" styleClass="glyph-icon" stylesheets="@../util/UtilLogin.css" />
       <JFXPasswordField fx:id="loginSenha" labelFloat="true" layoutX="349.0" layoutY="172.0" prefHeight="25.0" prefWidth="196.0" promptText="Senha" styleClass="glyph-icon" stylesheets="@../util/UtilLogin.css" />
       <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="308.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
@@ -64,5 +64,10 @@
             <Font size="10.0" />
          </font>
       </Label>
+      <Text layoutX="20.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema de Gestão de Biblioteca" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
