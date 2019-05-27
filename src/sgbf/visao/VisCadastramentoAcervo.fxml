@@ -58,8 +58,17 @@
                         <Font name="Sitka Text Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Line endX="100.0" layoutX="408.0" layoutY="14.0" startX="-100.0" />
-                  <Line endX="100.0" layoutX="811.0" layoutY="14.0" startX="-100.0" />
+                  <CubicCurve controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" fill="#7ec1ff" layoutX="540.0" layoutY="30.0" startX="-150.0" stroke="BLACK" />
+                  <ImageView fitHeight="66.0" fitWidth="70.0" layoutX="1042.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icones/igregoriosemedo.jpg" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="1055.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SGB">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="327.0" prefWidth="1117.0">
