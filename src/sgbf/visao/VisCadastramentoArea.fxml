@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="400.0" prefWidth="524.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoArea">
     <stylesheets>
-        <URL value="@/sgbf/util/tabelaverarea.css" />
+        <URL value="@/sgbf/estilo/tabelaverarea.css" />
     </stylesheets>
    <children>
       <SplitPane dividerPositions="0.6470588235294118" orientation="VERTICAL" prefHeight="444.0" prefWidth="685.0" style="-fx-background-color: f5fffb;">

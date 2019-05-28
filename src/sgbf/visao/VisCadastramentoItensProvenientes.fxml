@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPaneItemProveniente" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoItensProvenientes">
     <stylesheets>
-        <URL value="@/sgbf/util/visitensprovenientes.css" />
+        <URL value="@/sgbf/estilo/visitensprovenientes.css" />
     </stylesheets>
    <children>
       <SplitPane dividerPositions="0.5083179297597042" orientation="VERTICAL" prefHeight="570.0" prefWidth="966.0" style="-fx-background-color: #1f4f4e;">

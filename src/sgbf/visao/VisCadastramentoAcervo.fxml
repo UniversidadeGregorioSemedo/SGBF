@@ -220,12 +220,12 @@
                         <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="botaoNovo" layoutX="1088.0" layoutY="48.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Novo" />
-                  <JFXButton fx:id="botaoCadastrar" layoutX="1088.0" layoutY="96.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Cadastrar" />
-                  <JFXButton fx:id="botaoAlterar" layoutX="1088.0" layoutY="136.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Alterar" />
-                  <JFXButton fx:id="botaoRemover" layoutX="1087.0" layoutY="173.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Remover" />
-                  <JFXButton fx:id="botaoCancelar" layoutX="1088.0" layoutY="217.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Cancelar" />
-                  <JFXButton fx:id="botaoSair" layoutX="1088.0" layoutY="276.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Sair" />
+                  <JFXButton fx:id="botaoNovo" layoutX="1088.0" layoutY="48.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" onAction="#novo"  text="Novo" />
+                  <JFXButton fx:id="botaoCadastrar" layoutX="1088.0" layoutY="96.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" onAction="#cadastrarAcervos" text="Cadastrar" />
+                  <JFXButton fx:id="botaoAlterar" layoutX="1088.0" layoutY="136.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" onAction="#alterarAcervo" text="Alterar" />
+                  <JFXButton fx:id="botaoRemover" layoutX="1087.0" layoutY="173.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" onAction="#removerAcervo" text="Remover" />
+                  <JFXButton fx:id="botaoCancelar" layoutX="1088.0" layoutY="217.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" onAction="#cancelar" text="Cancelar" />
+                  <JFXButton fx:id="botaoSair" layoutX="1088.0" layoutY="276.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" onAction="#sair" text="Sair" />
                   <ComboBox fx:id="comboBoxTipo" layoutX="689.0" layoutY="50.0" prefHeight="25.0" prefWidth="143.0" promptText="Seleciona o tipo" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css" />
                </children>
             </AnchorPane>

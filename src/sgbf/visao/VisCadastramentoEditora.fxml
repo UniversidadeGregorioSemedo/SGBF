@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="249.0" prefWidth="583.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoEditora">
     <stylesheets>
-        <URL value="@/sgbf/util/viscadastroeditora.css" />
+        <URL value="@/sgbf/estilo/viscadastroeditora.css" />
     </stylesheets>
    <children>
       <SplitPane dividerPositions="0.5586080586080586" orientation="VERTICAL" prefHeight="548.0" prefWidth="876.0" style="-fx-background-color: #1f4f4e;">

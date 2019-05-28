@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchorPaneVisAutor" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerAutor">
     <stylesheets>
-        <URL value="@/sgbf/util/visverautor.css" />
+        <URL value="@/sgbf/estilo/visverautor.css" />
     </stylesheets>
    <children>
       <SplitPane dividerPositions="0.5757097791798107" orientation="VERTICAL" prefHeight="636.0" prefWidth="1074.0" style="-fx-background-color: #1f4f4e;">
