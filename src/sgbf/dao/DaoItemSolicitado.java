@@ -20,7 +20,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConItemSolicitado extends ConCRUD {
+public class DaoItemSolicitado extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -29,7 +29,7 @@ public class ConItemSolicitado extends ConCRUD {
             for (ModItemSolicitado itemSolicitado : reservaMod.getItensRegistados()) {
                 if (this.existeRegistoDoProduto(reservaMod, itemSolicitado, operacao)) {
                     super.query = "update itenssolicitados set quantidade=quantidade+? where Acervos_idAcervos=? and Reserva_idReserva=?";
-                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                     super.preparedStatement.setByte(1, itemSolicitado.getQuantidade_revervada());
                     super.preparedStatement.setInt(2, itemSolicitado.getAcervoMod().getIdAcervo());
                     super.preparedStatement.setInt(3, reservaMod.getIdReserva());
@@ -37,7 +37,7 @@ public class ConItemSolicitado extends ConCRUD {
                 } else {
                     super.query = "INSERT INTO tcc.itenssolicitados(Acervos_idAcervos, Reserva_idReserva, quantidade)"
                             + " VALUES (?, ?, ?)";
-                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                     super.preparedStatement.setInt(1, itemSolicitado.getAcervoMod().getIdAcervo());
                     super.preparedStatement.setInt(2, reservaMod.getIdReserva());
                     super.preparedStatement.setByte(3, itemSolicitado.getQuantidade_revervada());
@@ -48,14 +48,14 @@ public class ConItemSolicitado extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Reserva !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
     private boolean existeRegistoDoProduto(ModReserva reservaMod, ModItemSolicitado itemSolicitado, String operacao) {
         try{
             super.query = "select * from itenssolicitados where Acervos_idAcervos=? and Reserva_idReserva=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, itemSolicitado.getAcervoMod().getIdAcervo());
             super.preparedStatement.setInt(2, reservaMod.getIdReserva());
             super.setResultset = super.preparedStatement.executeQuery();
@@ -71,7 +71,7 @@ public class ConItemSolicitado extends ConCRUD {
         ModReserva reservaMod = (ModReserva)objecto_pesquisar;
         try{
             super.query = "select * from view_itensReservados where idReserva=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, reservaMod.getIdReserva());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
@@ -89,7 +89,7 @@ public class ConItemSolicitado extends ConCRUD {
         try{
             for(ModItemSolicitado itemSolicitado: reservaMod.getItensRegistados()){
                 super.query = "delete from itenssolicitados where Acervos_idAcervos=? and Reserva_idReserva=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, itemSolicitado.getAcervoMod().getIdAcervo());
                 super.preparedStatement.setInt(2, reservaMod.getIdReserva());
                 super.preparedStatement.execute();
@@ -101,7 +101,7 @@ public class ConItemSolicitado extends ConCRUD {
     }
     
     private Object pegarRegistos(ResultSet setResultset, String operacao) throws SQLException {
-        ConAcervo acervoCon = new ConAcervo();
+        DaoAcervo acervoCon = new DaoAcervo();
         ModItemSolicitado  itemSolicitado = new ModItemSolicitado();
         itemSolicitado.getAcervoMod().setIdAcervo(setResultset.getInt("idAcervos"), operacao);
         

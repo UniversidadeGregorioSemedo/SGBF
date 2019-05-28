@@ -5,7 +5,7 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ConEditora;
+import sgbf.dao.DaoEditora;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class VisCadastramentoEditora implements Initializable {
 
     private String operacao = null;
     private final ModEditora editoraMod = new ModEditora();
-    private final ConEditora editoraCon = new ConEditora();
+    private final DaoEditora editoraCon = new DaoEditora();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

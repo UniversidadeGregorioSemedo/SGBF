@@ -5,10 +5,10 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ContItemProveniente;
-import sgbf.dao.ConProveniencia;
-import sgbf.dao.ConEstoque;
-import sgbf.dao.ConAcervo;
+import sgbf.dao.DaoItemProveniente;
+import sgbf.dao.DaoProveniencia;
+import sgbf.dao.DaoEstoque;
+import sgbf.dao.DaoAcervo;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -77,10 +77,10 @@ public class VisCadastramentoItensProvenientes implements Initializable {
 
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
-    private final ConAcervo acervoCon = new ConAcervo();
-    private final ConEstoque estoqueCon = new ConEstoque();
+    private final DaoAcervo acervoCon = new DaoAcervo();
+    private final DaoEstoque estoqueCon = new DaoEstoque();
     private final ModItemProveniente itemProvenienteMod = new ModItemProveniente();
-    private final ContItemProveniente itemProvenienteCon = new ContItemProveniente();
+    private final DaoItemProveniente itemProvenienteCon = new DaoItemProveniente();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -250,7 +250,7 @@ public class VisCadastramentoItensProvenientes implements Initializable {
     }
 
     private void carregarValorNasComboxs() {
-        ConProveniencia provenienciaCon = new ConProveniencia();
+        DaoProveniencia provenienciaCon = new DaoProveniencia();
         List<ModProveniencia> todasProveniencias = new ArrayList<>();
         ObservableList todasProvenienciasParaCombox = null;
         todasProveniencias.add(new ModProveniencia());

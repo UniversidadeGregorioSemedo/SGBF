@@ -18,7 +18,7 @@ import sgbf.util.UtilCriptografia;
  *
  * @author Dell
  */
-public class ConFuncionario extends ConCRUD {
+public class DaoFuncionario extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -29,7 +29,7 @@ public class ConFuncionario extends ConCRUD {
             } else {
                 super.query = "INSERT INTO tcc.funcionario (cargo, cod_funcionario, Utente_idUtente)"
                         + " VALUES (?, ?, ?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, funcionarioMod.getCargo());
                 super.preparedStatement.setString(2, funcionarioMod.getCodigoFuncionario());
                 super.preparedStatement.setInt(3, funcionarioMod.getIdUtente());
@@ -38,7 +38,7 @@ public class ConFuncionario extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Funcionários !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -50,7 +50,7 @@ public class ConFuncionario extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Já existe registo deste funcionário", Alert.AlertType.WARNING);
             } else {
                 super.query = "update tcc.funcionario set cargo=?, cod_funcionario=? where Utente_idUtente=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, funcionarioMod.getCargo());
                 super.preparedStatement.setString(2, funcionarioMod.getCodigoFuncionario());
                 super.preparedStatement.setInt(3, funcionarioMod.getIdUtente());
@@ -59,7 +59,7 @@ public class ConFuncionario extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Funcionários !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -71,14 +71,14 @@ public class ConFuncionario extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Existem registos importantes deste Funcionário !", Alert.AlertType.INFORMATION);
             } else {
                 super.query = "delete from tcc.funcionario where Utente_idUtente=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, funcionarioMod.getIdUtente());
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -87,7 +87,7 @@ public class ConFuncionario extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from view_funcionarios order by primeiro_nome";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -106,7 +106,7 @@ public class ConFuncionario extends ConCRUD {
             super.query = "select * from tcc.view_funcionarios where idUtente=? or \n"
                     + "primeiro_nome like '%" + funcionarioMod.getPrimeiro_nome() + "%'"
                     + " or segundo_nome like '%" + funcionarioMod.getPrimeiro_nome() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, funcionarioMod.getIdUtente());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -118,7 +118,7 @@ public class ConFuncionario extends ConCRUD {
         }
     }
 
-    private Object pegarRegistos(ResultSet setResult, String operacao) throws SQLException {
+    public Object pegarRegistos(ResultSet setResult, String operacao) throws SQLException {
         ModFuncionario funcionarioMod = new ModFuncionario();
         funcionarioMod.setIdUtente(setResult.getInt("Utente_idUtente"), operacao);
         funcionarioMod.setPrimeiro_nome(setResult.getString("primeiro_nome"), operacao);
@@ -152,19 +152,19 @@ public class ConFuncionario extends ConCRUD {
 
     private boolean temDadosRelacionados(ModFuncionario funcionarioMod, String operacao) throws SQLException {
         super.query = "select *from reserva where Funcionario_idFuncionario=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
         super.preparedStatement.setInt(1, funcionarioMod.getIdFuncionario());
         if (super.setResultset.next()) {
             throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\nO funcionário seleccionado possui registo de reservas!", Alert.AlertType.INFORMATION);
         } else {
             super.query = "select *from devolucao where Funcionario_idFuncionario=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
             super.preparedStatement.setInt(1, funcionarioMod.getIdFuncionario());
             if (super.setResultset.next()) {
                 throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\nO funcionário seleccionado possui registo de Devolução!", Alert.AlertType.INFORMATION);
             } else {
                 super.query = "select *from emprestimo where Funcionario_idFuncionario=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
                 super.preparedStatement.setInt(1, funcionarioMod.getIdFuncionario());
                 if (super.setResultset.next()) {
                     throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\nO funcionário seleccionado possui registo de Emprestimo!", Alert.AlertType.INFORMATION);

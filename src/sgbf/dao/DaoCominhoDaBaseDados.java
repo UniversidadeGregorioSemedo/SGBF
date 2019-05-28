@@ -11,30 +11,36 @@ import sgbf.util.UtilControloExcessao;
 public class DaoCominhoDaBaseDados {
 
     private final String driver = "org.mysql.Driver";
-    private final String caminho_base_dados = "jdbc:mysql://localhost:3306/tcc";
+    private final String caminho_base_dados = "jdbc:mysql://localhost:3307/tcc";
     private final String usuario = "root";
     private final String senha = "__Gestline18";
+    private String operacaoEmExecucao;
 
-    public Connection baseDeDados(String nome_da_operacao) {
+    public DaoCominhoDaBaseDados(String operacaoEmExecucao) {
+        this.operacaoEmExecucao = operacaoEmExecucao;
+
+    }
+
+    public Connection conectarBaseDeDados() {
         try {
             System.setProperty("jdbc.Driver", driver);
             return DriverManager.getConnection(caminho_base_dados, usuario, senha);
         } catch (SQLException ex) {
-            throw new UtilControloExcessao(nome_da_operacao, "Erro ao Efectuar Conexão com o Servidor de Base de Dados !\nErro: " + ex.getMessage(), Alert.AlertType.ERROR);
+            throw new UtilControloExcessao(operacaoEmExecucao, "Erro ao Efectuar Conexão com o Servidor de Base de Dados !\nErro: " + ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
-    public void fecharTodasConexoes(PreparedStatement statementPrepared, ResultSet setResult, String nome_da_operacao) {
+    public void fecharTodasConexoes(PreparedStatement statementPrepared, ResultSet setResult) {
         try {
             if (statementPrepared != null) {
                 if (setResult != null) {
-                    this.fecharRespostaDaBaseDados(this.baseDeDados(nome_da_operacao), statementPrepared, setResult);
+                    this.fecharRespostaDaBaseDados(this.conectarBaseDeDados(), statementPrepared, setResult);
                 } else {
-                    this.fecharSolicitacaoABaseDados(this.baseDeDados(nome_da_operacao), statementPrepared);
+                    this.fecharSolicitacaoABaseDados(this.conectarBaseDeDados(), statementPrepared);
                 }
             }
-        } catch (SQLException ex) {
-            throw new UtilControloExcessao(nome_da_operacao,"Erro de comunicação com a Servidor de Base de Dados !",  Alert.AlertType.ERROR);
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacaoEmExecucao, "Erro ao se conectar a base de dados", Alert.AlertType.ERROR);
         }
     }
 

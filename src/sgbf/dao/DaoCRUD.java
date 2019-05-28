@@ -4,14 +4,13 @@ package sgbf.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
-import sgbf.dao.DaoCominhoDaBaseDados;
 
 /**
  *
  * @author Look
  */
-public abstract class ConCRUD {
-    final protected DaoCominhoDaBaseDados caminhoDaBaseDados = new DaoCominhoDaBaseDados();
+public abstract class DaoCRUD {
+    final protected DaoCominhoDaBaseDados caminhoDaBaseDados = new DaoCominhoDaBaseDados("Conexão");
     protected PreparedStatement preparedStatement = null;
     protected ResultSet setResultset = null;
     protected String query = null;

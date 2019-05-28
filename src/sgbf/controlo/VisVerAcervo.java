@@ -5,7 +5,7 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ConAcervo;
+import sgbf.dao.DaoAcervo;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class VisVerAcervo implements Initializable {
 
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
-    private final ConAcervo acervoCon = new ConAcervo();
+    private final DaoAcervo acervoCon = new DaoAcervo();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

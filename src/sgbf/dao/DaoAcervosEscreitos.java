@@ -18,7 +18,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConAcervosEscreitos extends ConCRUD {
+public class DaoAcervosEscreitos extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -33,7 +33,7 @@ public class ConAcervosEscreitos extends ConCRUD {
                     return acervoMod.getAutorMod().getIdAutor() == 0;
                 } else {
                     super.query = "INSERT INTO tcc.acervosescritos(Acervos_idAcervos, Autor_idAutor) VALUES (?, ?)";
-                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                     super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
                     super.preparedStatement.setInt(2, acervoMod.getAutorMod().getIdAutor());
                     return !super.preparedStatement.execute();
@@ -42,7 +42,7 @@ public class ConAcervosEscreitos extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Acervos Escritos !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -57,7 +57,7 @@ public class ConAcervosEscreitos extends ConCRUD {
                     return this.registar(acervoMod, operacao);
                 } else {
                     super.query = "update tcc.acervosescritos set Autor_idAutor=? where Acervos_idAcervos=?";
-                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                     super.preparedStatement.setInt(1, acervoMod.getAutorMod().getIdAutor());
                     super.preparedStatement.setInt(2, acervoMod.getIdAcervo());
                     return !super.preparedStatement.execute();
@@ -66,7 +66,7 @@ public class ConAcervosEscreitos extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estante !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -75,7 +75,7 @@ public class ConAcervosEscreitos extends ConCRUD {
         ModAcervosEscritos acervosEscritosMod = (ModAcervosEscritos) objecto_remover;
         try {
             super.query = "delete from tcc.acervosescritos where Acervos_idAcervos=? or Autor_idAutor=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, acervosEscritosMod.getAcervoMod().getIdAcervo());
             super.preparedStatement.setInt(2, acervosEscritosMod.getAutorMod().getIdAutor());
             return !super.preparedStatement.execute();
@@ -89,7 +89,7 @@ public class ConAcervosEscreitos extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.Estante ";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -98,7 +98,7 @@ public class ConAcervosEscreitos extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estante(s) !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -108,7 +108,7 @@ public class ConAcervosEscreitos extends ConCRUD {
         ModAcervo acervoMod = (ModAcervo) objecto_pesquisar;
         try {
             super.query = "select * from tcc.acervosescritos where Acervos_idAcervos=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {

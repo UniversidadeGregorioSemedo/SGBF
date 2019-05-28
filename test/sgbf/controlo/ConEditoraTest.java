@@ -5,7 +5,7 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ConEditora;
+import sgbf.dao.DaoEditora;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class ConEditoraTest {
     public void testRegistar() {
         final String operacao = "Regitar Editora";
         ModEditora editoraMod = new ModEditora();
-        ConEditora editoraCon = new ConEditora();
+        DaoEditora editoraCon = new DaoEditora();
         editoraMod.setNome("Porto editora", operacao);
         editoraMod.setContacto("929298318", operacao);
         editoraMod.setEmail("lazarodjanilson@gmail.com", operacao);

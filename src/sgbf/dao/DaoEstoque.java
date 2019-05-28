@@ -20,9 +20,9 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConEstoque extends ConCRUD {
+public class DaoEstoque extends DaoCRUD {
 
-    private final ContItemProveniente itemProvenienteCon = new ContItemProveniente();
+    private final DaoItemProveniente itemProvenienteCon = new DaoItemProveniente();
 
     @Override
     public boolean alterar(Object objecto_alterar, String operacao) {
@@ -31,7 +31,7 @@ public class ConEstoque extends ConCRUD {
         try {
             if (itemProvenienteMod != null) {
                 super.query = "call pr_alterarItensEntradas(?,?,?,?,?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
                 super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
                 super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
                 super.preparedStatement.setInt(3, itemProvenienteMod.getQuantidade_entrada());
@@ -51,12 +51,12 @@ public class ConEstoque extends ConCRUD {
     public boolean remover(Object objecto_remover, String operacao) {
         ModAcervo acervoMod = (ModAcervo) objecto_remover;
         ModItemProveniente itemProvenienteMod = new ModItemProveniente();
-        ContItemProveniente itemProvenienteCon = new ContItemProveniente();
+        DaoItemProveniente itemProvenienteCon = new DaoItemProveniente();
         itemProvenienteMod.setAcervoMod(acervoMod, operacao);
         try {
             if (itemProvenienteCon.remover(itemProvenienteMod, operacao)) {
                 super.query = "delete from estoque where Acervos_idAcervos=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
                 super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
                 return !super.preparedStatement.execute();
             } else {
@@ -71,7 +71,7 @@ public class ConEstoque extends ConCRUD {
         try {
             if (this.quantidadePodeSerRemovida(itemProvenienteMod, operacao)) {
                 super.query = "call pr_removerEntradaDeItem(?,?,?,?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
                 super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
                 super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
                 super.preparedStatement.setInt(3, itemProvenienteMod.getQuantidade_entrada());
@@ -114,7 +114,7 @@ public class ConEstoque extends ConCRUD {
         try {
             if (this.temQuantidadeSuficiente(itemSolicitadoMod, operacao)) {
                 super.query = "call pr_descontarAcervoRegistadoNaReserva(?,?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
                 super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
                 return !super.preparedStatement.execute();
@@ -129,7 +129,7 @@ public class ConEstoque extends ConCRUD {
     public boolean devolverAcervoReservadoNoEstoque(ModItemSolicitado itemSolicitadoMod, String operacao) {
         try {
             super.query = "call pr_devolverAcervoReservadosNoEstoque(?,?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
             super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
             return !super.preparedStatement.execute();
@@ -142,7 +142,7 @@ public class ConEstoque extends ConCRUD {
         try {
             for (ModItemSolicitado itemSolicitadoMod : emprestimoMod.getReservaMod().getItensRegistados()) {
                 super.query = "call pr_devolverAcervosEmprestadosNoEstoque(?,?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
                 super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
                 super.preparedStatement.execute();
@@ -157,7 +157,7 @@ public class ConEstoque extends ConCRUD {
         try {
             for (ModItemSolicitado itemSolicitadoMod : todosItensSolicitado) {
                 super.query = "call pr_emprestarAcervos(?,?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, itemSolicitadoMod.getAcervoMod().getEstoqueMod().getIdEstoque());
                 super.preparedStatement.setInt(2, itemSolicitadoMod.getQuantidade_revervada());
                 super.preparedStatement.execute();
@@ -169,7 +169,7 @@ public class ConEstoque extends ConCRUD {
     }
 
     private boolean temQuantidadeSuficiente(ModItemSolicitado itemSolicitadoMod, String operacao) {
-        ConAcervo acervoCon = new ConAcervo();
+        DaoAcervo acervoCon = new DaoAcervo();
         if (acervoCon.pesquisar(itemSolicitadoMod.getAcervoMod(), operacao).isEmpty()) {
             throw new UtilControloExcessao(operacao, "O Acervo Seleccionado não existe", Alert.AlertType.WARNING);
         } else {

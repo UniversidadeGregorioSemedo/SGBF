@@ -1,12 +1,13 @@
 package sgbf.controlo;
 
-import sgbf.dao.ConUsuario;
-import sgbf.dao.ConEmprestimo;
+import sgbf.dao.DaoUsuario;
+import sgbf.dao.DaoEmprestimo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 import sgbf.modelo.ModFuncionario;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilUsuarioLogado;
+import sgbf.util.ProriedadesDaJanela;
 
 /**
  * FXML Controller class
@@ -62,58 +64,58 @@ public class VisLogin implements Initializable {
 
     @FXML
     private void clicarBotoes(MouseEvent accao) {
-        Node node = (Node) accao.getSource();
-        Stage propreidadeDaJanela = (Stage) node.getScene().getWindow();
-
-        if (accao.getSource() == loginEntrar) {
-            this.abrirTelaPrincipal(operacao, propreidadeDaJanela);
-        } else {
-            if (accao.getSource() == loginCancelar) {
+        try {
+            Node node = (Node) accao.getSource();
+            Stage propreidadeDaJanela = (Stage) node.getScene().getWindow();
+            if (accao.getSource() == loginEntrar) {
+                this.abrirDeAmbienteDeTrabalho(operacao, propreidadeDaJanela);
+            } else if (accao.getSource() == loginCancelar) {
                 Main.sairdoSistema(operacao, propreidadeDaJanela);
             }
+        } catch (IOException erro) {
+            throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.INFORMATION);
         }
     }
-    
+
     @FXML
-    private void recuperarSenha(){
-        throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.INFORMATION);
-    }
-    
-    @FXML
-    private void contacteNos(){
+    private void recuperarSenha() {
         throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.INFORMATION);
     }
 
-    private void abrirTelaPrincipal(String operacao, Stage propreidadeDaJanela) {
+    @FXML
+    private void contacteNos() {
+        throw new UtilControloExcessao(operacao, "Operação indisponível no momento", Alert.AlertType.INFORMATION);
+    }
+
+    private void abrirDeAmbienteDeTrabalho(String operacao, Stage propreidadeDaJanela) throws IOException {
         try {
-            UtilUsuarioLogado.setUsuarioLogado(this.autenticar(operacao));
-            if (UtilUsuarioLogado.getUsuarioLogado() != null) {
+            if (this.validarCredenciasDoUsuario(operacao)) {
                 propreidadeDaJanela.close();
                 Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisTelaPrincipal.fxml"));
                 Scene scene = new Scene(root);
                 propreidadeDaJanela.setScene(scene);
-                propreidadeDaJanela.setTitle("Sistema de Gestão de Biblioteca( " + UtilUsuarioLogado.getUsuarioLogado().getNome() + " )");
+                ProriedadesDaJanela.exibirUsuarioLogado(propreidadeDaJanela);
                 propreidadeDaJanela.setMaximized(true);
                 propreidadeDaJanela.setResizable(true);
                 propreidadeDaJanela.show();
-                ConEmprestimo emprestimoCon = new ConEmprestimo();
+                DaoEmprestimo emprestimoCon = new DaoEmprestimo();
                 this.loginMensagem.setTooltip(null);
             } else {
                 loginMensagem.setText("Usuário ou senha incorreta");
                 this.loginMensagem.setTooltip(new Tooltip("Usuário ou senha incorreta"));
             }
-        } catch (IOException erro) {
-            throw new UtilControloExcessao(operacao, "Erro so iniciar o sistema !\nErro: " + erro, Alert.AlertType.ERROR);
+        } catch (SQLException erro) {
+            throw new UtilControloExcessao(operacao, "Erro ao se conectar com a Base de Dados !\nErro: "+erro, Alert.AlertType.ERROR);
         }
     }
 
-    private ModFuncionario autenticar(String operacao) {
+    private boolean validarCredenciasDoUsuario(String operacao) throws SQLException {
         ModFuncionario funcionaMod = new ModFuncionario();
-        ConUsuario usuarioCon = new ConUsuario();
-
+        DaoUsuario usuarioCon = new DaoUsuario();
         funcionaMod.setUsuario(this.loginNomeUsuario.getText(), operacao);
         funcionaMod.setSenha(this.loginSenha.getText(), operacao);
-        return usuarioCon.autenticar(funcionaMod, operacao);
+        UtilUsuarioLogado.setUsuarioLogado(usuarioCon.identificarUsuario(funcionaMod, operacao));
+        return UtilUsuarioLogado.getUsuarioLogado() != null;
     }
 
 }

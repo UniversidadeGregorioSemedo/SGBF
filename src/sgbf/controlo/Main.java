@@ -24,7 +24,7 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-           ProriedadesDaJanela.barraDeTitulo(primaryStage);
+            ProriedadesDaJanela.barraDeTitulo(primaryStage);
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException erro) {

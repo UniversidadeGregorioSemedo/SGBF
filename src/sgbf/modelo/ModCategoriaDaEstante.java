@@ -5,7 +5,7 @@
  */
 package sgbf.modelo;
 
-import sgbf.dao.ConCategoria;
+import sgbf.dao.DaoCategoria;
 
 /**
  *
@@ -26,7 +26,7 @@ public class ModCategoriaDaEstante {
     }
 
     public void setCategoriaMod(ModCategoria categoriaMod, String operacao) {
-        ConCategoria categoriaCon = new ConCategoria();
+        DaoCategoria categoriaCon = new DaoCategoria();
         this.categoriaMod = categoriaMod;
         for (Object todosRegistos : categoriaCon.listarTodos(operacao)) {
             ModCategoria categoriaRegistada = (ModCategoria) todosRegistos;

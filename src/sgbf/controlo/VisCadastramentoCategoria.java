@@ -1,8 +1,8 @@
 package sgbf.controlo;
 
-import sgbf.dao.ConEstante;
-import sgbf.dao.ConCategoriaDaEstante;
-import sgbf.dao.ConCategoria;
+import sgbf.dao.DaoEstante;
+import sgbf.dao.DaoCategoriaDaEstante;
+import sgbf.dao.DaoCategoria;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -58,9 +58,9 @@ public class VisCadastramentoCategoria implements Initializable {
 
     private String operacao = null;
     private final ModCategoria categoriaMod = new ModCategoria();
-    private final ConCategoria categoriaCon = new ConCategoria();
+    private final DaoCategoria categoriaCon = new DaoCategoria();
     private final ModCategoriaDaEstante categoriaDaEstanteMod = new ModCategoriaDaEstante();
-    private final ConCategoriaDaEstante categoriaDaEstanteCon = new ConCategoriaDaEstante();
+    private final DaoCategoriaDaEstante categoriaDaEstanteCon = new DaoCategoriaDaEstante();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -176,7 +176,7 @@ public class VisCadastramentoCategoria implements Initializable {
     }
 
     private void carregarValorNasComboxs() {
-        ConEstante estanteCon = new ConEstante();
+        DaoEstante estanteCon = new DaoEstante();
         List<ModEstante> todasEstantes = new ArrayList<>();
         ObservableList todasEstantesParaCombox = null;
 

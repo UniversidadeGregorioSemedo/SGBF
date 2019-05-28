@@ -19,7 +19,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConDevolucao extends ConCRUD {
+public class DaoDevolucao extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -29,7 +29,7 @@ public class ConDevolucao extends ConCRUD {
                 super.query = "INSERT INTO tcc.devolucao (tipo_devolucao, quantidade_devolvida, Funcionario_idFuncionario, "
                         + "ItensSolicitados_Acervos_idAcervos, ItensSolicitados_Reserva_idReserva)"
                         + " VALUES (?, ?, ?, ?, ?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
                 super.preparedStatement.setInt(2, itemSolicitado.getQuantidade_revervada());
                 super.preparedStatement.setInt(3, devolucaoMod.getEmprestimoMod().getFuncionarioMod().getIdFuncionario());
@@ -41,7 +41,7 @@ public class ConDevolucao extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Devolução !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -51,7 +51,7 @@ public class ConDevolucao extends ConCRUD {
         try {
             super.query = "Update tcc.devolucao tipo_devolucao=?, quantidade_devolvida=?, Funcionario_idFuncionario=?, "
                     + "where ItensSolicitados_Acervos_idAcervos=? and ItensSolicitados_Reserva_idReserva=? and idDevolucao=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setString(1, devolucaoMod.getTipo_devolucao());
             super.preparedStatement.setInt(2, devolucaoMod.getQuantidade_devolvida());
             super.preparedStatement.setInt(3, devolucaoMod.getEmprestimoMod().getFuncionarioMod().getIdFuncionario());
@@ -62,7 +62,7 @@ public class ConDevolucao extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Devolução !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -71,14 +71,14 @@ public class ConDevolucao extends ConCRUD {
         ModDevolucao devolucaoMod = (ModDevolucao) objecto_remover;
         try {
             super.query = "delete from tcc.devolucao where ItensSolicitados_Acervos_idAcervos=? and ItensSolicitados_Reserva_idReserva=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             //super.preparedStatement.setInt(1, devolucaoMod.getSolicitadoItemMod().getFisicoAcervoMod().getIdAcervo());
             //super.preparedStatement.setInt(2, devolucaoMod.getSolicitadoItemMod().getReservaMod().getIdReserva());
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Devolução !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -87,7 +87,7 @@ public class ConDevolucao extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.devolucao order by data_modificacao asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -96,7 +96,7 @@ public class ConDevolucao extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Devolução !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -107,7 +107,7 @@ public class ConDevolucao extends ConCRUD {
         try {
             super.query = "select * from tcc.devolucao where ItensSolicitados_Acervos_idAcervos=? or "
                     + "designacao like '%" + estanteMod.getDesignacao() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             /*super.preparedStatement.setInt(1, estanteMod.getIdEstante());
             super.setResultset  = super.preparedStatement.executeQuery();
             while(super.setResultset.next()){
@@ -117,7 +117,7 @@ public class ConDevolucao extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Devolução !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 

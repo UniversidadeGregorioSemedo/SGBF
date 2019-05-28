@@ -5,12 +5,12 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ConEmprestimo;
-import sgbf.dao.ConUtente;
-import sgbf.dao.ConReserva;
-import sgbf.dao.ConEstoque;
-import sgbf.dao.ConAcervo;
-import sgbf.dao.ConItemSolicitado;
+import sgbf.dao.DaoEmprestimo;
+import sgbf.dao.DaoUtente;
+import sgbf.dao.DaoReserva;
+import sgbf.dao.DaoEstoque;
+import sgbf.dao.DaoAcervo;
+import sgbf.dao.DaoItemSolicitado;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -74,15 +74,15 @@ public class VisMovimentacaoEmprestimo implements Initializable {
 
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
-    private final ConAcervo acervoCon = new ConAcervo();
-    private final ConUtente utenteCon = new ConUtente();
-    private final ConEstoque estoqueCon = new ConEstoque();
-    private final ConReserva reservaCon = new ConReserva();
+    private final DaoAcervo acervoCon = new DaoAcervo();
+    private final DaoUtente utenteCon = new DaoUtente();
+    private final DaoEstoque estoqueCon = new DaoEstoque();
+    private final DaoReserva reservaCon = new DaoReserva();
     private final ModReserva reservaMod = new ModReserva();
     private final ModVisitante visitanteMod = new ModVisitante();
     private final ModEmprestimo emprestimoMod = new ModEmprestimo();
-    private final ConEmprestimo emprestimoCon = new ConEmprestimo();
-    private final ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
+    private final DaoEmprestimo emprestimoCon = new DaoEmprestimo();
+    private final DaoItemSolicitado itemSolicitadoCon = new DaoItemSolicitado();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

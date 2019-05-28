@@ -1,6 +1,6 @@
 package sgbf.controlo;
 
-import sgbf.dao.ConAutor;
+import sgbf.dao.DaoAutor;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class VisCadastramentoAutor implements Initializable {
 
     private String operacao = null;
     private final ModAutor autorMod = new ModAutor();
-    private final ConAutor autorCon = new ConAutor();
+    private final DaoAutor autorCon = new DaoAutor();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

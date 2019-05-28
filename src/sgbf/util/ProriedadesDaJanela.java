@@ -19,4 +19,7 @@ public class ProriedadesDaJanela {
         proriedadeDaJanela.getIcons().add(new Image("sgbf\\icones\\IconLogin.png"));
     }
 
+    public static void exibirUsuarioLogado(Stage proriedadeDaJanela) {
+        proriedadeDaJanela.setTitle(proriedadeDaJanela.getTitle() + "(" + UtilUsuarioLogado.getUsuarioLogado().getNome() + ")");
+    }
 }

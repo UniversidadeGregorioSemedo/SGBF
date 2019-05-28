@@ -5,7 +5,7 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ConArea;
+import sgbf.dao.DaoArea;
 import javafx.scene.control.Alert;
 import org.junit.After;
 import org.junit.Before;
@@ -35,7 +35,7 @@ public class ConAreaTest {
     public void testRegistar() {
         final String operacao = "Registar Área";
         ModArea areaMod = new ModArea();
-        ConArea areaCon = new ConArea();
+        DaoArea areaCon = new DaoArea();
         
         areaMod.setSector("Sector de engenharia", operacao);
         

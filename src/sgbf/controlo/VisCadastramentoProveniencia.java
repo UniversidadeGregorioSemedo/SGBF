@@ -5,7 +5,7 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ConProveniencia;
+import sgbf.dao.DaoProveniencia;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class VisCadastramentoProveniencia implements Initializable {
     
     private String operacao = null;
     private final ModProveniencia provenienciamod = new ModProveniencia();
-    private final ConProveniencia provenienciacom = new ConProveniencia();
+    private final DaoProveniencia provenienciacom = new DaoProveniencia();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

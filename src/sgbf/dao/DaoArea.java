@@ -17,7 +17,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConArea extends ConCRUD {
+public class DaoArea extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -27,14 +27,14 @@ public class ConArea extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Área !", Alert.AlertType.ERROR);
             } else {
                 super.query = "INSERT INTO tcc.area (sector) VALUES (?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, areaMod.getSector());
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -46,7 +46,7 @@ public class ConArea extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Área !", Alert.AlertType.ERROR);
             } else {
                 super.query = "UPDATE tcc.area set sector=?, data_modificacao = default where idArea=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, areaMod.getSector());
                 super.preparedStatement.setInt(2, areaMod.getIdArea());
                 return !super.preparedStatement.execute();
@@ -54,7 +54,7 @@ public class ConArea extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Área !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -66,7 +66,7 @@ public class ConArea extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\n A Área seleccionada possui Registos !", Alert.AlertType.WARNING);
             } else {
                 super.query = "delete from tcc.area where idArea=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, areaMod.getIdArea());
                 return !super.preparedStatement.execute();
             }
@@ -80,7 +80,7 @@ public class ConArea extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.area order by sector asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -98,7 +98,7 @@ public class ConArea extends ConCRUD {
         try {
             super.query = "select * from tcc.area where idArea=? or "
                     + "sector like '%" + areaMod.getSector() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, areaMod.getIdArea());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -120,7 +120,7 @@ public class ConArea extends ConCRUD {
 
     private boolean temDadosRelacionados(ModArea areaMod, String operacao) throws SQLException {
         super.query = "select * from estante where Area_idArea=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
         super.preparedStatement.setInt(1, areaMod.getIdArea());
         super.setResultset = super.preparedStatement.executeQuery();
         return super.setResultset.next();

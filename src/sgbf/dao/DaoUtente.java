@@ -15,7 +15,7 @@ import sgbf.modelo.ModVisitante;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilCriptografia;
 
-public class ConUtente extends ConCRUD {
+public class DaoUtente extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -28,7 +28,7 @@ public class ConUtente extends ConCRUD {
                         + " tipo_identidicacao, numero_identidicacao, contacto, email, "
                         + "endereco, endereco_imagem, categoria, usuario, senha)"
                         + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
                 super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
                 super.preparedStatement.setString(3, utenteMod.getGenero());
@@ -46,7 +46,7 @@ public class ConUtente extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -60,7 +60,7 @@ public class ConUtente extends ConCRUD {
                 super.query = "update tcc.utente set primeiro_nome=?, segundo_nome=?, genero=?,"
                         + " tipo_identidicacao=?, numero_identidicacao=?, contacto=?, email=?, "
                         + "endereco=?, endereco_imagem=?, categoria=?, usuario=?, senha=?,data_modificacao = default where idUtente=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, utenteMod.getPrimeiro_nome());
                 super.preparedStatement.setString(2, utenteMod.getSegundo_nome());
                 super.preparedStatement.setString(3, utenteMod.getGenero());
@@ -79,7 +79,7 @@ public class ConUtente extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -91,14 +91,14 @@ public class ConUtente extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\nO Utente selecionado tem registo ! ",Alert.AlertType.ERROR);
             } else {
                 super.query = "delete from tcc.utente where idUtente=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, utenteMod.getIdUtente());
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "!\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -107,7 +107,7 @@ public class ConUtente extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.utente order by primeiro_nome, data_modificacao asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -116,7 +116,7 @@ public class ConUtente extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "Utente(s) !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -128,7 +128,7 @@ public class ConUtente extends ConCRUD {
             super.query = "select * from tcc.utente where idUtente=? or \n"
                     + "primeiro_nome like '%" + visitanteMod.getPrimeiro_nome() + "%'"
                     + " or segundo_nome like '%" + visitanteMod.getPrimeiro_nome() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -163,13 +163,13 @@ public class ConUtente extends ConCRUD {
 
     private boolean temDadosRelacionados(ModUtente utenteMod, String operacao) throws SQLException {
         super.query = "select *from funcionario where Utente_idUtente=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
         super.preparedStatement.setInt(1, utenteMod.getIdUtente());
         if (super.setResultset.next()) {
             return super.setResultset.next();
         } else {
             super.query = "select *from reserva where Utente_idUtente=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
             super.preparedStatement.setInt(1, utenteMod.getIdUtente());
             return super.setResultset.next();
         }

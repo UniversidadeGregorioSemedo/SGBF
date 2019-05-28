@@ -17,7 +17,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConProveniencia extends ConCRUD {
+public class DaoProveniencia extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -27,7 +27,7 @@ public class ConProveniencia extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Proveniência", Alert.AlertType.ERROR);
             } else {
                 super.query = "INSERT INTO tcc.proveniencia (tipo) VALUES (?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, provenienciaMod.getTipo());
                 return !super.preparedStatement.execute();
             }
@@ -44,7 +44,7 @@ public class ConProveniencia extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Proveniência", Alert.AlertType.ERROR);
             } else {
                 super.query = "update tcc.proveniencia set tipo=?, data_modificao = default where idProveniencia=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, provenienciaMod.getTipo());
                 super.preparedStatement.setInt(2, provenienciaMod.getIdProveniencia());
                 return !super.preparedStatement.execute();
@@ -62,7 +62,7 @@ public class ConProveniencia extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada !\nErro: A proveniencia seleccionada tem dados registados !", Alert.AlertType.ERROR);
             } else {
                 super.query = "delete from tcc.proveniencia where idProveniencia=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, provenienciaMod.getIdProveniencia());
                 return !super.preparedStatement.execute();
             }
@@ -76,7 +76,7 @@ public class ConProveniencia extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.proveniencia";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -94,7 +94,7 @@ public class ConProveniencia extends ConCRUD {
         try {
             super.query = "select * from tcc.proveniencia where idProveniencia=? or "
                     + "tipo like '%" + provenienciaMod.getTipo() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, provenienciaMod.getIdProveniencia());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -125,7 +125,7 @@ public class ConProveniencia extends ConCRUD {
 
     private boolean temDadosRelacionados(ModProveniencia provenienciaMod, String operacao) throws SQLException {
         super.query = "select *from itensProvenientes where Proveniencia_idProveniencia=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
         super.preparedStatement.setInt(1, provenienciaMod.getIdProveniencia());
         super.setResultset = super.preparedStatement.executeQuery();
         return super.setResultset.next();

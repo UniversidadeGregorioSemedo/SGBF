@@ -17,7 +17,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ContItemProveniente extends ConCRUD {
+public class DaoItemProveniente extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -28,7 +28,7 @@ public class ContItemProveniente extends ConCRUD {
                         + "Erro: Acervos digitais não podem ter mais de duas proveniências", Alert.AlertType.WARNING);
             } else {
                 super.query = "call pr_registarItensEntradas(?, ?, ?, ?, ?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
                 super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
                 super.preparedStatement.setInt(3, itemProvenienteMod.getQuantidade_entrada());
@@ -39,7 +39,7 @@ public class ContItemProveniente extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Entradas \nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -50,7 +50,7 @@ public class ContItemProveniente extends ConCRUD {
         ModItemProveniente itemProvenienteMod = (ModItemProveniente) objecto_alterar;
         try {
             super.query = "update tcc.itensprovenientes set quantidade_entrada=?, subtotal=? where Estoque_idEstoque=? and Proveniencia_idProveniencia=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, itemProvenienteMod.getQuantidade_entrada());
             super.preparedStatement.setDouble(2, itemProvenienteMod.getSubTotal());
             super.preparedStatement.setInt(3, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
@@ -59,7 +59,7 @@ public class ContItemProveniente extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Estoque !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -68,7 +68,7 @@ public class ContItemProveniente extends ConCRUD {
         ModItemProveniente itemProvenienteMod = (ModItemProveniente) objecto_remover;
         try {
             super.query = "delete from tcc.itensprovenientes where Estoque_idEstoque=? or Proveniencia_idProveniencia=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getEstoqueMod().getIdEstoque());
             super.preparedStatement.setInt(2, itemProvenienteMod.getProvenienciaMod().getIdProveniencia());
             return !super.preparedStatement.execute();
@@ -90,7 +90,7 @@ public class ContItemProveniente extends ConCRUD {
         try {
             super.query = "select * from tcc.view_itensProvenientes where idAcervos=? or "
                     + "titulo like '%" + itemProvenienteMod.getAcervoMod().getTitulo() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, itemProvenienteMod.getAcervoMod().getIdAcervo());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {

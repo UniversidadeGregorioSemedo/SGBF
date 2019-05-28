@@ -22,9 +22,9 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConEmprestimo extends ConCRUD {
+public class DaoEmprestimo extends DaoCRUD {
 
-    public ConEmprestimo() {
+    public DaoEmprestimo() {
         this.actualizarDiasDeAtrazo();
     }
 
@@ -35,7 +35,7 @@ public class ConEmprestimo extends ConCRUD {
             if (this.actualizarEstoqueDoAcervo(emprestimoteMod.getReservaMod(), operacao)) {
                 super.query = "INSERT INTO tcc.emprestimo (data_vencimento, Funcionario_idFuncionario, Reserva_idReserva)"
                         + " VALUES (?, ?, ?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setTimestamp(1, emprestimoteMod.getDataVencimento(emprestimoteMod.getDiasEmprestimo(), operacao));
                 super.preparedStatement.setInt(2, emprestimoteMod.getFuncionarioMod().getIdFuncionario());
                 super.preparedStatement.setInt(3, emprestimoteMod.getReservaMod().getIdReserva());
@@ -46,7 +46,7 @@ public class ConEmprestimo extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " \nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -55,7 +55,7 @@ public class ConEmprestimo extends ConCRUD {
         ModEmprestimo emprestimoteMod = (ModEmprestimo) objecto_alterar;
         try {
             super.query = "update emprestimo set estado=? where idEmprestimo=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setString(1, emprestimoteMod.getEstado());
             super.preparedStatement.setInt(2, emprestimoteMod.getIdEmprestimo());
             return !super.preparedStatement.execute();
@@ -70,7 +70,7 @@ public class ConEmprestimo extends ConCRUD {
         ModVisitante visitanteMod = (ModVisitante) objecto_pesquisar;
         try {
             super.query = "select * from view_emprestimosDoUtente where idUtente=? order by estado";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, visitanteMod.getIdUtente());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -80,7 +80,7 @@ public class ConEmprestimo extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " \nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -107,7 +107,7 @@ public class ConEmprestimo extends ConCRUD {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         try {
             super.query = "select * from emprestimo where estado='Activo'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistosEncontrados.add(this.pegarRegistos(super.setResultset, operacao));
@@ -149,20 +149,20 @@ public class ConEmprestimo extends ConCRUD {
     private boolean actualizarEmprestimo(ModEmprestimo emprestimoteMod, String operacao) {
         try {
             super.query = "update emprestimo set dias_atraso=? where idEmprestimo=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, emprestimoteMod.getDias_atrazo());
             super.preparedStatement.setInt(2, emprestimoteMod.getIdEmprestimo());
             return !super.preparedStatement.execute();
         } catch (SQLException erro) {
             throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Empréstimo !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
     private boolean actualizarEstoqueDoAcervo(ModReserva reservaMod, String operacao) {
-        ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
-        ConEstoque estoqueCon = new ConEstoque();
+        DaoItemSolicitado itemSolicitadoCon = new DaoItemSolicitado();
+        DaoEstoque estoqueCon = new DaoEstoque();
         for (Object todosRegisto : itemSolicitadoCon.pesquisar(reservaMod, operacao)) {
             ModItemSolicitado itensEncontrados = (ModItemSolicitado) todosRegisto;
             reservaMod.adionarItemItensRegistados(itensEncontrados);

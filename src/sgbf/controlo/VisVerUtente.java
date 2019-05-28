@@ -5,7 +5,7 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ConUtente;
+import sgbf.dao.DaoUtente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;
@@ -57,7 +57,7 @@ public class VisVerUtente implements Initializable {
       
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
-    private final ConUtente utenteCon = new ConUtente();
+    private final DaoUtente utenteCon = new DaoUtente();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

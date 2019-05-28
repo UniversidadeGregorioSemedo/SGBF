@@ -18,21 +18,21 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConInstituicao extends ConCRUD{
+public class DaoInstituicao extends DaoCRUD{
     
         @Override
     public boolean registar(Object objecto_registar, String operacao) {
         ModInstituicao instituicaoMod = (ModInstituicao)objecto_registar;
         try{
             super.query = "INSERT INTO tcc.instiuicao (nome, endereco) VALUES (?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setString(1, instituicaoMod.getNome());
             super.preparedStatement.setString(2, instituicaoMod.getEnderecoMod());
             return !super.preparedStatement.execute();
         }catch(SQLException erro){
             throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -41,7 +41,7 @@ public class ConInstituicao extends ConCRUD{
         ModInstituicao instituicaoMod = (ModInstituicao)objecto_alterar;
         try{
             super.query = "update tcc.instiuicao set nome=?, endereco=? where idInstiuicao=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setString(1, instituicaoMod.getNome());
             super.preparedStatement.setString(2, instituicaoMod.getEnderecoMod());
             super.preparedStatement.setInt(3, instituicaoMod.getIdInstituicao());
@@ -49,7 +49,7 @@ public class ConInstituicao extends ConCRUD{
         }catch(SQLException erro){
             throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -61,7 +61,7 @@ public class ConInstituicao extends ConCRUD{
                throw new UtilControloExcessao( operacao, "Esta operação não pode ser executada\nA Instituição tem registo ! ",Alert.AlertType.WARNING);
             }else{
                 super.query = "delete from tcc.instiuicao where idInstiuicao=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1,instituicaoMod.getIdInstituicao());
                 return !super.preparedStatement.execute();
             }
@@ -69,7 +69,7 @@ public class ConInstituicao extends ConCRUD{
         }catch(SQLException erro){
             throw new UtilControloExcessao( operacao,"Erro ao "+operacao+" Instituição !\nErro: "+erro.getMessage(),Alert.AlertType.ERROR);
         }finally{
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -131,7 +131,7 @@ public class ConInstituicao extends ConCRUD{
 
     private boolean temDadosRelacionados(ModInstituicao instituicaoMod, String operacao) throws SQLException{
         super.query = "select *from utente where Instiuicao_idInstiuicao=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
         super.preparedStatement.setInt(1, instituicaoMod.getIdInstituicao());
         return super.setResultset.next();
     }

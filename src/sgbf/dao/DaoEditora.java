@@ -17,7 +17,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConEditora extends ConCRUD {
+public class DaoEditora extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -28,7 +28,7 @@ public class ConEditora extends ConCRUD {
             } else {
                 super.query = "INSERT INTO tcc.Editora (nome, contacto, email, fax, endereco)"
                         + " VALUES (?, ?, ?, ?, ?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, editoraMod.getNome());
                 super.preparedStatement.setString(2, editoraMod.getContacto());
                 super.preparedStatement.setString(3, editoraMod.getEmail());
@@ -39,7 +39,7 @@ public class ConEditora extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -52,7 +52,7 @@ public class ConEditora extends ConCRUD {
             } else {
                 super.query = "UPDATE tcc.Editora set nome=?, contacto=?, email=?, fax=?, endereco=?,"
                         + "  data_modificacao = default where idEditora=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, editoraMod.getNome());
                 super.preparedStatement.setString(2, editoraMod.getContacto());
                 super.preparedStatement.setString(3, editoraMod.getEmail());
@@ -64,7 +64,7 @@ public class ConEditora extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -76,14 +76,14 @@ public class ConEditora extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Editora", Alert.AlertType.WARNING);
             } else {
                 super.query = "delete from tcc.Editora where idEditora=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, editoraMod.getiEditora());
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Editora !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -92,7 +92,7 @@ public class ConEditora extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.editora order by nome asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -110,7 +110,7 @@ public class ConEditora extends ConCRUD {
         try {
             super.query = "select * from tcc.Editora where idEditora=? or "
                     + "nome like '%" + editoraMod.getNome() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, editoraMod.getiEditora());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -145,7 +145,7 @@ public class ConEditora extends ConCRUD {
 
     private boolean temDadosRelacionados(ModEditora editoraMod, String operacao) throws SQLException {
         super.query = "select * from tcc.acervos where Editora_idEditora =?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
         super.preparedStatement.setInt(1, editoraMod.getiEditora());
         super.setResultset = super.preparedStatement.executeQuery();
         return super.setResultset.next();

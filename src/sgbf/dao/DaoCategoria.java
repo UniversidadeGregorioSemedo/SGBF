@@ -17,7 +17,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConCategoria extends ConCRUD {
+public class DaoCategoria extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -28,14 +28,14 @@ public class ConCategoria extends ConCRUD {
             } else {
                 super.query = "INSERT INTO tcc.categoria (designacao)"
                         + " VALUES (?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, categoriaMod.getDesignacao());
                 return !super.preparedStatement.execute();
             }
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Categoria !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -47,7 +47,7 @@ public class ConCategoria extends ConCRUD {
                 throw new UtilControloExcessao(operacao, "Erro ao verificar dados da Categoria", Alert.AlertType.ERROR);
             } else {
                 super.query = "UPDATE tcc.categoria set designacao=?,data_modificacao = default where idcategoria=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, categoriaMod.getDesignacao());
                 super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
                 return !super.preparedStatement.execute();
@@ -55,7 +55,7 @@ public class ConCategoria extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Categoria !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -68,7 +68,7 @@ public class ConCategoria extends ConCRUD {
                     return true;
                 } else {
                     super.query = "delete from tcc.categoria where idcategoria=?";
-                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                     super.preparedStatement.setInt(1, categoriaMod.getIdCategoria());
                     return !super.preparedStatement.execute();
                 }
@@ -78,7 +78,7 @@ public class ConCategoria extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Categoria !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -87,7 +87,7 @@ public class ConCategoria extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.view_categorias";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -105,7 +105,7 @@ public class ConCategoria extends ConCRUD {
         try {
             super.query = "select * from tcc.view_categorias where idcategoria=? or "
                     + "designacao like '%" + categoriaMod.getDesignacao() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, categoriaMod.getIdCategoria());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -120,7 +120,7 @@ public class ConCategoria extends ConCRUD {
     public Integer proximoCodigoASerRegistado(String operacao) {
         try {
             super.query = "select max(idcategoria) from categoria";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             if (super.setResultset.next()) {
                 return super.setResultset.getInt("max(idcategoria)") + 1;
@@ -148,20 +148,20 @@ public class ConCategoria extends ConCRUD {
 
     private boolean removerTodosRegistos(ModCategoria categoriModMod, String operacao) throws SQLException {
         super.query = "select * from acervos where categoria_idcategoria=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
         super.preparedStatement.setInt(1, categoriModMod.getIdCategoria());
         super.setResultset = super.preparedStatement.executeQuery();
         if (super.setResultset.next()) {
             throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\n"
                     + "Erro: A categoria seleccionada possui registo nos acervos", Alert.AlertType.WARNING);
         } else {
-            ConCategoriaDaEstante categoriasDaEstanteCon = new ConCategoriaDaEstante();
+            DaoCategoriaDaEstante categoriasDaEstanteCon = new DaoCategoriaDaEstante();
             return categoriasDaEstanteCon.remover(categoriModMod, operacao);
         }
     }
 
     private boolean retirarCategoriaDaEstante(ModCategoria categoriaMod, String operacao) {
-        ConCategoriaDaEstante categoriaDaEstanteCon = new ConCategoriaDaEstante();
+        DaoCategoriaDaEstante categoriaDaEstanteCon = new DaoCategoriaDaEstante();
         if (categoriaMod.getEstanteNova().getIdEstante() != categoriaMod.getEstanteActual().getIdEstante()) {
             return categoriaDaEstanteCon.remover(categoriaMod, operacao);
         } else {

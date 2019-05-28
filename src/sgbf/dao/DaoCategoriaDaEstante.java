@@ -19,7 +19,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConCategoriaDaEstante extends ConCRUD {
+public class DaoCategoriaDaEstante extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -27,7 +27,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         try {
             if (this.registarCategoriaNaEstante(categoriaDaEstanteMod)) {
                 super.query = "INSERT INTO tcc.categoriasdaestante (categoria_idcategoria, Estante_idEstante) VALUES (?, ?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, categoriaDaEstanteMod.getCategoriaMod().getIdCategoria());
                 super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteMod().getIdEstante());
                 return !super.preparedStatement.execute();
@@ -53,7 +53,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
                     return this.registar(categoriaDaEstanteMod, operacao);
                 } else {
                     super.query = "update tcc.categoriasdaestante set Estante_idEstante=? where categoria_idcategoria=? and Estante_idEstante=?";
-                    super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                    super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                     super.preparedStatement.setInt(1, categoriaMod.getEstanteNova().getIdEstante());
                     super.preparedStatement.setInt(2, categoriaMod.getIdCategoria());
                     super.preparedStatement.setInt(3, categoriaMod.getEstanteActual().getIdEstante());
@@ -63,7 +63,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -72,7 +72,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         ModCategoria categoriaDaEstanteMod = (ModCategoria) objecto_remover;
         try {
             super.query = "delete from tcc.categoriasdaestante where categoria_idcategoria=? and Estante_idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, categoriaDaEstanteMod.getIdCategoria());
             if (categoriaDaEstanteMod.getEstanteActual().getIdEstante() == 0) {
                 super.preparedStatement.setInt(2, categoriaDaEstanteMod.getEstanteNova().getIdEstante());
@@ -95,7 +95,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from view_CategoriaDaEstante";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -112,7 +112,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         ModCategoria categoriaMod = (ModCategoria) objecto_pesquisar;
         try {
             super.query = "select * from tcc.view_CategoriaDaEstante where idcategoria=? and idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, categoriaMod.getIdCategoria());
             super.preparedStatement.setInt(2, categoriaMod.getEstanteActual().getIdEstante());
             super.setResultset = super.preparedStatement.executeQuery();
@@ -129,7 +129,7 @@ public class ConCategoriaDaEstante extends ConCRUD {
         List<Object> todosRegistosEncontrados = new ArrayList<>();
         try {
             super.query = "select * from tcc.view_CategoriaDaEstante where idEstante=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, estanteMod.getIdEstante());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {

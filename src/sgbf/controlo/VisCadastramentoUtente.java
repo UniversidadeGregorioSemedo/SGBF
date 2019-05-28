@@ -5,7 +5,7 @@
  */
 package sgbf.controlo;
 
-import sgbf.dao.ConUtente;
+import sgbf.dao.DaoUtente;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class VisCadastramentoUtente implements Initializable {
     
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
-    private final ConUtente utenteCon = new ConUtente();
+    private final DaoUtente utenteCon = new DaoUtente();
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {

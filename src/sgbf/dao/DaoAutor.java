@@ -13,7 +13,7 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConAutor extends ConCRUD {
+public class DaoAutor extends DaoCRUD {
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -24,7 +24,7 @@ public class ConAutor extends ConCRUD {
             } else {
                 super.query = "INSERT INTO tcc.Autor (primeiro_nome,segundo_nome,contacto,email)"
                         + " VALUES (?,?,?,?)";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, autorMod.getPrimeiro_nome());
                 super.preparedStatement.setString(2, autorMod.getSegundo_nome());
                 super.preparedStatement.setString(3, autorMod.getContacto());
@@ -34,7 +34,7 @@ public class ConAutor extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Autor !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -47,7 +47,7 @@ public class ConAutor extends ConCRUD {
             } else {
                 super.query = "UPDATE tcc.Autor set primeiro_nome=?, segundo_nome=?, contacto=?, email=?,"
                         + " data_modificacao = default where idAutor=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setString(1, autorMod.getPrimeiro_nome());
                 super.preparedStatement.setString(2, autorMod.getSegundo_nome());
                 super.preparedStatement.setString(3, autorMod.getContacto());
@@ -58,7 +58,7 @@ public class ConAutor extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Autor !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -68,7 +68,7 @@ public class ConAutor extends ConCRUD {
         try {
             if (this.removerTodosRegistos(autorMod, operacao)) {
                 super.query = "delete from tcc.Autor where idAutor=?";
-                super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                 super.preparedStatement.setInt(1, autorMod.getIdAutor());
                 return !super.preparedStatement.execute();
             } else {
@@ -77,7 +77,7 @@ public class ConAutor extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao( operacao,"Erro ao " + operacao + " Autor !\nErro: " + erro.getMessage(),Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -86,7 +86,7 @@ public class ConAutor extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.Autor order by primeiro_nome, data_modificacao asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -95,7 +95,7 @@ public class ConAutor extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Autor(es) !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -107,7 +107,7 @@ public class ConAutor extends ConCRUD {
             super.query = "select * from tcc.Autor where idAutor=? or "
                     + "primeiro_nome like '%" + autorMod.getPrimeiro_nome() + "%' or "
                     + "segundo_nome like '%" + autorMod.getPrimeiro_nome() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, autorMod.getIdAutor());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -153,7 +153,7 @@ public class ConAutor extends ConCRUD {
 
     private boolean removerTodosRegistos(ModAutor autorMod, String operacao) throws SQLException {
         ModAcervosEscritos acervosEscritosMod = new ModAcervosEscritos();
-        ConAcervosEscreitos acervosEscreitosCon = new ConAcervosEscreitos();
+        DaoAcervosEscreitos acervosEscreitosCon = new DaoAcervosEscreitos();
         acervosEscritosMod.setAutorMod(autorMod, operacao);
         return acervosEscreitosCon.remover(acervosEscritosMod, operacao);
     }
@@ -172,7 +172,7 @@ public class ConAutor extends ConCRUD {
             super.query = "select * from tcc.view_acervosEscritos where idAutor=? or "
                     + "primeiro_nome like '%" + autorMod.getPrimeiro_nome() + "%' or "
                     + "segundo_nome like '%" + autorMod.getPrimeiro_nome() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, autorMod.getIdAutor());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {

@@ -14,7 +14,8 @@ import sgbf.util.UtilControloExcessao;
  *
  * @author Look
  */
-public class ConAcervo extends ConCRUD {
+public class DaoAcervo extends DaoCRUD {
+    
 
     @Override
     public boolean registar(Object objecto_registar, String operacao) {
@@ -24,7 +25,7 @@ public class ConAcervo extends ConCRUD {
                     + " numero_paginas, codigo_barra, isbn, idioma, ano_lancamento, sinopse, endereco_acervo,"
                     + " categoria_idcategoria, Editora_idEditora)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setString(1, acervoMod.getTitulo());
             super.preparedStatement.setString(2, acervoMod.getSub_titulo());
             super.preparedStatement.setString(3, acervoMod.getTipo_acervo());
@@ -48,7 +49,7 @@ public class ConAcervo extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + "\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
@@ -59,7 +60,7 @@ public class ConAcervo extends ConCRUD {
             super.query = "UPDATE tcc.acervos set titulo=?, subtittulo=?, tipo_acervo=?, formato=?, edicao=?, volume=?,"
                     + " numero_paginas=?, codigo_barra=?, isbn=?, idioma=?, ano_lancamento=?, sinopse=?, endereco_acervo=?,"
                     + " categoria_idcategoria=?, Editora_idEditora=?,data_modificacao = default where idAcervos=?";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setString(1, acervoMod.getTitulo());
             super.preparedStatement.setString(2, acervoMod.getSub_titulo());
             super.preparedStatement.setString(3, acervoMod.getTipo_acervo());
@@ -84,16 +85,16 @@ public class ConAcervo extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Acervo !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
     @Override
     public boolean remover(Object objecto_remover, String operacao) {
         ModAcervosEscritos acervosEscritosMod = new ModAcervosEscritos();
-        ConAcervosEscreitos registoDeAutor = new ConAcervosEscreitos();
+        DaoAcervosEscreitos registoDeAutor = new DaoAcervosEscreitos();
         ModAcervo acervoMod = (ModAcervo) objecto_remover;
-        ConEstoque estoqueCon = new ConEstoque();
+        DaoEstoque estoqueCon = new DaoEstoque();
         try {
             if (this.temDadosRelacionados(acervoMod, operacao)) {
                 throw new UtilControloExcessao(operacao, "Esta operação não pode ser executada\n"
@@ -103,7 +104,7 @@ public class ConAcervo extends ConCRUD {
                 if (registoDeAutor.remover(acervosEscritosMod, operacao)) {
                     if (estoqueCon.remover(acervoMod, operacao)) {
                         super.query = "delete from tcc.acervos where idAcervos=?";
-                        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+                        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
                         super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
                         return !super.preparedStatement.execute();
                     } else {
@@ -116,13 +117,13 @@ public class ConAcervo extends ConCRUD {
         } catch (SQLException erro) {
             throw new UtilControloExcessao(operacao, "Erro ao " + operacao + " Acervo !\nErro: " + erro.getMessage(), Alert.AlertType.ERROR);
         } finally {
-            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset, operacao);
+            super.caminhoDaBaseDados.fecharTodasConexoes(preparedStatement, setResultset);
         }
     }
 
     private boolean temDadosRelacionados(ModAcervo acervoMod, String operacao) throws SQLException {
         super.query = "select *from itensSolicitados where Acervos_idAcervos=?";
-        super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(super.query);
+        super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(super.query);
         super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
         super.setResultset = super.preparedStatement.executeQuery();
         return super.setResultset.next();
@@ -133,7 +134,7 @@ public class ConAcervo extends ConCRUD {
         List<Object> todosRegistos = new ArrayList<>();
         try {
             super.query = "select * from tcc.view_acervoComEstoque order by titulo, data_modificacao asc";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
                 todosRegistos.add(this.pegarRegistos(super.setResultset, operacao));
@@ -151,7 +152,7 @@ public class ConAcervo extends ConCRUD {
         try {
             super.query = "select * from tcc.view_acervoComEstoque where idAcervos=? or "
                     + "titulo like '%" + acervoeMod.getTitulo() + "%'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, acervoeMod.getIdAcervo());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -169,7 +170,7 @@ public class ConAcervo extends ConCRUD {
             super.query = "select * from view_localizarAcervo "
                     + "inner join estoque on view_localizarAcervo.idAcervos=estoque.Acervos_idAcervos "
                     + "where idAcervos=? or titulo like '%" + acervoMod.getTitulo() + "%' and formato='Físico'";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.preparedStatement.setInt(1, acervoMod.getIdAcervo());
             super.setResultset = super.preparedStatement.executeQuery();
             while (super.setResultset.next()) {
@@ -240,7 +241,7 @@ public class ConAcervo extends ConCRUD {
     public Integer ultimoCodigoRegistado(String operacao) {
         try {
             super.query = "select max(idAcervos) from acervos";
-            super.preparedStatement = super.caminhoDaBaseDados.baseDeDados(operacao).prepareStatement(query);
+            super.preparedStatement = super.caminhoDaBaseDados.conectarBaseDeDados().prepareStatement(query);
             super.setResultset = super.preparedStatement.executeQuery();
             if (super.setResultset.next()) {
                 return super.setResultset.getInt("max(idAcervos)");
