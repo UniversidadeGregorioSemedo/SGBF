@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPaneVisitante" prefHeight="531.0" prefWidth="1013.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerUtente">
     <stylesheets>
-        <URL value="@/sgbf/util/tabelaverutente.css" />
+        <URL value="@/sgbf/estilo/tabelaverutente.css" />
     </stylesheets>
    <children>
       <SplitPane layoutY="3.0" orientation="VERTICAL" prefHeight="531.0" prefWidth="1013.0" style="-fx-background-color: #1f4f4e;">

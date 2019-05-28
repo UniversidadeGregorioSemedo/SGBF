@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPaneLocalizarAcervos" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerAcervo">
     <stylesheets>
-        <URL value="@/sgbf/util/tabelaveracervo.css" />
+        <URL value="@/sgbf/estilo/tabelaveracervo.css" />
     </stylesheets>
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="566.0" prefWidth="924.0" style="-fx-background-color: #1f4f4e;">

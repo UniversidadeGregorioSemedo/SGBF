@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchoPaneTodasReserva" prefHeight="684.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisMovimentacaoTodasReservas">
     <stylesheets>
-        <URL value="@/sgbf/util/reserva.css" />
+        <URL value="@/sgbf/estilo/reserva.css" />
     </stylesheets>
    <children>
       <SplitPane dividerPositions="0.6539589442815249" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: #1f4f4e;">
