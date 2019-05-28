@@ -64,11 +64,6 @@
                         <Image url="@../icones/igregoriosemedo.jpg" />
                      </image>
                   </ImageView>
-                  <Text layoutX="748.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SGB">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Text>
                   <CubicCurve controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" layoutX="381.0" layoutY="30.0" startX="-150.0" stroke="BLACK">
                      <fill>
                         <LinearGradient endX="0.9809523809523809" endY="0.9380952380952381" startX="0.019047619047619063" startY="0.5142857142857142">
@@ -80,6 +75,20 @@
                         </LinearGradient>
                      </fill>
                   </CubicCurve>
+                  <Text layoutX="748.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SGB">
+                     <fill>
+                        <LinearGradient endX="0.7428571428571429" endY="0.35238095238095235" startX="0.7380952380952381" startY="0.6761904761904762">
+                           <stops>
+                              <Stop color="#87c3e5" />
+                              <Stop color="#87c3e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
