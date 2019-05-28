@@ -5,6 +5,7 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.ConUtente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;

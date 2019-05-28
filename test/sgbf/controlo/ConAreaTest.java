@@ -5,15 +5,14 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.ConArea;
 import javafx.scene.control.Alert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Ignore;
 import sgbf.modelo.ModArea;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *

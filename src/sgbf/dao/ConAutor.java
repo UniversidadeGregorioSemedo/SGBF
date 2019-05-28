@@ -1,4 +1,4 @@
-package sgbf.controlo;
+package sgbf.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

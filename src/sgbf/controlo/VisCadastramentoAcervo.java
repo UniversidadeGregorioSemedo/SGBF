@@ -1,5 +1,12 @@
 package sgbf.controlo;
 
+import sgbf.dao.ConEstante;
+import sgbf.dao.ConCategoriaDaEstante;
+import sgbf.dao.ConAutor;
+import sgbf.dao.ConEditora;
+import sgbf.dao.ConCategoria;
+import sgbf.dao.ConAcervosEscreitos;
+import sgbf.dao.ConAcervo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;

@@ -5,6 +5,7 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.ConUtente;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,5 @@
 
-package sgbf.controlo;
+package sgbf.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

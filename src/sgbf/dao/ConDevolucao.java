@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sgbf.controlo;
+package sgbf.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +14,6 @@ import sgbf.modelo.ModDevolucao;
 import sgbf.modelo.ModEstante;
 import sgbf.modelo.ModItemSolicitado;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *

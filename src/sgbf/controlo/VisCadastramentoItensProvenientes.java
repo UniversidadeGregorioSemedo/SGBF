@@ -5,6 +5,10 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.ContItemProveniente;
+import sgbf.dao.ConProveniencia;
+import sgbf.dao.ConEstoque;
+import sgbf.dao.ConAcervo;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;

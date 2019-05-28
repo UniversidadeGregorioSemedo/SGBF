@@ -9,7 +9,7 @@ package sgbf.modelo;
 import javafx.scene.control.Alert;
 import sgbf.util.UtilControloDaData;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilEmail;
+import sgbf.util.UtilValidarDados;
 
 /**
  *
@@ -72,7 +72,7 @@ public class ModEditora {
     }
 
     public void setEmail(String email, String operacao) {
-        UtilEmail emailUtil = new UtilEmail();
+        UtilValidarDados emailUtil = new UtilValidarDados();
         if(email == null){
             this.email = email;
         }else{

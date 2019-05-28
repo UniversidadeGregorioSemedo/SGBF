@@ -8,12 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import sgbf.util.UtilControloExcessao;
+import sgbf.util.ProriedadesDaJanela;
 
 /**
  *
  * @author Dell
  */
-public class ConPrincipal extends Application {
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -23,7 +24,7 @@ public class ConPrincipal extends Application {
             Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Sistema de Gestão de Biblioteca");
+           ProriedadesDaJanela.barraDeTitulo(primaryStage);
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException erro) {
@@ -41,7 +42,7 @@ public class ConPrincipal extends Application {
     private void fecharPeloBotaoWindow(String operacao, Stage propridadeDaJanela) {
         propridadeDaJanela.setOnCloseRequest((evento) -> {
             evento.consume();
-            ConPrincipal.sairdoSistema(operacao, propridadeDaJanela);
+            Main.sairdoSistema(operacao, propridadeDaJanela);
         });
     }
 

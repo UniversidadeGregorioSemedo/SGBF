@@ -5,6 +5,7 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.ConReserva;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;

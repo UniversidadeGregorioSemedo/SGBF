@@ -5,6 +5,7 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.ConArea;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;

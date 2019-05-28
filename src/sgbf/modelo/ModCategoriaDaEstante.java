@@ -5,7 +5,7 @@
  */
 package sgbf.modelo;
 
-import sgbf.controlo.ConCategoria;
+import sgbf.dao.ConCategoria;
 
 /**
  *

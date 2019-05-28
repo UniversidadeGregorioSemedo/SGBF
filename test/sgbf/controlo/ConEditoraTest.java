@@ -5,14 +5,11 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.ConEditora;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Ignore;
 import sgbf.modelo.ModEditora;
-import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *

@@ -1,5 +1,8 @@
 package sgbf.controlo;
 
+import sgbf.dao.ConEstante;
+import sgbf.dao.ConCategoriaDaEstante;
+import sgbf.dao.ConCategoria;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;

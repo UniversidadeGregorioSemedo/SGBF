@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sgbf.controlo;
+package sgbf.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +13,6 @@ import javafx.scene.control.Alert;
 import sgbf.modelo.ModFuncionario;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilCriptografia;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *

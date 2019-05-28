@@ -1,5 +1,10 @@
 package sgbf.controlo;
 
+import sgbf.dao.ConUtente;
+import sgbf.dao.ConReserva;
+import sgbf.dao.ConEstoque;
+import sgbf.dao.ConAcervo;
+import sgbf.dao.ConItemSolicitado;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;

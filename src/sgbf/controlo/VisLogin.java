@@ -1,5 +1,7 @@
 package sgbf.controlo;
 
+import sgbf.dao.ConUsuario;
+import sgbf.dao.ConEmprestimo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -67,7 +69,7 @@ public class VisLogin implements Initializable {
             this.abrirTelaPrincipal(operacao, propreidadeDaJanela);
         } else {
             if (accao.getSource() == loginCancelar) {
-                ConPrincipal.sairdoSistema(operacao, propreidadeDaJanela);
+                Main.sairdoSistema(operacao, propreidadeDaJanela);
             }
         }
     }
