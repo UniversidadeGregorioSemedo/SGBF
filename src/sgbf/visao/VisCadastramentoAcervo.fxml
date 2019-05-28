@@ -23,7 +23,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="botaoPesquisar" layoutX="572.0" layoutY="92.0" onAction="#pesquisarAcervo" prefHeight="25.0" prefWidth="35.0" ripplerFill="BLACK" style="-fx-border-style: solid; -fx-border-insets: 0.1px; -fx-border-radius: 8px; -fx-border-width: 1.5px; -fx-border-color: grey;" text=" ">
+                  <JFXButton fx:id="botaoPesquisar" layoutX="572.0" layoutY="92.0" onAction="#pesquisarAcervo" prefHeight="25.0" prefWidth="35.0" ripplerFill="BLACK" styleClass="jfx1-button1" stylesheets="@../estilo/viscadastroacervo.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -52,7 +52,7 @@
                         <TableColumn fx:id="tableColumnFormato" prefWidth="75.0" text="Formato" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="92.0" prefHeight="25.0" prefWidth="551.0" promptText="Pesquisar acervos" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
+                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="92.0" prefHeight="25.0" prefWidth="551.0" promptText="Pesquisar acervos" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
                   <Label layoutX="541.0" layoutY="6.0" text="Cadastro de acervo">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
@@ -78,7 +78,7 @@
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font></Label>
-                  <ComboBox fx:id="comboBoxCategoria" layoutX="918.0" layoutY="148.0" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione a categoria" styleClass="jfx-button" stylesheets="@../estilo/viscadastroacervo.css">
+                  <ComboBox fx:id="comboBoxCategoria" layoutX="918.0" layoutY="148.0" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione a categoria" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
@@ -87,7 +87,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxEstante" layoutX="685.0" layoutY="148.0" onAction="#categoriasDaEstante" prefWidth="150.0" promptText="Seleccione a estante" styleClass="jfx-button" stylesheets="@../estilo/viscadastroacervo.css">
+                  <ComboBox fx:id="comboBoxEstante" layoutX="685.0" layoutY="148.0" onAction="#categoriasDaEstante" prefWidth="150.0" promptText="Seleccione a estante" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
@@ -104,8 +104,8 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <JFXTextArea fx:id="textAreaSinopese" layoutX="668.0" layoutY="208.0" prefHeight="73.0" prefWidth="367.0" />
-                  <ComboBox fx:id="comboBoxAutor" layoutX="89.0" layoutY="206.0" prefHeight="25.0" prefWidth="464.0" promptText="Seleccione o autor" styleClass="jfx-combobox" stylesheets="@../util/viscadastroacervo.css" />
+                  <JFXTextArea fx:id="textAreaSinopese" layoutX="668.0" layoutY="208.0" prefHeight="73.0" prefWidth="367.0" styleClass="text-sinopse" stylesheets="@../estilo/viscadastroacervo.css" />
+                  <ComboBox fx:id="comboBoxAutor" layoutX="89.0" layoutY="206.0" prefHeight="25.0" prefWidth="464.0" promptText="Seleccione o autor" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css" />
                   <Label layoutX="19.0" layoutY="212.0" prefHeight="17.0" prefWidth="58.0" text="Autor">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
@@ -116,8 +116,8 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="texteFiedCodigoBarra" layoutX="73.0" layoutY="152.0" prefHeight="25.0" prefWidth="185.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
-                  <ComboBox fx:id="comboBoxIdioma" layoutX="685.0" layoutY="97.0" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione o idioma" styleClass="jfx-button" stylesheets="@../estilo/viscadastroacervo.css">
+                  <TextField fx:id="texteFiedCodigoBarra" layoutX="73.0" layoutY="152.0" prefHeight="25.0" prefWidth="185.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
+                  <ComboBox fx:id="comboBoxIdioma" layoutX="685.0" layoutY="97.0" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione o idioma" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
@@ -126,7 +126,7 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxFormato" layoutX="918.0" layoutY="49.0" onAction="#introduzirEndereco" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione o formato" styleClass="jfx-button" stylesheets="@../estilo/viscadastroacervo.css">
+                  <ComboBox fx:id="comboBoxFormato" layoutX="918.0" layoutY="49.0" onAction="#introduzirEndereco" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione o formato" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
@@ -145,26 +145,26 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="texteFiedISBN" layoutX="350.0" layoutY="152.0" prefHeight="25.0" prefWidth="205.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
+                  <TextField fx:id="texteFiedISBN" layoutX="350.0" layoutY="152.0" prefHeight="25.0" prefWidth="205.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
                   <Label layoutX="140.0" layoutY="107.0" text="Volume" textFill="WHITE">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="texteFiedVolume" layoutX="191.0" layoutY="103.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
-                  <TextField fx:id="texteFiedEdicao" layoutX="71.0" layoutY="102.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="58.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
+                  <TextField fx:id="texteFiedVolume" layoutX="191.0" layoutY="103.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
+                  <TextField fx:id="texteFiedEdicao" layoutX="71.0" layoutY="102.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="58.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
                   <Label layoutX="21.0" layoutY="106.0" text="Edição">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="texteFiedSubTitulo" layoutX="350.0" layoutY="53.0" prefHeight="25.0" prefWidth="205.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
+                  <TextField fx:id="texteFiedSubTitulo" layoutX="350.0" layoutY="53.0" prefHeight="25.0" prefWidth="205.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
                   <Label layoutX="281.0" layoutY="57.0" text="Subtitulo">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="texteFiedTitulo" layoutX="70.0" layoutY="54.0" prefHeight="25.0" prefWidth="191.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
+                  <TextField fx:id="texteFiedTitulo" layoutX="70.0" layoutY="54.0" prefHeight="25.0" prefWidth="191.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
                   <Label layoutX="21.0" layoutY="61.0" text="Titulo *">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
@@ -175,13 +175,13 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="texteFiedEndereco" disable="true" layoutX="150.0" layoutY="256.0" prefHeight="25.0" prefWidth="408.0" stylesheets="@../util/viscadastroacervo.css" />
+                  <TextField fx:id="texteFiedEndereco" disable="true" layoutX="150.0" layoutY="256.0" prefHeight="25.0" prefWidth="408.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
                   <Label layoutX="852.0" layoutY="101.0" text="Editora">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxEditora" layoutX="918.0" layoutY="94.0" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione a editora" styleClass="jfx-button" stylesheets="@../estilo/viscadastroacervo.css">
+                  <ComboBox fx:id="comboBoxEditora" layoutX="918.0" layoutY="94.0" prefHeight="25.0" prefWidth="150.0" promptText="Seleccione a editora" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
@@ -195,20 +195,20 @@
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="texteFieldAno" layoutX="489.0" layoutY="101.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
-                  <TextField fx:id="texteFiedNumPaginas" layoutX="353.0" layoutY="101.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="69.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroacervo.css" />
+                  <TextField fx:id="texteFieldAno" layoutX="489.0" layoutY="101.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="66.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
+                  <TextField fx:id="texteFiedNumPaginas" layoutX="353.0" layoutY="101.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="69.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroacervo.css" />
                   <Label layoutX="276.0" layoutY="107.0" text="Nº Paginas*">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="cpmboBoxTipo" layoutX="695.0" layoutY="52.0" prefHeight="25.0" prefWidth="132.0" promptText="Seleccione o tipo de acervo" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css" />
-                  <JFXButton fx:id="botaoNovo" layoutX="1088.0" layoutY="48.0" prefHeight="25.0" prefWidth="78.0" style="-fx-border-radius: 8px; -fx-border-width: 1.5px; -fx-border-style: solid; -fx-border-color: grey;" styleClass="jfx-button" stylesheets="@../estilo/viscadastroacervo.css" />
-                  <JFXButton fx:id="botaoCadastrar" layoutX="1088.0" layoutY="96.0" prefHeight="25.0" prefWidth="78.0" style="-fx-border-width: 1.5px; -fx-border-radius: 8px; -fx-border-style: solid; -fx-border-color: grey;" />
-                  <JFXButton fx:id="botaoAlterar" layoutX="1088.0" layoutY="136.0" prefHeight="25.0" prefWidth="78.0" style="-fx-border-width: 1.5px; -fx-border-radius: 8px; -fx-border-style: solid; -fx-border-color: grey;" />
-                  <JFXButton fx:id="botaoRemover" layoutX="1087.0" layoutY="173.0" prefHeight="25.0" prefWidth="78.0" style="-fx-border-width: 1.5px; -fx-border-radius: 8px; -fx-border-style: solid; -fx-border-color: grey;" />
-                  <JFXButton fx:id="botaoCancelar" layoutX="1088.0" layoutY="217.0" prefHeight="25.0" prefWidth="78.0" style="-fx-border-width: 1.5px; -fx-border-radius: 8px; -fx-border-style: solid; -fx-border-color: grey;" />
-                  <JFXButton fx:id="botaoSair" layoutX="1088.0" layoutY="276.0" prefHeight="25.0" prefWidth="78.0" style="-fx-border-width: 1.5px; -fx-border-radius: 8px; -fx-border-style: solid; -fx-border-color: grey;" />
+                  <JFXButton fx:id="botaoNovo" layoutX="1088.0" layoutY="48.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Novo" />
+                  <JFXButton fx:id="botaoCadastrar" layoutX="1088.0" layoutY="96.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Cadastrar" />
+                  <JFXButton fx:id="botaoAlterar" layoutX="1088.0" layoutY="136.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Alterar" />
+                  <JFXButton fx:id="botaoRemover" layoutX="1087.0" layoutY="173.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Remover" />
+                  <JFXButton fx:id="botaoCancelar" layoutX="1088.0" layoutY="217.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Cancelar" />
+                  <JFXButton fx:id="botaoSair" layoutX="1088.0" layoutY="276.0" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroacervo.css" text="Sair" />
+                  <ComboBox fx:id="comboBoxTipo" layoutX="689.0" layoutY="50.0" prefHeight="25.0" prefWidth="143.0" promptText="Seleciona o tipo" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastroacervo.css" />
                </children>
             </AnchorPane>
          </items>
