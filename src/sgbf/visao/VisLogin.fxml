@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import com.gluonhq.charm.glisten.control.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.Cursor?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a363f; -fx-background-color: f5fffb;" styleClass="mainFxmlClass" stylesheets="@/sgbf/estilo/UtilLogin.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisLogin">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2a363f; -fx-background-color: f5fffb;" styleClass="mainFxmlClass" stylesheets="@/sgbf/estilo/UtilLogin.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisLogin">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="70.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -50,12 +49,12 @@
       <JFXPasswordField fx:id="loginSenha" labelFloat="true" layoutX="349.0" layoutY="172.0" prefHeight="25.0" prefWidth="196.0" promptText="Senha" styleClass="glyph-icon" stylesheets="@../estilo/UtilLogin.css" />
       <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="308.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../icones/User%20Account_52px.png" />
+            <Image url="@../icones/User%20Account_52.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="308.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../icones/Key%202_50px.png" />
+            <Image url="@../icones/Key%202_50.png" />
          </image>
       </ImageView>
       <Label fx:id="loginMensagem" layoutX="349.0" layoutY="218.0" prefHeight="17.0" prefWidth="196.0" textFill="#eb1d1d">
