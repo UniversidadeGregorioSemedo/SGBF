@@ -1,17 +1,17 @@
-.jfx-button{
+.jfx1-button{
     -fx-background-color: d4d3d3;
     -fx-text-fill: black;
 }
 
-.jfx-button:hover{
+.jfx1-button:hover{
     -fx-background-color:  #2ECCFA;
 }
 
-.jfx-button1{
+.jfx1-button1{
     -fx-background-color: d4d3d3;  
 }
 
-.jfx-button1:hover{
+.jfx1-button1:hover{
     -fx-background-color:  #2ECCFA;
 }
 
@@ -38,7 +38,7 @@
     -fx-background-radius: 0, 3;
 }
 .jfx-textfield:focused{
-    -fx-border-color: #ff6919;
+    -fx-border-color: #ff6919; 
 }
 
 .jfx-textfield:hover{
