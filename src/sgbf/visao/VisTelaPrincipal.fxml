@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -12,7 +13,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisTelaPrincipal">
    <children>
-      <MenuBar fx:id="menuBar">
+      <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="818.0">
         <menus>
           <Menu fx:id="menuArquivo" mnemonicParsing="false" text="Arquivo">
             <items>
@@ -70,7 +71,10 @@
                         </MenuItem>
                         <MenuItem fx:id="menuitemCadastroEditora" mnemonicParsing="false" onAction="#BotaoMenuItemEditora" text="Editora">
                            <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icones/student-standing-with-books-stack.png" />
+                                 </image></ImageView>
                            </graphic>
                         </MenuItem>
                         <MenuItem fx:id="menuitemCadastroEstante" mnemonicParsing="false" onAction="#BotaoMenuItemEstante" text="Estante">
@@ -132,14 +136,17 @@
                   </MenuItem>
                   <MenuItem fx:id="menuitemVerEditoras" mnemonicParsing="false" onAction="#BotaoMenuItemVerEditora" text="Todas editoras">
                      <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icones/Classroom_48px.png" />
+                           </image></ImageView>
                      </graphic>
                   </MenuItem>
                   <MenuItem fx:id="menuitemVerAutores" mnemonicParsing="false" onAction="#BotaoMenuItemVerAutor" text="Todos autores">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icones/Edit%20Property_48px.png" />
+                              <Image url="@../icones/student-standing-with-books-stack.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -211,11 +218,24 @@
       </MenuBar>
       <AnchorPane fx:id="anchorPane" prefHeight="721.0" prefWidth="701.0" style="-fx-background-color: #2a363f; -fx-background-color: f5fffb;">
          <children>
-            <ImageView fitHeight="397.0" fitWidth="489.0" layoutX="501.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="397.0" fitWidth="489.0" layoutX="501.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icones/igregoriosemedo.jpg" />
                </image>
             </ImageView>
+            <Label layoutX="444.0" layoutY="542.0" text="SISTEMA DE GESTÃO DE BIBLIOTECA">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="0.7428571428571428" endY="0.36666666666666664" startX="0.7761904761904762" startY="0.7">
+                     <stops>
+                        <Stop color="#87c4e5" />
+                        <Stop color="#db5f32" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
          </children></AnchorPane>
    </children>
 </VBox>

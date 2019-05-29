@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -17,7 +18,7 @@
         <URL value="@/sgbf/estilo/reserva.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.658357771260997" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: #1f4f4e;">
+      <SplitPane dividerPositions="0.658357771260997" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: f5fffb;">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -48,8 +49,8 @@
                         <TableColumn fx:id="tableColumnDataVencimento" prefWidth="75.0" text="Data de vencimento" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="17.0" layoutY="68.0" prefHeight="25.0" prefWidth="250.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../util/emprestimo.css" />
-                  <JFXButton fx:id="botaoPesquisar" layoutX="276.0" layoutY="68.0" onAction="#pesquisarUtente" prefHeight="25.0" prefWidth="37.0" stylesheets="@../util/emprestimo.css" text=" ">
+                  <TextField fx:id="textFieldPesquisar" layoutX="17.0" layoutY="83.0" prefHeight="25.0" prefWidth="250.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../estilo/emprestimo.css" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="276.0" layoutY="82.0" onAction="#pesquisarUtente" prefHeight="25.0" prefWidth="37.0" styleClass="jfx1-button" stylesheets="@../estilo/emprestimo.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -64,42 +65,70 @@
                         <Insets right="3.0" />
                      </padding>
                   </JFXButton>
-                  <Label layoutX="17.0" layoutY="54.0" text="Use ( _  ) para ver todos utentes" textFill="WHITE">
+                  <Label layoutX="17.0" layoutY="69.0" text="Use ( _  ) para ver todos utentes">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font></Label>
-                  <Label layoutX="14.0" layoutY="269.0" text="Todos os Emprestimos" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="13.0" />
-                     </font></Label>
-                  <Label layoutX="385.0" layoutY="8.0" text="Todos emprestimos" textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="269.0" text="Todos os Emprestimos">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
+                     </font></Label>
+                  <Label layoutX="385.0" layoutY="8.0" text="Todos emprestimos">
+                     <font>
+                        <Font name="Sitka Text Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Line endX="100.0" layoutX="276.0" layoutY="15.0" startX="-100.0" stroke="WHITE" />
-                  <Line endX="100.0" layoutX="631.0" layoutY="16.0" startX="-100.0" stroke="WHITE" />
+                  <CubicCurve controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" layoutX="388.0" layoutY="30.0" startX="-150.0" stroke="BLACK">
+                     <fill>
+                        <LinearGradient endX="0.9809523809523809" endY="0.9380952380952381" startX="0.019047619047619063" startY="0.5142857142857142">
+                           <stops>
+                              <Stop color="#87c4e5" />
+                              <Stop color="#87c4e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </CubicCurve>
+                  <Text layoutX="807.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SGB">
+                     <fill>
+                        <LinearGradient endX="0.7428571428571429" endY="0.35238095238095235" startX="0.7380952380952381" startY="0.6761904761904762">
+                           <stops>
+                              <Stop color="#87c3e5" />
+                              <Stop color="#87c3e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="66.0" fitWidth="70.0" layoutX="793.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icones/igregoriosemedo.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
                <children>
-                  <Button fx:id="botaoCancelar" layoutX="774.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/emprestimo.css" text="Cancelar">
+                  <Button fx:id="botaoCancelar" layoutX="774.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="111.0" styleClass="jfx1-button" stylesheets="@../estilo/emprestimo.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="botaoSair" layoutX="774.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="111.0" styleClass="jfx-button" stylesheets="@../util/emprestimo.css" text="Sair">
+                  <Button fx:id="botaoSair" layoutX="774.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="111.0" styleClass="jfx1-button" stylesheets="@../estilo/emprestimo.css" text="Sair">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Label layoutX="14.0" layoutY="6.0" text="Todos os itens emprestados" textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="6.0" text="Todos os itens emprestados">
                      <font>
-                        <Font name="Sitka Text Bold" size="13.0" />
+                        <Font name="Sitka Text Bold" size="14.0" />
                      </font></Label>
                   <TableView fx:id="tableViewItensReservados" layoutX="14.0" layoutY="33.0" prefHeight="189.0" prefWidth="756.0">
                     <columns>
