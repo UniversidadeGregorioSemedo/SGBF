@@ -16,7 +16,7 @@ public class ProriedadesDaJanela {
 
     public static void barraDeTitulo(Stage proriedadeDaJanela) {
         proriedadeDaJanela.setTitle("Sistema de Gestão de Biblioteca");
-        proriedadeDaJanela.getIcons().add(new Image("sgbf\\icones\\IconLogin.png"));
+        proriedadeDaJanela.getIcons().add(new Image("sgbf\\icones\\igregoriosemedo.jpg"));
     }
 
     public static void exibirUsuarioLogado(Stage proriedadeDaJanela) {

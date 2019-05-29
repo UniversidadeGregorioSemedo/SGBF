@@ -11,9 +11,9 @@ import sgbf.util.UtilControloExcessao;
 public class DaoCominhoDaBaseDados {
 
     private final String driver = "org.mysql.Driver";
-    private final String caminho_base_dados = "jdbc:mysql://localhost:3306/tcc";
+    private final String caminho_base_dados = "jdbc:mysql://localhost:3307/tcc";
     private final String usuario = "root";
-    private final String senha = "lazaro1A";
+    private final String senha = "__Gestline18";
     private String operacaoEmExecucao;
 
     public DaoCominhoDaBaseDados(String operacaoEmExecucao) {
