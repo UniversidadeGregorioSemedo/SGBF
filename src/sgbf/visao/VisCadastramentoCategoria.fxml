@@ -98,7 +98,7 @@
                         <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxEstante" layoutX="110.0" layoutY="137.0" prefHeight="25.0" prefWidth="341.0" promptText="Seleccione a estante" styleClass="jfx-combobox" stylesheets="@../util/viscadastrocategoria.css" />
+                  <ComboBox fx:id="comboBoxEstante" layoutX="110.0" layoutY="137.0" prefHeight="25.0" prefWidth="341.0" promptText="Seleccione a estante" styleClass="jfx-combobox" stylesheets="@../estilo/viscadastrofuncionario.css" />
                   <Label layoutX="14.0" layoutY="94.0" text="Designação *">
                      <font>
                         <Font name="Sitka Text Bold" size="13.0" />
