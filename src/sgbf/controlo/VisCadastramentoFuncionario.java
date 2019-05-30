@@ -5,6 +5,8 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.DaoFuncionario;
+import sgbf.dao.DaoUtente;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,8 +62,8 @@ public class VisCadastramentoFuncionario implements Initializable {
     private String operacao = null;
     private final ModVisitante utenteMod = new ModVisitante();
     private final ModFuncionario funcionarioMod = new ModFuncionario();
-    private final ConUtente utenteCon = new ConUtente();
-    private final ConFuncionario funcionarioCon = new ConFuncionario();
+    private final DaoUtente utenteCon = new DaoUtente();
+    private final DaoFuncionario funcionarioCon = new DaoFuncionario();
     @FXML
     private AnchorPane AnchorPaneFuncionario;
     @FXML

@@ -5,6 +5,7 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.DaoArea;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class VisCadastramentoArea implements Initializable {
 
     private final ModArea areaMod = new ModArea();
     private String operacao = null;
-    private final ConArea areaCon = new ConArea();
+    private final DaoArea areaCon = new DaoArea();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

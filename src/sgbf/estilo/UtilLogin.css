@@ -1,0 +1,13 @@
+*{
+    -fx-primarytext: white;
+}
+
+.root{
+    -fx-background-color: -fx-primary;
+}
+
+.glyph-icon{
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+/*Não sei o porquê mas ao donominar o nome do css como "text-field" não aparece. Portanto deixei esse nome.*/

@@ -5,6 +5,8 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.DaoEstante;
+import sgbf.dao.DaoArea;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -61,7 +63,7 @@ public class VisCadastramentoEstante implements Initializable {
 
     private String operacao = null;
     private final ModEstante estanteMod = new ModEstante();
-    private final ConEstante estanteCon = new ConEstante();
+    private final DaoEstante estanteCon = new DaoEstante();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -194,7 +196,7 @@ public class VisCadastramentoEstante implements Initializable {
     }
 
     private void carregarValorNasComboxs() {
-        ConArea areaCon = new ConArea();
+        DaoArea areaCon = new DaoArea();
         List<ModArea> todasAreas = new ArrayList<>();
         ObservableList todasAreasParaCombox = null;
 

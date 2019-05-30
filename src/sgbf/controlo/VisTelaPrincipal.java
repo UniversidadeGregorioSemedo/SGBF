@@ -19,6 +19,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sgbf.modelo.ModFuncionario;
+import sgbf.util.ProriedadesDaJanela;
 import sgbf.util.UtilControloExcessao;
 import sgbf.util.UtilUsuarioLogado;
 
@@ -229,7 +230,7 @@ public class VisTelaPrincipal implements Initializable {
             Parent root = FXMLLoader.load(this.getClass().getResource("..\\visao\\VisLogin.fxml"));
             Scene scene = new Scene(root);
             propriedadeDaJanela.setScene(scene);
-            propriedadeDaJanela.setTitle("Sistema de Gestão de Biblioteca");
+            ProriedadesDaJanela.barraDeTitulo(propriedadeDaJanela);
             propriedadeDaJanela.setResizable(false);
             propriedadeDaJanela.setMaximized(false);
             propriedadeDaJanela.show();
@@ -253,7 +254,7 @@ public class VisTelaPrincipal implements Initializable {
     @FXML
     public void botaoMenuItemSairDoSistema() {
         Stage propriedadeDaJanela = (Stage) menuBar.getScene().getWindow();
-        ConPrincipal.sairdoSistema(menuItemSairDoSistema.getText(), propriedadeDaJanela);
+        Main.sairdoSistema(menuItemSairDoSistema.getText(), propriedadeDaJanela);
     }
 
     private void habilitarFuncionalidadeParaFuncionario(ModFuncionario funcionarioMod) {

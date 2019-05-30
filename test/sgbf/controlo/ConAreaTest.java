@@ -5,15 +5,14 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.DaoArea;
 import javafx.scene.control.Alert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Ignore;
 import sgbf.modelo.ModArea;
 import sgbf.util.UtilControloExcessao;
-import sgbf.util.UtilIconesDaJOPtionPane;
 
 /**
  *
@@ -36,7 +35,7 @@ public class ConAreaTest {
     public void testRegistar() {
         final String operacao = "Registar Área";
         ModArea areaMod = new ModArea();
-        ConArea areaCon = new ConArea();
+        DaoArea areaCon = new DaoArea();
         
         areaMod.setSector("Sector de engenharia", operacao);
         

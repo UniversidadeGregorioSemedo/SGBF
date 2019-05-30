@@ -5,6 +5,11 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.DaoEmprestimo;
+import sgbf.dao.DaoUtente;
+import sgbf.dao.DaoEstoque;
+import sgbf.dao.DaoDevolucao;
+import sgbf.dao.DaoItemSolicitado;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,13 +76,13 @@ public class VisMovimentacaoDevolucao implements Initializable {
     private AnchorPane anchoPaneTodosEmprestimo;
 
     private String operacao = null;
-    private final ConUtente utenteCon = new ConUtente();
-    private final ConEmprestimo emprestimoCon = new ConEmprestimo();
+    private final DaoUtente utenteCon = new DaoUtente();
+    private final DaoEmprestimo emprestimoCon = new DaoEmprestimo();
     private final ModVisitante visitanteMod = new ModVisitante();
     private final ModDevolucao devolucaoMod = new ModDevolucao();
-    private final ConDevolucao devolucaoCon = new ConDevolucao();
-    private final ConEstoque estoqueCon = new ConEstoque();
-    private final ConItemSolicitado itemSolicitadoCon = new ConItemSolicitado();
+    private final DaoDevolucao devolucaoCon = new DaoDevolucao();
+    private final DaoEstoque estoqueCon = new DaoEstoque();
+    private final DaoItemSolicitado itemSolicitadoCon = new DaoItemSolicitado();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -5,6 +5,7 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.DaoReserva;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -24,7 +25,7 @@ public class ConReservaTest {
 
     @Test
     public void testUtlimoCodigoRegistado() {
-        ConReserva reservaCon = new ConReserva();
+        DaoReserva reservaCon = new DaoReserva();
     }
 
     @Test

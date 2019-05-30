@@ -1,5 +1,12 @@
 package sgbf.controlo;
 
+import sgbf.dao.DaoEstante;
+import sgbf.dao.DaoCategoriaDaEstante;
+import sgbf.dao.DaoAutor;
+import sgbf.dao.DaoEditora;
+import sgbf.dao.DaoCategoria;
+import sgbf.dao.DaoAcervosEscreitos;
+import sgbf.dao.DaoAcervo;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
@@ -71,8 +78,8 @@ public class VisCadastramentoAcervo implements Initializable {
 
     private String operacao = null;
     private final ModAcervo acervoMod = new ModAcervo();
-    private final ConAcervo acervoCon = new ConAcervo();
-    private final ConAcervosEscreitos escreitosAcervosCon = new ConAcervosEscreitos();
+    private final DaoAcervo acervoCon = new DaoAcervo();
+    private final DaoAcervosEscreitos escreitosAcervosCon = new DaoAcervosEscreitos();
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -279,9 +286,9 @@ public class VisCadastramentoAcervo implements Initializable {
     }
 
     private void carregarValorNasComboxs() {
-        ConEditora editoraCon = new ConEditora();
-        ConEstante estanteCon = new ConEstante();
-        ConAutor autorCon = new ConAutor();
+        DaoEditora editoraCon = new DaoEditora();
+        DaoEstante estanteCon = new DaoEstante();
+        DaoAutor autorCon = new DaoAutor();
         List<ModEditora> todasEditoras = new ArrayList<>();
         List<ModEstante> todasEstante = new ArrayList<>();
         List<ModAutor> todosAutores = new ArrayList<>();
@@ -317,7 +324,7 @@ public class VisCadastramentoAcervo implements Initializable {
     }
 
     private void carregarCategorias() {
-        ConCategoria categoriaCon = new ConCategoria();
+        DaoCategoria categoriaCon = new DaoCategoria();
         List<ModCategoria> todasCategorias = new ArrayList<>();
         ObservableList todasCategoriasPAraCombox = null;
         if (categoriaCon.listarTodos(operacao).isEmpty()) {
@@ -436,7 +443,7 @@ public class VisCadastramentoAcervo implements Initializable {
                 this.carregarCategorias();
             } else {
                 List<ModCategoria> todasCategorias = new ArrayList<>();
-                ConCategoriaDaEstante categoriaDaEstante = new ConCategoriaDaEstante();
+                DaoCategoriaDaEstante categoriaDaEstante = new DaoCategoriaDaEstante();
                 ObservableList todasCategoriasPAraCombox = null;
                 for (Object todosRegistos : categoriaDaEstante.pesquisar(estanteMod, operacao)) {
                     ModCategoria categoriaMod = (ModCategoria) todosRegistos;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
@@ -14,14 +15,14 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPaneUtente" prefHeight="400.0" prefWidth="524.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisCadastramentoArea">
     <stylesheets>
-        <URL value="@/sgbf/util/tabelaverarea.css" />
+        <URL value="@/sgbf/estilo/tabelaverarea.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.6256281407035176" orientation="VERTICAL" prefHeight="444.0" prefWidth="685.0" style="-fx-background-color: #1f4f4e;">
+      <SplitPane dividerPositions="0.6470588235294118" orientation="VERTICAL" prefHeight="444.0" prefWidth="685.0" style="-fx-background-color: f5fffb;">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <JFXButton fx:id="botaoPesquisar" layoutX="277.0" layoutY="75.0" onAction="#pesquisarArea" prefHeight="25.0" prefWidth="38.0" stylesheets="@../util/viscadastroarea.css" text=" ">
+                  <JFXButton fx:id="botaoPesquisar" layoutX="276.0" layoutY="94.0" onAction="#pesquisarArea" prefHeight="25.0" prefWidth="38.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroarea.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -36,7 +37,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <TableView fx:id="tableViewArea" layoutX="21.0" layoutY="109.0" prefHeight="144.0" prefWidth="651.0">
+                  <TableView fx:id="tableViewArea" layoutX="20.0" layoutY="125.0" prefHeight="144.0" prefWidth="651.0">
                      <columns>
                         <TableColumn fx:id="tableColumId" prefWidth="81.0" text="Id" />
                         <TableColumn fx:id="tableColumSector" prefWidth="69.0" text="Sector" />
@@ -47,39 +48,67 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="texteFiedPesquisar" layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="245.0" promptText="Pesquisar áreas" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css">
+                  <TextField fx:id="texteFiedPesquisar" layoutX="20.0" layoutY="94.0" prefHeight="25.0" prefWidth="245.0" promptText="Pesquisar áreas" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroarea.css">
                      <padding>
                         <Insets right="3.0" />
                      </padding>
                   </TextField>
-                  <Label layoutX="21.0" layoutY="61.0" text="Use ( _ ) ver todas áreas" textFill="WHITE">
+                  <Label layoutX="20.0" layoutY="80.0" text="Use ( _ ) ver todas áreas">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="283.0" layoutY="14.0" text="Cadastro de áreas" textFill="WHITE">
+                  <Label layoutX="280.0" layoutY="6.0" text="Cadastro de áreas">
                      <font>
-                        <Font name="Sitka Text Bold" size="14.0" />
+                        <Font name="Sitka Text Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Line endX="100.0" layoutX="184.0" layoutY="23.0" startX="-100.0" stroke="WHITE" />
-                  <Line endX="100.0" layoutX="508.0" layoutY="23.0" startX="-100.0" stroke="WHITE" />
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="575.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icones/igregoriosemedo.jpg" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="591.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SGB">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <fill>
+                        <LinearGradient endX="0.7428571428571429" endY="0.35238095238095235" startX="0.7380952380952381" startY="0.6761904761904762">
+                           <stops>
+                              <Stop color="#87c3e5" />
+                              <Stop color="#87c3e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Text>
+                  <CubicCurve controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" layoutX="279.0" layoutY="30.0" startX="-150.0" stroke="BLACK">
+                     <fill>
+                        <LinearGradient endX="0.9809523809523809" endY="0.9380952380952381" startX="0.019047619047619063" startY="0.5142857142857142">
+                           <stops>
+                              <Stop color="#87c4e5" />
+                              <Stop color="#87c4e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </CubicCurve>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="683.0">
                <children>
-                  <TextField fx:id="texteFiedSector" layoutX="83.0" layoutY="123.0" prefHeight="25.0" prefWidth="368.0" styleClass="jfx-textfield" stylesheets="@../util/viscadastroarea.css" />
-                  <Label layoutX="21.0" layoutY="128.0" text="Sector *" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="21.0" layoutY="14.0" text="Dados da área" textFill="WHITE">
+                  <TextField fx:id="texteFiedSector" layoutX="80.0" layoutY="105.0" prefHeight="25.0" prefWidth="368.0" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroarea.css" />
+                  <Label layoutX="18.0" layoutY="110.0" text="Sector *">
                      <font>
                         <Font name="Sitka Text Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="botaoSair" layoutX="591.0" layoutY="123.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Sair">
+                  <Label layoutX="21.0" layoutY="14.0" text="Dados da área">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="botaoSair" layoutX="588.0" layoutY="105.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroarea.css" text="Sair">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -87,7 +116,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoCancelar" layoutX="498.0" layoutY="123.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Cancelar">
+                  <Button fx:id="botaoCancelar" layoutX="495.0" layoutY="105.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroarea.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -95,7 +124,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoCadastrar" layoutX="591.0" layoutY="55.0" mnemonicParsing="false" onAction="#cadastrarArea" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Cadastrar">
+                  <Button fx:id="botaoCadastrar" layoutX="588.0" layoutY="37.0" mnemonicParsing="false" onAction="#cadastrarArea" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroarea.css" text="Cadastrar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -103,7 +132,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoNovo" layoutX="498.0" layoutY="55.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Novo">
+                  <Button fx:id="botaoNovo" layoutX="495.0" layoutY="37.0" mnemonicParsing="false" onAction="#novo" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroarea.css" text="Novo">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -111,7 +140,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoAlterar" layoutX="498.0" layoutY="89.0" mnemonicParsing="false" onAction="#alterarArea" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Alterar">
+                  <Button fx:id="botaoAlterar" layoutX="495.0" layoutY="71.0" mnemonicParsing="false" onAction="#alterarArea" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroarea.css" text="Alterar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
@@ -119,7 +148,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoRemover" layoutX="591.0" layoutY="89.0" mnemonicParsing="false" onAction="#removerArea" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-button" stylesheets="@../util/viscadastroarea.css" text="Remover">
+                  <Button fx:id="botaoRemover" layoutX="588.0" layoutY="71.0" mnemonicParsing="false" onAction="#removerArea" prefHeight="25.0" prefWidth="78.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroarea.css" text="Remover">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>

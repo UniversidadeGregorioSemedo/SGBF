@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
@@ -14,14 +15,14 @@
 
 <AnchorPane id="AnchorPane" fx:id="AnchorPaneVerEditoras" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisVerEditora">
     <stylesheets>
-        <URL value="@/sgbf/util/tabelavereditora.css" />
+        <URL value="@/sgbf/estilo/tabelavereditora.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.5332167832167832" orientation="VERTICAL" prefHeight="574.0" prefWidth="1241.0" style="-fx-background-color: #1f4f4e;">
+      <SplitPane dividerPositions="0.548951048951049" orientation="VERTICAL" prefHeight="574.0" prefWidth="1241.0" style="-fx-background-color: f5fffb;">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="1293.0">
                <children>
-                  <TableView fx:id="tableViewEditora" layoutX="15.0" layoutY="88.0" prefHeight="200.0" prefWidth="1201.0">
+                  <TableView fx:id="tableViewEditora" layoutX="15.0" layoutY="100.0" prefHeight="200.0" prefWidth="1201.0">
                      <columns>
                         <TableColumn fx:id="tableColumNome" prefWidth="179.0" text="Nome" />
                         <TableColumn fx:id="tableColumContacto" prefWidth="164.0" text="Contacto" />
@@ -35,8 +36,8 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="46.0" prefHeight="25.0" prefWidth="517.0" promptText="Pesquisar editoras" styleClass="jfx-textfield" stylesheets="@../util/tabelavereditora.css" />
-                  <JFXButton fx:id="botaoPesquisar" layoutX="536.0" layoutY="46.0" onAction="#pesquisarEditora" prefHeight="25.0" prefWidth="35.0" stylesheets="@../util/tabelavereditora.css" text=" ">
+                  <TextField fx:id="texteFiedPesquisar" layoutX="14.0" layoutY="69.0" prefHeight="25.0" prefWidth="517.0" promptText="Pesquisar editoras" styleClass="jfx-textfield" stylesheets="@../estilo/viscadastroeditora.css" />
+                  <JFXButton fx:id="botaoPesquisar" layoutX="536.0" layoutY="68.0" onAction="#pesquisarEditora" prefHeight="25.0" prefWidth="35.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroeditora.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,18 +51,46 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXButton>
-                  <Label layoutX="571.0" layoutY="6.0" text="Ver todas editoras" textFill="WHITE">
+                  <Label layoutX="571.0" layoutY="6.0" text="Ver todas editoras">
                      <font>
-                        <Font name="Sitka Text Bold" size="14.0" />
+                        <Font name="Sitka Text Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="15.0" layoutY="32.0" text="Use ( _  ) para ver todas editoras" textFill="WHITE">
+                  <Label layoutX="15.0" layoutY="51.0" text="Use ( _  ) para ver todas editoras">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font>
                   </Label>
-                  <Line endX="100.0" layoutX="443.0" layoutY="15.0" startX="-100.0" stroke="WHITE" />
-                  <Line endX="100.0" layoutX="825.0" layoutY="16.0" startX="-100.0" stroke="WHITE" />
+                  <CubicCurve controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" layoutX="588.0" layoutY="30.0" startX="-150.0" stroke="BLACK">
+                     <fill>
+                        <LinearGradient endX="0.9809523809523809" endY="0.9380952380952381" startX="0.019047619047619063" startY="0.5142857142857142">
+                           <stops>
+                              <Stop color="#87c4e5" />
+                              <Stop color="#87c4e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </CubicCurve>
+                  <Text layoutX="1123.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SGB">
+                     <fill>
+                        <LinearGradient endX="0.7428571428571429" endY="0.35238095238095235" startX="0.7380952380952381" startY="0.6761904761904762">
+                           <stops>
+                              <Stop color="#87c3e5" />
+                              <Stop color="#87c3e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="66.0" fitWidth="70.0" layoutX="1109.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icones/igregoriosemedo.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -80,56 +109,56 @@
                         <TableColumn fx:id="tableColumnAno" prefWidth="75.0" text="Ano de Lançamento" />
                      </columns>
                   </TableView>
-                  <Label layoutX="14.0" layoutY="24.0" prefHeight="17.0" prefWidth="124.0" text="Todos os Acervos" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="945.0" layoutY="24.0" prefHeight="17.0" prefWidth="147.0" text="Outras Informações" textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="24.0" prefHeight="17.0" prefWidth="124.0" text="Todos os Acervos">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="945.0" layoutY="50.0" text="Total de Acervos:" textFill="WHITE">
+                  <Label layoutX="945.0" layoutY="24.0" prefHeight="17.0" prefWidth="147.0" text="Outras Informações">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
-                     </font></Label>
-                  <Label layoutX="945.0" layoutY="90.0" text="Data de Registo:" textFill="WHITE">
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="945.0" layoutY="50.0" text="Total de Acervos:">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="946.0" layoutY="131.0" text="Última modificação:" textFill="WHITE">
+                  <Label layoutX="945.0" layoutY="90.0" text="Data de Registo:">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="944.0" layoutY="165.0" text="Data e hora corrente:" textFill="WHITE">
+                  <Label layoutX="946.0" layoutY="131.0" text="Última modificação:">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Button fx:id="botaoSair" layoutX="1086.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="124.0" styleClass="jfx-button" stylesheets="@../util/tabelavereditora.css" text="Sair">
+                  <Label layoutX="944.0" layoutY="165.0" text="Data e hora corrente:">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <Button fx:id="botaoSair" layoutX="1086.0" layoutY="225.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="124.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroeditora.css" text="Sair">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Label fx:id="labeTotalAcervos" layoutX="1069.0" layoutY="50.0" prefHeight="17.0" prefWidth="139.0" text="Nenhuma informação" textFill="WHITE">
+                  <Label fx:id="labeTotalAcervos" layoutX="1069.0" layoutY="50.0" prefHeight="17.0" prefWidth="139.0" text="Nenhuma informação">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
+                        <Font name="Sitka Text" size="12.0" />
                      </font></Label>
-                  <Label fx:id="labeDataRegisto" layoutX="1069.0" layoutY="90.0" prefHeight="17.0" prefWidth="139.0" text="Nenhuma informação" textFill="WHITE">
+                  <Label fx:id="labeDataRegisto" layoutX="1069.0" layoutY="90.0" prefHeight="17.0" prefWidth="139.0" text="Nenhuma informação">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
+                        <Font name="Sitka Text" size="12.0" />
                      </font></Label>
-                  <Label fx:id="labeUltimaModificacao" layoutX="1069.0" layoutY="131.0" prefHeight="17.0" prefWidth="139.0" text="Nenhuma informação" textFill="WHITE">
+                  <Label fx:id="labeUltimaModificacao" layoutX="1085.0" layoutY="131.0" prefHeight="17.0" prefWidth="131.0" text="Nenhuma informação">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
+                        <Font name="Sitka Text" size="12.0" />
                      </font></Label>
-                  <Label fx:id="labelHoraDataCorrente" layoutX="1083.0" layoutY="164.0" prefHeight="17.0" prefWidth="131.0" text="Indisponível" textFill="WHITE">
+                  <Label fx:id="labelHoraDataCorrente" layoutX="1083.0" layoutY="164.0" prefHeight="17.0" prefWidth="131.0" text="Indisponível">
                      <font>
-                        <Font name="Sitka Text" size="13.0" />
+                        <Font name="Sitka Text" size="12.0" />
                      </font></Label>
-                  <Button fx:id="botaoCancelar" layoutX="945.0" layoutY="225.0" mnemonicParsing="false" onAction="#limparItensDaJanela" prefHeight="25.0" prefWidth="131.0" styleClass="jfx-button" stylesheets="@../util/tabelavereditora.css" text="Cancelar">
+                  <Button fx:id="botaoCancelar" layoutX="945.0" layoutY="225.0" mnemonicParsing="false" onAction="#limparItensDaJanela" prefHeight="25.0" prefWidth="131.0" styleClass="jfx1-button" stylesheets="@../estilo/viscadastroeditora.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text" size="13.0" />
                      </font>

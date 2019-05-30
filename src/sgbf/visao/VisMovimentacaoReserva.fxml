@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
@@ -14,10 +15,10 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchoPaneReserva" prefHeight="684.0" prefWidth="900.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sgbf.controlo.VisMovimentacaoReserva">
     <stylesheets>
-        <URL value="@/sgbf/util/reserva.css" />
+        <URL value="@/sgbf/estilo/reserva.css" />
     </stylesheets>
    <children>
-      <SplitPane dividerPositions="0.6627565982404692" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: #1f4f4e;">
+      <SplitPane dividerPositions="0.6627565982404692" orientation="VERTICAL" prefHeight="684.0" prefWidth="900.0" style="-fx-background-color: f5fffb;">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -48,19 +49,19 @@
                         <TableColumn fx:id="tableColumnFormato" prefWidth="75.0" text="Formato" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="textFieldPesquisar" layoutX="176.0" layoutY="74.0" prefHeight="25.0" prefWidth="250.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
-                  <RadioButton fx:id="radioButtonUtente" layoutX="17.0" layoutY="78.0" mnemonicParsing="false" stylesheets="@../util/reserva.css" text="Utente" textFill="WHITE">
+                  <TextField fx:id="textFieldPesquisar" layoutX="176.0" layoutY="74.0" prefHeight="25.0" prefWidth="250.0" promptText="Pesquisar utente" styleClass="jfx-textfield" stylesheets="@../estilo/reserva.css" />
+                  <RadioButton fx:id="radioButtonUtente" layoutX="17.0" layoutY="78.0" mnemonicParsing="false" text="Utente">
                      <toggleGroup>
                         <ToggleGroup fx:id="OpcoesDePesquisa" />
                      </toggleGroup>
                      <font>
-                        <Font name="Sitka Text Bold" size="13.0" />
+                        <Font name="Sitka Text Bold" size="14.0" />
                      </font></RadioButton>
-                  <RadioButton fx:id="radioButtonAcervos" layoutX="89.0" layoutY="78.0" mnemonicParsing="false" stylesheets="@../util/reserva.css" text="Acervos" textFill="WHITE" toggleGroup="$OpcoesDePesquisa">
+                  <RadioButton fx:id="radioButtonAcervos" layoutX="89.0" layoutY="78.0" mnemonicParsing="false" text="Acervos" toggleGroup="$OpcoesDePesquisa">
                      <font>
-                        <Font name="Sitka Text Bold" size="13.0" />
+                        <Font name="Sitka Text Bold" size="14.0" />
                      </font></RadioButton>
-                  <JFXButton fx:id="botaoPesquisar" layoutX="433.0" layoutY="74.0" onAction="#pesquisar" prefHeight="25.0" prefWidth="40.0" stylesheets="@../util/reserva.css" text=" ">
+                  <JFXButton fx:id="botaoPesquisar" layoutX="433.0" layoutY="74.0" onAction="#pesquisar" prefHeight="25.0" prefWidth="40.0" styleClass="jfx1-button" stylesheets="@../estilo/reserva.css" text=" ">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -75,89 +76,117 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <Label layoutX="717.0" layoutY="373.0" text="Q. Reservar:" textFill="WHITE">
+                  <Label layoutX="717.0" layoutY="373.0" text="Q. Reservar:">
                      <font>
-                        <Font name="Sitka Text Bold" size="12.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <TextField fx:id="textFieldQuantidadeReservar" layoutX="798.0" layoutY="369.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="92.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
-                  <TextField fx:id="textFieldQuantidadeTotal" disable="true" editable="false" layoutX="796.0" layoutY="290.0" prefHeight="25.0" prefWidth="92.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
-                  <Label layoutX="714.0" layoutY="294.0" prefHeight="17.0" prefWidth="57.0" text="Q. Total:" textFill="WHITE">
+                  <TextField fx:id="textFieldQuantidadeReservar" layoutX="798.0" layoutY="369.0" onKeyTyped="#validarDadosNumericos" prefHeight="25.0" prefWidth="92.0" styleClass="jfx-textfield" stylesheets="@../estilo/reserva.css" />
+                  <TextField fx:id="textFieldQuantidadeTotal" disable="true" editable="false" layoutX="796.0" layoutY="290.0" prefHeight="25.0" prefWidth="92.0" styleClass="jfx-textfield" stylesheets="@../estilo/reserva.css" />
+                  <Label layoutX="714.0" layoutY="294.0" prefHeight="17.0" prefWidth="57.0" text="Q. Total:">
                      <font>
-                        <Font name="Sitka Text Bold" size="12.0" />
+                        <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Button fx:id="botaoRegistar" layoutX="713.0" layoutY="410.0" mnemonicParsing="false" onAction="#registarAcervoReservado" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Registar Acervo">
+                  <Button fx:id="botaoRegistar" layoutX="713.0" layoutY="410.0" mnemonicParsing="false" onAction="#registarAcervoReservado" prefHeight="25.0" prefWidth="175.0" styleClass="jfx1-button" stylesheets="@../estilo/reserva.css" text="Registar Acervo">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Label layoutX="17.0" layoutY="103.0" text="Dados do Utente" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="13.0" />
-                     </font></Label>
-                  <Label layoutX="14.0" layoutY="267.0" text="Dados dos Acervos" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="13.0" />
-                     </font></Label>
-                  <TextField fx:id="textFieldQuantidadeRemanescente" disable="true" editable="false" layoutX="797.0" layoutY="329.0" prefHeight="25.0" prefWidth="91.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
-                  <Label layoutX="714.0" layoutY="333.0" prefHeight="17.0" prefWidth="75.0" text="Q. Reman.:" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="12.0" />
-                     </font></Label>
-                  <Line endX="100.0" layoutX="301.0" layoutY="14.0" startX="-100.0" stroke="WHITE" />
-                  <Line endX="100.0" layoutX="637.0" layoutY="14.0" startX="-100.0" stroke="WHITE" />
-                  <Label layoutX="445.0" layoutY="6.0" text="Reserva" textFill="WHITE">
+                  <Label layoutX="17.0" layoutY="103.0" text="Dados do Utente">
                      <font>
                         <Font name="Sitka Text Bold" size="14.0" />
+                     </font></Label>
+                  <Label layoutX="14.0" layoutY="267.0" text="Dados dos Acervos">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="textFieldQuantidadeRemanescente" disable="true" editable="false" layoutX="797.0" layoutY="329.0" prefHeight="25.0" prefWidth="91.0" styleClass="jfx-textfield" stylesheets="@../estilo/reserva.css" />
+                  <Label layoutX="714.0" layoutY="333.0" prefHeight="17.0" prefWidth="75.0" text="Q. Reman.:">
+                     <font>
+                        <Font name="Sitka Text Bold" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="445.0" layoutY="6.0" text="Reserva">
+                     <font>
+                        <Font name="Sitka Text Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="176.0" layoutY="57.0" text="Use ( _ ) para ver todos utentes" textFill="WHITE">
+                  <Label layoutX="176.0" layoutY="57.0" text="Use ( _ ) para ver todos utentes">
                      <font>
                         <Font name="Sitka Text" size="12.0" />
                      </font>
                   </Label>
+                  <CubicCurve controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" layoutX="432.0" layoutY="30.0" startX="-150.0" stroke="BLACK">
+                     <fill>
+                        <LinearGradient endX="0.9809523809523809" endY="0.9380952380952381" startX="0.019047619047619063" startY="0.5142857142857142">
+                           <stops>
+                              <Stop color="#87c4e5" />
+                              <Stop color="#87c4e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </CubicCurve>
+                  <Text layoutX="815.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SGB">
+                     <fill>
+                        <LinearGradient endX="0.7428571428571429" endY="0.35238095238095235" startX="0.7380952380952381" startY="0.6761904761904762">
+                           <stops>
+                              <Stop color="#87c3e5" />
+                              <Stop color="#87c3e5" offset="0.007662835249042145" />
+                              <Stop color="#db5f32" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="66.0" fitWidth="70.0" layoutX="801.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icones/igregoriosemedo.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="920.0">
                <children>
-                  <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" onAction="#devolverAcervoReservado" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Devolver">
+                  <Button fx:id="botaoDevolver" layoutX="710.0" layoutY="100.0" mnemonicParsing="false" onAction="#devolverAcervoReservado" prefHeight="25.0" prefWidth="175.0" styleClass="jfx1-button" stylesheets="@../estilo/reserva.css" text="Devolver">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="botaoCancelar" layoutX="710.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Cancelar">
+                  <Button fx:id="botaoCancelar" layoutX="710.0" layoutY="163.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="25.0" prefWidth="175.0" styleClass="jfx1-button" stylesheets="@../estilo/reserva.css" text="Cancelar">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="botaoSair" layoutX="710.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Sair">
+                  <Button fx:id="botaoSair" layoutX="710.0" layoutY="197.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="175.0" styleClass="jfx1-button" stylesheets="@../estilo/reserva.css" text="Sair">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Label layoutX="14.0" layoutY="6.0" text="Dados da reserva" textFill="WHITE">
+                  <Label layoutX="14.0" layoutY="6.0" text="Dados da reserva">
+                     <font>
+                        <Font name="Sitka Text Bold" size="14.0" />
+                     </font></Label>
+                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" onAction="#verTodasReservas" prefHeight="25.0" prefWidth="175.0" styleClass="jfx1-button" stylesheets="@../estilo/reserva.css" text="Ver todas as Reservas">
+                     <font>
+                        <Font name="Sitka Text Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Label layoutX="712.0" layoutY="37.0" prefHeight="17.0" prefWidth="48.0" text="Utente:">
                      <font>
                         <Font name="Sitka Text Bold" size="13.0" />
                      </font></Label>
-                  <Button fx:id="botaoTodasReservas" layoutX="710.0" layoutY="134.0" mnemonicParsing="false" onAction="#verTodasReservas" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Ver todas as Reservas">
-                     <font>
-                        <Font name="Sitka Text Bold" size="12.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Label layoutX="712.0" layoutY="37.0" prefHeight="17.0" prefWidth="48.0" text="Utente:" textFill="WHITE">
-                     <font>
-                        <Font name="Sitka Text Bold" size="12.0" />
-                     </font></Label>
-                  <TextField fx:id="textFieldUtente" disable="true" editable="false" layoutX="764.0" layoutY="33.0" prefHeight="25.0" prefWidth="122.0" styleClass="jfx-textfield" stylesheets="@../util/reserva.css" />
+                  <TextField fx:id="textFieldUtente" disable="true" editable="false" layoutX="764.0" layoutY="33.0" prefHeight="25.0" prefWidth="122.0" styleClass="jfx-textfield" stylesheets="@../estilo/reserva.css" />
                   <TableView fx:id="tableViewReserva" layoutX="14.0" layoutY="33.0" prefHeight="189.0" prefWidth="693.0">
                     <columns>
                       <TableColumn fx:id="textFieldTituloReserva" prefWidth="75.0" text="Título" />
@@ -172,7 +201,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Button fx:id="botaoReserva" layoutX="711.0" layoutY="64.0" mnemonicParsing="false" onAction="#reservar" prefHeight="25.0" prefWidth="175.0" styleClass="jfx-button" stylesheets="@../util/reserva.css" text="Reservar">
+                  <Button fx:id="botaoReserva" layoutX="711.0" layoutY="64.0" mnemonicParsing="false" onAction="#reservar" prefHeight="25.0" prefWidth="175.0" styleClass="jfx1-button" stylesheets="@../estilo/reserva.css" text="Reservar">
                      <font>
                         <Font name="Sitka Text Bold" size="12.0" />
                      </font>

@@ -5,6 +5,8 @@
  */
 package sgbf.controlo;
 
+import sgbf.dao.DaoEditora;
+import sgbf.dao.DaoAcervo;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class VisVerEditora implements Initializable {
 
     private String operacao = null;
     private final ModEditora editoraMod = new ModEditora();
-    private final ConEditora editoraCon = new ConEditora();
+    private final DaoEditora editoraCon = new DaoEditora();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -155,7 +157,7 @@ public class VisVerEditora implements Initializable {
 
     private ObservableList<ModAcervo> todosRegistosParaCarregar(ModEditora editoraMod) {
         List<ModAcervo> listaDosRegistosEncontrados = new ArrayList<>();
-        ConAcervo acervoCon = new ConAcervo();
+        DaoAcervo acervoCon = new DaoAcervo();
         operacao = "Pesquisar Acervos";
         for (Object acervoRegistado : acervoCon.listarTodos(operacao)) {
             ModAcervo acervosEncontrado = (ModAcervo) acervoRegistado;

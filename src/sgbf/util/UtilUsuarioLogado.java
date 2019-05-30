@@ -2,7 +2,6 @@
 package sgbf.util;
 
 import sgbf.modelo.ModFuncionario;
-import sgbf.modelo.ModVisitante;
 
 /**
  *
